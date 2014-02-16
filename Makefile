@@ -4,7 +4,10 @@ SPHINXDIR = sphinx
 SPHINXOPTS = -W
 PYTHON = python
 
-.PHONY:		sphinx-html, images, upload, clean, help
+# The name of a sample data file so we know whether to init/update the git submodule
+IMAGE_FILE = $(SPHINXDIR)/data/92AV3C.lan
+
+.PHONY:		sphinx-html, images, upload, clean, help, git-submodules
 
 help:
 	@echo "Build targets:"
@@ -16,11 +19,20 @@ help:
 	@echo "  upload           Uploads web site content to server."
 	@echo ""
 
-sphinx-html:
+sphinx-html:	$(IMAGE_FILE)
+	@echo "Building Sphinx files..."
 	$(MAKE) -C $(SPHINXDIR) html SPHINXOPTS=$(SPHINXOPTS)
 
 images:
+	@echo "Creating image files..."
 	$(PYTHON) scripts/create_images.py -o $(SPHINXDIR)/images
+
+$(IMAGE_FILE):	git-submodules
+
+git-submodules:
+	@echo "Retrieving sample data files from GitHub..."
+	git submodule init
+	git submodule update
 
 site:		images sphinx-html
 
