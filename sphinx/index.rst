@@ -1,0 +1,128 @@
+.. Spectral Python documentation master file, created by
+   sphinx-quickstart on Sun Jul 11 16:15:08 2010.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+.. _home:
+
+Welcome to Spectral Python (SPy)
+--------------------------------
+
+.. figure:: images_static/hypercube_big.jpg
+   :scale: 70 %
+   :align: center
+
+Spectral Python (SPy) is a pure Python module for processing hyperspectral image
+data. It has functions for reading, displaying, manipulating, and classifying
+hyperspectral imagery. It can be used interactively from the Python command
+prompt or via Python scripts.  SPy is free, open source software distributed
+under the `GNU General Public License <http://www.gnu.org/copyleft/gpl.html>`_.
+To see some examples of how SPy can be used, you may want to jump straight to
+the documentation sections on :ref:`graphics` or :ref:`algorithms`.  You can
+download SPy from the `SPy Project Page <https://sourceforge.net/projects/spectralpython>`_
+hosted by `Sourceforge.net <http://sourceforge.net>`_.
+
+Documentation
+-------------
+
+.. toctree::
+    :maxdepth: 2
+
+    Spectral Python User Guide <user_guide>
+
+News
+----
+
+2014-01-06 : Numerous new user interface features and performance improvements in SPy 0.13.
+
+    The SPy :func:`~spectral.graphics.spypylab.imshow` wrapper around matplotlib's
+    :func:`imshow` function provides numerous new features, including:
+
+        * Interactive image class labeling using keyboard & mouse
+
+	* Zoom windows
+
+        * Class overlays with adjustable transparency
+
+	* Dynamic view of changing pixel classes when modified in an ND Window.
+	  
+    Data/Statistic cacheing and more efficient use of numpy provides significant
+    performance improvement in mutiple algorithms (GMLC 14x, Mahalanobis
+    classifier 8x, kmeans 3x). Functions :func:`~spectral.algorithms.detectors.rx`
+    and :func:`~spectral.algorithms.detectors.matched_filter` are significantly
+    faster, particularly when using common global covariance.
+
+    The :func:`~spectral.algorithms.algorithms.cov_avg` function computes
+    covariance averaged over a set of classes (useful when samples are limited
+    or global covariance is desired). Christian Mielke provided code for the
+    :func:`~spectral.algorithms.algorithms.msam` function, which computes the
+    Modified SAM score (by Oshigami et al).
+
+    
+2013-09-06 : SPy 0.12 is released.
+
+    SPy 0.12 provides an improved memmap interface that enables accessing image
+    data using arbitrary interleaves and supports editable images (see
+    :func:`~spectral.io.bipfile.BipFile.open_memmap` for details). The RX
+    anomaly detector (:func:`~spectral.algorithms.detectors.rx`) now allows
+    anomaly detection using local (sub-image) statistics by specifying an inner/outer
+    window around each pixel. The ability to disable algorithm progress messages
+    and addition of a wrapper around matplotlib's `imshow` function are provided to
+    simplify integration of SPy code with `IPython Notebooks <http://ipython.org/notebook.html>`_.
+
+2013-04-03 : SPy 0.11 is released.
+
+    This release adds an :class:`~spectral.algorithms.detectors.RX` anomaly detector,
+    ability to save and create images in ENVI format (see :func:`~spectral.io.envi.save_image`
+    and :func:`~spectral.io.envi.create_image`), and a unit-testing sub-package.
+    The top-level namespace has been simplified and several functions have been
+    renamed for consistency (:func:`image` is now :func:`~spectral.open_image`
+    and :func:`save_image` is now :func:`~spectral.save_rgb`).
+
+2013-02-23 : SPy 0.10.1 bug-fix release is now available.
+
+    This is a bug-fix release that corrects the spectrum displayed when double-
+    clicking on a raster display.  Version 0.10 introduced a bug that had the
+    row/column swapped, resulting in either the wrong pixel being plotted or an
+    exception raised.
+    
+    If you have installed SPy 0.10, you should install this update as soon as
+    possible.
+
+2013-02-17 : SPy 0.10 is released: SPy now uses IPython for GUI display.
+
+    As of this release, SPy now uses IPython for non-blocking GUI windows. IPython
+    should be started in **pylab** mode with the appropriate backend set (see
+    :ref:`starting_ipython`). The standard python interpreter can still be used if
+    GUI functions are not being called. This release also resolves a number of
+    issues associated with different versions of wxWidgets (2.8.x vs. 2.9.x) on
+    various operating systems.
+
+2013-01-23 : SPy 0.9 adds a linear matched filter target detector.
+
+    :class:`~spectral.algorithms.detectors.MatchedFilter` uses background and target means, along
+    with background covariance to provide a linear target detector.
+    
+    A generic :class:`~spectral.algorithms.transforms.LinearTransform` class allows simple application
+    of linear transforms to numpy ndarrays or :class:`~spectral.SpyFile` objects.
+    
+
+2012-07-10 : SPy 0.8 adds N-Dimensional visualization of hyperspectral image data.
+
+    The :func:`~spectral.graphics.ndwindow.ndwindow` function enables viewing of
+    high-dimensional images in a 3D display. See :ref:`nd_displays` for details.
+    
+    Hypercube display now uses mouse control for pan/zoom/rotate.
+    
+    Fixed a bug in several deprecation warnings that caused infinte recursion.
+
+2012-02-19 : SPy 0.7 Released.
+
+    The :func:`~spectral.kmeans` algorithm is about 10 times faster than version 0.6.  Many
+    method/function names have been renamed for consistency with external packages.
+    A few bugs potentially affecting BIP and BSQ input have been fixed.
+
+2011-01-17 : SPy 0.6 Released.
+
+    This release adds ASTER Spectral Library support, ability to save spectral
+    libraries, and installation via :mod:`distutils`.
