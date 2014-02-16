@@ -1,0 +1,3 @@
+[submodule "sphinx/data"]
+	path = sphinx/data
+	url = https://github.com/spectralpython/sample-data.git
