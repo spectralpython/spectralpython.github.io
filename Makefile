@@ -3,6 +3,7 @@
 SPHINXDIR = sphinx
 SPHINXOPTS = -W
 PYTHON = python
+SPECTRAL_DATA := $(SPHINXDIR)/data:$(SPECTRAL_DATA)
 
 # The name of a sample data file so we know whether to init/update the git submodule
 IMAGE_FILE = $(SPHINXDIR)/data/92AV3C.lan
@@ -27,7 +28,10 @@ images:
 	@echo "Creating image files..."
 	$(PYTHON) scripts/create_images.py -o $(SPHINXDIR)/images
 
-$(IMAGE_FILE):	git-submodules
+$(IMAGE_FILE):
+	@echo "Retrieving sample data files from GitHub..."
+	git submodule init
+	git submodule update
 
 git-submodules:
 	@echo "Retrieving sample data files from GitHub..."
