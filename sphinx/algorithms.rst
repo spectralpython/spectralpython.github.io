@@ -20,6 +20,10 @@ memory, you should load your image into memory.
     
     In [4]: img = open_image('92AV3C.lan').load()
 
+    @suppress
+    In [5]:  settings.show_progress = False
+
+
 Unsupervised Classification
 ===========================
 
@@ -117,22 +121,16 @@ The following commands will load and display the ground truth map for our sample
 image:
 
 .. ipython::
-    :verbatim:
 
     In [14]: gt = open_image('92AV3GT.GIS').read_band(0)
     
-    In [15]: w = view_indexed(gt)
-
-.. figure::	images/view_gt.jpg
-   :align:	center
-   
-   Image ground truth classes
+    @savefig view_gt.png scale=33% align=center
+    In [15]: v = imshow(classes=gt)
 
 We can now create a :class:`~spectral.TrainingClassSet` object by calling
 :func:`~spectral.create_training_classes`:
 
 .. ipython::
-    :verbatim:
 
     In [15]: classes = create_training_classes(img, gt)
 
@@ -147,25 +145,8 @@ In this case, we'll perform Gaussian Maximum Likelihood Classification (GMLC),
 so let's create the appropriate classifier.
 
 .. ipython::
-    :verbatim:
 
     In [16]: gmlc = GaussianClassifier(classes)
-      Omitting class   1 : only 54 samples present
-      Omitting class   7 : only 26 samples present
-      Omitting class   9 : only 20 samples present
-      Omitting class  13 : only 212 samples present
-      Omitting class  16 : only 95 samples present
-    Covariance.....done  
-    Covariance.....done  
-    Covariance.....done  
-    Covariance.....done  
-    Covariance.....done  
-    Covariance.....done  
-    Covariance.....done  
-    Covariance.....done  
-    Covariance.....done  
-    Covariance.....done  
-    Covariance.....done  
 
 When we created the classifier, it was automatically trained on the training sets
 we provided.  Notice that the classifier ignored five of the training classes.
@@ -179,33 +160,23 @@ the same spectral bands as the training set.  Let's classify our training image
 and display the resulting classification map.
 
 .. ipython::
-    :verbatim:
 
     In [17]: clmap = gmlc.classify_image(img)
     Classifying image...done  
     
-    In [18]: w = view_indexed(clmap)
-
-.. figure::	images/gmlc.jpg
-   :align:	center
-   
-   Gaussian Maximum Likelihood classification results
+    @savefig gmlc_map.png scale=33% align=center
+    In [18]: v = imshow(classes=clmap)
 
 The classification map above shows classification results for the entire image.  To view
 results for only the ground truth pixels we must mask out all the pixels not
 associated with a training class.
 
 .. ipython::
-    :verbatim:
 
     In [19]: gtresults = clmap * (gt != 0)
     
-    In [20]: w = view_indexed(gtresults)
-
-.. figure::	images/gmlc_training.jpg
-   :align:	center
-
-   GMLC results for training set
+    @savefig gmlc_map_training.png scale=33% align=center
+    In [20]: v = imshow(classes=gtresults)
 
 If the classification results are good, we expect the classification map
 above to look very similar to the original ground truth map.  To view only the
@@ -213,16 +184,13 @@ errors, we must mask out all elements in :obj:`gtResults` that do not match the
 ground truth image.
 
 .. ipython::
-    :verbatim:
 
     In [22]: gterrors = gtresults * (gtresults != gt)
     
     In [23]: w = view_indexed(gterrors)
 
-.. figure::	images/gmlc_errors.jpg
-   :align:	center
-   
-   GMLC errors
+    @savefig gmlc_errors.png scale=33% align=center
+    In [20]: v = imshow(classes=gterrors)
 
 The five contiguous regions in the error image above correspond to the ground
 truth classes that the :class:`~spectral.GaussianClassifier` ignored because they
@@ -268,17 +236,12 @@ This object also contains a transform to rotate data in to the space of the
 principal compenents, as well as a method to reduce the number of eigenvectors.
 
 .. ipython::
-    :verbatim:
 
     In [60]: pc = principal_components(img)
     Covariance.....done  
     
-    In [61]: w = view(pc.cov)
-
-.. figure::	images/covariance.jpg
-   :align:	center
-   
-   Image covariance matrix
+    @savefig covariance.png scale=33% align=center
+    In [61]: v = imshow(pc.cov)
 
 In the covariance matrix display, whiter values indicate strong positive covariance,
 darker values indicate strong negative covariance, and grey values indicate
@@ -291,65 +254,43 @@ dimensionality of the image pixels by projecting them onto the remaining eigenve
 We will choose to retain a minimum of 99.9% of the total image variance.
 
 .. ipython::
-    :verbatim:
 
     In [62]: pc_0999 = pc.reduce(fraction=0.999)
     
     In [62]: # How many eigenvalues are left?
     
     In [63]: len(pc_0999.eigenvalues)
-    32
     
     In [64]: img_pc = pc_0999.transform(img)
     
-    In [65]: w = view(img_pc[:,:,:3], stretch_all=True)
-
-.. figure::	images/pc3.jpg
-   :align:	center
-   
-   First 3 principal components of the image
+    @savefig pc3.png scale=33% align=center
+    In [65]: v = imshow(img_pc[:,:,:3], stretch_all=True)
 
 Now we'll use a Gaussian maximum likelihood classifier (GMLC) for the reduced
 principal components to train and classify against the training data.
 
 .. ipython::
-    :verbatim:
 
     In [68]: classes = create_training_classes(img_pc, gt)
     
     In [68]: gmlc = GaussianClassifier(classes)
-      Omitting class   7 : only 26 samples present
-      Omitting class   9 : only 20 samples present
-    Covariance.....done  
-    Covariance.....done  
-    Covariance.....done  
-    ---// snip //---
-    Covariance.....done  
     
     In [69]: clmap = gmlc.classify_image(img_pc)
-    Classifying image...done  
     
     In [70]: clmap_training = clmap * (gt != 0)
     
-    In [71]: w = view_indexed(clmap_training)
+    @savefig gmlc2_training.png scale=33% align=center
+    In [71]: v = imshow(classes=clmap_training)
 
-.. figure::	images/gmlc2_training.jpg
-   :align:	center
-
-   GMLC results for 32 principal components
+And the associated errors:
 
 .. ipython::
-    :verbatim:
 
     In [72]: training_errors = clmap_training * (clmap_training != gt)
     
-    In [73]: w = view_indexed(training_errors)
+    @savefig gmlc2_errors.png scale=33% align=center
+    In [73]: v = imshow(classes=training_errors)
 
-
-.. figure::	images/gmlc2_errors.jpg
-   :align:	center
-
-   GMLC errors for 32 principal components
 
 Fischer Linear Discriminant
 ---------------------------
@@ -375,58 +316,45 @@ This eigenvalue problem is solved by the :func:`~spectral.linear_discriminant`
 function, yielding `C-1` eigenvalues, where `C` is the number of classes.
 
 .. ipython::
-    :verbatim:
 
     In [74]: classes = create_training_classes(img, gt)
     
     In [75]: fld = linear_discriminant(classes)
-    Covariance.....done  
-    Covariance.....done  
-    ---// snip //---
-    Covariance.....done  
     
     In [76]: len(fld.eigenvectors)
-    15    
 
 Let's view the image projected onto the top 3 components of the transform:
 
 .. ipython::
-    :verbatim:
+
+    In [77]: print '2 + 2 =', 4
 
     In [77]: img_fld = fld.transform(img)
     
-    In [79]: w = view_indexed(img_fld[:, :, :3])
+    @savefig fld3.png scale=33% align=center
+    In [79]: v = imshow(img_fld[:, :, :3])
 
-.. figure::	images/fld3.jpg
-   :align:	center
-
-   Image data projected onto the first 3 components of the Fischer Linear
-   Discriminant
-
-Now we'll classify the data using this discriminant.
+Next, we'll classify the data using this discriminant.
 
 .. ipython::
-    :verbatim:
 
     In [80]: classes.transform(fld.transform)
     
     In [81]: gmlc = GaussianClassifier(classes)
     
     In [82]: clmap = gmlc.classify_image(img_fld)
-    Classifying image...done  
     
     In [83]: clmap_training = clmap * (gt != 0)
     
-    In [84]: w = view_indexed(clmap_training)
+    @savefig fld_training.png scale=33% align=center
+    In [84]: v = imshow(classes=clmap_training)
     
+.. ipython::
+
     In [85]: fld_errors = clmap_training * (clmap_training != gt)
     
-    In [87]: w = view_indexed(fld_errors)
-
-.. figure::	images/gmlc_fld_training.jpg
-   :align:	center
-
-   GMLC results for Fischer Linear Discriminant
+    @savefig fld_training_errors.png scale=33% align=center
+    In [87]: v = imshow(classes=fld_errors)
 
 .. seealso::
 
@@ -473,28 +401,17 @@ less than 0.001 with respect to the background:
 
     In [1]: P = chi2.ppf(0.999, nbands)
 
-    @verbatim
-    In [1]: view(1 * (rxvals > P))
+    @savefig rxvals_threshold.png scale=33% align=center
+    In [1]: v = imshow(1 * (rxvals > P))
 
-    @suppress
-    In [1]: save_rgb('images/rx_threshold.png', 1 * (rxvals > P))
-
-.. figure::     images/rx_threshold.png
-   :align:      center
 
 Rather than specifying a threshold for anomalous pixels, one can also simply
 view an image of raw RX scores, where brighter pixels are considered "more anomalous":
 
 .. ipython::
 
-    @verbatim
-    In [1]: view(rxvals)
-
-    @suppress
-    In [1]: save_rgb('images/rx.png', rxvals)
-
-.. figure::	images/rx.png
-   :align:	center
+    @savefig rxvals.png scale=33% align=center
+    In [1]: v = imshow(rxvals)
 
 For the sample image, only a few pixels are visible in the image of RX scores
 because a linear color scale is used and there is a very small number of pixels with RX
@@ -506,14 +423,8 @@ data prior to displaying the image:
 
     In [1]: import numpy as np
 
-    @verbatim
-    In [1]: view(np.log(rxvals))
-
-    @suppress
-    In [1]: save_rgb('images/rx_log.png', np.log(rxvals))
-
-.. figure::	images/rx_log.png
-   :align:	center
+    @savefig rxvals_log.png scale=33% align=center
+    In [1]: v = imshow(np.log(rxvals))
 
 If an image contains regions with different background materials, then the
 assumption of a single mean/covariance for background pixels can reduce
@@ -594,15 +505,9 @@ scores are greater than 0.2.
 
     In [1]: mfscores = matched_filter(img, t)
 
-    @verbatim
-    In [1]: view(1 * (mfscores > 0.2))
+    @savefig mf_gt_02.png scale=33% align=center
+    In [1]: v = imshow(1 * (mfscores > 0.2))
 
-    @suppress
-    In [1]: save_rgb('images/mf_gt_02.png', 1 * (mfscores > 0.2))
-
-.. figure::	images/mf_gt_02.png
-   :align:	center
-    
 As with the :func:`rx` function, :func:`matched_filter` can be applied using
 windowed background statistics (optionally with a global covariance estimate).
 
@@ -637,6 +542,7 @@ BandResampler is created, we can call it with a source sensor spectrum and it wi
 return the resampled spectrum.
 
 .. ipython:: python
+    :verbatim:
 
     import spectral.io.aviris as aviris
     img1 = aviris.open('f970619t01p02_r02_sc04.a.rfl', 'f970619t01p02_r02.a.spc')
@@ -661,16 +567,11 @@ band 21 (607.0 nm) for our red band and band 43 (802.5 nm) for near infrared,
 we get the following NDVI image.
 
 .. ipython::
-    :verbatim:
 
     In [103]: vi = ndvi(img, 21, 43)
     
-    In [104]: w = view(vi)
-
-.. figure::	images/ndvi.jpg
-   :align:	center
-
-   Normalized Difference Vegetation Index
+    @savefig ndvi.png scale=33% align=center
+    In [104]: v = imshow(vi)
 
 :func:`~spectral.algorithms.algorithms.ndvi` is a simple convenience function.
 You could just as easily calculate the vegetation index yourself like this:
@@ -699,7 +600,6 @@ mean spectra, where `C` is the number of training classes and `B` is the number
 of spectral bands.
 
 .. ipython::
-    :verbatim:
 
     In [96]: import numpy as np
     
@@ -725,18 +625,13 @@ function to select the index for the smallest angle corresponding to each pixel.
 The ``clmap + 1`` is used in the display command because our class IDs start at 1 (not 0).
 
 .. ipython::
-    :verbatim:
 
     In [100]: angles = spectral_angles(img, means)
     
     In [101]: clmap = np.argmin(angles, 2)
     
-    In [102]: view_indexed((clmap + 1) * (gt != 0))
-
-.. figure::	images/spectral_angles_training.jpg
-   :align:	center
-
-   Spectral angle classification for training set
+    @savefig sam.png scale=33% align=center
+    In [102]: v = imshow(classes=((clmap + 1) * (gt != 0)))
 
 .. seealso::
 

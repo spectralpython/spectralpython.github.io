@@ -22,27 +22,29 @@ graphical capabilities.
    :class: center
 
    * - Dependency
-     - Requirement
-   * - `Python 2.6+ <http://www.python.org>`_
-     - Required (Note that SPy does not work with Python 3.x)
+     - Notes
+   * - `Python  <http://www.python.org>`_ 2.6 or 2.7
+     - SPy does not work with Python 3 (yet)
    * - `NumPy <http://numpy.scipy.org/>`_
      - Required
-   * - `Python Imaging Library (PIL) <http://www.pythonware.com/products/pil/>`_
+   * - `Pillow <https://pypi.python.org/pypi/Pillow/>`_ or `Python Imaging Library (PIL) <http://www.pythonware.com/products/pil/>`_
      - Required if displaying or saving images
    * - `wxPython <http://www.wxpython.org/>`_
-     - Required if displaying images
+     - `(1)`
    * - `matplotlib <http://matplotlib.sourceforge.net/>`_
-     - Required if plotting spectra interactively
+     - Required if rendering raster displays or spectral plots
    * - `IPython <http://ipython.org/>`_
      - Required for interactive, non-blocking GUI windows
    * - `PyOpenGL <http://pyopengl.sourceforge.net/>`_
-     - Required if calling
-       :func:`~spectral.view_cube` or
-       :func:`~spectral.view_nd`
+     - `(1)`
+
+Notes:
+
+(1): Required if calling :func:`~spectral.view_cube` or :func:`~spectral.view_nd`.
 
 As of SPy version 0.10, IPython is used to provide interactive GUI windows.
-To use SPy with IPython, you will need to start IPython in "pylab"
-(see :ref:`starting_ipython`)
+To use SPy with IPython, you will need to start IPython in "pylab" mode
+(see :ref:`starting_ipython`).
 
 Installing from a distribution package
 ======================================

@@ -102,8 +102,10 @@ object to issue the query.
 Next, let's retrieve and plot one of the results (we will take the last one).
 
 .. ipython::
-    :verbatim:
 
+    @supress
+    In [117]: f = plt.figure()
+    
     In [117]: s = db.get_signature(2436)
     
     In [118]: import pylab as plt
@@ -116,13 +118,8 @@ Next, let's retrieve and plot one of the results (we will take the last one).
     
     In [121]: plt.grid(1)
     
+    @savefig limestone.png scale=80% align=center
     In [122]: plt.show()
-
-.. figure::	images/limestone.png
-   :align:	center
-   :scale:	50 %
-
-   Limestone spectrum from ASTER Spectral Library
 
 .. seealso::
 
@@ -212,35 +209,27 @@ plot the same limestone spectrum plotted above, which happens to be the last spe
 in the resampled library.
 
 .. ipython::
-    :verbatim:
 
     In [132]: import pylab as plt
     
     In [133]: s = db.get_signature(2436)
     
-    In [134]: plt.plot(s.x, s.y, label='original')
-    Out[134]: [<matplotlib.lines.Line2D at 0x100768ed0>]
+    In [134]: plt.plot(s.x, s.y, 'k-', label='original');
     
     In [135]: plt.hold(1)
     
-    In [136]: plt.plot(bands.centers, lib.spectra[-1], label='resampled')
-    Out[136]: [<matplotlib.lines.Line2D at 0x1292bd190>]
+    In [136]: plt.plot(bands.centers, lib.spectra[-1], 'r-', label='resampled');
     
     In [137]: plt.grid(1)
     
-    In [138]: plt.xlim(0, 3)
-    Out[138]: (0, 3)
+    In [138]: plt.gca().legend(loc='upper left');
+
+    In [138]: plt.xlim(0, 3);
     
-    In [139]: plt.title('Resampled %s spectrum' % lib.names[-1])
-    Out[139]: <matplotlib.text.Text at 0x1292b6b90>
+    In [139]: plt.title('Resampled %s spectrum' % lib.names[-1]);
     
+    @savefig limestone_resampled.png scale=80% align=center
     In [140]: plt.show()
-
-.. figure::	images/limestone_resampled.png
-   :align:	center
-   :scale:	50 %
-
-   Resampled limestone spectrum
 
 The resampled spectral library can be used with any image that uses the same
 band calibration to which we resampled the spectra.  We can also save the library

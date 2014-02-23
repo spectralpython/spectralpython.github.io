@@ -8,6 +8,7 @@ Displaying Data
 ===============
 
 .. ipython::
+    :suppress:
 
     In [9]: import matplotlib
 
@@ -26,35 +27,184 @@ have already set your `matplotlib backend <http://matplotlib.org/faq/usage_faq.h
 to either "WX" or "WXAgg" in your matplotlibrc file, you should be able to
 start IPython for SPy like this::
 
-    # ipython --pylab
+    ipython --pylab
     
 You can also set the backend explicitly when starting IPython this way::
 
-    # ipython --pylab=wx
+    ipython --pylab=wx
     
 .. note::
 
-    If you are not calling GUI functions (calling :func:`~spectral.graphics.save_rgb`
+    If you are not calling GUI functions (calling :func:`~spectral.save_rgb`
     doesn't count as a GUI function), then it is not necessary to run IPython -
     you can run the standard python interpreter.
+
+.. note::
+
+    If you are not able to run the `WX` backend on your system, you can still use
+    a different backend (e.g., `Qt4Agg` or `TkAgg`); however you will be unable
+    to call the :func:`~spectral.view_cube` or
+    :func:`~spectral.view_nd` functions.
 
 Raster Displays
 ===============
 
+Displaying images with `imshow`
+*******************************
+
+The SPy :func:`~spectral.graphics.spypylab.imshow` function is a wrapper around
+the matplotlib function of the same name. The main differences are that the SPy
+version makes it easy to display bands from multispectral/hyperspectral images,
+it renders classification images, and supports several additional types of
+interactivity.
+
+Image Data Display
+~~~~~~~~~~~~~~~~~~
+
+To display the RGB bands as shown for the `view` function above, pass the same
+arguments to `imshow`:
+
+.. ipython::
+
+    In [1]: from spectral import *
+    
+    In [1]: img = open_image('92AV3C.lan')
+    
+    @savefig imshow_92AV3C_rgb.png scale=33% align=center
+    In [1]: view = imshow(img, (29, 19, 9))
+
+When displaying the image interactively, the matplotlib button controls can be
+used to pan and zoom the displayed images. If you press the "z" keyboard key,
+a zoom window will be opened, which displays a magnified view of the image. By
+holding down the **CONTROL** key and left-clicking in the original window, the
+zoom window will pan to the pixel clicked in the original window.
+
+Class Map Display
+~~~~~~~~~~~~~~~~~
+
+To display the ground truth image using :func:`imshow`, set the *classes*
+argument in the `imshow` function:
+
+.. ipython::
+
+    In [1]: gt = open_image('92AV3GT.GIS').read_band(0)
+    
+    @savefig imshow_92AV3C_gt.png scale=33% align=center
+    In [9]: view = imshow(classes=gt)
+It is also possible to switch between displaying image bands and class colors,
+as well as displaying class color masks overlayed on the image data display. To
+do this, specify both the data and class values when calling :func:`imshow`:
+
+.. ipython::
+
+    @verbatim
+    In [9]: view = imshow(img, (30, 20, 10), classes=gt)
+
+The default display mode is to show the image bands. Press "d", "c",
+or "C" (while focus is on the image window) to switch the display to *data*,
+*classes*, or *class overlay*, respectively. Setting the display parameters can also
+be done programatically. For example, to display the image with overlayed class
+masks, using an alpha transparency of 0.5, type the following commands after
+calling :func:`imshow`:
+
+.. ipython::
+
+    In [9]: view = imshow(img, (30, 20, 10), classes=gt)
+
+    In [9]: view.set_display_mode('overlay')
+
+    In [9]: view.class_alpha = 0.5
+
+    @suppress
+    In [9]: plt.savefig('images/imshow_92AV3C_overlay.png')
+
+.. figure:: images/imshow_92AV3C_overlay.png
+   :align:  center
+   :scale:  30 %
+
+Interactive Class Labeling
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The :class:`ImageView` window provides the ability to modify pixel class IDs interactively
+by selecting rectangular regions in the image and assigning a new class ID.
+Applying a class ID to a rectangular region is done using the following steps:
+
+    #. Call :func:`imshow`, providing an initial array for the *classes* argument.
+       This must be a non-negative, integer-valued array. A class ID value of zero
+       represents an unlabeled pixel so to start with a completely unlabeled
+       image, pass an array of all zeros for the *classes* argument.
+
+    #. While holding the **SHIFT** key, click with the left mouse button at the
+       upper left corner of the rectangle to be selected. Drag the mouse cursor
+       and release the mouse button at the lower right corner of the rectangular
+       region. Note that releasing the **SHIFT** key before the mouse button is
+       released will result in cancellation of the selection operation.
+
+    #. With focus still on the :class:`ImageView` window, enter the numeric
+       class ID to apply to the region. The class ID can contain multiple digits.
+       The digits will not be echoed on the command line. Press **ENTER** to
+       apply the class ID. The command line will request confirmation of the
+       opertion. Press **ENTER** again to apply the class ID or press any other
+       key to cancel the operation.
+
+Classes can be assigned form either a main :class:`ImageView` window or from
+an associated zoom window. While the selection tool only produces rectangular
+regions, you can assign classes to non-rectangular regions by first assigning
+the class ID to a super-rectangle covering all the pixels of interest, then
+reassigning sub-rectangles back to class 0 (or whatever was the original class ID).
+
+Additional Capabilities
+~~~~~~~~~~~~~~~~~~~~~~~
+
+To get help on :class:`ImageView` keyboard & mouse functions, press "h" while focus is on
+the image window to display all keybinds and mouse functions::
+
+    Mouse Functions:
+    ----------------
+    ctrl+left-click          ->   pan zoom window to pixel
+    shift+left-click&drag    ->   select rectangular image region
+    left-dblclick            ->   plot pixel spectrum
+
+    Keybinds:
+    ---------
+    0-9     -> enter class ID for image pixel labeling
+    ENTER   -> apply specified class ID to selected rectangular region
+    a/A     -> decrease/increase class overlay alpha value
+    c       -> set display mode to "classes" (if classes set)
+    C       -> set display mode to "overlay" (if data and classes set)
+    d       -> set display mode to "data" (if data set)
+    h       -> print help message
+    i       -> toggle pixel interpolation between "nearest" and SPy default.
+    z       -> open zoom window
+
+    See matplotlib imshow documentation for addition key binds.
+
+To customize behavior of the image display beyond what is provided by the
+:func:`~spectral.graphics.spypylab.imshow` function, you can create an
+:class:`~spectral.graphics.spypylab.ImageView` object directly and customize it
+prior to calling its :meth:`show` method. You can also access the
+matplotlib :attr:`figure` and :attr:`canvas` attributes from the :attr:`axes`
+attribute of the :class:`ImageView` object returned by :func:`imshow`. Finally,
+you can customize some of the default behaviours of the image display by
+modifiying members of the module's :class:`~spectral.spectral.SpySettings`
+object.
+
+Displaying images with `view` and `view_indexed`
+************************************************
+
 .. note::
 
-    While this documentation uses the :func:`view` and :func:`view_indexed`
-    functions for displaying images, you are incouraged to instead use the SPy
+    :func:`spectral.view` and :func:`spectral.view_indexed` functions are
+    older raster display functions, which are superceded by the SPy
     :func:`~spectral.graphics.spypylab.imshow` function (which is a wrapper
     around matplotlib's `imshow` function). The `view*` functions always display
     images at full resolution (one image pixel corresponds to one screen pixel),
     which is convenient for small chips (such as those used in this documentation).
     However, for typical image dimensions, it is more convenient to use the
     `imshow` function, which provides capabilities such as panning, zooming,
-    resizing, class map overlays, and pixel class labeling.
-
-Displaying images with `view` and `view_indexed`
-************************************************
+    resizing, class map overlays, and pixel class labeling. The `view*`
+    functions will likely be deprecated and subsequently removed in future
+    versions of the software.
 
 The :func:`~spectral.view` function opens a window that displays a raster view of
 an image.
@@ -67,10 +217,6 @@ an image.
     @suppress
     In [2]: app = wx.App()
 
-    In [3]: from spectral import *
-    
-    In [4]: img = open_image('92AV3C.lan')
-    
     @verbatim    
     In [5]: w = view(img)
     
@@ -199,169 +345,14 @@ palette must be explicitly passed as a keyword argument:
     @suppress
     In [13]: save_rgb('images/view_gt.jpg', gt, colors=spy.spy_colors)
 
-Displaying images with imshow
-*****************************
-
-The :func:`~spectral.graphics.spypylab.imshow` function is a wrapper around the
-matplotlib function of the same name. The main differences are that the SPy
-version makes it easy to display bands from multispectral/hyperspectral images,
-it renders classification images, and supports several additional types of
-interactivity.
-
-Image Data Display
-~~~~~~~~~~~~~~~~~~
-
-To display the RGB bands as shown for the `view` function above, pass the same
-arguments to `imshow`:
-
-.. ipython::
-
-    In [9]: view = imshow(img, (29, 19, 9))
-
-    @suppress
-    In [9]: plt.savefig('images/imshow_92AV3C_rgb.png')
-
-.. figure:: images/imshow_92AV3C_rgb.png
-   :align:  center
-   :scale:  30 %
-
-When displaying the image interactively, the matplotlib button controls can be
-used to pan and zoom the displayed images. If you press the "z" keyboard key,
-a zoom window will be opened, which displays a magnified view of the image. By
-holding down the **CONTROL** key and left-clicking in the original window, the
-zoom window will pan to the pixel clicked in the original window.
-
-Class Map Display
-~~~~~~~~~~~~~~~~~
-
-To display the ground truth image using :func:`imshow`, set the *classes*
-argument in the `imshow` function:
-
-.. ipython::
-
-    In [9]: view = imshow(classes=gt)
-
-    @suppress
-    In [9]: plt.savefig('images/imshow_92AV3C_gt.png')
-
-.. figure:: images/imshow_92AV3C_gt.png
-   :align:  center
-   :scale:  30 %
-
-It is also possible to switch between displaying image bands and class colors,
-as well as displaying class color masks overlayed on the image data display. To
-do this, specify both the data and class values when calling :func:`imshow`:
-
-.. ipython::
-
-    @verbatim
-    In [9]: view = imshow(img, (30, 20, 10), classes=gt)
-
-The default display mode is to show the image bands. Press "d", "c",
-or "C" (while focus is on the image window) to switch the display to *data*,
-*classes*, or *class overlay*, respectively. Setting the display parameters can also
-be done programatically. For example, to display the image with overlayed class
-masks, using an alpha transparency of 0.5, type the following commands after
-calling :func:`imshow`:
-
-.. ipython::
-
-    @suppress
-    In [9]: view = imshow(img, (30, 20, 10), classes=gt)
-
-    In [9]: view.set_display_mode('overlay')
-
-    In [9]: view.class_alpha = 0.5
-
-    @suppress
-    In [9]: plt.savefig('images/imshow_92AV3C_overlay.png')
-
-.. figure:: images/imshow_92AV3C_overlay.png
-   :align:  center
-   :scale:  30 %
-
-Interactive Class Labeling
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The :class:`ImageView` window provides the ability to modify pixel class IDs interactively
-by selecting rectangular regions in the image and assigning a new class ID.
-Applying a class ID to a rectangular region is done using the following steps:
-
-    #. Call :func:`imshow`, providing an initial array for the *classes* argument.
-       This must be a non-negative, integer-valued array. A class ID value of zero
-       represents an unlabeled pixel so to start with a completely unlabeled
-       image, pass an array of all zeros for the *classes* argument.
-
-    #. While holding the **SHIFT** key, click with the left mouse button at the
-       upper left corner of the rectangle to be selected. Drag the mouse cursor
-       and release the mouse button at the lower right corner of the rectangular
-       region. Note that releasing the **SHIFT** key before the mouse button is
-       released will result in cancellation of the selection operation.
-
-    #. With focus still on the :class:`ImageView` window, enter the numeric
-       class ID to apply to the region. The class ID can contain multiple digits.
-       The digits will not be echoed on the command line. Press **ENTER** to
-       apply the class ID. The command line will request confirmation of the
-       opertion. Press **ENTER** again to apply the class ID or press any other
-       key to cancel the operation.
-
-Classes can be assigned form either a main :class:`ImageView` window or from
-an associated zoom window. While the selection tool only produces rectangular
-regions, you can assign classes to non-rectangular regions by first assigning
-the class ID to a super-rectangle covering all the pixels of interest, then
-reassigning sub-rectangles back to class 0 (or whatever was the original class ID).
-
-Additional Capabilities
-~~~~~~~~~~~~~~~~~~~~~~~
-
-To get help on :class:`ImageView` keyboard & mouse functions, press "h" while focus is on
-the image window to display all keybinds and mouse functions::
-
-    Mouse Functions:
-    ----------------
-    ctrl+left-click          ->   pan zoom window to pixel
-    shift+left-click&drag    ->   select rectangular image region
-    left-dblclick            ->   plot pixel spectrum
-
-    Keybinds:
-    ---------
-    0-9     -> enter class ID for image pixel labeling
-    ENTER   -> apply specified class ID to selected rectangular region
-    a/A     -> decrease/increase class overlay alpha value
-    c       -> set display mode to "classes" (if classes set)
-    C       -> set display mode to "overlay" (if data and classes set)
-    d       -> set display mode to "data" (if data set)
-    h       -> print help message
-    i       -> toggle pixel interpolation between "nearest" and SPy default.
-    z       -> open zoom window
-
-    See matplotlib imshow documentation for addition key binds.
-
-To customize behavior of the image display beyond what is provided by the
-:func:`~spectral.graphics.spypylab.imshow` function, you can create an
-:class:`~spectral.graphics.spypylab.ImageView` object directly and customize it
-prior to calling its :meth:`show` method. You can also access the
-matplotlib :attr:`figure` and :attr:`canvas` attributes from the :attr:`axes`
-attribute of the :class:`ImageView` object returned by :func:`imshow`. Finally,
-you can customize some of the default behaviours of the image display by
-modifiying members of the module's :class:`~spectral.spectral.SpySettings`
-object.
-
 Spectrum Plots
 ==============
 
 The image display windows provide a few interactive functions.  If you create an
-image display with :func:`~spectral.view` and then double-click on a particular
-location in the window, a new window will be created with a 2D plot of the spectrum
-for the pixel that was clicked:
-
-.. ipython::
-
-    @verbatim
-    In [9]: w = view(green)
-
-Now if you double-click on the image, the selected pixel will appear in a
-spectrum plot.
+image display with :func:`~spectral.graphics.spypylab.imshow` (or :func:`~spectral.view`)
+and then double-click on a particular location in the window, a new window will
+be created with a 2D plot of the spectrum for the pixel that was clicked. It
+should look something like this:
 
 .. figure::	images_static/rgb_double_click.png
    :align:	center
@@ -392,7 +383,7 @@ Notice that the spectra are now plotted against their associated wavelengths.
 The spectral plots are intended as a convenience to enable one to quickly view
 spectra from an image.  If you would like a prettier plot of the same data, you
 can use SPy to read the spectra from the image and create a customized plot by
-using `matplotlib <http://matplotlib.sourceforge.net/>`_ directly.
+using `matplotlib <http://matplotlib.org/>`_ directly.
 
 Hypercube Display
 =================

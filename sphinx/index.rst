@@ -33,6 +33,13 @@ Documentation
 News
 ----
 
+2014-02-23 : SPy 0.14 is released. This is primarily a bug fix release.
+
+    This release fixes a bug in :class:`~spectral.algorithms.classifiers.PerceptronClassifier`
+    and provides significant performance improvement. A bug is also fixed that
+    causes incorrect display of several faces in the :func:`~spectral.view_cube`
+    image cube display. See `VERSIONS.txt` file for full details.
+
 2014-01-06 : Numerous new user interface features and performance improvements in SPy 0.13.
 
     The SPy :func:`~spectral.graphics.spypylab.imshow` wrapper around matplotlib's
