@@ -39,6 +39,7 @@ git-submodules:
 	git submodule update
 
 site:		images sphinx-html
+	cp static/CNAME sphinx/_build/html
 
 upload:
 	@echo "Not yet implemented."
