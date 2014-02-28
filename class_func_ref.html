@@ -1,0 +1,3379 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Class/Function Reference &mdash; Spectral Python 0.14 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.14',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Spectral Python 0.14 documentation" href="index.html" />
+    <link rel="up" title="Spectral Python (SPy) User Guide" href="user_guide.html" />
+    <link rel="prev" title="Spectral Libraries" href="libraries.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="libraries.html" title="Spectral Libraries"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Spectral Python 0.14 documentation</a> &raquo;</li>
+          <li><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound" id="class-func-ref">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="class-function-reference">
+<h1>Class/Function Reference<a class="headerlink" href="#class-function-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="file-i-o">
+<h2>File I/O<a class="headerlink" href="#file-i-o" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="open-image">
+<h3>open_image<a class="headerlink" href="#open-image" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.open_image">
+<tt class="descname">open_image</tt><big>(</big><em>file</em><big>)</big><a class="headerlink" href="#spectral.open_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locates &amp; opens the specified hyperspectral image.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>file (str):</dt>
+<dd>Name of the file to open.</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>SpyFile object to access the file.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>IOError.</div></blockquote>
+<p>This function attempts to determine the associated file type and open the
+file. If the specified file is not found in the current directory, all
+directories listed in the <tt class="xref py py-const docutils literal"><span class="pre">SPECTRAL_DATA</span></tt> environment variable will
+be searched until the file is found.  If the file being opened is an ENVI
+file, the <cite>file</cite> argument should be the name of the header file.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="imagearray">
+<h3>ImageArray<a class="headerlink" href="#imagearray" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.spectral.ImageArray">
+<em class="property">class </em><tt class="descname">ImageArray</tt><big>(</big><em>data</em>, <em>spyfile</em><big>)</big><a class="headerlink" href="#spectral.spectral.ImageArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>ImageArray is an interface to an image loaded entirely into memory.
+ImageArray objects are returned by <a class="reference internal" href="#spectral.SpyFile.load" title="spectral.SpyFile.load"><tt class="xref py py-meth docutils literal"><span class="pre">spectral.SpyFile.load</span></tt></a>.
+This class inherits from both numpy.ndarray and SpyFile, providing the
+interfaces of both classes.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="spyfile">
+<h3>SpyFile<a class="headerlink" href="#spyfile" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.SpyFile">
+<em class="property">class </em><tt class="descname">SpyFile</tt><big>(</big><em>params</em>, <em>metadata=None</em><big>)</big><a class="headerlink" href="#spectral.SpyFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>A base class for accessing spectral image files</p>
+<dl class="method">
+<dt id="spectral.SpyFile.__getitem__">
+<tt class="descname">__getitem__</tt><big>(</big><em>args</em><big>)</big><a class="headerlink" href="#spectral.SpyFile.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subscripting operator that provides a numpy-like interface.
+Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>i</cite>, <cite>j</cite>, <cite>k</cite> (int or <tt class="xref py py-class docutils literal"><span class="pre">slice</span></tt> object)</p>
+<blockquote>
+<div>Integer subscript indices or slice objects.</div></blockquote>
+</div></blockquote>
+<p>The subscript operator emulates the <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> subscript
+operator, except data are read from the corresponding image file
+instead of an array object in memory.  For frequent access or when
+accessing a large fraction of the image data, consider calling
+<a class="reference internal" href="#spectral.SpyFile.load" title="spectral.SpyFile.load"><tt class="xref py py-meth docutils literal"><span class="pre">spectral.SpyFile.load</span></tt></a> to load the data into an
+<tt class="xref py py-meth docutils literal"><span class="pre">spectral.ImageArray</span></tt> object and using its subscript operator
+instead.</p>
+<p>Examples:</p>
+<blockquote>
+<div><p>Read the pixel at the 30th row and 51st column of the image:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pixel</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="mi">29</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Read the 10th band:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">band</span> <span class="o">=</span> <span class="n">img</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">9</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Read the first 30 bands for a square sub-region of the image:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">region</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span> <span class="p">:</span><span class="mi">30</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.SpyFile.__str__">
+<tt class="descname">__str__</tt><big>(</big><big>)</big><a class="headerlink" href="#spectral.SpyFile.__str__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints basic parameters of the associated file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.SpyFile.load">
+<tt class="descname">load</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.SpyFile.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads entire image into memory in a <tt class="xref py py-class docutils literal"><span class="pre">spectral.ImageArray</span></tt>.</p>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div><p><cite>dtype</cite> (numpy.dtype):</p>
+<blockquote>
+<div>An optional dtype to which the loaded array should be cast.</div></blockquote>
+<p><cite>scale</cite> (bool, default True):</p>
+<blockquote>
+<div>Specifies whether any applicable scale factor should be applied
+to the data after loading.</div></blockquote>
+</div></blockquote>
+<p><tt class="xref py py-class docutils literal"><span class="pre">spectral.ImageArray</span></tt> is derived from both
+<tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt> and <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> so it supports the
+full <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> interface.  The returns object will have
+shape <cite>(M,N,B)</cite>, where <cite>M</cite>, <cite>N</cite>, and <cite>B</cite> are the numbers of rows,
+columns, and bands in the image.</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="spyfile-subclasses">
+<h4>SpyFile Subclasses<a class="headerlink" href="#spyfile-subclasses" title="Permalink to this headline">¶</a></h4>
+<p>SpyFile is an abstract base class.  Subclasses of <tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt>
+(<a class="reference internal" href="#spectral.io.bipfile.BipFile" title="spectral.io.bipfile.BipFile"><tt class="xref py py-class docutils literal"><span class="pre">BipFile</span></tt></a>, <tt class="xref py py-class docutils literal"><span class="pre">BilFile</span></tt>,
+<tt class="xref py py-class docutils literal"><span class="pre">BsqFile</span></tt>) all implement a common set of additional
+methods. <a class="reference internal" href="#spectral.io.bipfile.BipFile" title="spectral.io.bipfile.BipFile"><tt class="xref py py-class docutils literal"><span class="pre">BipFile</span></tt></a> is shown here but the other two are similar.</p>
+<dl class="class">
+<dt id="spectral.io.bipfile.BipFile">
+<em class="property">class </em><tt class="descname">BipFile</tt><big>(</big><em>params</em>, <em>metadata=None</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to interface image files stored with bands interleaved by pixel.</p>
+<dl class="method">
+<dt id="spectral.io.bipfile.BipFile.open_memmap">
+<tt class="descname">open_memmap</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.open_memmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new <cite>numpy.memmap</cite> object for image file data access.</p>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div><p><cite>interleave</cite> (str, default &#8216;bip&#8217;):</p>
+<blockquote>
+<div><p>Specifies the shape/interleave of the returned object. Must be
+one of [&#8216;bip&#8217;, &#8216;bil&#8217;, &#8216;bsq&#8217;, &#8216;source&#8217;]. If not specified, the
+memmap will be returned as &#8216;bip&#8217;. If the interleave is
+&#8216;source&#8217;, the interleave of the memmap will be the same as the
+source data file. If the number of rows, columns, and bands in
+the file are R, C, and B, the shape of the returned memmap
+array will be as follows:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="48%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">interleave</th>
+<th class="head">array shape</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>&#8216;bip&#8217;</td>
+<td>(R, C, B)</td>
+</tr>
+<tr class="row-odd"><td>&#8216;bil&#8217;</td>
+<td>(R, B, C)</td>
+</tr>
+<tr class="row-even"><td>&#8216;bsq&#8217;</td>
+<td>(B, R, C)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><cite>writable</cite> (bool, default False):</p>
+<blockquote>
+<div>If <cite>writable</cite> is True, modifying values in the returned memmap
+will result in corresponding modification to the image data
+file.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.io.bipfile.BipFile.read_band">
+<tt class="descname">read_band</tt><big>(</big><em>band</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_band" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a single band from the image.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>band</cite> (int):</p>
+<blockquote>
+<div>Index of band to read.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></p>
+<blockquote>
+<div>An <cite>MxN</cite> array of values for the specified band.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.io.bipfile.BipFile.read_bands">
+<tt class="descname">read_bands</tt><big>(</big><em>bands</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_bands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads multiple bands from the image.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>bands</cite> (list of ints):</p>
+<blockquote>
+<div>Indices of bands to read.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></p>
+<blockquote>
+<div>An <cite>MxNxL</cite> array of values for the specified bands. <cite>M</cite> and <cite>N</cite>
+are the number of rows &amp; columns in the image and <cite>L</cite> equals
+len(<cite>bands</cite>).</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.io.bipfile.BipFile.read_pixel">
+<tt class="descname">read_pixel</tt><big>(</big><em>row</em>, <em>col</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_pixel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the pixel at position (row,col) from the file.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>row</cite>, <cite>col</cite> (int):</p>
+<blockquote>
+<div>Indices of the row &amp; column for the pixel</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></p>
+<blockquote>
+<div>A length-<cite>B</cite> array, where <cite>B</cite> is the number of image bands.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.io.bipfile.BipFile.read_subimage">
+<tt class="descname">read_subimage</tt><big>(</big><em>rows</em>, <em>cols</em>, <em>bands=None</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_subimage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads arbitrary rows, columns, and bands from the image.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>rows</cite> (list of ints):</p>
+<blockquote>
+<div>Indices of rows to read.</div></blockquote>
+<p><cite>cols</cite> (list of ints):</p>
+<blockquote>
+<div>Indices of columns to read.</div></blockquote>
+<p><cite>bands</cite> (list of ints):</p>
+<blockquote>
+<div>Optional list of bands to read.  If not specified, all bands
+are read.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></p>
+<blockquote>
+<div>An <cite>MxNxL</cite> array, where <cite>M</cite> = len(<cite>rows</cite>), <cite>N</cite> = len(<cite>cols</cite>),
+and <cite>L</cite> = len(bands) (or # of image bands if <cite>bands</cite> == None).</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.io.bipfile.BipFile.read_subregion">
+<tt class="descname">read_subregion</tt><big>(</big><em>row_bounds</em>, <em>col_bounds</em>, <em>bands=None</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_subregion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a contiguous rectangular sub-region from the image.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>row_bounds</cite> (2-tuple of ints):</p>
+<blockquote>
+<div>(a, b) -&gt; Rows a through b-1 will be read.</div></blockquote>
+<p><cite>col_bounds</cite> (2-tuple of ints):</p>
+<blockquote>
+<div>(a, b) -&gt; Columnss a through b-1 will be read.</div></blockquote>
+<p><cite>bands</cite> (list of ints):</p>
+<blockquote>
+<div>Optional list of bands to read.  If not specified, all bands
+are read.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></p>
+<blockquote>
+<div>An <cite>MxNxL</cite> array.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="subimage">
+<h3>SubImage<a class="headerlink" href="#subimage" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.io.spyfile.SubImage">
+<em class="property">class </em><tt class="descname">SubImage</tt><big>(</big><em>image</em>, <em>row_range</em>, <em>col_range</em><big>)</big><a class="headerlink" href="#spectral.io.spyfile.SubImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a rectangular sub-region of a larger SpyFile object.</p>
+<dl class="method">
+<dt id="spectral.io.spyfile.SubImage.read_band">
+<tt class="descname">read_band</tt><big>(</big><em>band</em><big>)</big><a class="headerlink" href="#spectral.io.spyfile.SubImage.read_band" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a single band from the image.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>band</cite> (int):</p>
+<blockquote>
+<div>Index of band to read.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></p>
+<blockquote>
+<div>An <cite>MxN</cite> array of values for the specified band.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.io.spyfile.SubImage.read_bands">
+<tt class="descname">read_bands</tt><big>(</big><em>bands</em><big>)</big><a class="headerlink" href="#spectral.io.spyfile.SubImage.read_bands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads multiple bands from the image.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>bands</cite> (list of ints):</p>
+<blockquote>
+<div>Indices of bands to read.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></p>
+<blockquote>
+<div>An <cite>MxNxL</cite> array of values for the specified bands. <cite>M</cite> and <cite>N</cite>
+are the number of rows &amp; columns in the image and <cite>L</cite> equals
+len(<cite>bands</cite>).</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.io.spyfile.SubImage.read_pixel">
+<tt class="descname">read_pixel</tt><big>(</big><em>row</em>, <em>col</em><big>)</big><a class="headerlink" href="#spectral.io.spyfile.SubImage.read_pixel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the pixel at position (row,col) from the file.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>row</cite>, <cite>col</cite> (int):</p>
+<blockquote>
+<div>Indices of the row &amp; column for the pixel</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></p>
+<blockquote>
+<div>A length-<cite>B</cite> array, where <cite>B</cite> is the number of image bands.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.io.spyfile.SubImage.read_subimage">
+<tt class="descname">read_subimage</tt><big>(</big><em>rows</em>, <em>cols</em>, <em>bands=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#spectral.io.spyfile.SubImage.read_subimage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads arbitrary rows, columns, and bands from the image.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>rows</cite> (list of ints):</p>
+<blockquote>
+<div>Indices of rows to read.</div></blockquote>
+<p><cite>cols</cite> (list of ints):</p>
+<blockquote>
+<div>Indices of columns to read.</div></blockquote>
+<p><cite>bands</cite> (list of ints):</p>
+<blockquote>
+<div>Optional list of bands to read.  If not specified, all bands
+are read.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></p>
+<blockquote>
+<div>An <cite>MxNxL</cite> array, where <cite>M</cite> = len(<cite>rows</cite>), <cite>N</cite> = len(<cite>cols</cite>),
+and <cite>L</cite> = len(bands) (or # of image bands if <cite>bands</cite> == None).</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.io.spyfile.SubImage.read_subregion">
+<tt class="descname">read_subregion</tt><big>(</big><em>row_bounds</em>, <em>col_bounds</em>, <em>bands=None</em><big>)</big><a class="headerlink" href="#spectral.io.spyfile.SubImage.read_subregion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a contiguous rectangular sub-region from the image.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>row_bounds</cite> (2-tuple of ints):</p>
+<blockquote>
+<div>(a, b) -&gt; Rows a through b-1 will be read.</div></blockquote>
+<p><cite>col_bounds</cite> (2-tuple of ints):</p>
+<blockquote>
+<div>(a, b) -&gt; Columnss a through b-1 will be read.</div></blockquote>
+<p><cite>bands</cite> (list of ints):</p>
+<blockquote>
+<div>Optional list of bands to read.  If not specified, all bands
+are read.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></p>
+<blockquote>
+<div>An <cite>MxNxL</cite> array.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="file-formats">
+<h3>File Formats<a class="headerlink" href="#file-formats" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-spectral.io.aviris">
+<span id="aviris"></span><h4>AVIRIS<a class="headerlink" href="#module-spectral.io.aviris" title="Permalink to this headline">¶</a></h4>
+<p>Functions for handling AVIRIS image files.</p>
+<dl class="function">
+<dt id="spectral.io.aviris.open">
+<tt class="descname">open</tt><big>(</big><em>file</em>, <em>band_file=None</em><big>)</big><a class="headerlink" href="#spectral.io.aviris.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a SpyFile object for an AVIRIS image file.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>file</cite> (str):</p>
+<blockquote>
+<div>Name of the AVIRIS data file.</div></blockquote>
+<p><cite>band_file</cite> (str):</p>
+<blockquote>
+<div>Optional name of the AVIRIS spectral calibration file.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>A SpyFile object for the image file.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>IOError</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="spectral.io.aviris.read_aviris_bands">
+<tt class="descname">read_aviris_bands</tt><big>(</big><em>cal_filename</em><big>)</big><a class="headerlink" href="#spectral.io.aviris.read_aviris_bands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a BandInfo object for an AVIRIS spectral calibration file.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>cal_filename</cite> (str):</p>
+<blockquote>
+<div>Name of the AVIRIS spectral calibration file.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>A <a class="reference internal" href="#spectral.BandInfo" title="spectral.BandInfo"><tt class="xref py py-class docutils literal"><span class="pre">spectral.BandInfo</span></tt></a> object</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="module-spectral.io.envi">
+<span id="envi"></span><h4>ENVI<a class="headerlink" href="#module-spectral.io.envi" title="Permalink to this headline">¶</a></h4>
+<p>ENVI <a class="footnote-reference" href="#envi-trademark" id="id1">[1]</a> is a popular commercial software package for processing
+and analyzing geospatial imagery.  SPy supports reading imagery with associated
+ENVI header files and reading &amp; writing spectral libraries with ENVI headers.
+ENVI files are opened automatically by the SPy <tt class="xref py py-func docutils literal"><span class="pre">image</span></tt> function
+but can also be called explicitly.  It may be necessary to open an ENVI file
+explicitly if the data file is in a separate directory from the header or if
+the data file has an unusual file extension that SPy can not identify.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">spectral.io.envi</span> <span class="kn">as</span> <span class="nn">envi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">envi</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;cup95eff.int.hdr&#39;</span><span class="p">,</span> <span class="s">&#39;/Users/thomas/spectral_data/cup95eff.int&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils footnote" frame="void" id="envi-trademark" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>ENVI is a registered trademark of ITT Corporation.</td></tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="spectral.io.envi.open">
+<tt class="descname">open</tt><big>(</big><em>file</em>, <em>image=None</em><big>)</big><a class="headerlink" href="#spectral.io.envi.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens an image or spectral library with an associated ENVI HDR header file.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>file</cite> (str):</p>
+<blockquote>
+<div>Name of the header file for the image.</div></blockquote>
+<p><cite>image</cite> (str):</p>
+<blockquote>
+<div>Optional name of the associated image data file.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><a class="reference internal" href="#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">spectral.SpyFile</span></tt></a> or <a class="reference internal" href="#spectral.io.envi.SpectralLibrary" title="spectral.io.envi.SpectralLibrary"><tt class="xref py py-class docutils literal"><span class="pre">spectral.io.envi.SpectralLibrary</span></tt></a>
+object.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>TypeError, IOError.</div></blockquote>
+<p>If the specified file is not found in the current directory, all
+directories listed in the SPECTRAL_DATA environment variable will be
+searched until the file is found.  Based on the name of the header file,
+this function will search for the image file in the same directory as the
+header, looking for a file with the same name as the header but different
+extension. Extensions recognized are .img, .dat, .sli, and no extension.
+Capitalized versions of the file extensions are also searched.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="spectral.io.envi.SpectralLibrary">
+<em class="property">class </em><tt class="descname">SpectralLibrary</tt><big>(</big><em>data</em>, <em>header</em>, <em>params</em><big>)</big><a class="headerlink" href="#spectral.io.envi.SpectralLibrary" title="Permalink to this definition">¶</a></dt>
+<dd><p>The envi.SpectralLibrary class holds data contained in an ENVI-formatted
+spectral library file (.sli files), which stores data as specified by a
+corresponding .hdr header file.  The primary members of an
+Envi.SpectralLibrary object are:</p>
+<blockquote>
+<div><p><cite>spectra</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>A subscriptable array of all spectra in the library. <cite>spectra</cite> will
+have shape <cite>CxB</cite>, where <cite>C</cite> is the number of spectra in the library
+and <cite>B</cite> is the number of bands for each spectrum.</div></blockquote>
+<p><cite>names</cite> (list of str):</p>
+<blockquote>
+<div>A length-<cite>C</cite> list of names corresponding to the spectra.</div></blockquote>
+<p><cite>bands</cite> (<a class="reference internal" href="#spectral.BandInfo" title="spectral.BandInfo"><tt class="xref py py-class docutils literal"><span class="pre">spectral.BandInfo</span></tt></a>):</p>
+<blockquote>
+<div>Spectral bands associated with the library spectra.</div></blockquote>
+</div></blockquote>
+<dl class="method">
+<dt id="spectral.io.envi.SpectralLibrary.save">
+<tt class="descname">save</tt><big>(</big><em>fileBaseName</em>, <em>description=None</em><big>)</big><a class="headerlink" href="#spectral.io.envi.SpectralLibrary.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the spectral library to a library file.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>fileBaseName</cite> (str):</p>
+<blockquote>
+<div>Name of the file (without extension) to save.</div></blockquote>
+<p><cite>description</cite> (str):</p>
+<blockquote>
+<div>Optional text description of the library.</div></blockquote>
+</div></blockquote>
+<p>This method creates two files: <cite>fileBaseName</cite>.hdr and
+<cite>fileBaseName</cite>.sli.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="envi-create-image">
+<h3>envi.create_image<a class="headerlink" href="#envi-create-image" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.io.envi.create_image">
+<tt class="descname">create_image</tt><big>(</big><em>hdr_file</em>, <em>metadata=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.io.envi.create_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an image file and ENVI header with a memmep array for write access.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>hdr_file</cite> (str):</p>
+<blockquote>
+<div>Header file (with &#8221;.hdr&#8221; extension) name with path.</div></blockquote>
+<p><cite>metadata</cite> (dict):</p>
+<blockquote>
+<div>Metadata to specify the image file format. The following parameters
+(in ENVI header format) are required, if not specified via
+corresponding keyword arguments: &#8220;bands&#8221;, &#8220;lines&#8221;, &#8220;samples&#8221;,
+and &#8220;data type&#8221;.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div><p><cite>dtype</cite> (numpy dtype or type string):</p>
+<blockquote>
+<div>The numpy data type with which to store the image.  For example,
+to store the image in 16-bit unsigned integer format, the argument
+could be any of <cite>numpy.uint16</cite>, &#8220;u2&#8221;, &#8220;uint16&#8221;, or &#8220;H&#8221;. If this
+keyword is given, it will override the &#8220;data type&#8221; parameter in
+the <cite>metadata</cite> argument.</div></blockquote>
+<p><cite>force</cite> (bool, False by default):</p>
+<blockquote>
+<div>If the associated image file or header already exist and <cite>force</cite> is
+True, the files will be overwritten; otherwise, if either of the
+files exist, an exception will be raised.</div></blockquote>
+<p><cite>ext</cite> (str):</p>
+<blockquote>
+<div>The extension to use for the image file.  If not specified, the
+default extension &#8221;.img&#8221; will be used.  If <cite>ext</cite> is an empty
+string, the image file will have the same name as the header but
+without the &#8221;.hdr&#8221; extension.</div></blockquote>
+<p><cite>interleave</cite> (str):</p>
+<blockquote>
+<div>Must be one of &#8220;bil&#8221;, &#8220;bip&#8221;, or &#8220;bsq&#8221;. This keyword supercedes the
+value of &#8220;interleave&#8221; in the metadata argument, if given. If no
+interleave is specified (via keyword or <cite>metadata</cite>), &#8220;bip&#8221; is
+assumed.</div></blockquote>
+<p><cite>shape</cite> (tuple of integers):</p>
+<blockquote>
+<div>Specifies the number of rows, columns, and bands in the image.
+This keyword should be either of the form (R, C, B) or (R, C),
+where R, C, and B specify the number or rows, columns, and bands,
+respectively. If B is omitted, the number of bands is assumed to
+be one. If this keyword is given, its values supercede the values
+of &#8220;bands&#8221;, &#8220;lines&#8221;, and &#8220;samples&#8221; if they are present in the
+<cite>metadata</cite> argument.</div></blockquote>
+<p><cite>offset</cite> (integer, default 0):</p>
+<blockquote>
+<div>The offset (in bytes) of image data from the beginning of the file.
+This value supercedes the value of &#8220;header offset&#8221; in the metadata
+argument (if given).</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><cite>SpyFile</cite> object:</p>
+<blockquote>
+<div>To access a <cite>numpy.memmap</cite> for the returned <cite>SpyFile</cite> object, call
+the <cite>open_memmap</cite> method of the returned object.</div></blockquote>
+</div></blockquote>
+<p>Examples:</p>
+<blockquote>
+<div><p>Creating a new image from metadata:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;lines&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+<span class="go">          &#39;samples&#39;: 40,</span>
+<span class="go">          &#39;bands&#39;: 50,</span>
+<span class="go">          &#39;data type&#39;: 12}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">envi</span><span class="o">.</span><span class="n">create_image</span><span class="p">(</span><span class="s">&#39;new_image.hdr&#39;</span><span class="p">,</span> <span class="n">md</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Creating a new image via keywords:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">envi</span><span class="o">.</span><span class="n">create_image</span><span class="p">(</span><span class="s">&#39;new_image2.hdr&#39;</span><span class="p">,</span>
+<span class="go">                            shape=(30, 40, 50),</span>
+<span class="go">                            dtype=np.uint16)</span>
+</pre></div>
+</div>
+<p>Writing to the new image using a memmap interface:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Set all band values for a single pixel to 100.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">open_memmap</span><span class="p">(</span><span class="n">writable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="envi-save-image">
+<h3>envi.save_image<a class="headerlink" href="#envi-save-image" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.io.envi.save_image">
+<tt class="descname">save_image</tt><big>(</big><em>hdr_file</em>, <em>image</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.io.envi.save_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves an image to disk.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>hdr_file</cite> (str):</p>
+<blockquote>
+<div>Header file (with &#8221;.hdr&#8221; extension) name with path.</div></blockquote>
+<p><cite>image</cite> (SpyFile object or numpy.ndarray):</p>
+<blockquote>
+<div>The image to save.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div><p><cite>dtype</cite> (numpy dtype or type string):</p>
+<blockquote>
+<div>The numpy data type with which to store the image.  For example,
+to store the image in 16-bit unsigned integer format, the argument
+could be any of <cite>numpy.uint16</cite>, &#8220;u2&#8221;, &#8220;uint16&#8221;, or &#8220;H&#8221;.</div></blockquote>
+<p><cite>force</cite> (bool):</p>
+<blockquote>
+<div>If the associated image file or header already exist and <cite>force</cite> is
+True, the files will be overwritten; otherwise, if either of the
+files exist, an exception will be raised.</div></blockquote>
+<p><cite>ext</cite> (str):</p>
+<blockquote>
+<div>The extension to use for the image file.  If not specified, the
+default extension &#8221;.img&#8221; will be used.  If <cite>ext</cite> is an empty
+string, the image file will have the same name as the header but
+without the &#8221;.hdr&#8221; extension.</div></blockquote>
+<p><cite>interleave</cite> (str):</p>
+<blockquote>
+<div>The band interleave format to use in the file.  This argument
+should be one of &#8220;bil&#8221;, &#8220;bip&#8221;, or &#8220;bsq&#8221;.  If not specified, the
+image will be written in BIP interleave.</div></blockquote>
+<p><cite>byteorder</cite> (int or string):</p>
+<blockquote>
+<div>Specifies the byte order (endian-ness) of the data as
+written to disk. For little endian, this value should be
+either 0 or &#8220;little&#8221;.  For big endian, it should be
+either 1 or &#8220;big&#8221;. If not specified, native byte order
+will be used.</div></blockquote>
+<p><cite>metadata</cite> (dict):</p>
+<blockquote>
+<div>A dict containing ENVI header parameters (e.g., parameters
+extracted from a source image).</div></blockquote>
+</div></blockquote>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Save the first 10 principal components of an image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3C.lan&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pc</span> <span class="o">=</span> <span class="n">principal_components</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pcdata</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">envi</span><span class="o">.</span><span class="n">save_image</span><span class="p">(</span><span class="s">&#39;pcimage.hdr&#39;</span><span class="p">,</span> <span class="n">pcdata</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the source image being saved was already in ENVI format, then the
+SpyFile object for that image will contain a <cite>metadata</cite> dict that can be
+passed as the <cite>metadata</cite> keyword. However, care should be taken to ensure
+that all the metadata fields from the source image are still accurate
+(e.g., band names or wavelengths will no longer be correct if the data
+being saved are from a principal components transformation).</p>
+</dd></dl>
+
+<div class="section" id="erdas-lan">
+<h4>ERDAS/Lan<a class="headerlink" href="#erdas-lan" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="module-spectral.io.erdas">
+<span id="erdas-open"></span><h3>erdas.open<a class="headerlink" href="#module-spectral.io.erdas" title="Permalink to this headline">¶</a></h3>
+<p>Functions for reading Erdas files.</p>
+<dl class="function">
+<dt id="spectral.io.erdas.open">
+<tt class="descname">open</tt><big>(</big><em>file</em><big>)</big><a class="headerlink" href="#spectral.io.erdas.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a SpyFile object for an ERDAS/Lan image file.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>file</cite> (str):</p>
+<blockquote>
+<div>Name of the ERDAS/Lan image data file.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>A SpyFile object for the image file.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>IOError</div></blockquote>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="graphics">
+<h2>Graphics<a class="headerlink" href="#graphics" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="colorscale">
+<h3>ColorScale<a class="headerlink" href="#colorscale" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.ColorScale">
+<em class="property">class </em><tt class="descname">ColorScale</tt><big>(</big><em>levels</em>, <em>colors</em>, <em>num_tics=256</em><big>)</big><a class="headerlink" href="#spectral.ColorScale" title="Permalink to this definition">¶</a></dt>
+<dd><p>A color scale class to map scalar values to rgb colors.  The class allows
+associating colors with particular scalar values, setting a background
+color (for values below threshold), andadjusting the scale limits. The
+<tt class="xref py py-meth docutils literal"><span class="pre">__call__</span></tt> operator takes a scalar input and returns the
+corresponding color, interpolating between defined colors.</p>
+<dl class="method">
+<dt id="spectral.ColorScale.__call__">
+<tt class="descname">__call__</tt><big>(</big><em>val</em><big>)</big><a class="headerlink" href="#spectral.ColorScale.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the scale color associated with the given value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.ColorScale.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>levels</em>, <em>colors</em>, <em>num_tics=256</em><big>)</big><a class="headerlink" href="#spectral.ColorScale.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the ColorScale.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>levels</cite> (list of numbers):</p>
+<blockquote>
+<div>Scalar levels to which the <cite>colors</cite> argument will correspond.</div></blockquote>
+<p><cite>colors</cite> (list of 3-tuples):</p>
+<blockquote>
+<div>RGB 3-tuples that define the colors corresponding to <cite>levels</cite>.</div></blockquote>
+<p><cite>num_tics</cite> (int):</p>
+<blockquote>
+<div>The total number of colors in the scale, not including the
+background color.  This includes the colors given in the
+<cite>colors</cite> argument, as well as interpolated color values.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.ColorScale.set_background_color">
+<tt class="descname">set_background_color</tt><big>(</big><em>color</em><big>)</big><a class="headerlink" href="#spectral.ColorScale.set_background_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets RGB color used for values below the scale minimum.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><cite>color</cite> (3-tuple): An RGB triplet</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.ColorScale.set_range">
+<tt class="descname">set_range</tt><big>(</big><em>min</em>, <em>max</em><big>)</big><a class="headerlink" href="#spectral.ColorScale.set_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the min and max values of the color scale.</p>
+<p>The distribution of colors within the scale will stretch or shrink
+accordingly.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="get-rgb">
+<h3>get_rgb<a class="headerlink" href="#get-rgb" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.graphics.graphics.get_rgb">
+<tt class="descname">get_rgb</tt><big>(</big><em>source</em>, <em>bands=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.graphics.graphics.get_rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract RGB data for display from a SpyFile object or numpy array.</p>
+<dl class="docutils">
+<dt>USAGE: rgb = get_rgb(source [, bands] [stretch=True]</dt>
+<dd>[stretch_all=False] [bounds = (lower, upper)] )</dd>
+</dl>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>source</cite> (<a class="reference internal" href="#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">spectral.SpyFile</span></tt></a> or <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>Data source from which to extract the RGB data.</div></blockquote>
+<p><cite>bands</cite> (list of <cite>int</cite>) (optional):</p>
+<blockquote>
+<div>Optional triplet of indices which specifies the bands to extract
+for the red, green, and blue components, respectively. If this
+arg is not given, SpyFile object, it&#8217;s metadata dict will be
+checked to see if it contains a &#8220;default bands&#8221; item.  If it does
+not, then first, middle and last band will be returned.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div><p><cite>stretch</cite> (bool, default True):</p>
+<blockquote>
+<div>If the <cite>stretch</cite> keyword is True, the RGB values will be scaled
+so the maximum value in the returned array will be 1.</div></blockquote>
+<p><cite>stretch_all</cite> (bool, default False):</p>
+<blockquote>
+<div>If this keyword is True, each color channel will be scaled
+separately such that its maximum value is 1.</div></blockquote>
+<p><cite>bounds</cite> (2-tuple of scalars):</p>
+<blockquote>
+<div>If <cite>bounds</cite> is specified, the data will be scaled so that <cite>lower</cite>
+and <cite>upper</cite> correspond to 0 and 1, respectively. Any values outside
+of the range (<cite>lower</cite>, <cite>upper</cite>) will be clipped.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="imageview">
+<h3>ImageView<a class="headerlink" href="#imageview" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.graphics.spypylab.ImageView">
+<em class="property">class </em><tt class="descname">ImageView</tt><big>(</big><em>data=None</em>, <em>bands=None</em>, <em>classes=None</em>, <em>source=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.ImageView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to manage events and data associated with image raster views.</p>
+<p>In most cases, it is more convenient to simply call <a class="reference internal" href="#spectral.graphics.spypylab.imshow" title="spectral.graphics.spypylab.imshow"><tt class="xref py py-func docutils literal"><span class="pre">imshow</span></tt></a>,
+which creates, displays, and returns an <tt class="xref py py-class docutils literal"><span class="pre">ImageView</span></tt> object. Creating
+an <tt class="xref py py-class docutils literal"><span class="pre">ImageView</span></tt> object directly (or creating an instance of a subclass)
+enables additional customization of the image display (e.g., overriding
+default event handlers). If the object is created directly, call the
+<tt class="xref py py-meth docutils literal"><span class="pre">show</span></tt> method to display the image. The underlying image display
+functionality is implemented via <tt class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.imshow</span></tt>.</p>
+<dl class="method">
+<dt id="spectral.graphics.spypylab.ImageView.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>data=None</em>, <em>bands=None</em>, <em>classes=None</em>, <em>source=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Arguments:</p>
+<blockquote>
+<div><p><cite>data</cite> (ndarray or <tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt>):</p>
+<blockquote>
+<div>The source of RGB bands to be displayed. with shape (R, C, B).
+If the shape is (R, C, 3), the last dimension is assumed to
+provide the red, green, and blue bands (unless the <cite>bands</cite>
+argument is provided). If <img class="math" src="_images/math/87e5ba8a4a16d021439d2b39e40803755773e8a5.png" alt="B &gt; 3"/> and <cite>bands</cite> is not
+provided, the first, middle, and last band will be used.</div></blockquote>
+<p><cite>bands</cite> (triplet of integers):</p>
+<blockquote>
+<div>Specifies which bands in <cite>data</cite> should be displayed as red,
+green, and blue, respectively.</div></blockquote>
+<p><cite>classes</cite> (ndarray of integers):</p>
+<blockquote>
+<div>An array of integer-valued class labels with shape (R, C). If
+the <cite>data</cite> argument is provided, the shape must match the first
+two dimensions of <cite>data</cite>.</div></blockquote>
+<p><cite>source</cite> (ndarray or <tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt>):</p>
+<blockquote>
+<div>The source of spectral data associated with the image display.
+This optional argument is used to access spectral data (e.g., to
+generate a spectrum plot when a user double-clicks on the image
+display.</div></blockquote>
+</div></blockquote>
+<p>Keyword arguments:</p>
+<blockquote>
+<div>Any keyword that can be provided to <a class="reference internal" href="#spectral.graphics.graphics.get_rgb" title="spectral.graphics.graphics.get_rgb"><tt class="xref py py-func docutils literal"><span class="pre">get_rgb</span></tt></a>
+or <tt class="xref py py-func docutils literal"><span class="pre">matplotlib.imshow</span></tt>.</div></blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="spectral.graphics.spypylab.ImageView.class_alpha">
+<tt class="descname">class_alpha</tt><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.class_alpha" title="Permalink to this definition">¶</a></dt>
+<dd><p>alpha transparency for the class overlay.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.graphics.spypylab.ImageView.format_coord">
+<tt class="descname">format_coord</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.format_coord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats pixel coordinate string displayed in the window.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="spectral.graphics.spypylab.ImageView.interpolation">
+<tt class="descname">interpolation</tt><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.interpolation" title="Permalink to this definition">¶</a></dt>
+<dd><p>matplotlib pixel interpolation to use in the image display.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.graphics.spypylab.ImageView.label_region">
+<tt class="descname">label_region</tt><big>(</big><em>rectangle</em>, <em>class_id</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.label_region" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns all pixels in the rectangle to the specified class.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>rectangle</cite> (4-tuple of integers):</p>
+<blockquote>
+<div>Tuple or list defining the rectangle bounds. Should have the
+form (row_start, row_stop, col_start, col_stop), where the
+stop indices are not included (i.e., the effect is
+<cite>classes[row_start:row_stop, col_start:col_stop] = id</cite>.</div></blockquote>
+<p>class_id (integer &gt;= 0):</p>
+<blockquote>
+<div>The class to which pixels will be assigned.</div></blockquote>
+</div></blockquote>
+<p>Returns the number of pixels reassigned (the number of pixels in the
+rectangle whose class has <em>changed</em> to <cite>class_id</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.graphics.spypylab.ImageView.open_zoom">
+<tt class="descname">open_zoom</tt><big>(</big><em>center=None</em>, <em>size=None</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.open_zoom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens a separate window with a zoomed view.
+If a ctrl-lclick event occurs in the original view, the zoomed window
+will pan to the location of the click event.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>center</cite> (two-tuple of int):</p>
+<blockquote>
+<div>Initial (row, col) of the zoomed view.</div></blockquote>
+<p><cite>size</cite> (int):</p>
+<blockquote>
+<div>Width and height (in source image pixels) of the initial
+zoomed view.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<p>A new ImageView object for the zoomed view.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.graphics.spypylab.ImageView.pan_to">
+<tt class="descname">pan_to</tt><big>(</big><em>row</em>, <em>col</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.pan_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Centers view on pixel coordinate (row, col).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.graphics.spypylab.ImageView.refresh">
+<tt class="descname">refresh</tt><big>(</big><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.refresh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the displayed data (if it has been shown).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.graphics.spypylab.ImageView.set_classes">
+<tt class="descname">set_classes</tt><big>(</big><em>classes</em>, <em>colors=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.set_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the array of class values associated with the image data.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>classes</cite> (ndarray of int):</p>
+<blockquote>
+<div><cite>classes</cite> must be an integer-valued array with the same
+number rows and columns as the display data (if set).</div></blockquote>
+<p><cite>colors</cite>: (array or 3-tuples):</p>
+<blockquote>
+<div>Color triplets (with values in the range [0, 255]) that
+define the colors to be associatd with the integer indices
+in <cite>classes</cite>.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div>Any valid keyword for <cite>matplotlib.imshow</cite> can be provided.</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.graphics.spypylab.ImageView.set_data">
+<tt class="descname">set_data</tt><big>(</big><em>data</em>, <em>bands=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.set_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the data to be shown in the RGB channels.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>data</cite> (ndarray or SpyImage):</p>
+<blockquote>
+<div>If <cite>data</cite> has more than 3 bands, the <cite>bands</cite> argument can be
+used to specify which 3 bands to display. <cite>data</cite> will be
+passed to <cite>get_rgb</cite> prior to display.</div></blockquote>
+<p><cite>bands</cite> (3-tuple of int):</p>
+<blockquote>
+<div>Indices of the 3 bands to display from <cite>data</cite>.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div>Any valid keyword for <cite>get_rgb</cite> or <cite>matplotlib.imshow</cite> can be
+given.</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.graphics.spypylab.ImageView.set_display_mode">
+<tt class="descname">set_display_mode</tt><big>(</big><em>mode</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.set_display_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>mode</cite> must be one of (&#8220;data&#8221;, &#8220;classes&#8221;, &#8220;overlay&#8221;).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.graphics.spypylab.ImageView.set_source">
+<tt class="descname">set_source</tt><big>(</big><em>source</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.set_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the image data source (used for accessing spectral data).</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>source</cite> (ndarray or <tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt>):</p>
+<blockquote>
+<div>The source for spectral data associated with the view.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.graphics.spypylab.ImageView.show">
+<tt class="descname">show</tt><big>(</big><em>mode=None</em>, <em>fignum=None</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the image data.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>mode</cite> (str):</p>
+<blockquote>
+<div><p>Must be one of:</p>
+<blockquote>
+<div><p>&#8220;data&#8221;:          Show the data RGB</p>
+<p>&#8220;classes&#8221;:       Shows indexed color for <cite>classes</cite></p>
+<p>&#8220;overlay&#8221;:       Shows class colors overlaid on data RGB.</p>
+</div></blockquote>
+<p>If <cite>mode</cite> is not provided, a mode will be automatically
+selected, based on the data set in the ImageView.</p>
+</div></blockquote>
+<p><cite>fignum</cite> (int):</p>
+<blockquote>
+<div>Figure number of the matplotlib figure in which to display
+the ImageView. If not provided, a new figure will be created.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="imshow">
+<h3>imshow<a class="headerlink" href="#imshow" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.graphics.spypylab.imshow">
+<tt class="descname">imshow</tt><big>(</big><em>data=None</em>, <em>bands=None</em>, <em>classes=None</em>, <em>source=None</em>, <em>colors=None</em>, <em>figsize=None</em>, <em>fignum=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.imshow" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper around matplotlib&#8217;s imshow for multi-band images.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>data</cite> (SpyFile or ndarray):</p>
+<blockquote>
+<div>Can have shape (R, C) or (R, C, B).</div></blockquote>
+<p><cite>bands</cite> (tuple of integers, optional)</p>
+<blockquote>
+<div>If <cite>bands</cite> has 3 values, the bands specified are extracted from
+<cite>data</cite> to be plotted as the red, green, and blue colors,
+respectively. If it contains a single value, then a single band
+will be extracted from the image.</div></blockquote>
+<p><cite>classes</cite> (ndarray of integers):</p>
+<blockquote>
+<div>An array of integer-valued class labels with shape (R, C). If
+the <cite>data</cite> argument is provided, the shape must match the first
+two dimensions of <cite>data</cite>. The returned <cite>ImageView</cite> object will use
+a copy of this array. To access class values that were altered
+after calling <cite>imshow</cite>, access the <cite>classes</cite> attribute of the
+returned <cite>ImageView</cite> object.</div></blockquote>
+<p><cite>source</cite> (optional, SpyImage or ndarray):</p>
+<blockquote>
+<div>Object used for accessing image source data. If this argument is
+not provided, events such as double-clicking will have no effect
+(i.e., a spectral plot will not be created).</div></blockquote>
+<p><cite>colors</cite> (optional, array of ints):</p>
+<blockquote>
+<div>Custom colors to be used for class image view. If provided, this
+argument should be an array of 3-element arrays, each of which
+specifies an RGB triplet with integer color components in the
+range [0, 256).</div></blockquote>
+<p><cite>figsize</cite> (optional, 2-tuple of scalar):</p>
+<blockquote>
+<div>Specifies the width and height (in inches) of the figure window
+to be created. If this value is not provided, the value specified
+in <cite>spectral.settings.imshow_figure_size</cite> will be used.</div></blockquote>
+<p><cite>fignum</cite>  (optional, integer):</p>
+<blockquote>
+<div>Specifies the figure number of an existing matplotlib figure. If
+this argument is None, a new figure will be created.</div></blockquote>
+</div></blockquote>
+<p>Keywords:</p>
+<blockquote>
+<div>If provided, the keywords, &#8220;stretch&#8221;, &#8220;stretch_all&#8221;, and &#8220;bounds&#8221;
+will be passed as keywords to <cite>get_rgb</cite> for extracting RGB values
+from <cite>data</cite>. All keyword arguments other than those described above
+will be passed on to <cite>matplotlib.imshow</cite>.</div></blockquote>
+<p>This function defaults the color scale (imshow&#8217;s &#8220;cmap&#8221; keyword) to
+&#8220;gray&#8221;. To use imshow&#8217;s default color scale, call this function with
+keyword <cite>cmap=None</cite>.</p>
+<p>Returns:</p>
+<blockquote>
+<div>An <cite>ImageView</cite> object, which can be subsequently used to refine the
+image display.</div></blockquote>
+<p>See <a class="reference internal" href="#spectral.graphics.spypylab.ImageView" title="spectral.graphics.spypylab.ImageView"><tt class="xref py py-class docutils literal"><span class="pre">ImageView</span></tt></a> for additional details.</p>
+<p>Examples:</p>
+<p>Show a true color image of a hyperspectral image:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3C.lan&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">view</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Show ground truth in a separate window:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">classes</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3GT.GIS&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cview</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Overlay ground truth data on the data display:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">view</span><span class="o">.</span><span class="n">set_classes</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">view</span><span class="o">.</span><span class="n">set_display_mode</span><span class="p">(</span><span class="s">&#39;overlay&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Show RX anomaly detector results in the view and a zoom window showing
+true color data:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">rx</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zoom</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">open_zoom</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">view</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that pressing ctrl-lclick with the mouse in the main window will
+cause the zoom window to pan to the clicked location.</p>
+<p>Opening zoom windows, changing display modes, and other functions can
+also be achieved via keys mapped directly to the displayed image. Press
+&#8220;h&#8221; with focus on the displayed image to print a summary of mouse/
+keyboard commands accepted by the display.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="save-rgb">
+<h3>save_rgb<a class="headerlink" href="#save-rgb" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.save_rgb">
+<tt class="descname">save_rgb</tt><big>(</big><em>filename</em>, <em>data</em>, <em>bands=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.save_rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves a viewable image to a JPEG (or other format) file.</p>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">save_rgb</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>filename</cite> (str):</p>
+<blockquote>
+<div>Name of image file to save (e.g. &#8220;rgb.jpg&#8221;)</div></blockquote>
+<p><cite>data</cite> (<tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>Source image data to display.  <cite>data</cite> can be and instance of a
+<tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt> (e.g., <a class="reference internal" href="#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">spectral.SpyFile</span></tt></a> or
+<tt class="xref py py-class docutils literal"><span class="pre">spectral.ImageArray</span></tt>) or a <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>. <cite>data</cite>
+must have shape <cite>MxN</cite> or <cite>MxNxB</cite>.  If thes shape is <cite>MxN</cite>, the
+image will be saved as greyscale (unless keyword <cite>colors</cite> is
+specified). If the shape is <cite>MxNx3</cite>, it will be interpreted as
+three <cite>MxN</cite> images defining the R, G, and B channels respectively.
+If <cite>B &gt; 3</cite>, the first, middle, and last images in <cite>data</cite> will be
+used, unless <cite>bands</cite> is specified.</div></blockquote>
+<p><cite>bands</cite> (3-tuple of ints):</p>
+<blockquote>
+<div>Optional list of indices for bands to use in the red, green,
+and blue channels, respectively.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div><p><cite>format</cite> (str):</p>
+<blockquote>
+<div>The image file format to create.  Must be a format recognized by
+<tt class="xref py py-mod docutils literal"><span class="pre">PIL</span></tt> (e.g., &#8216;png&#8217;, &#8216;tiff&#8217;, &#8216;bmp&#8217;).  If <cite>format</cite> is not
+provided, &#8216;jpg&#8217; is assumed.</div></blockquote>
+<p><cite>colors</cite> (list of 3-tuples of ints):</p>
+<blockquote>
+<div>If this keyword is provided, <cite>data</cite> is interpeted to be a color map
+into the <cite>colors</cite> color palette. This is the same <cite>colors</cite> keyword
+used by the <a class="reference internal" href="#spectral.view_indexed" title="spectral.view_indexed"><tt class="xref py py-func docutils literal"><span class="pre">spectral.view_indexed</span></tt></a> function. The parameter
+is a list of 3-tuples defining RGB values, where R, G, and B are
+in the range [0-255].</div></blockquote>
+<p><cite>stretch</cite> (bool):</p>
+<blockquote>
+<div>If <cite>stretch</cite> evaluates True, the highest value in the data source
+will be scaled to maximum color channel intensity.</div></blockquote>
+<p><cite>stretch_all</cite> (bool):</p>
+<blockquote>
+<div>If <cite>stretch_all</cite> evaluates True, the highest value of the data
+source in each color channel will be set to maximum intensity.</div></blockquote>
+<p><cite>bounds</cite> (2-tuple of ints):</p>
+<blockquote>
+<div>Clips the input data at (lower, upper) values.</div></blockquote>
+</div></blockquote>
+<p>Examples:</p>
+<blockquote>
+<div><p>Save a color view of an image by specifying RGB band indices:</p>
+<div class="highlight-python"><pre>save_image('rgb.jpg', img, [29, 19, 9]])</pre>
+</div>
+<p>Save the same image as <strong>png</strong>:</p>
+<div class="highlight-python"><pre>save_image('rgb.png', img, [29, 19, 9]], format='png')</pre>
+</div>
+<p>Save classification results using the default color palette (note that
+the color palette must be passed explicitly for <cite>clMap</cite> to be
+interpreted as a color map):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">save_image</span><span class="p">(</span><span class="s">&#39;results.jpg&#39;</span><span class="p">,</span> <span class="n">clMap</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">spectral</span><span class="o">.</span><span class="n">spy_colors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="view">
+<h3>view<a class="headerlink" href="#view" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.view">
+<tt class="descname">view</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens a window and displays a raster greyscale or color image.</p>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">view</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>source</cite> (<tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>Source image data to display.  <cite>source</cite> can be and instance of a
+<tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt> (e.g., <a class="reference internal" href="#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">spectral.SpyFile</span></tt></a> or
+<tt class="xref py py-class docutils literal"><span class="pre">spectral.ImageArray</span></tt>) or a <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>. <cite>source</cite>
+must have shape <cite>MxN</cite> or <cite>MxNxB</cite>.</div></blockquote>
+<p><cite>bands</cite> (3-tuple of ints):</p>
+<blockquote>
+<div>Optional list of indices for bands to display in the red, green,
+and blue channels, respectively.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div><p><cite>stretch</cite> (bool):</p>
+<blockquote>
+<div>If <cite>stretch</cite> evaluates True, the highest value in the data source
+will be scaled to maximum color channel intensity.</div></blockquote>
+<p><cite>stretch_all</cite> (bool):</p>
+<blockquote>
+<div>If <cite>stretch_all</cite> evaluates True, the highest value of the data
+source in each color channel will be set to maximum intensity.</div></blockquote>
+<p><cite>bounds</cite> (2-tuple of ints):</p>
+<blockquote>
+<div>Clips the input data at (lower, upper) values.</div></blockquote>
+<p><cite>title</cite> (str):</p>
+<blockquote>
+<div>Text to display in the new window frame.</div></blockquote>
+</div></blockquote>
+<p><cite>source</cite> is the data source and can be either a <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>
+object or a numpy array. If <cite>source</cite> has shape <cite>MxN</cite>, the image will be
+displayed in greyscale. If its shape is <cite>MxNx3</cite>, the three layers/bands
+will be displayed as the red, green, and blue components of the displayed
+image, respectively. If its shape is <cite>MxNxB</cite>, where <cite>B &gt; 3</cite>, the first,
+middle, and last bands will be displayed in the RGB channels, unless
+<cite>bands</cite> is specified.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="view-cube">
+<h3>view_cube<a class="headerlink" href="#view-cube" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.view_cube">
+<tt class="descname">view_cube</tt><big>(</big><em>data</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.view_cube" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders an interactive 3D hypercube in a new window.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>data</cite> (<tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>Source image data to display.  <cite>data</cite> can be and instance of a
+<tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt> (e.g., <a class="reference internal" href="#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">spectral.SpyFile</span></tt></a> or
+<tt class="xref py py-class docutils literal"><span class="pre">spectral.ImageArray</span></tt>) or a <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>. <cite>source</cite>
+must have shape <cite>MxN</cite> or <cite>MxNxB</cite>.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div><p><cite>bands</cite> (3-tuple of ints):</p>
+<blockquote>
+<div>3-tuple specifying which bands from the image data should be
+displayed on top of the cube.</div></blockquote>
+<p><cite>top</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">PIL.Image</span></tt>):</p>
+<blockquote>
+<div>Data to display on top of the cube. This will supercede the
+<cite>bands</cite> keyword.</div></blockquote>
+<p><cite>scale</cite> (<a class="reference internal" href="#spectral.ColorScale" title="spectral.ColorScale"><tt class="xref py py-class docutils literal"><span class="pre">spectral.ColorScale</span></tt></a>)</p>
+<blockquote>
+<div>A color scale to be used for color in the sides of the cube. If
+this keyword is not specified,
+<tt class="xref py py-obj docutils literal"><span class="pre">spectral.graphics.colorscale.defaultColorScale</span></tt> is used.</div></blockquote>
+<p><cite>size</cite> (2-tuple of ints):</p>
+<blockquote>
+<div>Width and height (in pixels) for initial size of the new window.</div></blockquote>
+<p><cite>background</cite> (3-tuple of floats):</p>
+<blockquote>
+<div>Background RGB color of the scene. Each value should be in the
+range [0, 1]. If not specified, the background will be black.</div></blockquote>
+<p><cite>title</cite> (str):</p>
+<blockquote>
+<div>Title text to display in the new window frame.</div></blockquote>
+</div></blockquote>
+<p>This function opens a new window, renders a 3D hypercube, and accepts
+keyboard input to manipulate the view of the hypercube.  Accepted keyboard
+inputs are printed to the console output.  Focus must be on the 3D window
+to accept keyboard input.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="view-indexed">
+<h3>view_indexed<a class="headerlink" href="#view-indexed" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.view_indexed">
+<tt class="descname">view_indexed</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.view_indexed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens a window and displays a raster image for the provided color map data.</p>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">view_indexed</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>data</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>An <cite>MxN</cite> array of integer values that correspond to colors in a
+color palette.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div><p><cite>colors</cite> (list of 3-tuples of ints):</p>
+<blockquote>
+<div>This parameter provides an alternate color map to use for display.
+The parameter is a list of 3-tuples defining RGB values, where R,
+G, and B are in the range [0-255].</div></blockquote>
+<p><cite>title</cite> (str):</p>
+<blockquote>
+<div>Text to display in the new window frame.</div></blockquote>
+</div></blockquote>
+<p>The default color palette used is defined by <tt class="xref py py-obj docutils literal"><span class="pre">spectral.spy_colors</span></tt>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="view-nd">
+<h3>view_nd<a class="headerlink" href="#view-nd" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.view_nd">
+<tt class="descname">view_nd</tt><big>(</big><em>data</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.view_nd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a 3D window that displays ND data from an image.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>data</cite> (<tt class="xref py py-class docutils literal"><span class="pre">spectral.ImageArray</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>Source image data to display.  <cite>data</cite> can be and instance of a
+<tt class="xref py py-class docutils literal"><span class="pre">spectral.ImageArray</span> <span class="pre">or</span> <span class="pre">a</span> <span class="pre">:class:`numpy.ndarray</span></tt>. <cite>source</cite>
+must have shape <cite>MxNxB</cite>, where M &gt;= 3.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div><p><cite>classes</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>2-dimensional array of integers specifying the classes of each
+pixel in <cite>data</cite>. <cite>classes</cite> must have the same dimensions as the
+first two dimensions of <cite>data</cite>.</div></blockquote>
+<p><cite>features</cite> (list or list of integer lists):</p>
+<blockquote>
+<div><p>This keyword specifies which bands/features from <cite>data</cite> should be
+displayed in the 3D window. It must be defined as one of the
+following:</p>
+<ol class="arabic simple">
+<li>A length-3 list of integer feature IDs. In this case, the data
+points will be displayed in the positive x,y,z octant using
+features associated with the 3 integers.</li>
+<li>A length-6 list of integer feature IDs. In this case, each
+integer specifies a single feature index to be associated with
+the coordinate semi-axes x, y, z, -x, -y, and -z (in that
+order). Each octant will display data points using the features
+associated with the 3 semi-axes for that octant.</li>
+<li>A length-8 list of length-3 lists of integers. In this case,
+each length-3 list specfies the features to be displayed in a
+single octants (the same semi-axis can be associated with
+different features in different octants).  Octants are ordered
+starting with the postive x,y,z octant and procede
+counterclockwise around the z-axis, then procede similarly
+around the negative half of the z-axis.  An octant triplet can
+be specified as None instead of a list, in which case nothing
+will be rendered in that octant.</li>
+</ol>
+</div></blockquote>
+<p><cite>size</cite> (2-tuple of ints)</p>
+<blockquote>
+<div>Specifies the initial size (pixel rows/cols) of the window.</div></blockquote>
+<p><cite>title</cite> (string)</p>
+<blockquote>
+<div>The title to display in the ND window title bar.</div></blockquote>
+</div></blockquote>
+<p>Returns an NDWindowProxy object with a <cite>classes</cite> member to access the
+current class labels associated with data points and a <cite>set_features</cite>
+member to specify which features are displayed.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="training-classes">
+<h2>Training Classes<a class="headerlink" href="#training-classes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-training-classes">
+<h3>create_training_classes<a class="headerlink" href="#create-training-classes" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.create_training_classes">
+<tt class="descname">create_training_classes</tt><big>(</big><em>image</em>, <em>class_mask</em>, <em>calc_stats=False</em>, <em>indices=None</em><big>)</big><a class="headerlink" href="#spectral.create_training_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a :class:spectral.algorithms.TrainingClassSet: from an indexed array.</p>
+<p>USAGE:  sets = createTrainingClasses(classMask)</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>image</cite> (<tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>The image data for which the training classes will be defined.
+<cite>image</cite> has shape <cite>MxNxB</cite>.</div></blockquote>
+<p><cite>class_mask</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>A rank-2 array whose elements are indices of various spectral
+classes.  if <cite>class_mask[i,j]</cite> == <cite>k</cite>, then <cite>image[i,j]</cite> is
+assumed to belong to class <cite>k</cite>.</div></blockquote>
+<p><cite>calc_stats</cite> (bool):</p>
+<blockquote>
+<div>An optional parameter which, if True, causes statistics to be
+calculated for all training classes.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>A <tt class="xref py py-class docutils literal"><span class="pre">spectral.algorithms.TrainingClassSet</span></tt> object.</div></blockquote>
+<p>The dimensions of classMask should be the same as the first two dimensions
+of the corresponding image. Values of zero in classMask are considered
+unlabeled and are not added to a training set.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="trainingclass">
+<h3>TrainingClass<a class="headerlink" href="#trainingclass" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.algorithms.algorithms.TrainingClass">
+<em class="property">class </em><tt class="descname">TrainingClass</tt><big>(</big><em>image</em>, <em>mask</em>, <em>index=0</em>, <em>class_prob=1.0</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.TrainingClass" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="spectral.algorithms.algorithms.TrainingClass.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>image</em>, <em>mask</em>, <em>index=0</em>, <em>class_prob=1.0</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.TrainingClass.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new training class defined by applying <cite>mask</cite> to <cite>image</cite>.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>image</cite> (<tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>The <cite>MxNxB</cite> image over which the training class is defined.</div></blockquote>
+<p><cite>mask</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>An <cite>MxN</cite> array of integers that specifies which pixels in
+<cite>image</cite> are associated with the class.</div></blockquote>
+<p><cite>index</cite> (int) [default 0]:</p>
+<blockquote>
+<div>if <cite>index</cite> == 0, all nonzero elements of <cite>mask</cite> are associated
+with the class.  If <cite>index</cite> is nonzero, all elements of <cite>mask</cite>
+equal to <cite>index</cite> are associated with the class.</div></blockquote>
+<p><cite>class_prob</cite> (float) [default 1.0]:</p>
+<blockquote>
+<div>Defines the prior probability associated with the class, which
+is used in maximum likelihood classification.  If <cite>classProb</cite>
+is 1.0, prior probabilities are ignored by classifiers, giving
+all class equal weighting.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.TrainingClass.__iter__">
+<tt class="descname">__iter__</tt><big>(</big><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.TrainingClass.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator over all samples for the class.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.TrainingClass.calc_stats">
+<tt class="descname">calc_stats</tt><big>(</big><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.TrainingClass.calc_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates statistics for the class.</p>
+<p>This function causes the <tt class="xref py py-attr docutils literal"><span class="pre">stats</span></tt> attribute of the class to be
+updated, where <cite>stats</cite> will have the following attributes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="31%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Attribute</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><cite>mean</cite></td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></td>
+<td>length-<cite>B</cite> mean vector</td>
+</tr>
+<tr class="row-odd"><td><cite>cov</cite></td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></td>
+<td><cite>BxB</cite> covariance matrix</td>
+</tr>
+<tr class="row-even"><td><cite>inv_cov</cite></td>
+<td><tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt></td>
+<td>Inverse of <cite>cov</cite></td>
+</tr>
+<tr class="row-odd"><td><cite>log_det_cov</cite></td>
+<td>float</td>
+<td>Natural log of determinant of <cite>cov</cite></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.TrainingClass.size">
+<tt class="descname">size</tt><big>(</big><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.TrainingClass.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of pixels/samples in the training set.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.TrainingClass.stats_valid">
+<tt class="descname">stats_valid</tt><big>(</big><em>tf=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.TrainingClass.stats_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets statistics for the TrainingClass to be valid or invalid.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>tf</cite> (bool or None):</p>
+<blockquote>
+<div>A value evaluating to False indicates that statistics should be
+recalculated prior to being used. If the argument is <cite>None</cite>,
+a value will be returned indicating whether stats need to be
+recomputed.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.TrainingClass.transform">
+<tt class="descname">transform</tt><big>(</big><em>transform</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.TrainingClass.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a linear transformation on the statistics of the training set.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>transform</cite> (:class:numpy.ndarray or LinearTransform):</p>
+<blockquote>
+<div>The linear transform array.  If the class has <cite>B</cite> bands, then
+<cite>transform</cite> must have shape <cite>(C,B)</cite>.</div></blockquote>
+</div></blockquote>
+<p>After <cite>transform</cite> is applied, the class statistics will have <cite>C</cite> bands.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="traningclassset">
+<h3>TraningClassSet<a class="headerlink" href="#traningclassset" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.algorithms.algorithms.TrainingClassSet">
+<em class="property">class </em><tt class="descname">TrainingClassSet</tt><a class="headerlink" href="#spectral.algorithms.algorithms.TrainingClassSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to manage a set of <tt class="xref py py-class docutils literal"><span class="pre">TrainingClass</span></tt> objects.</p>
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.TrainingClassSet.__getitem__">
+<tt class="descname">__getitem__</tt><big>(</big><em>i</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.TrainingClassSet.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the training class having ID i.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.TrainingClassSet.__iter__">
+<tt class="descname">__iter__</tt><big>(</big><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.TrainingClassSet.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd><p>An iterator over all training classes in the set.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.TrainingClassSet.__len__">
+<tt class="descname">__len__</tt><big>(</big><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.TrainingClassSet.__len__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns number of training classes in the set.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.TrainingClassSet.add_class">
+<tt class="descname">add_class</tt><big>(</big><em>cl</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.TrainingClassSet.add_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new class to the training set.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>cl</cite> (<tt class="xref py py-class docutils literal"><span class="pre">spectral.TrainingClass</span></tt>):</p>
+<blockquote>
+<div><cite>cl.index</cite> must not duplicate a class already in the set.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.TrainingClassSet.all_samples">
+<tt class="descname">all_samples</tt><big>(</big><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.TrainingClassSet.all_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>An iterator over all samples in all classes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.TrainingClassSet.transform">
+<tt class="descname">transform</tt><big>(</big><em>X</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.TrainingClassSet.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies linear transform, M, to all training classes.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>X</cite> (:class:numpy.ndarray):</p>
+<blockquote>
+<div>The linear transform array.  If the classes have <cite>B</cite> bands, then
+<cite>X</cite> must have shape <cite>(C,B)</cite>.</div></blockquote>
+</div></blockquote>
+<p>After the transform is applied, all classes will have <cite>C</cite> bands.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="spectral-classes-functions">
+<h2>Spectral Classes/Functions<a class="headerlink" href="#spectral-classes-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="asterdatabase">
+<h3>AsterDatabase<a class="headerlink" href="#asterdatabase" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.database.AsterDatabase">
+<em class="property">class </em><tt class="descname">AsterDatabase</tt><big>(</big><em>sqlite_filename=None</em><big>)</big><a class="headerlink" href="#spectral.database.AsterDatabase" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="classmethod">
+<dt id="spectral.database.AsterDatabase.create">
+<em class="property">classmethod </em><tt class="descname">create</tt><big>(</big><em>filename</em>, <em>aster_data_dir=None</em><big>)</big><a class="headerlink" href="#spectral.database.AsterDatabase.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an ASTER relational database by parsing ASTER data files.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>filename</cite> (str):</p>
+<blockquote>
+<div>Name of the new sqlite database file to create.</div></blockquote>
+<p><cite>aster_data_dir</cite> (str):</p>
+<blockquote>
+<div>Path to the directory containing ASTER library data files. If
+this argument is not provided, no data will be imported.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>An <a class="reference internal" href="#spectral.database.AsterDatabase" title="spectral.database.AsterDatabase"><tt class="xref py py-class docutils literal"><span class="pre">AsterDatabase</span></tt></a> object.</div></blockquote>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">AsterDatabase</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;aster_lib.db&quot;</span><span class="p">,</span> <span class="s">&quot;/CDROM/ASTER2.0/data&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is a class method (it does not require instantiating an
+AsterDatabase object) that creates a new database by parsing all of the
+files in the ASTER library data directory.  Normally, this should only
+need to be called once.  Subsequently, a corresponding database object
+can be created by instantiating a new AsterDatabase object with the
+path the database file as its argument.  For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">spectral.database.aster</span> <span class="kn">import</span> <span class="n">AsterDatabase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">AsterDatabase</span><span class="p">(</span><span class="s">&quot;aster_lib.db&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.database.AsterDatabase.create_envi_spectral_library">
+<tt class="descname">create_envi_spectral_library</tt><big>(</big><em>spectrumIDs</em>, <em>bandInfo</em><big>)</big><a class="headerlink" href="#spectral.database.AsterDatabase.create_envi_spectral_library" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an ENVI-formatted spectral library for a list of spectra.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>spectrumIDs</cite> (list of ints):</p>
+<blockquote>
+<div>List of <strong>SpectrumID</strong> values for of spectra in the &#8220;Spectra&#8221;
+table of the ASTER database.</div></blockquote>
+<p><cite>bandInfo</cite> (<a class="reference internal" href="#spectral.BandInfo" title="spectral.BandInfo"><tt class="xref py py-class docutils literal"><span class="pre">BandInfo</span></tt></a>):</p>
+<blockquote>
+<div>The spectral bands to which the original ASTER library spectra
+will be resampled.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>A <a class="reference internal" href="#spectral.io.envi.SpectralLibrary" title="spectral.io.envi.SpectralLibrary"><tt class="xref py py-class docutils literal"><span class="pre">SpectralLibrary</span></tt></a> object.</div></blockquote>
+<p>The IDs passed to the method should correspond to the SpectrumID field
+of the ASTER database &#8220;Spectra&#8221; table.  All specified spectra will be
+resampled to the same discretization specified by the bandInfo
+parameter. See <tt class="xref py py-class docutils literal"><span class="pre">spectral.BandResampler</span></tt> for details on the
+resampling method used.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.database.AsterDatabase.get_signature">
+<tt class="descname">get_signature</tt><big>(</big><em>spectrumID</em><big>)</big><a class="headerlink" href="#spectral.database.AsterDatabase.get_signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a spectrum with some additional metadata.</p>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">sig</span> <span class="o">=</span> <span class="n">aster</span><span class="o">.</span><span class="n">get_signature</span><span class="p">(</span><span class="n">spectrumID</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>spectrumID</cite> (int):</p>
+<blockquote>
+<div>The <strong>SpectrumID</strong> value for the desired spectrum from the
+<strong>Spectra</strong> table in the database.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><cite>sig</cite> (<tt class="xref py py-class docutils literal"><span class="pre">Signature</span></tt>):</p>
+<blockquote>
+<div><p>An object with the following attributes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="8%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Attribute</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>measurement_id</td>
+<td>int</td>
+<td>SpectrumID value from Spectra table</td>
+</tr>
+<tr class="row-odd"><td>sample_name</td>
+<td>str</td>
+<td><strong>Sample</strong> from the <strong>Samples</strong> table</td>
+</tr>
+<tr class="row-even"><td>sample_id</td>
+<td>int</td>
+<td><strong>SampleID</strong> from the <strong>Samples</strong> table</td>
+</tr>
+<tr class="row-odd"><td>x</td>
+<td>list</td>
+<td>list of band center wavelengths</td>
+</tr>
+<tr class="row-even"><td>y</td>
+<td>list</td>
+<td>list of spectrum values for each band</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.database.AsterDatabase.get_spectrum">
+<tt class="descname">get_spectrum</tt><big>(</big><em>spectrumID</em><big>)</big><a class="headerlink" href="#spectral.database.AsterDatabase.get_spectrum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a spectrum from the database.</p>
+<p>Usage:</p>
+<blockquote>
+<div>(x, y) = aster.get_spectrum(spectrumID)</div></blockquote>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>spectrumID</cite> (int):</p>
+<blockquote>
+<div>The <strong>SpectrumID</strong> value for the desired spectrum from the
+<strong>Spectra</strong> table in the database.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><cite>x</cite> (list):</p>
+<blockquote>
+<div>Band centers for the spectrum.</div></blockquote>
+<p><cite>y</cite> (list):</p>
+<blockquote>
+<div>Spectrum data values for each band.</div></blockquote>
+</div></blockquote>
+<p>Returns a pair of vectors containing the wavelengths and measured
+values values of a measurment.  For additional metadata, call
+&#8220;get_signature&#8221; instead.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.database.AsterDatabase.print_query">
+<tt class="descname">print_query</tt><big>(</big><em>sql</em>, <em>args=None</em><big>)</big><a class="headerlink" href="#spectral.database.AsterDatabase.print_query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints the text result of an arbitrary SQL statement.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>sql</cite> (str):</p>
+<blockquote>
+<div>An SQL statement to be passed to the database. Use &#8221;?&#8221; for
+variables passed into the statement.</div></blockquote>
+<p><cite>args</cite> (tuple):</p>
+<blockquote>
+<div>Optional arguments which will replace the &#8221;?&#8221; placeholders in
+the <cite>sql</cite> argument.</div></blockquote>
+</div></blockquote>
+<p>This function performs the same query function as
+<tt class="xref py py-meth docutils literal"><span class="pre">spectral.database.Asterdatabase.query</span></tt> except query results are
+printed to <strong>stdout</strong> instead of returning a cursor object.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sql</span> <span class="o">=</span> <span class="s">r&#39;SELECT SpectrumID, Name FROM Samples, Spectra &#39;</span> <span class="o">+</span>
+<span class="gp">... </span>       <span class="s">&#39;WHERE Spectra.SampleID = Samples.SampleID &#39;</span> <span class="o">+</span>
+<span class="gp">... </span>       <span class="s">&#39;AND Name LIKE &quot;</span><span class="si">%g</span><span class="s">rass%&quot; AND MinWavelength &lt; ?&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">print_query</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+<span class="go">356|dry grass</span>
+<span class="go">357|grass</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.database.AsterDatabase.query">
+<tt class="descname">query</tt><big>(</big><em>sql</em>, <em>args=None</em><big>)</big><a class="headerlink" href="#spectral.database.AsterDatabase.query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the result of an arbitrary SQL statement.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>sql</cite> (str):</p>
+<blockquote>
+<div>An SQL statement to be passed to the database. Use &#8221;?&#8221; for
+variables passed into the statement.</div></blockquote>
+<p><cite>args</cite> (tuple):</p>
+<blockquote>
+<div>Optional arguments which will replace the &#8221;?&#8221; placeholders in
+the <cite>sql</cite> argument.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>An <tt class="xref py py-class docutils literal"><span class="pre">sqlite3.Cursor</span></tt> object with the query results.</div></blockquote>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">sql</span> <span class="o">=</span> <span class="s">r&#39;SELECT SpectrumID, Name FROM Samples, Spectra &#39;</span> <span class="o">+</span>
+<span class="gp">... </span>       <span class="s">&#39;WHERE Spectra.SampleID = Samples.SampleID &#39;</span> <span class="o">+</span>
+<span class="gp">... </span>       <span class="s">&#39;AND Name LIKE &quot;</span><span class="si">%g</span><span class="s">rass%&quot; AND MinWavelength &lt; ?&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cur</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cur</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="n">row</span>
+<span class="gp">...</span>
+<span class="go">(356, u&#39;dry grass&#39;)</span>
+<span class="go">(357, u&#39;grass&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="bandinfo">
+<span id="spectral-band-info"></span><h3>BandInfo<a class="headerlink" href="#bandinfo" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.BandInfo">
+<em class="property">class </em><tt class="descname">BandInfo</tt><a class="headerlink" href="#spectral.BandInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>A BandInfo object characterizes the spectral bands associated with an
+image. All BandInfo member variables are optional.  For <em>N</em> bands, all
+members of type &lt;list&gt; will have length <em>N</em> and contain float values.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="61%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Member</th>
+<th class="head">Description</th>
+<th class="head">Default</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>centers</td>
+<td>List of band centers</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td>bandwidths</td>
+<td>List of band FWHM values</td>
+<td>None</td>
+</tr>
+<tr class="row-even"><td>centers_stdevs</td>
+<td>List of std devs of band centers</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td>bandwidth_stdevs</td>
+<td>List of std devs of bands FWHMs</td>
+<td>None</td>
+</tr>
+<tr class="row-even"><td>band_quantity</td>
+<td>Image data type (e.g., &#8220;reflectance&#8221;)</td>
+<td>&#8220;&#8221;</td>
+</tr>
+<tr class="row-odd"><td>band_unit</td>
+<td>Band unit (e.g., &#8220;nanometer&#8221;)</td>
+<td>&#8220;&#8221;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="bandresampler">
+<h3>BandResampler<a class="headerlink" href="#bandresampler" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.algorithms.resampling.BandResampler">
+<em class="property">class </em><tt class="descname">BandResampler</tt><big>(</big><em>centers1</em>, <em>centers2</em>, <em>fwhm1=None</em>, <em>fwhm2=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.resampling.BandResampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>A callable object for resampling spectra between band discretizations.</p>
+<p>A source band will contribute to any destination band where there is
+overlap between the FWHM of the two bands.  If there is an overlap, an
+integral is performed over the region of overlap assuming the source band
+data value is constant over its FWHM (since we do not know the true
+spectral load over the source band) and the destination band has a Gaussian
+response function. Any target bands that do not have any overlapping source
+bands will contain NaN as the resampled band value.</p>
+<p>If bandwidths are not specified for source or destination bands, the bands
+are assumed to have FWHM values that span half the distance to the adjacent
+bands.</p>
+<dl class="method">
+<dt id="spectral.algorithms.resampling.BandResampler.__call__">
+<tt class="descname">__call__</tt><big>(</big><em>spectrum</em><big>)</big><a class="headerlink" href="#spectral.algorithms.resampling.BandResampler.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a source spectrum as input and returns a resampled spectrum.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>spectrum</cite> (list or <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>list or vector of values to be resampled.  Must have same
+length as the source band discretiation used to created the
+resampler.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>A resampled rank-1 <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> with length corresponding
+to the destination band discretization used to create the resampler.</div></blockquote>
+<p>Any target bands that do not have at lease one overlapping source band
+will contain <cite>float(&#8216;nan&#8217;)</cite> as the resampled band value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.resampling.BandResampler.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>centers1</em>, <em>centers2</em>, <em>fwhm1=None</em>, <em>fwhm2=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.resampling.BandResampler.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>BandResampler constructor.</p>
+<p>Usage:</p>
+<blockquote>
+<div><p>resampler = BandResampler(bandInfo1, bandInfo2)</p>
+<p>resampler = BandResampler(centers1, centers2, [fwhm1 = None [, fwhm2 = None]])</p>
+</div></blockquote>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>bandInfo1</cite> (<a class="reference internal" href="#spectral.BandInfo" title="spectral.BandInfo"><tt class="xref py py-class docutils literal"><span class="pre">BandInfo</span></tt></a>):</p>
+<blockquote>
+<div>Discretization of the source bands.</div></blockquote>
+<p><cite>bandInfo2</cite> (<a class="reference internal" href="#spectral.BandInfo" title="spectral.BandInfo"><tt class="xref py py-class docutils literal"><span class="pre">BandInfo</span></tt></a>):</p>
+<blockquote>
+<div>Discretization of the destination bands.</div></blockquote>
+<p><cite>centers1</cite> (list):</p>
+<blockquote>
+<div>floats defining center values of source bands.</div></blockquote>
+<p><cite>centers2</cite> (list):</p>
+<blockquote>
+<div>floats defining center values of destination bands.</div></blockquote>
+<p><cite>fwhm1</cite> (list):</p>
+<blockquote>
+<div>Optional list defining FWHM values of source bands.</div></blockquote>
+<p><cite>fwhm2</cite> (list):</p>
+<blockquote>
+<div>Optional list defining FWHM values of destination bands.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>A callable BandResampler object that takes a spectrum corresponding
+to the source bands and returns the spectrum resampled to the
+destination bands.</div></blockquote>
+<p>If bandwidths are not specified, the associated bands are assumed to
+have FWHM values that span half the distance to the adjacent bands.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="bhattacharyya-distance">
+<h3>Bhattacharyya Distance<a class="headerlink" href="#bhattacharyya-distance" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.algorithms.bdist">
+<tt class="descname">bdist</tt><big>(</big><em>class1</em>, <em>class2</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.bdist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calulates the Bhattacharyya distance between two classes.</p>
+<p>USAGE:  bd = bdist(class1, class2)</p>
+<p>Arguments:</p>
+<blockquote>
+<div><cite>class1</cite>, <cite>class2</cite> (<a class="reference internal" href="#spectral.algorithms.algorithms.TrainingClass" title="spectral.algorithms.algorithms.TrainingClass"><tt class="xref py py-class docutils literal"><span class="pre">TrainingClass</span></tt></a>)</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>A float value for the Bhattacharyya Distance between the classes.  This
+function is aliased to <tt class="xref py py-func docutils literal"><span class="pre">bDistance</span></tt>.</div></blockquote>
+<p>References:</p>
+<blockquote>
+<div>Richards, J.A. &amp; Jia, X. Remote Sensing Digital Image Analysis: An
+Introduction. (Springer: Berlin, 1999).</div></blockquote>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since it is unlikely anyone can actually remember how to spell
+&#8220;Bhattacharyya&#8221;, this function has been aliased to &#8220;bdist&#8221;
+for convenience.</p>
+</div>
+</div>
+<div class="section" id="calc-stats">
+<h3>calc_stats<a class="headerlink" href="#calc-stats" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.calc_stats">
+<tt class="descname">calc_stats</tt><big>(</big><em>image</em>, <em>mask=None</em>, <em>index=None</em><big>)</big><a class="headerlink" href="#spectral.calc_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes Gaussian stats for image data..</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>image</cite> (ndarrray, <tt class="xref py py-class docutils literal"><span class="pre">Image</span></tt>, or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Iterator</span></tt>):</p>
+<blockquote>
+<div>If an ndarray, it should have shape <cite>MxNxB</cite> and the mean &amp;
+covariance will be calculated for each band (third dimension).</div></blockquote>
+<p><cite>mask</cite> (ndarray):</p>
+<blockquote>
+<div>If <cite>mask</cite> is specified, mean &amp; covariance will be calculated for
+all pixels indicated in the mask array.  If <cite>index</cite> is specified,
+all pixels in <cite>image</cite> for which <cite>mask == index</cite> will be used;
+otherwise, all nonzero elements of <cite>mask</cite> will be used.</div></blockquote>
+<p><cite>index</cite> (int):</p>
+<blockquote>
+<div>Specifies which value in <cite>mask</cite> to use to select pixels from
+<cite>image</cite>. If not specified but <cite>mask</cite> is, then all nonzero elements
+of <cite>mask</cite> will be used.</div></blockquote>
+<p>If neither <cite>mask</cite> nor <cite>index</cite> are specified, all samples in <cite>vectors</cite>
+will be used.</p>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><cite>GaussianStats</cite> object:</p>
+<blockquote>
+<div>This object will have members <cite>mean</cite>, <cite>cov</cite>, and <cite>nsamples</cite>.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="cluster">
+<h3>cluster<a class="headerlink" href="#cluster" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.cluster">
+<tt class="descname">cluster</tt><big>(</big><em>data</em>, <em>nclusters=10</em><big>)</big><a class="headerlink" href="#spectral.cluster" title="Permalink to this definition">¶</a></dt>
+<dd><p>An single-pass clustering algorithm with replacement.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>data</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>):</p>
+<blockquote>
+<div>The <cite>MxNxB</cite> image on which to perform clustering.</div></blockquote>
+<p><cite>nclusters</cite> (int) [default 10]:</p>
+<blockquote>
+<div>Number of clusters to create.</div></blockquote>
+</div></blockquote>
+<p>Returns a 2-tuple containing:</p>
+<blockquote>
+<div><p><cite>class_map</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>An <cite>MxN</cite> array of cluster indices.</div></blockquote>
+<p><cite>centers</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>A <cite>nclusters x B</cite> array of cluster centers corresponding to the
+indices in clMap</div></blockquote>
+</div></blockquote>
+<p>This algorithm initializes the clusters with the first <cite>nclusters</cite>
+pixels from data.  Successive pixels are then assigned to the nearest
+cluster in <cite>N</cite>-space.  If the distance from a pixel to the nearest cluster
+is greater than the greatest inter-cluster distance, the pixel is added
+as a new cluster and the two clusters nearest to eachother are combined
+into a single cluster.</p>
+<p>The advantages of this algorithm are that threshold distances need
+not be specified and the number of clusters remains fixed; however, results
+typically are not as accurate as iterative algorithms.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="covariance">
+<h3>covariance<a class="headerlink" href="#covariance" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.algorithms.covariance">
+<tt class="descname">covariance</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.covariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the covariance of the set of vectors.</p>
+<p>Usage:</p>
+<div class="highlight-python"><pre>C = covariance(vectors [, mask=None [, index=None]])</pre>
+</div>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>vectors</cite> (ndarrray, <tt class="xref py py-class docutils literal"><span class="pre">Image</span></tt>, or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Iterator</span></tt>):</p>
+<blockquote>
+<div>If an ndarray, it should have shape <cite>MxNxB</cite> and the mean &amp;
+covariance will be calculated for each band (third dimension).</div></blockquote>
+<p><cite>mask</cite> (ndarray):</p>
+<blockquote>
+<div>If <cite>mask</cite> is specified, mean &amp; covariance will be calculated for
+all pixels indicated in the mask array.  If <cite>index</cite> is specified,
+all pixels in <cite>image</cite> for which <cite>mask == index</cite> will be used;
+otherwise, all nonzero elements of <cite>mask</cite> will be used.</div></blockquote>
+<p><cite>index</cite> (int):</p>
+<blockquote>
+<div>Specifies which value in <cite>mask</cite> to use to select pixels from
+<cite>image</cite>. If not specified but <cite>mask</cite> is, then all nonzero elements
+of <cite>mask</cite> will be used.</div></blockquote>
+<p>If neither <cite>mask</cite> nor <cite>index</cite> are specified, all samples in <cite>vectors</cite>
+will be used.</p>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><cite>C</cite> (ndarray):</p>
+<blockquote>
+<div>The <cite>BxB</cite> unbiased estimate (dividing by N-1) of the covariance
+of the vectors.</div></blockquote>
+</div></blockquote>
+<p>To also return the mean vector and number of samples, call
+<a class="reference internal" href="#spectral.algorithms.algorithms.mean_cov" title="spectral.algorithms.algorithms.mean_cov"><tt class="xref py py-func docutils literal"><span class="pre">mean_cov</span></tt></a> instead.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="cov-avg">
+<h3>cov_avg<a class="headerlink" href="#cov-avg" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.algorithms.cov_avg">
+<tt class="descname">cov_avg</tt><big>(</big><em>image</em>, <em>mask</em>, <em>weighted=True</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.cov_avg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the covariance averaged over a set of classes.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>image</cite> (ndarrray, <tt class="xref py py-class docutils literal"><span class="pre">Image</span></tt>, or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Iterator</span></tt>):</p>
+<blockquote>
+<div>If an ndarray, it should have shape <cite>MxNxB</cite> and the mean &amp;
+covariance will be calculated for each band (third dimension).</div></blockquote>
+<p><cite>mask</cite> (integer-valued ndarray):</p>
+<blockquote>
+<div>Elements specify the classes associated with pixels in <cite>image</cite>.
+All pixels associeted with non-zero elements of <cite>mask</cite> will be
+used in the covariance calculation.</div></blockquote>
+<p><cite>weighted</cite> (bool, default True):</p>
+<blockquote>
+<div>Specifies whether the individual class covariances should be
+weighted when computing the average. If True, each class will
+be weighted by the number of pixels provided for the class;
+otherwise, a simple average of the class covariances is performed.</div></blockquote>
+</div></blockquote>
+<p>Returns a class-averaged covariance matrix. The number of covariances used
+in the average is equal to the number of non-zero elements of <cite>mask</cite>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="gaussianclassifier">
+<h3>GaussianClassifier<a class="headerlink" href="#gaussianclassifier" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.algorithms.classifiers.GaussianClassifier">
+<em class="property">class </em><tt class="descname">GaussianClassifier</tt><big>(</big><em>training_data=None</em>, <em>min_samples=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.GaussianClassifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Gaussian Maximum Likelihood Classifier</p>
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.GaussianClassifier.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>training_data=None</em>, <em>min_samples=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.GaussianClassifier.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the classifier and optionally trains it with training data.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>training_data</cite> (<tt class="xref py py-class docutils literal"><span class="pre">TrainingClassSet</span></tt>):</p>
+<blockquote>
+<div>The training classes on which to train the classifier.</div></blockquote>
+<p><cite>min_samples</cite> (int) [default None]:</p>
+<blockquote>
+<div>Minimum number of samples required from a training class to
+include it in the classifier.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.GaussianClassifier.classify_image">
+<tt class="descname">classify_image</tt><big>(</big><em>image</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.GaussianClassifier.classify_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Classifies an entire image, returning a classification map.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>image</cite> (ndarray or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>)</p>
+<blockquote>
+<div>The <cite>MxNxB</cite> image to classify.</div></blockquote>
+</div></blockquote>
+<p>Returns (ndarray):</p>
+<blockquote>
+<div>An <cite>MxN</cite> ndarray of integers specifying the class for each pixel.</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.GaussianClassifier.classify_spectrum">
+<tt class="descname">classify_spectrum</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.GaussianClassifier.classify_spectrum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Classifies a pixel into one of the trained classes.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>x</cite> (list or rank-1 ndarray):</p>
+<blockquote>
+<div>The unclassified spectrum.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><cite>classIndex</cite> (int):</p>
+<blockquote>
+<div>The index for the <tt class="xref py py-class docutils literal"><span class="pre">TrainingClass</span></tt>
+to which <cite>x</cite> is classified.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.GaussianClassifier.train">
+<tt class="descname">train</tt><big>(</big><em>training_data</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.GaussianClassifier.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains the classifier on the given training data.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>training_data</cite> (<tt class="xref py py-class docutils literal"><span class="pre">TrainingClassSet</span></tt>):</p>
+<blockquote>
+<div>Data for the training classes.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="kmeans">
+<h3>kmeans<a class="headerlink" href="#kmeans" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.kmeans">
+<tt class="descname">kmeans</tt><big>(</big><em>image</em>, <em>nclusters=10</em>, <em>max_iterations=20</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.kmeans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs iterative clustering using the k-means algorithm.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>image</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>):</p>
+<blockquote>
+<div>The <cite>MxNxB</cite> image on which to perform clustering.</div></blockquote>
+<p><cite>nclusters</cite> (int) [default 10]:</p>
+<blockquote>
+<div>Number of clusters to create.  The number produced may be less than
+<cite>nclusters</cite>.</div></blockquote>
+<p><cite>max_iterations</cite> (int) [default 20]:</p>
+<blockquote>
+<div>Max number of iterations to perform.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div><p><cite>start_clusters</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>) [default None]:</p>
+<blockquote>
+<div><cite>nclusters x B</cite> array of initial cluster centers.  If not provided,
+initial cluster centers will be spaced evenly along the diagonal of
+the N-dimensional bounding box of the image data.</div></blockquote>
+<p><cite>compare</cite> (callable object) [default None]:</p>
+<blockquote>
+<div>Optional comparison function. <cite>compare</cite> must be a callable object
+that takes 2 <cite>MxN</cite> <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> objects as its arguments
+and returns non-zero when clustering is to be terminated. The two
+arguments are the cluster maps for the previous and current cluster
+cycle, respectively.</div></blockquote>
+<p><cite>distance</cite> (callable object) [default <tt class="xref py py-func docutils literal"><span class="pre">L2</span></tt>]:</p>
+<blockquote>
+<div>The distance measure to use for comparison. The default is to use
+<strong>L2</strong> (Euclidean) distance. For Manhattan distance, specify
+<tt class="xref py py-func docutils literal"><span class="pre">L1</span></tt>.</div></blockquote>
+<p><cite>frames</cite> (list) [default None]:</p>
+<blockquote>
+<div>If this argument is given and is a list object, each intermediate
+cluster map is appended to the list.</div></blockquote>
+</div></blockquote>
+<p>Returns a 2-tuple containing:</p>
+<blockquote>
+<div><p><cite>class_map</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>An <cite>MxN</cite> array whos values are the indices of the cluster for the
+corresponding element of <cite>image</cite>.</div></blockquote>
+<p><cite>centers</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>An <cite>nclusters x B</cite> array of cluster centers.</div></blockquote>
+</div></blockquote>
+<p>Iterations are performed until clusters converge (no pixels reassigned
+between iterations), <cite>maxIterations</cite> is reached, or <cite>compare</cite> returns
+nonzero. If <tt class="xref py py-exc docutils literal"><span class="pre">KeyboardInterrupt</span></tt> is generated (i.e., CTRL-C pressed)
+while the algorithm is executing, clusters are returned from the previously
+completed iteration.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="linear-discriminant">
+<h3>linear_discriminant<a class="headerlink" href="#linear-discriminant" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.linear_discriminant">
+<tt class="descname">linear_discriminant</tt><big>(</big><em>classes</em>, <em>whiten=True</em><big>)</big><a class="headerlink" href="#spectral.linear_discriminant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solve Fisher&#8217;s linear discriminant for eigenvalues and eigenvectors.</p>
+<p>Usage: (L, V, Cb, Cw) = linear_discriminant(classes)</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>classes</cite> (<tt class="xref py py-class docutils literal"><span class="pre">TrainingClassSet</span></tt>):</p>
+<blockquote>
+<div>The set of <cite>C</cite> classes to discriminate.</div></blockquote>
+</div></blockquote>
+<p>Returns a <cite>FisherLinearDiscriminant</cite> object containing the within/between-
+class covariances, mean vector, and a callable transform to convert data to
+the transform&#8217;s space.</p>
+<p>This function determines the solution to the generalized eigenvalue problem</p>
+<blockquote>
+<div>Cb * x = lambda * Cw * x</div></blockquote>
+<p>Since cov_w is normally invertable, the reduces to</p>
+<blockquote>
+<div>(inv(Cw) * Cb) * x = lambda * x</div></blockquote>
+<p>References:</p>
+<blockquote>
+<div>Richards, J.A. &amp; Jia, X. Remote Sensing Digital Image Analysis: An
+Introduction. (Springer: Berlin, 1999).</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="lineartransform">
+<h3>LinearTransform<a class="headerlink" href="#lineartransform" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.algorithms.transforms.LinearTransform">
+<em class="property">class </em><tt class="descname">LinearTransform</tt><big>(</big><em>A</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.algorithms.transforms.LinearTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>A callable linear transform object.</p>
+<p>In addition to the __call__ method, which applies the transform to given,
+data, a LinearTransform object also has the following members:</p>
+<blockquote>
+<div><p><cite>dim_in</cite> (int):</p>
+<blockquote>
+<div>The expected length of input vectors. This will be <cite>None</cite> if the
+input dimension is unknown (e.g., if the transform is a scalar).</div></blockquote>
+<p><cite>dim_out</cite> (int):</p>
+<blockquote>
+<div>The length of output vectors (after linear transformation). This
+will be <cite>None</cite> if the input dimension is unknown (e.g., if
+the transform is a scalar).</div></blockquote>
+<p><cite>dtype</cite> (numpy dtype):</p>
+<blockquote>
+<div>The numpy dtype for the output ndarray data.</div></blockquote>
+</div></blockquote>
+<dl class="method">
+<dt id="spectral.algorithms.transforms.LinearTransform.__call__">
+<tt class="descname">__call__</tt><big>(</big><em>X</em><big>)</big><a class="headerlink" href="#spectral.algorithms.transforms.LinearTransform.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the linear transformation to the given data.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>X</cite> (<tt class="xref py py-class docutils literal"><span class="pre">ndarray</span></tt> or object with <cite>transform</cite> method):</p>
+<blockquote>
+<div>If <cite>X</cite> is an ndarray, it is either an (M,N,K) array containing
+M*N length-K vectors to be transformed or it is an (R,K) array
+of length-K vectors to be transformed. If <cite>X</cite> is an object with
+a method named <cite>transform</cite> the result of passing the
+<cite>LinearTransform</cite> object to the <cite>transform</cite> method will be
+returned.</div></blockquote>
+</div></blockquote>
+<p>Returns an (M,N,J) or (R,J) array, depending on shape of <cite>X</cite>, where J
+is the length of the first dimension of the array <cite>A</cite> passed to
+__init__.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.transforms.LinearTransform.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>A</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.algorithms.transforms.LinearTransform.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Arguments:</p>
+<blockquote>
+<div><p><cite>A</cite> (<tt class="xref py py-class docutils literal"><span class="pre">ndarrray</span></tt>):</p>
+<blockquote>
+<div>An (J,K) array to be applied to length-K targets.</div></blockquote>
+</div></blockquote>
+<p>Keyword Argments:</p>
+<blockquote>
+<div><p><cite>pre</cite> (scalar or length-K sequence):</p>
+<blockquote>
+<div>Additive offset to be applied prior to linear transformation.</div></blockquote>
+<p><cite>post</cite> (scalar or length-J sequence):</p>
+<blockquote>
+<div>An additive offset to be applied after linear transformation.</div></blockquote>
+<p><cite>dtype</cite> (numpy dtype):</p>
+<blockquote>
+<div>Explicit type for transformed data.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.transforms.LinearTransform.chain">
+<tt class="descname">chain</tt><big>(</big><em>transform</em><big>)</big><a class="headerlink" href="#spectral.algorithms.transforms.LinearTransform.chain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Chains together two linear transforms.
+If the transform <cite>f1</cite> is given by</p>
+<div class="math">
+<p><img src="_images/math/9e022355d98d559f059a9205a75605c6fb4f6ba6.png" alt="F_1(X) = A_1(X + b_1) + c_1"/></p>
+</div><p>and <cite>f2</cite> by</p>
+<div class="math">
+<p><img src="_images/math/ab1099d098e203acb6fe639a8fa177e40bcf8f07.png" alt="F_2(X) = A_2(X + b_2) + c_2"/></p>
+</div><p>then <cite>f1.chain(f2)</cite> returns a new LinearTransform, <cite>f3</cite>, whose output
+is given by</p>
+<div class="math">
+<p><img src="_images/math/1f049d98e76c7ec5f2403d016ddd3ad792169232.png" alt="F_3(X) = F_2(F_1(X))"/></p>
+</div></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="matched-filter">
+<h3>matched_filter<a class="headerlink" href="#matched-filter" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.detectors.matched_filter">
+<tt class="descname">matched_filter</tt><big>(</big><em>X</em>, <em>target</em>, <em>background=None</em>, <em>window=None</em>, <em>cov=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.detectors.matched_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes a linear matched filter target detector score.</p>
+<p>Usage:</p>
+<blockquote>
+<div><p>y = matched_filter(X, target, background)</p>
+<p>y = matched_filter(X, target, window=&lt;win&gt; [, cov=&lt;cov&gt;])</p>
+</div></blockquote>
+<p>Given target/background means and a common covariance matrix, the matched
+filter response is given by:</p>
+<div class="math">
+<p><img src="_images/math/f962c5cb40b1672405835f5a5592c2410c5d5d19.png" alt="y=\frac{(\mu_t-\mu_b)^T\Sigma^{-1}(x-\mu_b)}{(\mu_t-\mu_b)^T\Sigma^{-1}(\mu_t-\mu_b)}"/></p>
+</div><p>where <img class="math" src="_images/math/2f9e4510130fedb42dca7d5e1bb137f0e39df777.png" alt="\mu_t"/> is the target mean, <img class="math" src="_images/math/310d542196cb8e2f484138a1458505769fe857ba.png" alt="\mu_b"/> is the background
+mean, and <img class="math" src="_images/math/c8f77e3035db5fe9a4975967750ac1a6454bda8c.png" alt="\Sigma"/> is the covariance.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>X</cite> (numpy.ndarray):</p>
+<blockquote>
+<div><p>For the first calling method shown, <cite>X</cite> can be an image with
+shape (R, C, B) or an ndarray of shape (R * C, B). If the
+<cite>background</cite> keyword is given, it will be used for the image
+background statistics; otherwise, background statistics will be
+computed from <cite>X</cite>.</p>
+<p>If the <cite>window</cite> keyword is given, <cite>X</cite> must be a 3-dimensional
+array and background statistics will be computed for each point
+in the image using a local window defined by the keyword.</p>
+</div></blockquote>
+<p><cite>target</cite> (ndarray):</p>
+<blockquote>
+<div>Length-K vector specifying the target to be detected.</div></blockquote>
+<p><cite>background</cite> (<cite>GaussianStats</cite>):</p>
+<blockquote>
+<div>The Gaussian statistics for the background (e.g., the result
+of calling <tt class="xref py py-func docutils literal"><span class="pre">calc_stats</span></tt> for an image). This argument is not
+required if <cite>window</cite> is given.</div></blockquote>
+<p><cite>window</cite> (2-tuple of odd integers):</p>
+<blockquote>
+<div><p>Must have the form (<cite>inner</cite>, <cite>outer</cite>), where the two values
+specify the widths (in pixels) of inner and outer windows centered
+about the pixel being evaulated. Both values must be odd integers.
+The background mean and covariance will be estimated from pixels
+in the outer window, excluding pixels within the inner window. For
+example, if (<cite>inner</cite>, <cite>outer</cite>) = (5, 21), then the number of
+pixels used to estimate background statistics will be
+<img class="math" src="_images/math/3990ab5951e6dfa17434842b8e194367af8e01e3.png" alt="21^2 - 5^2 = 416"/>. If this argument is given, <cite>background</cite>
+is not required (and will be ignored, if given).</p>
+<p>The window is modified near image borders, where full, centered
+windows cannot be created. The outer window will be shifted, as
+needed, to ensure that the outer window still has height and width
+<cite>outer</cite> (in this situation, the pixel being evaluated will not be
+at the center of the outer window). The inner window will be
+clipped, as needed, near image borders. For example, assume an
+image with 145 rows and columns. If the window used is
+(5, 21), then for the image pixel at (0, 0) (upper left corner),
+the the inner window will cover <cite>image[:3, :3]</cite> and the outer
+window will cover <cite>image[:21, :21]</cite>. For the pixel at (50, 1), the
+inner window will cover <cite>image[48:53, :4]</cite> and the outer window
+will cover <cite>image[40:51, :21]</cite>.</p>
+</div></blockquote>
+<p><cite>cov</cite> (ndarray):</p>
+<blockquote>
+<div>An optional covariance to use. If this parameter is given, <cite>cov</cite>
+will be used for all matched filter calculations (background
+covariance will not be recomputed in each window). Only the
+background mean will be recomputed in each window). If the
+<cite>window</cite> argument is specified, providing <cite>cov</cite> will allow the
+result to be computed <em>much</em> faster.</div></blockquote>
+</div></blockquote>
+<p>Returns numpy.ndarray:</p>
+<blockquote>
+<div>The return value will be the matched filter scores distance) for each
+pixel given.  If <cite>X</cite> has shape (R, C, K), the returned ndarray will
+have shape (R, C).</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="matchedfilter">
+<h3>MatchedFilter<a class="headerlink" href="#matchedfilter" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.algorithms.detectors.MatchedFilter">
+<em class="property">class </em><tt class="descname">MatchedFilter</tt><big>(</big><em>background</em>, <em>target</em><big>)</big><a class="headerlink" href="#spectral.algorithms.detectors.MatchedFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>A callable linear matched filter.</p>
+<p>Given target/background means and a common covariance matrix, the matched
+filter response is given by:</p>
+<div class="math">
+<p><img src="_images/math/f962c5cb40b1672405835f5a5592c2410c5d5d19.png" alt="y=\frac{(\mu_t-\mu_b)^T\Sigma^{-1}(x-\mu_b)}{(\mu_t-\mu_b)^T\Sigma^{-1}(\mu_t-\mu_b)}"/></p>
+</div><p>where <img class="math" src="_images/math/2f9e4510130fedb42dca7d5e1bb137f0e39df777.png" alt="\mu_t"/> is the target mean, <img class="math" src="_images/math/310d542196cb8e2f484138a1458505769fe857ba.png" alt="\mu_b"/> is the background
+mean, and <img class="math" src="_images/math/c8f77e3035db5fe9a4975967750ac1a6454bda8c.png" alt="\Sigma"/> is the covariance.</p>
+<dl class="method">
+<dt id="spectral.algorithms.detectors.MatchedFilter.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>background</em>, <em>target</em><big>)</big><a class="headerlink" href="#spectral.algorithms.detectors.MatchedFilter.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the filter, given background/target means and covariance.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>background</cite> (<cite>GaussianStats</cite>):</p>
+<blockquote>
+<div>The Gaussian statistics for the background (e.g., the result
+of calling <tt class="xref py py-func docutils literal"><span class="pre">calc_stats</span></tt>).</div></blockquote>
+<p><cite>target</cite> (ndarray):</p>
+<blockquote>
+<div>Length-K target mean</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.detectors.MatchedFilter.whiten">
+<tt class="descname">whiten</tt><big>(</big><em>X</em><big>)</big><a class="headerlink" href="#spectral.algorithms.detectors.MatchedFilter.whiten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms data to the whitened space of the background.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>X</cite> (ndarray):</p>
+<blockquote>
+<div>Size (M,N,K) or (M*N,K) array of length K vectors to transform.</div></blockquote>
+</div></blockquote>
+<p>Returns an array of same size as <cite>X</cite> but linearly transformed to the
+whitened space of the filter.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="mahalanobisdistanceclassifier">
+<h3>MahalanobisDistanceClassifier<a class="headerlink" href="#mahalanobisdistanceclassifier" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier">
+<em class="property">class </em><tt class="descname">MahalanobisDistanceClassifier</tt><big>(</big><em>training_data=None</em>, <em>min_samples=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Classifier using Mahalanobis distance for class discrimination</p>
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>training_data=None</em>, <em>min_samples=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the classifier and optionally trains it with training data.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>training_data</cite> (<tt class="xref py py-class docutils literal"><span class="pre">TrainingClassSet</span></tt>):</p>
+<blockquote>
+<div>The training classes on which to train the classifier.</div></blockquote>
+<p><cite>min_samples</cite> (int) [default None]:</p>
+<blockquote>
+<div>Minimum number of samples required from a training class to
+include it in the classifier.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier.classify_image">
+<tt class="descname">classify_image</tt><big>(</big><em>image</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier.classify_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Classifies an entire image, returning a classification map.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>image</cite> (ndarray or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>)</p>
+<blockquote>
+<div>The <cite>MxNxB</cite> image to classify.</div></blockquote>
+</div></blockquote>
+<p>Returns (ndarray):</p>
+<blockquote>
+<div>An <cite>MxN</cite> ndarray of integers specifying the class for each pixel.</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier.classify_spectrum">
+<tt class="descname">classify_spectrum</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier.classify_spectrum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Classifies a pixel into one of the trained classes.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>x</cite> (list or rank-1 ndarray):</p>
+<blockquote>
+<div>The unclassified spectrum.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><cite>classIndex</cite> (int):</p>
+<blockquote>
+<div>The index for the <tt class="xref py py-class docutils literal"><span class="pre">TrainingClass</span></tt>
+to which <cite>x</cite> is classified.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier.train">
+<tt class="descname">train</tt><big>(</big><em>trainingData</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains the classifier on the given training data.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>trainingData</cite> (<tt class="xref py py-class docutils literal"><span class="pre">TrainingClassSet</span></tt>):</p>
+<blockquote>
+<div>Data for the training classes.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="mean-cov">
+<h3>mean_cov<a class="headerlink" href="#mean-cov" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.algorithms.mean_cov">
+<tt class="descname">mean_cov</tt><big>(</big><em>image</em>, <em>mask=None</em>, <em>index=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.mean_cov" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the mean and covariance of the set of vectors.</p>
+<p>Usage:</p>
+<div class="highlight-python"><pre>(mean, cov, S) = mean_cov(vectors [, mask=None [, index=None]])</pre>
+</div>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>image</cite> (ndarrray, <tt class="xref py py-class docutils literal"><span class="pre">Image</span></tt>, or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Iterator</span></tt>):</p>
+<blockquote>
+<div>If an ndarray, it should have shape <cite>MxNxB</cite> and the mean &amp;
+covariance will be calculated for each band (third dimension).</div></blockquote>
+<p><cite>mask</cite> (ndarray):</p>
+<blockquote>
+<div>If <cite>mask</cite> is specified, mean &amp; covariance will be calculated for
+all pixels indicated in the mask array.  If <cite>index</cite> is specified,
+all pixels in <cite>image</cite> for which <cite>mask == index</cite> will be used;
+otherwise, all nonzero elements of <cite>mask</cite> will be used.</div></blockquote>
+<p><cite>index</cite> (int):</p>
+<blockquote>
+<div>Specifies which value in <cite>mask</cite> to use to select pixels from
+<cite>image</cite>. If not specified but <cite>mask</cite> is, then all nonzero elements
+of <cite>mask</cite> will be used.</div></blockquote>
+<p>If neither <cite>mask</cite> nor <cite>index</cite> are specified, all samples in <cite>vectors</cite>
+will be used.</p>
+</div></blockquote>
+<p>Returns a 3-tuple containing:</p>
+<blockquote>
+<div><p><cite>mean</cite> (ndarray):</p>
+<blockquote>
+<div>The length-<cite>B</cite> mean vectors</div></blockquote>
+<p><cite>cov</cite> (ndarray):</p>
+<blockquote>
+<div>The <cite>BxB</cite> unbiased estimate (dividing by N-1) of the covariance
+of the vectors.</div></blockquote>
+<p><cite>S</cite> (int):</p>
+<blockquote>
+<div>Number of samples used to calculate mean &amp; cov</div></blockquote>
+</div></blockquote>
+<p>Calculate the mean and covariance of of the given vectors. The argument
+can be an Iterator, a SpyFile object, or an <cite>MxNxB</cite> array.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="msam">
+<h3>msam<a class="headerlink" href="#msam" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.algorithms.msam">
+<tt class="descname">msam</tt><big>(</big><em>data</em>, <em>members</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.msam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modified SAM scores according to Oshigami, et al [1]. Endmembers are
+mean-subtracted prior to spectral angle calculation. Results are
+normalized such that the maximum value of 1 corresponds to a perfect match
+(zero spectral angle).</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>data</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>):</p>
+<blockquote>
+<div>An <cite>MxNxB</cite> image for which spectral angles will be calculated.</div></blockquote>
+<p><cite>members</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div><cite>CxB</cite> array of spectral endmembers.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><cite>MxNxC</cite> array of MSAM scores with maximum value of 1 corresponding
+to a perfect match (zero spectral angle).</div></blockquote>
+<p>Calculates the spectral angles between each vector in data and each of the
+endmembers.  The output of this function (angles) can be used to classify
+the data by minimum spectral angle by calling argmax(angles).</p>
+<p>References:</p>
+<p>[1] Shoko Oshigami, Yasushi Yamaguchi, Tatsumi Uezato, Atsushi Momose,
+Yessy Arvelyna, Yuu Kawakami, Taro Yajima, Shuichi Miyatake, and
+Anna Nguno. 2013. Mineralogical mapping of southern Namibia by application
+of continuum-removal MSAM method to the HyMap data. Int. J. Remote Sens.
+34, 15 (August 2013), 5282-5295.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="ndvi">
+<h3>ndvi<a class="headerlink" href="#ndvi" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.algorithms.ndvi">
+<tt class="descname">ndvi</tt><big>(</big><em>data</em>, <em>red</em>, <em>nir</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.ndvi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates Normalized Difference Vegetation Index (NDVI).</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>data</cite> (ndarray or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>):</p>
+<blockquote>
+<div>The array or SpyFile for which to calculate the index.</div></blockquote>
+<p><cite>red</cite> (int or int range):</p>
+<blockquote>
+<div>Index of the red band or an index range for multiple bands.</div></blockquote>
+<p><cite>nir</cite> (int or int range):</p>
+<blockquote>
+<div>An integer index of the near infrared band or an index range for
+multiple bands.</div></blockquote>
+</div></blockquote>
+<p>Returns an ndarray:</p>
+<blockquote>
+<div>An array containing NDVI values in the range [-1.0, 1.0] for each
+corresponding element of data.</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="orthogonalize">
+<h3>orthogonalize<a class="headerlink" href="#orthogonalize" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.algorithms.orthogonalize">
+<tt class="descname">orthogonalize</tt><big>(</big><em>vecs</em>, <em>start=0</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.orthogonalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs Gram-Schmidt Orthogonalization on a set of vectors.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>vecs</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>The set of vectors for which an orthonormal basis will be created.
+If there are <cite>C</cite> vectors of length <cite>B</cite>, <cite>vecs</cite> should be <cite>CxB</cite>.</div></blockquote>
+<p><cite>start</cite> (int) [default 0]:</p>
+<blockquote>
+<div>If <cite>start</cite> &gt; 0, then <cite>vecs[start]</cite> will be assumed to already be
+orthonormal.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>A new <cite>CxB</cite> containing an orthonormal basis for the given vectors.</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="perceptronclassifier">
+<h3>PerceptronClassifier<a class="headerlink" href="#perceptronclassifier" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.algorithms.classifiers.PerceptronClassifier">
+<em class="property">class </em><tt class="descname">PerceptronClassifier</tt><big>(</big><em>layers</em>, <em>k=1.0</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.PerceptronClassifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>A multi-layer perceptron classifier with backpropagation learning.</p>
+<p>Multi-layer perceptrons often require many (i.e., thousands) of iterations
+through the traning data to converge on a solution. Therefore, it is not
+recommended to attempt training a network on full-dimensional hyperspectral
+data or even on a full set of image pixels. It is likely preferable to
+first train the network on a subset of the data, then retrain the network
+(starting with network weights from initial training) on the full data
+set.</p>
+<p>Example usage: Train an MLP with 20 samples from each training class after
+performing dimensionality reduction:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">classes</span> <span class="o">=</span> <span class="n">create_training_classes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">gt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fld</span> <span class="o">=</span> <span class="n">linear_discriminant</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xdata</span> <span class="o">=</span> <span class="n">fld</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">classes</span> <span class="o">=</span> <span class="n">create_training_classes</span><span class="p">(</span><span class="n">xdata</span><span class="p">,</span> <span class="n">gt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nfeatures</span> <span class="o">=</span> <span class="n">xdata</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nclasses</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">PerceptronClassifier</span><span class="p">([</span><span class="n">nfeatures</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">nclasses</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">classes</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">clip</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">accuracy</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">batch</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="n">momentum</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">xdata</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.PerceptronClassifier.classify_image">
+<tt class="descname">classify_image</tt><big>(</big><em>image</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.PerceptronClassifier.classify_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Classifies an entire image, returning a classification map.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>image</cite> (ndarray or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>)</p>
+<blockquote>
+<div>The <cite>MxNxB</cite> image to classify.</div></blockquote>
+</div></blockquote>
+<p>Returns (ndarray):</p>
+<blockquote>
+<div>An <cite>MxN</cite> ndarray of integers specifying the class for each pixel.</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.PerceptronClassifier.classify_spectrum">
+<tt class="descname">classify_spectrum</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.PerceptronClassifier.classify_spectrum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Classifies a pixel into one of the trained classes.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>x</cite> (list or rank-1 ndarray):</p>
+<blockquote>
+<div>The unclassified spectrum.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><cite>classIndex</cite> (int):</p>
+<blockquote>
+<div>The index for the <tt class="xref py py-class docutils literal"><span class="pre">TrainingClass</span></tt>
+to which <cite>x</cite> is classified.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.PerceptronClassifier.input">
+<tt class="descname">input</tt><big>(</big><em>x</em>, <em>clip=0.0</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.PerceptronClassifier.input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets Perceptron input, activates neurons and sets &amp; returns output.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>x</cite> (sequence):</p>
+<blockquote>
+<div>Inputs to input layer. Should not include a bias input.</div></blockquote>
+<p><cite>clip</cite> (float &gt;= 0):</p>
+<blockquote>
+<div>Optional clipping value to limit sigmoid output. The sigmoid
+function has output in the range (0, 1). If the <cite>clip</cite> argument
+is set to <cite>a</cite> then all neuron outputs for the layer will be
+constrained to the range [a, 1 - a]. This can improve perceptron
+learning rate in some situations.</div></blockquote>
+</div></blockquote>
+<p>For classifying samples, call <cite>classify</cite> instead of <cite>input</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.PerceptronClassifier.train">
+<tt class="descname">train</tt><big>(</big><em>training_data</em>, <em>samples_per_class=0</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.PerceptronClassifier.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains the Perceptron on the training data.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>training_data</cite> (<tt class="xref py py-class docutils literal"><span class="pre">TrainingClassSet</span></tt>):</p>
+<blockquote>
+<div>Data for the training classes.</div></blockquote>
+<p><cite>samples_per_class</cite> (int):</p>
+<blockquote>
+<div>Maximum number of training observations to user from each
+class in <cite>training_data</cite>. If this argument is not provided,
+all training data is used.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div><p><cite>accuracy</cite> (float):</p>
+<blockquote>
+<div>The percent training accuracy at which to terminate training, if
+the maximum number of iterations are not reached first. This
+value can be set greater than 100 to force a specified number of
+training iterations to be performed (e.g., to continue reducing
+the error term after 100% classification accuracy has been
+achieved.</div></blockquote>
+<p><cite>rate</cite> (float):</p>
+<blockquote>
+<div>The perceptron learning rate (typically in the range (0, 1]).</div></blockquote>
+<p><cite>momentum</cite> (float):</p>
+<blockquote>
+<div>The perceptron learning momentum term, which specifies the
+fraction of the previous update value that should be added to
+the current update term. The value should be in the range [0, 1).</div></blockquote>
+<p><cite>batch</cite> (positive integer):</p>
+<blockquote>
+<div>Specifies how many samples should be evaluated before an update
+is made to the perceptron weights. A value of 0 indicates batch
+updates should be performed (evaluate all training inputs prior
+to updating). Otherwise, updates will be aggregated for every
+<cite>batch</cite> inputs (i.e., <cite>batch</cite> == 1 is stochastic learning).</div></blockquote>
+<p><cite>clip</cite> (float &gt;= 0):</p>
+<blockquote>
+<div><p>Optional clipping value to limit sigmoid output during training.
+The sigmoid function has output in the range (0, 1). If the
+<cite>clip</cite> argument is set to <cite>a</cite> then all neuron outputs for the
+layer will be constrained to the range [a, 1 - a]. This can
+improve perceptron learning rate in some situations.</p>
+<p>After training the perceptron with a clipping value, <cite>train</cite> can
+be called again with clipping set to 0 to continue reducing the
+training error.</p>
+</div></blockquote>
+<p><cite>on_iteration</cite> (callable):</p>
+<blockquote>
+<div>A callable object that accepts the perceptron as input and
+returns bool. If this argument is set, the object will be called
+at the end of each training iteration with the perceptron as its
+argument. If the callable returns True, training will terminate.</div></blockquote>
+<p><cite>stdout</cite>:</p>
+<blockquote>
+<div>An object with a <cite>write</cite> method that can be set to redirect
+training status messages somewhere other than stdout. To
+suppress output, set <cite>stdout</cite> to None.</div></blockquote>
+</div></blockquote>
+<p>Return value:</p>
+<blockquote>
+<div>Returns True if desired accuracy was achieved.</div></blockquote>
+<p>Neural networks can require many iterations through a data set to
+converge. If convergence slows (as indicated by small changes in
+residual error), training can be terminated by pressing CTRL-C, which
+will preserve the network weights from the previous training iteration.
+<cite>train</cite> can then be called again with altered training parameters
+(e.g., increased learning rate or momentum) to increase the convergence
+rate.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="principal-components">
+<h3>principal_components<a class="headerlink" href="#principal-components" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.principal_components">
+<tt class="descname">principal_components</tt><big>(</big><em>image</em><big>)</big><a class="headerlink" href="#spectral.principal_components" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate Principal Component eigenvalues &amp; eigenvectors for an image.</p>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pc</span> <span class="o">=</span> <span class="n">principal_components</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>image</cite> (ndarray or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>):</p>
+<blockquote>
+<div>An <cite>MxNxB</cite> image</div></blockquote>
+</div></blockquote>
+<p>Returns a <a class="reference internal" href="#spectral.algorithms.algorithms.PrincipalComponents" title="spectral.algorithms.algorithms.PrincipalComponents"><tt class="xref py py-class docutils literal"><span class="pre">PrincipalComponents</span></tt></a>
+object with the following members:</p>
+<blockquote>
+<div><p><cite>eigenvalues</cite>:</p>
+<blockquote>
+<div>A length B array of eigenvalues</div></blockquote>
+<p><cite>eigenvectors</cite>:</p>
+<blockquote>
+<div>A <cite>BxB</cite> array of normalized eigenvectors</div></blockquote>
+<p><cite>stats</cite> (<tt class="xref py py-class docutils literal"><span class="pre">GaussianStats</span></tt>):</p>
+<blockquote>
+<div>A statistics object containing <cite>mean</cite>, <cite>cov</cite>, and <cite>nsamples</cite>.</div></blockquote>
+<p><cite>transform</cite>:</p>
+<blockquote>
+<div>A callable function to transform data to the space of the
+principal components.</div></blockquote>
+<p><cite>reduce</cite>:</p>
+<blockquote>
+<div>A method to reduce the number of eigenvalues.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="principalcomponents">
+<h3>PrincipalComponents<a class="headerlink" href="#principalcomponents" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.algorithms.algorithms.PrincipalComponents">
+<em class="property">class </em><tt class="descname">PrincipalComponents</tt><big>(</big><em>vals</em>, <em>vecs</em>, <em>stats</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.PrincipalComponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>An object for storing a data set&#8217;s principal components.  The
+object has the following members:</p>
+<blockquote>
+<div><p><cite>eigenvalues</cite>:</p>
+<blockquote>
+<div>A length B array of eigenvalues sorted in descending order</div></blockquote>
+<p><cite>eigenvectors</cite>:</p>
+<blockquote>
+<div>A <cite>BxB</cite> array of normalized eigenvectors (in columns)</div></blockquote>
+<p><cite>stats</cite> (<tt class="xref py py-class docutils literal"><span class="pre">GaussianStats</span></tt>):</p>
+<blockquote>
+<div>A statistics object containing <cite>mean</cite>, <cite>cov</cite>, and <cite>nsamples</cite>.</div></blockquote>
+<p><cite>transform</cite>:</p>
+<blockquote>
+<div>A callable function to transform data to the space of the
+principal components.</div></blockquote>
+<p><cite>reduce</cite>:</p>
+<blockquote>
+<div>A method to return a reduced set of principal components based
+on either a fixed number of components or a fraction of total
+variance.</div></blockquote>
+</div></blockquote>
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.PrincipalComponents.reduce">
+<tt class="descname">reduce</tt><big>(</big><em>N=0</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.PrincipalComponents.reduce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduces the number of principal components.</p>
+<p>Keyword Arguments (one of the following must be specified):</p>
+<blockquote>
+<div><p><cite>num</cite> (integer):</p>
+<blockquote>
+<div>Number of eigenvalues/eigenvectors to retain.  The top <cite>num</cite>
+eigenvalues will be retained.</div></blockquote>
+<p><cite>eigs</cite> (list):</p>
+<blockquote>
+<div>A list of indices of eigenvalues/eigenvectors to be retained.</div></blockquote>
+<p><cite>fraction</cite> (float):</p>
+<blockquote>
+<div>The fraction of total image variance to retain.  Eigenvalues
+will be retained (starting from greatest to smallest) until
+<cite>fraction</cite> of total image variance is retained.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="rx-anomaly-detector">
+<h3>RX Anomaly Detector<a class="headerlink" href="#rx-anomaly-detector" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.detectors.rx">
+<tt class="descname">rx</tt><big>(</big><em>X</em>, <em>background=None</em>, <em>window=None</em>, <em>cov=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.detectors.rx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes RX anomaly detector scores.</p>
+<p>Usage:</p>
+<blockquote>
+<div><p>y = rx(X [, background=bg])</p>
+<p>y = rx(X, window=(inner, outer) [, cov=C])</p>
+</div></blockquote>
+<p>The RX anomaly detector produces a detection statistic equal to the 
+squared Mahalanobis distance of a spectrum from a background distribution
+according to</p>
+<div class="math">
+<p><img src="_images/math/9835fcee4ef7e2edb9323bce03ee2ff9777dd4c4.png" alt="y=(x-\mu_b)^T\Sigma^{-1}(x-\mu_b)"/></p>
+</div><p>where <cite>x</cite> is the pixel spectrum, <img class="math" src="_images/math/310d542196cb8e2f484138a1458505769fe857ba.png" alt="\mu_b"/> is the background
+mean, and <img class="math" src="_images/math/c8f77e3035db5fe9a4975967750ac1a6454bda8c.png" alt="\Sigma"/> is the background covariance.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>X</cite> (numpy.ndarray):</p>
+<blockquote>
+<div><p>For the first calling method shown, <cite>X</cite> can be an image with
+shape (R, C, B) or an ndarray of shape (R * C, B). If the
+<cite>background</cite> keyword is given, it will be used for the image
+background statistics; otherwise, background statistics will be
+computed from <cite>X</cite>.</p>
+<p>If the <cite>window</cite> keyword is given, <cite>X</cite> must be a 3-dimensional
+array and background statistics will be computed for each point
+in the image using a local window defined by the keyword.</p>
+</div></blockquote>
+<p><cite>background</cite> (<cite>GaussianStats</cite>):</p>
+<blockquote>
+<div>The Gaussian statistics for the background (e.g., the result
+of calling <tt class="xref py py-func docutils literal"><span class="pre">calc_stats</span></tt>). If no background stats are
+provided, they will be estimated based on data passed to the
+detector.</div></blockquote>
+<p><cite>window</cite> (2-tuple of odd integers):</p>
+<blockquote>
+<div><p>Must have the form (<cite>inner</cite>, <cite>outer</cite>), where the two values
+specify the widths (in pixels) of inner and outer windows centered
+about the pixel being evaulated. Both values must be odd integers.
+The background mean and covariance will be estimated from pixels
+in the outer window, excluding pixels within the inner window. For
+example, if (<cite>inner</cite>, <cite>outer</cite>) = (5, 21), then the number of
+pixels used to estimate background statistics will be
+<img class="math" src="_images/math/3990ab5951e6dfa17434842b8e194367af8e01e3.png" alt="21^2 - 5^2 = 416"/>.</p>
+<p>The window are modified near image borders, where full, centered
+windows cannot be created. The outer window will be shifted, as
+needed, to ensure that the outer window still has height and width
+<cite>outer</cite> (in this situation, the pixel being evaluated will not be
+at the center of the outer window). The inner window will be
+clipped, as needed, near image borders. For example, assume an
+image with 145 rows and columns. If the window used is
+(5, 21), then for the image pixel at (0, 0) (upper left corner),
+the the inner window will cover <cite>image[:3, :3]</cite> and the outer
+window will cover <cite>image[:21, :21]</cite>. For the pixel at (50, 1), the
+inner window will cover <cite>image[48:53, :4]</cite> and the outer window
+will cover <cite>image[40:51, :21]</cite>.</p>
+</div></blockquote>
+<p><cite>cov</cite> (ndarray):</p>
+<blockquote>
+<div>An optional covariance to use. If this parameter is given, <cite>cov</cite>
+will be used for all RX calculations (background covariance
+will not be recomputed in each window). Only the background
+mean will be recomputed in each window).</div></blockquote>
+</div></blockquote>
+<p>Returns numpy.ndarray:</p>
+<blockquote>
+<div>The return value will be the RX detector score (squared Mahalanobis
+distance) for each pixel given.  If <cite>X</cite> has shape (R, C, B), the
+returned ndarray will have shape (R, C)..</div></blockquote>
+<p>References:</p>
+<p>Reed, I.S. and Yu, X., &#8220;Adaptive multiple-band CFAR detection of an optical
+pattern with unknown spectral distribution,&#8221; IEEE Trans. Acoust.,
+Speech, Signal Processing, vol. 38, pp. 1760-1770, Oct. 1990.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="spectral-angles">
+<h3>spectral_angles<a class="headerlink" href="#spectral-angles" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.algorithms.spectral_angles">
+<tt class="descname">spectral_angles</tt><big>(</big><em>data</em>, <em>members</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.spectral_angles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates spectral angles with respect to given set of spectra.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>data</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>):</p>
+<blockquote>
+<div>An <cite>MxNxB</cite> image for which spectral angles will be calculated.</div></blockquote>
+<p><cite>members</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div><cite>CxB</cite> array of spectral endmembers.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><cite>MxNxC</cite> array of spectral angles.</div></blockquote>
+<p>Calculates the spectral angles between each vector in data and each of the
+endmembers.  The output of this function (angles) can be used to classify
+the data by minimum spectral angle by calling argmin(angles).</p>
+</dd></dl>
+
+</div>
+<div class="section" id="spectrallibrary">
+<h3>SpectralLibrary<a class="headerlink" href="#spectrallibrary" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt>
+<em class="property">class </em><tt class="descname">SpectralLibrary</tt><big>(</big><em>data</em>, <em>header</em>, <em>params</em><big>)</big></dt>
+<dd><p>The envi.SpectralLibrary class holds data contained in an ENVI-formatted
+spectral library file (.sli files), which stores data as specified by a
+corresponding .hdr header file.  The primary members of an
+Envi.SpectralLibrary object are:</p>
+<blockquote>
+<div><p><cite>spectra</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
+<blockquote>
+<div>A subscriptable array of all spectra in the library. <cite>spectra</cite> will
+have shape <cite>CxB</cite>, where <cite>C</cite> is the number of spectra in the library
+and <cite>B</cite> is the number of bands for each spectrum.</div></blockquote>
+<p><cite>names</cite> (list of str):</p>
+<blockquote>
+<div>A length-<cite>C</cite> list of names corresponding to the spectra.</div></blockquote>
+<p><cite>bands</cite> (<a class="reference internal" href="#spectral.BandInfo" title="spectral.BandInfo"><tt class="xref py py-class docutils literal"><span class="pre">spectral.BandInfo</span></tt></a>):</p>
+<blockquote>
+<div>Spectral bands associated with the library spectra.</div></blockquote>
+</div></blockquote>
+<dl class="method">
+<dt>
+<tt class="descname">save</tt><big>(</big><em>fileBaseName</em>, <em>description=None</em><big>)</big></dt>
+<dd><p>Saves the spectral library to a library file.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>fileBaseName</cite> (str):</p>
+<blockquote>
+<div>Name of the file (without extension) to save.</div></blockquote>
+<p><cite>description</cite> (str):</p>
+<blockquote>
+<div>Optional text description of the library.</div></blockquote>
+</div></blockquote>
+<p>This method creates two files: <cite>fileBaseName</cite>.hdr and
+<cite>fileBaseName</cite>.sli.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="transform-image">
+<h3>transform_image<a class="headerlink" href="#transform-image" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.io.spyfile.transform_image">
+<tt class="descname">transform_image</tt><big>(</big><em>transform</em>, <em>img</em><big>)</big><a class="headerlink" href="#spectral.io.spyfile.transform_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies a linear transform to an image.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>transform</cite> (ndarray or LinearTransform):</p>
+<blockquote>
+<div>The <cite>CxB</cite> linear transform to apply.</div></blockquote>
+<p><cite>img</cite> (ndarray or <a class="reference internal" href="#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">spectral.SpyFile</span></tt></a>):</p>
+<blockquote>
+<div>The <cite>MxNxB</cite> image to be transformed.</div></blockquote>
+</div></blockquote>
+<p>Returns (ndarray or :class:spectral.spyfile.TransformedImage`):</p>
+<blockquote>
+<div>The transformed image.</div></blockquote>
+<p>If <cite>img</cite> is an ndarray, then a <cite>MxNxC</cite> ndarray is returned.  If <cite>img</cite> is
+a <a class="reference internal" href="#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">spectral.SpyFile</span></tt></a>, then a
+<tt class="xref py py-class docutils literal"><span class="pre">spectral.spyfile.TransformedImage</span></tt> is returned.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="spysettings">
+<h3>SpySettings<a class="headerlink" href="#spysettings" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.spectral.SpySettings">
+<em class="property">class </em><tt class="descname">SpySettings</tt><a class="headerlink" href="#spectral.spectral.SpySettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run-time settings for the <cite>spectral</cite> module.</p>
+<p>After importing <cite>spectral</cite>, the settings object is referenced as
+<cite>spectral.settings</cite>.</p>
+<p>Noteworthy members:</p>
+<blockquote>
+<div><p><cite>WX_GL_DEPTH_SIZE</cite> (integer, default 24):</p>
+<blockquote>
+<div>Sets the depth (in number of bits) for the OpenGL depth buffer.
+If calls to <cite>view_cube</cite> or <cite>view_nd</cite> result in windows with blank
+canvases, try reducing this value.</div></blockquote>
+<p><cite>show_progress</cite> (bool, default True):</p>
+<blockquote>
+<div>Indicates whether long-running algorithms should display progress
+to sys.stdout. It can be useful to set this value to False when
+SPy is embedded in another application (e.g., IPython Notebook).</div></blockquote>
+<p><cite>imshow_figure_size</cite> (2-tuple of integers, default <cite>None</cite>):</p>
+<blockquote>
+<div>Width and height (in inches) of windows opened with <cite>imshow</cite>. If
+this value is <cite>None</cite>, matplotlib&#8217;s default size is used.</div></blockquote>
+<p><cite>imshow_interpolation</cite> (str, default <cite>None</cite>):</p>
+<blockquote>
+<div>Pixel interpolation to be used in imshow windows. If this value
+is <cite>None</cite>, matplotlib&#8217;s default interpolation is used. Note that
+zoom windows always use &#8220;nearest&#8221; interpolation.</div></blockquote>
+<p><cite>imshow_zoom_figure_width</cite> (int, default <cite>None</cite>):</p>
+<blockquote>
+<div>Width of zoom windows opened from an imshow window. Since zoom
+windows are always square, this is also the window height. If this
+value is <cite>None</cite>, matplotlib&#8217;s default window size is used.</div></blockquote>
+<p><cite>imshow_zoom_pixel_width</cite> (int, default 50):</p>
+<blockquote>
+<div>Number of source image pixel rows and columns to display in a
+zoom window.</div></blockquote>
+<p><cite>imshow_float_cmap</cite> (str, default &#8220;gray&#8221;):</p>
+<blockquote>
+<div>imshow color map to use with floating point arrays.</div></blockquote>
+<p><cite>imshow_class_alpha</cite> (float, default 0.5):</p>
+<blockquote>
+<div>alpha blending value to use for imshow class overlays</div></blockquote>
+<p><cite>imshow_enable_rectangle_selector</cite> (bool, default True):</p>
+<blockquote>
+<div>Whether to create the rectangle selection tool that enables
+interactive image pixel class labeling. On some OS/backend
+combinations, an exception may be raised when this object is
+created so disabling it allows imshow windows to be created without
+using the selector tool.</div></blockquote>
+<p><cite>imshow_disable_mpl_callbacks</cite> (bool, default True):</p>
+<blockquote>
+<div>If True, several matplotlib keypress event callbacks will be
+disabled to prevent conflicts with callbacks from SPy.  The
+matplotlib callbacks can be set back to their defaults by
+calling <cite>matplotlib.rcdefaults()</cite>.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="iterator">
+<h3>iterator<a class="headerlink" href="#iterator" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.algorithms.iterator">
+<tt class="descname">iterator</tt><big>(</big><em>image</em>, <em>mask=None</em>, <em>index=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.iterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an iterator over pixels in the image.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>image</cite> (ndarray or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>):</p>
+<blockquote>
+<div>An image over whose pixels will be iterated.</div></blockquote>
+<p><cite>mask</cite> (ndarray) [default None]:</p>
+<blockquote>
+<div>An array of integers that specify over which pixels in <cite>image</cite>
+iteration should be performed.</div></blockquote>
+<p><cite>index</cite> (int) [default None]:</p>
+<blockquote>
+<div>Specifies which value in <cite>mask</cite> should be used for iteration.</div></blockquote>
+</div></blockquote>
+<p>Returns (<tt class="xref py py-class docutils literal"><span class="pre">spectral.Iterator</span></tt>):</p>
+<blockquote>
+<div>An iterator over image pixels.</div></blockquote>
+<p>If neither <cite>mask</cite> nor <cite>index</cite> are defined, iteration is performed over all
+pixels.  If <cite>mask</cite> (but not <cite>index</cite>) is defined, iteration is performed
+over all pixels for which <cite>mask</cite> is nonzero.  If both <cite>mask</cite> and <cite>index</cite>
+are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for which
+<cite>mask[i,j] == index</cite>.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Class/Function Reference</a><ul>
+<li><a class="reference internal" href="#file-i-o">File I/O</a><ul>
+<li><a class="reference internal" href="#open-image">open_image</a></li>
+<li><a class="reference internal" href="#imagearray">ImageArray</a></li>
+<li><a class="reference internal" href="#spyfile">SpyFile</a><ul>
+<li><a class="reference internal" href="#spyfile-subclasses">SpyFile Subclasses</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#subimage">SubImage</a></li>
+<li><a class="reference internal" href="#file-formats">File Formats</a><ul>
+<li><a class="reference internal" href="#module-spectral.io.aviris">AVIRIS</a></li>
+<li><a class="reference internal" href="#module-spectral.io.envi">ENVI</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#envi-create-image">envi.create_image</a></li>
+<li><a class="reference internal" href="#envi-save-image">envi.save_image</a><ul>
+<li><a class="reference internal" href="#erdas-lan">ERDAS/Lan</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-spectral.io.erdas">erdas.open</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#graphics">Graphics</a><ul>
+<li><a class="reference internal" href="#colorscale">ColorScale</a></li>
+<li><a class="reference internal" href="#get-rgb">get_rgb</a></li>
+<li><a class="reference internal" href="#imageview">ImageView</a></li>
+<li><a class="reference internal" href="#imshow">imshow</a></li>
+<li><a class="reference internal" href="#save-rgb">save_rgb</a></li>
+<li><a class="reference internal" href="#view">view</a></li>
+<li><a class="reference internal" href="#view-cube">view_cube</a></li>
+<li><a class="reference internal" href="#view-indexed">view_indexed</a></li>
+<li><a class="reference internal" href="#view-nd">view_nd</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#training-classes">Training Classes</a><ul>
+<li><a class="reference internal" href="#create-training-classes">create_training_classes</a></li>
+<li><a class="reference internal" href="#trainingclass">TrainingClass</a></li>
+<li><a class="reference internal" href="#traningclassset">TraningClassSet</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#spectral-classes-functions">Spectral Classes/Functions</a><ul>
+<li><a class="reference internal" href="#asterdatabase">AsterDatabase</a></li>
+<li><a class="reference internal" href="#bandinfo">BandInfo</a></li>
+<li><a class="reference internal" href="#bandresampler">BandResampler</a></li>
+<li><a class="reference internal" href="#bhattacharyya-distance">Bhattacharyya Distance</a></li>
+<li><a class="reference internal" href="#calc-stats">calc_stats</a></li>
+<li><a class="reference internal" href="#cluster">cluster</a></li>
+<li><a class="reference internal" href="#covariance">covariance</a></li>
+<li><a class="reference internal" href="#cov-avg">cov_avg</a></li>
+<li><a class="reference internal" href="#gaussianclassifier">GaussianClassifier</a></li>
+<li><a class="reference internal" href="#kmeans">kmeans</a></li>
+<li><a class="reference internal" href="#linear-discriminant">linear_discriminant</a></li>
+<li><a class="reference internal" href="#lineartransform">LinearTransform</a></li>
+<li><a class="reference internal" href="#matched-filter">matched_filter</a></li>
+<li><a class="reference internal" href="#matchedfilter">MatchedFilter</a></li>
+<li><a class="reference internal" href="#mahalanobisdistanceclassifier">MahalanobisDistanceClassifier</a></li>
+<li><a class="reference internal" href="#mean-cov">mean_cov</a></li>
+<li><a class="reference internal" href="#msam">msam</a></li>
+<li><a class="reference internal" href="#ndvi">ndvi</a></li>
+<li><a class="reference internal" href="#orthogonalize">orthogonalize</a></li>
+<li><a class="reference internal" href="#perceptronclassifier">PerceptronClassifier</a></li>
+<li><a class="reference internal" href="#principal-components">principal_components</a></li>
+<li><a class="reference internal" href="#principalcomponents">PrincipalComponents</a></li>
+<li><a class="reference internal" href="#rx-anomaly-detector">RX Anomaly Detector</a></li>
+<li><a class="reference internal" href="#spectral-angles">spectral_angles</a></li>
+<li><a class="reference internal" href="#spectrallibrary">SpectralLibrary</a></li>
+<li><a class="reference internal" href="#transform-image">transform_image</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#spysettings">SpySettings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li><a class="reference internal" href="#iterator">iterator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="libraries.html"
+                        title="previous chapter">Spectral Libraries</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="libraries.html" title="Spectral Libraries"
+             >previous</a></li>
+        <li><a href="index.html">Spectral Python 0.14 documentation</a> &raquo;</li>
+          <li><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+<!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://sourceforge.net/apps/piwik/spectralpython/" : "http://sourceforge.net/apps/piwik/spectralpython/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://sourceforge.net/apps/piwik/spectralpython/piwik.php?idsite=1" style="border:0" alt=""/></p></noscript>
+
+    <div class="footer">
+        &copy; Copyright 2010, Thomas Boggs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+<!-- End Piwik Tag -->
+
+  </body>
+</html>

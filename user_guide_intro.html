@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction &mdash; Spectral Python 0.14 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.14',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Spectral Python 0.14 documentation" href="index.html" />
+    <link rel="up" title="Spectral Python (SPy) User Guide" href="user_guide.html" />
+    <link rel="next" title="Installing SPy" href="installation.html" />
+    <link rel="prev" title="Spectral Python (SPy) User Guide" href="user_guide.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="installation.html" title="Installing SPy"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="user_guide.html" title="Spectral Python (SPy) User Guide"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Spectral Python 0.14 documentation</a> &raquo;</li>
+          <li><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="introduction">
+<span id="user-guide-intro"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This user guide introduces various categories of  SPy functions in a tutorial
+style.  If you would like to test the commands presented in the guide, you
+should download the following sample data files, which are associated with a
+well-studied AVIRIS hyperspectral image collected over Indiana in 1992.
+<a class="reference internal" href="#landgrebe1998" id="id1">[Landgrebe1998]</a></p>
+<table border="1" class="center docutils">
+<caption>Sample Data Files</caption>
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">File Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference download internal" href="_downloads/92AV3C.lan"><tt class="xref download docutils literal"><span class="pre">92AV3C.lan</span></tt></a></td>
+<td>A small hyperspectral image chip (9.3 MB) in ERDAS/Lan format.  The chip
+is 145x145 pixels from an AVIRIS image and contains 220 spectral bands.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference download internal" href="_downloads/92AV3GT.GIS"><tt class="xref download docutils literal"><span class="pre">92AV3GT.GIS</span></tt></a></td>
+<td>A land-use ground-truth map for the hyperspectral image chip in ERDAS/Lan
+format.</td>
+</tr>
+<tr class="row-even"><td><a class="reference download internal" href="_downloads/92AV3C.spc"><tt class="xref download docutils literal"><span class="pre">92AV3C.spc</span></tt></a></td>
+<td>An AVIRIS-formatted band calibration file for the image chip.</td>
+</tr>
+</tbody>
+</table>
+<p>Many of the examples presented in the guide are cumulative, with success of
+commands issued depending on previous commands and module imports.  While it is
+generally not a good idea to import the contents of entire module namespaces,
+for brevity, the examples in the user guide assume that <tt class="docutils literal"><span class="pre">from</span> <span class="pre">spectral</span> <span class="pre">import</span> <span class="pre">*</span></tt>
+has been issued.</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="landgrebe1998" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[Landgrebe1998]</a></td><td>Landgrebe, D. Multispectral data analysis: A signal theory
+perspective. School of Electr. Comput. Eng., Purdue Univ., West Lafayette, IN  (1998).</td></tr>
+</tbody>
+</table>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="user_guide.html"
+                        title="previous chapter">Spectral Python (SPy) User Guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="next chapter">Installing SPy</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="installation.html" title="Installing SPy"
+             >next</a></li>
+        <li class="right" >
+          <a href="user_guide.html" title="Spectral Python (SPy) User Guide"
+             >previous</a> |</li>
+        <li><a href="index.html">Spectral Python 0.14 documentation</a> &raquo;</li>
+          <li><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+<!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://sourceforge.net/apps/piwik/spectralpython/" : "http://sourceforge.net/apps/piwik/spectralpython/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://sourceforge.net/apps/piwik/spectralpython/piwik.php?idsite=1" style="border:0" alt=""/></p></noscript>
+
+    <div class="footer">
+        &copy; Copyright 2010, Thomas Boggs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+<!-- End Piwik Tag -->
+
+  </body>
+</html>

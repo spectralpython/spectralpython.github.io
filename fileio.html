@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Reading HSI Data Files &mdash; Spectral Python 0.14 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.14',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Spectral Python 0.14 documentation" href="index.html" />
+    <link rel="up" title="Spectral Python (SPy) User Guide" href="user_guide.html" />
+    <link rel="next" title="Displaying Data" href="graphics.html" />
+    <link rel="prev" title="Installing SPy" href="installation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="graphics.html" title="Displaying Data"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Installing SPy"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Spectral Python 0.14 documentation</a> &raquo;</li>
+          <li><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound" id="fileio">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="reading-hsi-data-files">
+<span id="reading-data-files"></span><h1>Reading HSI Data Files<a class="headerlink" href="#reading-hsi-data-files" title="Permalink to this headline">¶</a></h1>
+<p>The standard means of opening and accessing a hyperspectral image file with SPy
+is via the <tt class="xref py py-func docutils literal"><span class="pre">image</span></tt> function, which returns an instance of a
+<a class="reference internal" href="class_func_ref.html#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt></a> object.</p>
+<div class="section" id="module-spectral.io.spyfile">
+<span id="the-spyfile-interface"></span><span id="spyfile-interface"></span><h2>The SpyFile Interface<a class="headerlink" href="#module-spectral.io.spyfile" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="class_func_ref.html#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt></a> is the base class for creating objects to read
+hyperspectral data files.  When a <a class="reference internal" href="class_func_ref.html#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt></a> object is created,
+it provides an interface to read data from a corresponding file.  When an image
+is opened, the actual object returned will be a subclass of
+<a class="reference internal" href="class_func_ref.html#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt></a> (BipFile, BilFile, or BsqFile) corresponding to the
+interleave of the data within the image file.</p>
+<p>Let&#8217;s open our sample image.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">spectral</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="gp">In [2]: </span><span class="n">img</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3C.lan&#39;</span><span class="p">)</span>
+
+<span class="gp">In [3]: </span><span class="n">img</span><span class="o">.</span><span class="n">__class__</span>
+<span class="go"> Out[3]: spectral.io.bilfile.BilFile</span>
+
+<span class="gp">In [4]: </span><span class="k">print</span> <span class="n">img</span>
+<span class="go">	Data Source:   &#39;/home/thomas/spectral_data/92AV3C.lan&#39;</span>
+<span class="go">	# Rows:            145</span>
+<span class="go">	# Samples:         145</span>
+<span class="go">	# Bands:           220</span>
+<span class="go">	Interleave:        BIL</span>
+<span class="go">	Quantization:  16 bits</span>
+<span class="go">	Data format:     int16</span>
+</pre></div>
+</div>
+<p>The image was not located in the working directory but it was still opened
+because it was in a directory specified by the <em>SPECTRAL_DATA</em> environment
+variable.  Because the image pixel data are interleaved by line, the <em>image</em>
+function returned a <em>BilFile</em> instance.</p>
+<p>Since hyperspectral image files can be quite large, only
+metadata are read from the file when the <a class="reference internal" href="class_func_ref.html#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt></a> object is
+first created. Image data values are only read when specifically requested via
+<a class="reference internal" href="class_func_ref.html#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt></a> methods.  The <a class="reference internal" href="class_func_ref.html#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt></a> class
+provides a subscript operator that behaves much like the numpy array subscript
+operator. The <a class="reference internal" href="class_func_ref.html#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt></a> object is subscripted as an <em>MxNxB</em>
+array where <em>M</em> is the number of rows in the image, <em>N</em> is the number of
+columns, and <em>B</em> is thenumber of bands.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [5]: </span><span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+<span class="go"> Out[5]: (145, 145, 220)</span>
+
+<span class="gp">In [6]: </span><span class="n">pixel</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">]</span>
+
+<span class="gp">In [7]: </span><span class="n">pixel</span><span class="o">.</span><span class="n">shape</span>
+<span class="go"> Out[7]: (220,)</span>
+
+<span class="gp">In [8]: </span><span class="n">band6</span> <span class="o">=</span> <span class="n">img</span><span class="p">[:,:,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="gp">In [9]: </span><span class="n">band6</span><span class="o">.</span><span class="n">shape</span>
+<span class="go"> Out[9]: (145, 145, 1)</span>
+</pre></div>
+</div>
+<p>The image data values were not read from the file until the subscript operator
+calls were performed.  Note that since Python indices start at 0,
+<tt class="docutils literal"><span class="pre">img[50,100]</span></tt> refers to the pixel at 51st row and 101st column of the image.
+Similarly, <tt class="docutils literal"><span class="pre">img[:,:,5]</span></tt> refers to all the rows and columns for the 6th band
+of the image.</p>
+<p><a class="reference internal" href="class_func_ref.html#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt></a> subclass instances returned for particular image
+files will also provide the following methods:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>read_band</td>
+<td>Reads a single band into an <em>MxN</em> array</td>
+</tr>
+<tr class="row-odd"><td>read_bands</td>
+<td>Reads multiple bands into an <em>MxNxC</em> array</td>
+</tr>
+<tr class="row-even"><td>read_pixel</td>
+<td>Reads a single pixel into a length <em>B</em> array</td>
+</tr>
+<tr class="row-odd"><td>read_subregion</td>
+<td>Reads multiple bands from a rectangular sub-region of the image</td>
+</tr>
+<tr class="row-even"><td>read_subimage</td>
+<td>Reads specified rows, columns, and bands</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="class_func_ref.html#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt></a> objects have a <tt class="docutils literal"><span class="pre">bands</span></tt> member, which is an
+instance of a <a class="reference internal" href="class_func_ref.html#spectral.BandInfo" title="spectral.BandInfo"><tt class="xref py py-class docutils literal"><span class="pre">BandInfo</span></tt></a> object that contains optional
+information about the images spectral bands.</p>
+</div>
+<div class="section" id="loading-entire-images">
+<span id="loading-images"></span><h2>Loading Entire Images<a class="headerlink" href="#loading-entire-images" title="Permalink to this headline">¶</a></h2>
+<p>It is important to note that image data are read by a <a class="reference internal" href="class_func_ref.html#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt></a> object on demand
+and the data are not cached.  Each time the <a class="reference internal" href="class_func_ref.html#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt></a> subscript operator or one of
+the <a class="reference internal" href="class_func_ref.html#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt></a> read methods are called, data are read from the corresponding image
+data file, regardless of whether the same data have been previously read.  This
+is done to avoid consuming too much memory when working with very large image files.
+It also improves performance when performing operations that only require reading
+a small portion of the data in a large image (e.g., reading RGB bands to display
+the image).  The downside of reading data on demand and not caching the data is that there can
+be a significant run time penalty when running algorithms that require access to
+all of the data.  Performance will be even worse if the algorithm requires iterative
+access to the data.</p>
+<p>To improve performance of spectral algorithms, it is preferable to load the entire
+image into memory using the <a class="reference internal" href="class_func_ref.html#spectral.SpyFile.load" title="spectral.SpyFile.load"><tt class="xref py py-meth docutils literal"><span class="pre">load</span></tt></a> method, which returns
+an <tt class="xref py py-class docutils literal"><span class="pre">ImageArray</span></tt> object.  <tt class="xref py py-class docutils literal"><span class="pre">ImageArray</span></tt> provides
+the full <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> interface, as well as the <a class="reference internal" href="class_func_ref.html#spectral.SpyFile" title="spectral.SpyFile"><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt></a> interface.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="n">arr</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="gp">In [2]: </span><span class="n">arr</span><span class="o">.</span><span class="n">__class__</span>
+<span class="go"> Out[2]: spectral.spectral.ImageArray</span>
+
+<span class="gp">In [3]: </span><span class="k">print</span> <span class="n">arr</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="go">	# Rows:            145</span>
+<span class="go">	# Samples:         145</span>
+<span class="go">	# Bands:           220</span>
+<span class="go">	Data format:   float32</span>
+
+<span class="gp">In [4]: </span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span>
+<span class="go"> Out[4]: (145, 145, 220)</span>
+</pre></div>
+</div>
+<p>Because SPy is primarily designed for processing in the spectral domain,
+<tt class="xref py py-class docutils literal"><span class="pre">spectral.ImageArray</span></tt> objects in memory will always have data interleaved
+by pixel, regardless of the interleave of the source image data file.  In other
+words, the <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> shape will be <tt class="docutils literal"><span class="pre">(numRows,</span> <span class="pre">numCols,</span> <span class="pre">numBands)</span></tt>.
+<tt class="xref py py-class docutils literal"><span class="pre">ImageArray</span></tt> objects always contain 32-bit floats.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Before calling the <tt class="xref py py-meth docutils literal"><span class="pre">load</span></tt> method, it is important to consider the amount of memory
+that will be consumed by the resulting ImageArray object.  Since <tt class="xref py py-class docutils literal"><span class="pre">spectral.ImageArray</span></tt> uses
+32-bit floating point values, the amount of memory consumed will be approximately
+<tt class="docutils literal"><span class="pre">4</span> <span class="pre">*</span> <span class="pre">numRows</span> <span class="pre">*</span> <span class="pre">numCols</span> <span class="pre">*</span> <span class="pre">numBands</span></tt> bytes.</p>
+</div>
+</div>
+<div class="section" id="numpy-memmap-interface">
+<h2>NumPy <tt class="xref py py-class docutils literal"><span class="pre">memmap</span></tt> Interface<a class="headerlink" href="#numpy-memmap-interface" title="Permalink to this headline">¶</a></h2>
+<p>As an alternative to loading an entire image into memory, a somewhat slower
+(but more memory efficient) way to access image data is to use a numpy memmap
+object, as returned by the <a class="reference internal" href="class_func_ref.html#spectral.io.bipfile.BipFile.open_memmap" title="spectral.io.bipfile.BipFile.open_memmap"><tt class="xref py py-meth docutils literal"><span class="pre">open_memmap</span></tt></a>
+method of SpyFile objects. memmap objects can also be used to write date to
+an image file.</p>
+</div>
+<div class="section" id="file-formats-supported">
+<span id="file-formats"></span><h2>File Formats Supported<a class="headerlink" href="#file-formats-supported" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="envi-headers">
+<span id="envi-format"></span><h3>ENVI Headers<a class="headerlink" href="#envi-headers" title="Permalink to this headline">¶</a></h3>
+<p>ENVI <a class="footnote-reference" href="#envi-trademark" id="id1">[1]</a> is a popular commercial software package for processing and analyzing
+geospatial imagery.  SPy can read images that have associated ENVI header files
+and can read &amp; write spectral libraries with ENVI headers.  ENVI files are opened
+automatically by the SPy <tt class="xref py py-func docutils literal"><span class="pre">image</span></tt> function but images can also be
+opened explicitly as ENVI files. It may be necessary to open an ENVI file explicitly
+if the data file is in a separate directory from the header or if the data file
+has an unusual file extension that SPy can not identify.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [5]: </span><span class="kn">import</span> <span class="nn">spectral.io.envi</span> <span class="kn">as</span> <span class="nn">envi</span>
+
+<span class="gp">In [6]: </span><span class="n">img</span> <span class="o">=</span> <span class="n">envi</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;cup95eff.int.hdr&#39;</span><span class="p">,</span> <span class="s">&#39;cup95eff.int&#39;</span><span class="p">)</span>
+
+<span class="gp">In [7]: </span><span class="kn">import</span> <span class="nn">spectral.io.envi</span> <span class="kn">as</span> <span class="nn">envi</span>
+
+<span class="gp">In [8]: </span><span class="n">lib</span> <span class="o">=</span> <span class="n">envi</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;spectra.hdr&#39;</span><span class="p">)</span>
+
+<span class="gp">In [9]: </span><span class="n">lib</span><span class="o">.</span><span class="n">names</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="go"> Out[9]: </span>
+<span class="go">[&#39;construction asphalt&#39;,</span>
+<span class="go"> &#39;construction  concrete&#39;,</span>
+<span class="go"> &#39;red smooth-faced brick&#39;,</span>
+<span class="go"> &#39;weathered red brick&#39;,</span>
+<span class="go"> &#39;bare red brick&#39;]</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>Functions for writing image data to files:</p>
+<p><a class="reference internal" href="class_func_ref.html#spectral.io.envi.create_image" title="spectral.io.envi.create_image"><tt class="xref py py-func docutils literal"><span class="pre">create_image</span></tt></a>:</p>
+<blockquote>
+<div>Creates a new image file with allocated storage on disk.</div></blockquote>
+<p><a class="reference internal" href="class_func_ref.html#spectral.io.envi.save_image" title="spectral.io.envi.save_image"><tt class="xref py py-func docutils literal"><span class="pre">save_image</span></tt></a>:</p>
+<blockquote class="last">
+<div>Saves an existing image or ndarray to a file with an ENVI header.</div></blockquote>
+</div>
+</div>
+<div class="section" id="aviris">
+<h3>AVIRIS<a class="headerlink" href="#aviris" title="Permalink to this headline">¶</a></h3>
+<p>SPy supports data files generated by the Airborne Visible/Infrared Imaging
+Spectrometer (AVIRIS) <a class="footnote-reference" href="#id3" id="id2">[2]</a>.  AVIRIS files are automatically recognized by
+the <a class="reference internal" href="class_func_ref.html#spectral.open_image" title="spectral.open_image"><tt class="xref py py-func docutils literal"><span class="pre">open_image</span></tt></a> function; however, spectral band calibration files
+are not automatically recognized; therefore you may want to open the image as
+an AVIRIS file explicitly and specify the cal file.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [10]: </span><span class="n">img</span> <span class="o">=</span> <span class="n">aviris</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;f970619t01p02_r02_sc01.a.rfl&#39;</span><span class="p">,</span> <span class="s">&#39;f970619t01p02_r02.a.spc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also load the band calibration file separately (this may be necessary if
+the band calibration file is in AVIRIS format but the image is not).</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [11]: </span><span class="n">img</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3C.lan&#39;</span><span class="p">)</span>
+
+<span class="gp">In [12]: </span><span class="n">img</span><span class="o">.</span><span class="n">bands</span> <span class="o">=</span> <span class="n">aviris</span><span class="o">.</span><span class="n">read_aviris_bands</span><span class="p">(</span><span class="s">&#39;92AV3C.spc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="erdas-lan">
+<h3>ERDAS/Lan<a class="headerlink" href="#erdas-lan" title="Permalink to this headline">¶</a></h3>
+<p>The ERDAS/Lan file format is automatically recognized by <tt class="xref py py-func docutils literal"><span class="pre">image</span></tt>.
+It is unlikely that a file would need to be opened explicitly as a Lan file but it
+can be done as follows.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [13]: </span><span class="kn">import</span> <span class="nn">spectral.io.erdas</span> <span class="kn">as</span> <span class="nn">erdas</span>
+
+<span class="gp">In [14]: </span><span class="n">img</span> <span class="o">=</span> <span class="n">erdas</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;92AV3C.lan&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils footnote" frame="void" id="envi-trademark" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>ENVI is a registered trademark of ITT Corporation.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="http://aviris.jpl.nasa.gov/">http://aviris.jpl.nasa.gov/</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Reading HSI Data Files</a><ul>
+<li><a class="reference internal" href="#module-spectral.io.spyfile">The SpyFile Interface</a></li>
+<li><a class="reference internal" href="#loading-entire-images">Loading Entire Images</a></li>
+<li><a class="reference internal" href="#numpy-memmap-interface">NumPy <tt class="docutils literal"><span class="pre">memmap</span></tt> Interface</a></li>
+<li><a class="reference internal" href="#file-formats-supported">File Formats Supported</a><ul>
+<li><a class="reference internal" href="#envi-headers">ENVI Headers</a></li>
+<li><a class="reference internal" href="#aviris">AVIRIS</a></li>
+<li><a class="reference internal" href="#erdas-lan">ERDAS/Lan</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">Installing SPy</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="graphics.html"
+                        title="next chapter">Displaying Data</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="graphics.html" title="Displaying Data"
+             >next</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Installing SPy"
+             >previous</a> |</li>
+        <li><a href="index.html">Spectral Python 0.14 documentation</a> &raquo;</li>
+          <li><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+<!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://sourceforge.net/apps/piwik/spectralpython/" : "http://sourceforge.net/apps/piwik/spectralpython/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://sourceforge.net/apps/piwik/spectralpython/piwik.php?idsite=1" style="border:0" alt=""/></p></noscript>
+
+    <div class="footer">
+        &copy; Copyright 2010, Thomas Boggs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+<!-- End Piwik Tag -->
+
+  </body>
+</html>
