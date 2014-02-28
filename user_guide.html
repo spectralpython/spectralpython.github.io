@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Spectral Python (SPy) User Guide &mdash; Spectral Python 0.14 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.14',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Spectral Python 0.14 documentation" href="index.html" />
+    <link rel="next" title="Introduction" href="user_guide_intro.html" />
+    <link rel="prev" title="Welcome to Spectral Python (SPy)" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="user_guide_intro.html" title="Introduction"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Spectral Python (SPy)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Spectral Python 0.14 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="spectral-python-spy-user-guide">
+<span id="user-guide"></span><h1>Spectral Python (SPy) User Guide<a class="headerlink" href="#spectral-python-spy-user-guide" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Release:</th><td class="field-body">0.14</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">February 23, 2014</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user_guide_intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#spy-dependencies">SPy Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-from-a-distribution-package">Installing from a distribution package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-with-pip-or-distribute">Installing with pip or Distribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-from-the-git-source-code-repository">Installing from the Git source code repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#configuring-spy">Configuring SPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fileio.html">Reading HSI Data Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fileio.html#module-spectral.io.spyfile">The SpyFile Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fileio.html#loading-entire-images">Loading Entire Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fileio.html#numpy-memmap-interface">NumPy <tt class="docutils literal"><span class="pre">memmap</span></tt> Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fileio.html#file-formats-supported">File Formats Supported</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphics.html">Displaying Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphics.html#starting-ipython">Starting IPython</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphics.html#raster-displays">Raster Displays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphics.html#spectrum-plots">Spectrum Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphics.html#hypercube-display">Hypercube Display</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphics.html#n-dimensional-feature-display">N-Dimensional Feature Display</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Spectral Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="algorithms.html#unsupervised-classification">Unsupervised Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms.html#supervised-classification">Supervised Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms.html#dimensionality-reduction">Dimensionality Reduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms.html#target-detectors">Target Detectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algorithms.html#miscellaneous-functions">Miscellaneous Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libraries.html">Spectral Libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="libraries.html#aster-spectral-library">ASTER Spectral Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libraries.html#envi-spectral-libraries">ENVI Spectral Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="class_func_ref.html">Class/Function Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="class_func_ref.html#file-i-o">File I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="class_func_ref.html#graphics">Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="class_func_ref.html#training-classes">Training Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="class_func_ref.html#spectral-classes-functions">Spectral Classes/Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="class_func_ref.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="class_func_ref.html#utilities">Utilities</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to Spectral Python (SPy)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="user_guide_intro.html"
+                        title="next chapter">Introduction</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="user_guide_intro.html" title="Introduction"
+             >next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Spectral Python (SPy)"
+             >previous</a> |</li>
+        <li><a href="index.html">Spectral Python 0.14 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+<!-- Piwik -->
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://sourceforge.net/apps/piwik/spectralpython/" : "http://sourceforge.net/apps/piwik/spectralpython/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://sourceforge.net/apps/piwik/spectralpython/piwik.php?idsite=1" style="border:0" alt=""/></p></noscript>
+
+    <div class="footer">
+        &copy; Copyright 2010, Thomas Boggs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+<!-- End Piwik Tag -->
+
+  </body>
+</html>
