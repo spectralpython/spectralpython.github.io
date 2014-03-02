@@ -31,7 +31,7 @@ graphical capabilities.
      - Required if displaying or saving images
    * - `wxPython <http://www.wxpython.org/>`_
      - `(1)`
-   * - `matplotlib <http://matplotlib.sourceforge.net/>`_
+   * - `matplotlib <http://matplotlib.org/>`_
      - Required if rendering raster displays or spectral plots
    * - `IPython <http://ipython.org/>`_
      - Required for interactive, non-blocking GUI windows
@@ -89,7 +89,7 @@ unix-based system.
 Installing from the Git source code repository
 ==============================================
 
-The latest version of the SPy source code resides in the Sourceforge Git
+The latest version of the SPy source code resides in the GitHub source code
 repository.  While the latest source code may be less stable than the most
 recent release, it often has newer features and bug fixes.  To download the
 latest version of SPy from the Git repository, ``cd`` to the directory
