@@ -19,8 +19,10 @@ prompt or via Python scripts.  SPy is free, open source software distributed
 under the `GNU General Public License <http://www.gnu.org/copyleft/gpl.html>`_.
 To see some examples of how SPy can be used, you may want to jump straight to
 the documentation sections on :ref:`graphics` or :ref:`algorithms`.  You can
-download SPy from the `SPy Project Page <https://sourceforge.net/projects/spectralpython>`_
-hosted by `Sourceforge.net <http://sourceforge.net>`_.
+download SPy from `GitHub <https://github.com/spectralpython/spectral/releases>`_,
+the `Python Package Index (PyPI) <https://pypi.python.org/pypi/spectral>`_, or
+`Sourceforge <https://sourceforge.net/projects/spectralpython>`_. See the
+:ref:`installation` section section of the documentation for details.
 
 Documentation
 -------------
