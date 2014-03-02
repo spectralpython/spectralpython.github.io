@@ -2,7 +2,7 @@ spectralpython.github.io
 ========================
 
 This repository contains source code for the Spectral Python (SPy)
-[web site](http://spectralpython.sourceforge.net).
+[web site](http://www.spectralpython..net).
 
 ## Build dependencies
 
@@ -38,15 +38,9 @@ be handy when debugging or testing Sphinx ReST code.
 
 ## Deploying the site
 
-The web site is currently hosted on sourceforge.net. Eventually, the site
-will be moved elsewhere and a simple build rule will be added to the Makefile.
-But for now, the site content is uploaded with the following commands:
+The web site is hosted on GitHub and is deployed using the `upload` target:
 
-    ssh-add
-    ssh -t tboggs,spectralpython@shell.sourceforge.net create
+    make upload
 
-Then, in a separate shell:
-
-    rsync -aiv --delete sphinx/_build/html/ tboggs,spectralpython@web.sourceforge.net:htdocs
-
-Obviously, if you are not `tboggs`, replace the username above with your own.
+Note you may be prompted to enter site credentials if you do note have your
+ssh key cached.
