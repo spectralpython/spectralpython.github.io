@@ -50,9 +50,9 @@ Installing from a distribution package
 ======================================
 
 SPy is distributed as a Python source distribution, which can be downloaded from
-the `SPy Download Page <https://sourceforge.net/projects/spectralpython/files>`_
-on `Sourceforge.net <http://sourceforge.net>`_.  Both ``.zip`` and ``.tar.gz``
-formats are available.  The source distribution will unpack to a directory with
+the `Python Package Index (PyPI) <https://pypi.python.org/pypi/spectral>`_ or
+from the `SPy Project Page <https://github.com/spectralpython/spectral>`_ on
+GitHub. The source distribution will unpack to a directory with
 a name like ``spectral-x.y``, where ``x.y`` is the SPy version number.  To
 install SPy, open a console in the unpacked directory and type the following:
 
@@ -95,14 +95,7 @@ recent release, it often has newer features and bug fixes.  To download the
 latest version of SPy from the Git repository, ``cd`` to the directory
 where you would like to check out the source code and type the following::
 
-    git clone git://git.code.sf.net/p/spectralpython/repo code
-
-.. note::
-
-    SPy migrated from Subversion to Git for source code management as of SPy
-    version 0.9.  If you have been using subversion, it is recommended you
-    delete the Subversion copy and clone the SPy Git repository because future
-    code changes will only be updated in the Git repository.
+    git clone https://github.com/spectralpython/spectral.git
 
 Configuring SPy
 ===============

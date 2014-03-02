@@ -33,6 +33,17 @@ Documentation
 News
 ----
 
+2014-03-02 : SPy has moved!
+
+    The Spectral Python web site is now located at `www.spectralpython.net <http://www.spectralpython.net>`_.
+    All old URLs will automatically redirect to the new site. The primary source code
+    repository has also moved and is now hosted on GitHub at
+    `https://github.com/spectralpython/spectral <https://github.com/spectralpython/spectral>`_.
+    For the indefinite future, source code and release builds will continue to
+    be mirrored on Sourceforge.net and as always, the current release can
+    always be installed from the `Python Package Index (PyPI) <https://pypi.python.org/pypi/spectral>`_
+    using `pip <https://pypi.python.org/pypi/pip>`_.
+
 2014-02-23 : SPy 0.14 is released. This is primarily a bug fix release.
 
     This release fixes a bug in :class:`~spectral.algorithms.classifiers.PerceptronClassifier`
