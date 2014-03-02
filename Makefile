@@ -40,9 +40,12 @@ git-submodules:
 
 site:		images sphinx-html
 	cp static/CNAME sphinx/_build/html
+	cp static/.nojekyll sphinx/_build/html
 
 upload:
-	@echo "Not yet implemented."
+	ghp-import sphinx/_build/html/ && \
+	git checkout master && git merge gh-pages -m "gh-pages merge" && \
+	git push origin --all && git checkout source
 
 clean:
 	$(MAKE) -C $(SPHINXDIR) clean
