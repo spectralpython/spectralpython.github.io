@@ -6,7 +6,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Spectral Algorithms &mdash; Spectral Python 0.14 documentation</title>
+    <title>Spectral Algorithms &mdash; Spectral Python 0.15.0
+ documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +15,8 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.14',
+        VERSION:     '0.15.0
+',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +25,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Spectral Python 0.14 documentation" href="index.html" />
+    <link rel="top" title="Spectral Python 0.15.0
+ documentation" href="index.html" />
     <link rel="up" title="Spectral Python (SPy) User Guide" href="user_guide.html" />
     <link rel="next" title="Spectral Libraries" href="libraries.html" />
     <link rel="prev" title="Displaying Data" href="graphics.html" /> 
@@ -38,7 +41,8 @@
         <li class="right" >
           <a href="graphics.html" title="Displaying Data"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Spectral Python 0.14 documentation</a> &raquo;</li>
+        <li><a href="index.html">Spectral Python 0.15.0
+ documentation</a> &raquo;</li>
           <li><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>
     </div>  
@@ -208,6 +212,26 @@ ground truth image.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [18]: </span><span class="n">gterrors</span> <span class="o">=</span> <span class="n">gtresults</span> <span class="o">*</span> <span class="p">(</span><span class="n">gtresults</span> <span class="o">!=</span> <span class="n">gt</span><span class="p">)</span>
 
 <span class="gp">In [19]: </span><span class="n">w</span> <span class="o">=</span> <span class="n">view_indexed</span><span class="p">(</span><span class="n">gterrors</span><span class="p">)</span>
+<span class="go">---------------------------------------------------------------------------</span>
+<span class="go">ImportError                               Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-19-cf7b5219154b&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 w = view_indexed(gterrors)</span>
+
+<span class="go">/home/thomas/src/spectral/spectral/graphics/graphics.pyc in view_indexed(*args, **kwargs)</span>
+<span class="go">    292     if not running_ipython():</span>
+<span class="go">    293         warn_no_ipython()</span>
+<span class="go">--&gt; 294     check_wx_app()</span>
+<span class="go">    295 </span>
+<span class="go">    296     if &#39;colors&#39; not in kwargs:</span>
+
+<span class="go">/home/thomas/src/spectral/spectral/graphics/graphics.pyc in check_wx_app()</span>
+<span class="go">    681     &#39;&#39;&#39;</span>
+<span class="go">    682     import spectral</span>
+<span class="go">--&gt; 683     import wx</span>
+<span class="go">    684     if wx.GetApp() is None and spectral.settings.START_WX_APP == True:</span>
+<span class="go">    685         warn(&#39;\nThere is no current wx.App object - creating one now.&#39;,</span>
+
+<span class="go">ImportError: No module named wx</span>
 
 <span class="gp">In [20]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">gterrors</span><span class="p">)</span>
 </pre></div>
@@ -320,12 +344,12 @@ find a set of transformed axes that maximize the ratio of the average distance
 between classes to the average distance between samples within each class. <a class="reference internal" href="#richards1999" id="id1">[Richards1999]</a>
 This is written as</p>
 <div class="math">
-<p><img src="_images/math/eb76cc8c5d146a84ac5a59184ccade18dbb79df1.png" alt="C_b x = \lambda C_w x"/></p>
-</div><p>where <img class="math" src="_images/math/47efede7cb107844b84fda4721597a3c5434dda6.png" alt="C_b"/> is the covariance of the class centers and <img class="math" src="_images/math/607b5e474e4ac1ec0950942f9ffe15d2a7779b97.png" alt="C_w"/> is the
-weighted average of the covariances of each class.  If <img class="math" src="_images/math/607b5e474e4ac1ec0950942f9ffe15d2a7779b97.png" alt="C_w"/> is invertible,
+<p><img src="_images/math/be6c111d8fc46009c7770cfad66ecc8d5a423898.png" alt="C_b x = \lambda C_w x"/></p>
+</div><p>where <img class="math" src="_images/math/31a3141fcb755a2f6eb521c53b534b2da3d00b99.png" alt="C_b"/> is the covariance of the class centers and <img class="math" src="_images/math/80704b5bea6a7ec033d45c015a4ed3b50336e1b5.png" alt="C_w"/> is the
+weighted average of the covariances of each class.  If <img class="math" src="_images/math/80704b5bea6a7ec033d45c015a4ed3b50336e1b5.png" alt="C_w"/> is invertible,
 this becomes</p>
 <div class="math">
-<p><img src="_images/math/a2aa55ee12deb0d7c35f0c849e84a1afd0f89059.png" alt="\left(C_{w}^{-1} C_b\right)x=\lambda x"/></p>
+<p><img src="_images/math/6f572cf049c804a4108b5f8fa062a565ac1bff34.png" alt="\left(C_{w}^{-1} C_b\right)x=\lambda x"/></p>
 </div><p>This eigenvalue problem is solved by the <a class="reference internal" href="class_func_ref.html#spectral.linear_discriminant" title="spectral.linear_discriminant"><tt class="xref py py-func docutils literal"><span class="pre">linear_discriminant</span></tt></a>
 function, yielding <cite>C-1</cite> eigenvalues, where <cite>C</cite> is the number of classes.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [35]: </span><span class="n">classes</span> <span class="o">=</span> <span class="n">create_training_classes</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gt</span><span class="p">)</span>
@@ -383,9 +407,9 @@ how anomalous a pixel is with respect to an assumed background. The SPy
 <a class="reference internal" href="class_func_ref.html#spectral.algorithms.detectors.rx" title="spectral.algorithms.detectors.rx"><tt class="xref py py-func docutils literal"><span class="pre">rx</span></tt></a> function computes RX scores for an
 array of image pixels. The squared Mahalanobis distance is given by</p>
 <div class="math">
-<p><img src="_images/math/740d7844d0bdd71251119cb91d79cb0687c6865b.png" alt="y=(x-\mu_b)^T\Sigma_b^{-1}(x-\mu_b)"/></p>
-</div><p>where <img class="math" src="_images/math/26eeb5258ca5099acf8fe96b2a1049c48c89a5e6.png" alt="x"/> is the pixel spectrum, <img class="math" src="_images/math/310d542196cb8e2f484138a1458505769fe857ba.png" alt="\mu_b"/> is the background
-mean, and <img class="math" src="_images/math/547fb8e88a93024f3f2782f618675531a28d4752.png" alt="\Sigma_b"/> is the background covariance <a class="reference internal" href="#reed-yu-1990" id="id2">[Reed_Yu_1990]</a>.</p>
+<p><img src="_images/math/83712571e86c95907c4d84ae50505e664e81b488.png" alt="y=(x-\mu_b)^T\Sigma_b^{-1}(x-\mu_b)"/></p>
+</div><p>where <img class="math" src="_images/math/188c175aac0a8a9c22499336711b5d7256407254.png" alt="x"/> is the pixel spectrum, <img class="math" src="_images/math/fa81c642bd991cd9258ad5e6385fb2c06697ef2c.png" alt="\mu_b"/> is the background
+mean, and <img class="math" src="_images/math/9afecf0d1e6130848c8836235bc7cfc5b0dd1ef8.png" alt="\Sigma_b"/> is the background covariance <a class="reference internal" href="#reed-yu-1990" id="id2">[Reed_Yu_1990]</a>.</p>
 <p>If no background statistics are passed to the <tt class="xref py py-func docutils literal"><span class="pre">rx</span></tt> function,
 background statistics will be estimated from the array of pixels for which the
 RX scores are to be calculated.</p>
@@ -396,12 +420,30 @@ RX scores are to be calculated.</p>
 example, we could choose all image pixels whose RX score has a probability of
 less than 0.001 with respect to the background:</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [49]: </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span>
+<span class="go">---------------------------------------------------------------------------</span>
+<span class="go">ImportError                               Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-49-7509cbf99e82&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 from scipy.stats import chi2</span>
+
+<span class="go">ImportError: No module named scipy.stats</span>
 
 <span class="gp">In [50]: </span><span class="n">nbands</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="gp">In [51]: </span><span class="n">P</span> <span class="o">=</span> <span class="n">chi2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.999</span><span class="p">,</span> <span class="n">nbands</span><span class="p">)</span>
+<span class="go">---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-51-5fa304b6515f&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 P = chi2.ppf(0.999, nbands)</span>
+
+<span class="go">NameError: name &#39;chi2&#39; is not defined</span>
 
 <span class="gp">In [52]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">rxvals</span> <span class="o">&gt;</span> <span class="n">P</span><span class="p">))</span>
+<span class="go">---------------------------------------------------------------------------</span>
+<span class="go">NameError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-52-61c94a283422&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 v = imshow(1 * (rxvals &gt; P))</span>
+
+<span class="go">NameError: name &#39;P&#39; is not defined</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/rxvals_threshold.png"><img alt="_images/rxvals_threshold.png" class="align-center" src="_images/rxvals_threshold.png" style="width: 264.0px; height: 198.0px;" /></a>
@@ -436,17 +478,17 @@ background statistics will be calculated. The inner window is a smaller window
 to be ignored. The purpose of the inner window is to prevent potential anomaly/target
 pixels from &#8220;polluting&#8221; background statistics.</p>
 <p>For example, to compute RX scores with background statistics computed from a
-21 <img class="math" src="_images/math/bac4dbe1c696d11e8dc43dd7f613199b2120daa1.png" alt="\times"/> 21 pixel window about the pixel being evaluated, with an exclusion window of
-5 <img class="math" src="_images/math/bac4dbe1c696d11e8dc43dd7f613199b2120daa1.png" alt="\times"/> 5 pixels, the function would be called as follows:</p>
+21 <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/> 21 pixel window about the pixel being evaluated, with an exclusion window of
+5 <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/> 5 pixels, the function would be called as follows:</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [56]: </span><span class="n">rxvals</span> <span class="o">=</span> <span class="n">rx</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">21</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>While the use of a windowed background will often improve results for images containing
 multiple background materials, it does so at the expense of introducing two
 issues. First, the sizes of the inner and outer windows must be specified such
-that the resulting covariance has full rank. That is, if <img class="math" src="_images/math/72c6599d3181a9b647610507c66871e3ee17e371.png" alt="w_{in}"/> and
-<img class="math" src="_images/math/742bfb65deeb72df7d5281f17dcc1bf9a4e921bb.png" alt="w_{out}"/> represent the pixel widths of the inner and outer windows, respectively,
-then <img class="math" src="_images/math/3c3d44ba507ab98d88ecd0dc0919f577f68fcbc8.png" alt="w_{out}^2 - w_{in}^2"/> must be at least as large as the number of
+that the resulting covariance has full rank. That is, if <img class="math" src="_images/math/cba1b6f77b2d051ecd50f37f3f9df900f58df942.png" alt="w_{in}"/> and
+<img class="math" src="_images/math/ee0f01780f99567711c06ab95aba466a924948ed.png" alt="w_{out}"/> represent the pixel widths of the inner and outer windows, respectively,
+then <img class="math" src="_images/math/bd82df9f51132ee550017c6c77cb8dacea868fc3.png" alt="w_{out}^2 - w_{in}^2"/> must be at least as large as the number of
 image bands. Second, recomputing the estimated background covariance for each
 pixel in the image makes the computational complexity of of the RX score
 computation orders of magnitue greater.</p>
@@ -468,9 +510,9 @@ cover classes and use the result as an estimate of the global covariance.</p>
 <h3>Matched Filter<a class="headerlink" href="#matched-filter" title="Permalink to this headline">¶</a></h3>
 <p>The matched filter is a linear detector given by the formula</p>
 <div class="math">
-<p><img src="_images/math/3f4dada638fc53a396ad7d863cde5bcd263cd88b.png" alt="y=\frac{(\mu_t-\mu_b)^T\Sigma_b^{-1}(x-\mu_b)}{(\mu_t-\mu_b)^T\Sigma^{-1}(\mu_t-\mu_b)}"/></p>
-</div><p>where <img class="math" src="_images/math/2f9e4510130fedb42dca7d5e1bb137f0e39df777.png" alt="\mu_t"/> is the target mean, <img class="math" src="_images/math/310d542196cb8e2f484138a1458505769fe857ba.png" alt="\mu_b"/> is the background
-mean, and <img class="math" src="_images/math/547fb8e88a93024f3f2782f618675531a28d4752.png" alt="\Sigma_b"/> is the covariance. The matched filter response is
+<p><img src="_images/math/609e01578d999a49c4228603107bfb95de882e5e.png" alt="y=\frac{(\mu_t-\mu_b)^T\Sigma_b^{-1}(x-\mu_b)}{(\mu_t-\mu_b)^T\Sigma^{-1}(\mu_t-\mu_b)}"/></p>
+</div><p>where <img class="math" src="_images/math/a6c88c3fa7369c07dae3ceb8bbe58990f43038cf.png" alt="\mu_t"/> is the target mean, <img class="math" src="_images/math/fa81c642bd991cd9258ad5e6385fb2c06697ef2c.png" alt="\mu_b"/> is the background
+mean, and <img class="math" src="_images/math/9afecf0d1e6130848c8836235bc7cfc5b0dd1ef8.png" alt="\Sigma_b"/> is the covariance. The matched filter response is
 scaled such that the response is zero when the input is equal to the background
 mean and equal to one when the pixel is equal to the target mean. Like the
 <a class="reference internal" href="class_func_ref.html#spectral.algorithms.detectors.rx" title="spectral.algorithms.detectors.rx"><tt class="xref py py-func docutils literal"><span class="pre">rx</span></tt></a> function the SPy
@@ -536,7 +578,7 @@ return the resampled spectrum.</p>
 <p>The Normalized Difference Vegetation Index (NDVI) is an indicator of the presence
 of vegetation.  The index is commonly defined as</p>
 <div class="math">
-<p><img src="_images/math/bfe763c43b4ffbb65384ed26a352083c1ab1c8f8.png" alt="NDVI = \frac{NIR-RED}{NIR+RED}"/></p>
+<p><img src="_images/math/0f6618d738748df0872f5094271ed3fd9ea5e165.png" alt="NDVI = \frac{NIR-RED}{NIR+RED}"/></p>
 </div><p>where <cite>NIR</cite> is the reflectance in the near infrared (NIR) part of the spectrum and
 <cite>RED</cite> is the reflectance of the red band.  For our sample image, if we take
 band 21 (607.0 nm) for our red band and band 43 (802.5 nm) for near infrared,
@@ -687,14 +729,15 @@ The <tt class="docutils literal"><span class="pre">clmap</span> <span class="pre
         <li class="right" >
           <a href="graphics.html" title="Displaying Data"
              >previous</a> |</li>
-        <li><a href="index.html">Spectral Python 0.14 documentation</a> &raquo;</li>
+        <li><a href="index.html">Spectral Python 0.15.0
+ documentation</a> &raquo;</li>
           <li><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>
     </div>
 
     <div class="footer">
-        &copy; Copyright 2010, Thomas Boggs.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+        &copy; Copyright 2014, Thomas Boggs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
 <!-- Google Analytics -->
 <script>

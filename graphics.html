@@ -6,7 +6,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Displaying Data &mdash; Spectral Python 0.14 documentation</title>
+    <title>Displaying Data &mdash; Spectral Python 0.15.0
+ documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +15,8 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.14',
+        VERSION:     '0.15.0
+',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +25,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Spectral Python 0.14 documentation" href="index.html" />
+    <link rel="top" title="Spectral Python 0.15.0
+ documentation" href="index.html" />
     <link rel="up" title="Spectral Python (SPy) User Guide" href="user_guide.html" />
     <link rel="next" title="Spectral Algorithms" href="algorithms.html" />
     <link rel="prev" title="Reading HSI Data Files" href="fileio.html" /> 
@@ -38,7 +41,8 @@
         <li class="right" >
           <a href="fileio.html" title="Reading HSI Data Files"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Spectral Python 0.14 documentation</a> &raquo;</li>
+        <li><a href="index.html">Spectral Python 0.15.0
+ documentation</a> &raquo;</li>
           <li><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>
     </div>  
@@ -176,7 +180,7 @@ reassigning sub-rectangles back to class 0 (or whatever was the original class I
 <h4>Additional Capabilities<a class="headerlink" href="#additional-capabilities" title="Permalink to this headline">¶</a></h4>
 <p>To get help on <tt class="xref py py-class docutils literal"><span class="pre">ImageView</span></tt> keyboard &amp; mouse functions, press &#8220;h&#8221; while focus is on
 the image window to display all keybinds and mouse functions:</p>
-<div class="highlight-python"><pre>Mouse Functions:
+<div class="highlight-python"><div class="highlight"><pre>Mouse Functions:
 ----------------
 ctrl+left-click          -&gt;   pan zoom window to pixel
 shift+left-click&amp;drag    -&gt;   select rectangular image region
@@ -187,14 +191,15 @@ Keybinds:
 0-9     -&gt; enter class ID for image pixel labeling
 ENTER   -&gt; apply specified class ID to selected rectangular region
 a/A     -&gt; decrease/increase class overlay alpha value
-c       -&gt; set display mode to "classes" (if classes set)
-C       -&gt; set display mode to "overlay" (if data and classes set)
-d       -&gt; set display mode to "data" (if data set)
+c       -&gt; set display mode to &quot;classes&quot; (if classes set)
+C       -&gt; set display mode to &quot;overlay&quot; (if data and classes set)
+d       -&gt; set display mode to &quot;data&quot; (if data set)
 h       -&gt; print help message
-i       -&gt; toggle pixel interpolation between "nearest" and SPy default.
+i       -&gt; toggle pixel interpolation between &quot;nearest&quot; and SPy default.
 z       -&gt; open zoom window
 
-See matplotlib imshow documentation for addition key binds.</pre>
+See matplotlib imshow documentation for addition key binds.
+</pre></div>
 </div>
 <p>To customize behavior of the image display beyond what is provided by the
 <a class="reference internal" href="class_func_ref.html#spectral.graphics.spypylab.imshow" title="spectral.graphics.spypylab.imshow"><tt class="xref py py-func docutils literal"><span class="pre">imshow</span></tt></a> function, you can create an
@@ -359,7 +364,7 @@ of the cube.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [34]: </span><span class="n">view_cube</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="mi">29</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="code highlight-python"><pre>Mouse Functions:
+<div class="code highlight-python"><div class="highlight"><pre>Mouse Functions:
 ----------------
 left-click &amp; drag        -&gt;   Rotate cube
 CTRL+left-click &amp; drag   -&gt;   Zoom in/out
@@ -370,7 +375,8 @@ Keybinds:
 l       -&gt; toggle light
 t/g     -&gt; stretch/compress z-dimension
 h       -&gt; print help message
-q       -&gt; close window</pre>
+q       -&gt; close window
+</pre></div>
 </div>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="_images/hypercube.jpg"><img alt="_images/hypercube.jpg" src="_images/hypercube.jpg" style="width: 253.0px; height: 261.5px;" /></a>
@@ -423,7 +429,7 @@ number of principal components).</p>
 </div>
 <p>The python prompt will display the set of keyboard and mouse commands accepted
 by the ND window:</p>
-<div class="highlight-python"><pre>Mouse functions:
+<div class="highlight-python"><div class="highlight"><pre>Mouse functions:
 ---------------
 Left-click &amp; drag       --&gt;     Rotate viewing geometry (or pan)
 CTRL+Left-click &amp; drag  --&gt;     Zoom viewing geometry
@@ -444,7 +450,8 @@ m       --&gt;     Toggle mouse function between rotate/zoom and pan modes
 p/P     --&gt;     Increase/Decrease the size of displayed points
 q       --&gt;     Exit the application
 r       --&gt;     Reset viewing geometry
-u       --&gt;     Toggle display of unassigned points (points with class == 0)</pre>
+u       --&gt;     Toggle display of unassigned points (points with class == 0)
+</pre></div>
 </div>
 <p>The following figure shows the same window after the display has been rotated,
 unlabeled pixels (white) have been supressed, and the displayed pixel size has
@@ -605,14 +612,15 @@ image were modified.</p>
         <li class="right" >
           <a href="fileio.html" title="Reading HSI Data Files"
              >previous</a> |</li>
-        <li><a href="index.html">Spectral Python 0.14 documentation</a> &raquo;</li>
+        <li><a href="index.html">Spectral Python 0.15.0
+ documentation</a> &raquo;</li>
           <li><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>
     </div>
 
     <div class="footer">
-        &copy; Copyright 2010, Thomas Boggs.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+        &copy; Copyright 2014, Thomas Boggs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
 <!-- Google Analytics -->
 <script>
