@@ -6,7 +6,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Class/Function Reference &mdash; Spectral Python 0.14 documentation</title>
+    <title>Class/Function Reference &mdash; Spectral Python 0.15.0
+ documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +15,8 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.14',
+        VERSION:     '0.15.0
+',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +25,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Spectral Python 0.14 documentation" href="index.html" />
+    <link rel="top" title="Spectral Python 0.15.0
+ documentation" href="index.html" />
     <link rel="up" title="Spectral Python (SPy) User Guide" href="user_guide.html" />
     <link rel="prev" title="Spectral Libraries" href="libraries.html" /> 
   </head>
@@ -34,7 +37,8 @@
         <li class="right" style="margin-right: 10px">
           <a href="libraries.html" title="Spectral Libraries"
              accesskey="P">previous</a></li>
-        <li><a href="index.html">Spectral Python 0.14 documentation</a> &raquo;</li>
+        <li><a href="index.html">Spectral Python 0.15.0
+ documentation</a> &raquo;</li>
           <li><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>
     </div>  
@@ -223,13 +227,18 @@ file.</div></blockquote>
 
 <dl class="method">
 <dt id="spectral.io.bipfile.BipFile.read_band">
-<tt class="descname">read_band</tt><big>(</big><em>band</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_band" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">read_band</tt><big>(</big><em>band</em>, <em>use_memmap=True</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_band" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a single band from the image.</p>
 <p>Arguments:</p>
 <blockquote>
 <div><p><cite>band</cite> (int):</p>
 <blockquote>
 <div>Index of band to read.</div></blockquote>
+<p><cite>use_memmap</cite> (bool, default True):</p>
+<blockquote>
+<div>Specifies whether the file&#8217;s memmap interface should be used
+to read the data. Setting this arg to True only has an effect
+if a memmap is being used (i.e., if <cite>img.using_memmap</cite> is True).</div></blockquote>
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
@@ -241,13 +250,18 @@ file.</div></blockquote>
 
 <dl class="method">
 <dt id="spectral.io.bipfile.BipFile.read_bands">
-<tt class="descname">read_bands</tt><big>(</big><em>bands</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_bands" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">read_bands</tt><big>(</big><em>bands</em>, <em>use_memmap=True</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_bands" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads multiple bands from the image.</p>
 <p>Arguments:</p>
 <blockquote>
 <div><p><cite>bands</cite> (list of ints):</p>
 <blockquote>
 <div>Indices of bands to read.</div></blockquote>
+<p><cite>use_memmap</cite> (bool, default True):</p>
+<blockquote>
+<div>Specifies whether the file&#8217;s memmap interface should be used
+to read the data. Setting this arg to True only has an effect
+if a memmap is being used (i.e., if <cite>img.using_memmap</cite> is True).</div></blockquote>
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
@@ -261,13 +275,18 @@ len(<cite>bands</cite>).</div></blockquote>
 
 <dl class="method">
 <dt id="spectral.io.bipfile.BipFile.read_pixel">
-<tt class="descname">read_pixel</tt><big>(</big><em>row</em>, <em>col</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_pixel" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">read_pixel</tt><big>(</big><em>row</em>, <em>col</em>, <em>use_memmap=True</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_pixel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the pixel at position (row,col) from the file.</p>
 <p>Arguments:</p>
 <blockquote>
 <div><p><cite>row</cite>, <cite>col</cite> (int):</p>
 <blockquote>
 <div>Indices of the row &amp; column for the pixel</div></blockquote>
+<p><cite>use_memmap</cite> (bool, default True):</p>
+<blockquote>
+<div>Specifies whether the file&#8217;s memmap interface should be used
+to read the data. Setting this arg to True only has an effect
+if a memmap is being used (i.e., if <cite>img.using_memmap</cite> is True).</div></blockquote>
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
@@ -279,7 +298,7 @@ len(<cite>bands</cite>).</div></blockquote>
 
 <dl class="method">
 <dt id="spectral.io.bipfile.BipFile.read_subimage">
-<tt class="descname">read_subimage</tt><big>(</big><em>rows</em>, <em>cols</em>, <em>bands=None</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_subimage" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">read_subimage</tt><big>(</big><em>rows</em>, <em>cols</em>, <em>bands=None</em>, <em>use_memmap=False</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_subimage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads arbitrary rows, columns, and bands from the image.</p>
 <p>Arguments:</p>
 <blockquote>
@@ -293,6 +312,11 @@ len(<cite>bands</cite>).</div></blockquote>
 <blockquote>
 <div>Optional list of bands to read.  If not specified, all bands
 are read.</div></blockquote>
+<p><cite>use_memmap</cite> (bool, default False):</p>
+<blockquote>
+<div>Specifies whether the file&#8217;s memmap interface should be used
+to read the data. Setting this arg to True only has an effect
+if a memmap is being used (i.e., if <cite>img.using_memmap</cite> is True).</div></blockquote>
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
@@ -305,7 +329,7 @@ and <cite>L</cite> = len(bands) (or # of image bands if <cite>bands</cite> == No
 
 <dl class="method">
 <dt id="spectral.io.bipfile.BipFile.read_subregion">
-<tt class="descname">read_subregion</tt><big>(</big><em>row_bounds</em>, <em>col_bounds</em>, <em>bands=None</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_subregion" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">read_subregion</tt><big>(</big><em>row_bounds</em>, <em>col_bounds</em>, <em>bands=None</em>, <em>use_memmap=True</em><big>)</big><a class="headerlink" href="#spectral.io.bipfile.BipFile.read_subregion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a contiguous rectangular sub-region from the image.</p>
 <p>Arguments:</p>
 <blockquote>
@@ -319,6 +343,11 @@ and <cite>L</cite> = len(bands) (or # of image bands if <cite>bands</cite> == No
 <blockquote>
 <div>Optional list of bands to read.  If not specified, all bands
 are read.</div></blockquote>
+<p><cite>use_memmap</cite> (bool, default True):</p>
+<blockquote>
+<div>Specifies whether the file&#8217;s memmap interface should be used
+to read the data. Setting this arg to True only has an effect
+if a memmap is being used (i.e., if <cite>img.using_memmap</cite> is True).</div></blockquote>
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
@@ -887,7 +916,7 @@ functionality is implemented via <tt class="xref py py-func docutils literal"><s
 <div>The source of RGB bands to be displayed. with shape (R, C, B).
 If the shape is (R, C, 3), the last dimension is assumed to
 provide the red, green, and blue bands (unless the <cite>bands</cite>
-argument is provided). If <img class="math" src="_images/math/87e5ba8a4a16d021439d2b39e40803755773e8a5.png" alt="B &gt; 3"/> and <cite>bands</cite> is not
+argument is provided). If <img class="math" src="_images/math/385193633a7610db1369fdb1014cdbdb330f9f10.png" alt="B &gt; 3"/> and <cite>bands</cite> is not
 provided, the first, middle, and last band will be used.</div></blockquote>
 <p><cite>bands</cite> (triplet of integers):</p>
 <blockquote>
@@ -1220,10 +1249,12 @@ source in each color channel will be set to maximum intensity.</div></blockquote
 <p>Examples:</p>
 <blockquote>
 <div><p>Save a color view of an image by specifying RGB band indices:</p>
-<div class="highlight-python"><pre>save_image('rgb.jpg', img, [29, 19, 9]])</pre>
+<div class="highlight-python"><div class="highlight"><pre>save_image(&#39;rgb.jpg&#39;, img, [29, 19, 9]])
+</pre></div>
 </div>
 <p>Save the same image as <strong>png</strong>:</p>
-<div class="highlight-python"><pre>save_image('rgb.png', img, [29, 19, 9]], format='png')</pre>
+<div class="highlight-python"><div class="highlight"><pre>save_image(&#39;rgb.png&#39;, img, [29, 19, 9]], format=&#39;png&#39;)
+</pre></div>
 </div>
 <p>Save classification results using the default color palette (note that
 the color palette must be passed explicitly for <cite>clMap</cite> to be
@@ -2011,7 +2042,7 @@ for convenience.</p>
 <h3>calc_stats<a class="headerlink" href="#calc-stats" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="spectral.calc_stats">
-<tt class="descname">calc_stats</tt><big>(</big><em>image</em>, <em>mask=None</em>, <em>index=None</em><big>)</big><a class="headerlink" href="#spectral.calc_stats" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">calc_stats</tt><big>(</big><em>image</em>, <em>mask=None</em>, <em>index=None</em>, <em>allow_nan=False</em><big>)</big><a class="headerlink" href="#spectral.calc_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes Gaussian stats for image data..</p>
 <p>Arguments:</p>
 <blockquote>
@@ -2030,6 +2061,11 @@ otherwise, all nonzero elements of <cite>mask</cite> will be used.</div></blockq
 <div>Specifies which value in <cite>mask</cite> to use to select pixels from
 <cite>image</cite>. If not specified but <cite>mask</cite> is, then all nonzero elements
 of <cite>mask</cite> will be used.</div></blockquote>
+<p><cite>allow_nan</cite> (bool, default False):</p>
+<blockquote>
+<div>If True, statistics will be computed even if <cite>np.nan</cite> values are
+present in the data; otherwise, <cite>~spectral.algorithms.spymath.NaNValueError</cite>
+is raised.</div></blockquote>
 <p>If neither <cite>mask</cite> nor <cite>index</cite> are specified, all samples in <cite>vectors</cite>
 will be used.</p>
 </div></blockquote>
@@ -2086,7 +2122,8 @@ typically are not as accurate as iterative algorithms.</p>
 <tt class="descname">covariance</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.covariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the covariance of the set of vectors.</p>
 <p>Usage:</p>
-<div class="highlight-python"><pre>C = covariance(vectors [, mask=None [, index=None]])</pre>
+<div class="highlight-python"><div class="highlight"><pre>C = covariance(vectors [, mask=None [, index=None]])
+</pre></div>
 </div>
 <p>Arguments:</p>
 <blockquote>
@@ -2217,6 +2254,46 @@ to which <cite>x</cite> is classified.</div></blockquote>
 </div></blockquote>
 </dd></dl>
 
+</dd></dl>
+
+</div>
+<div class="section" id="gaussianstats">
+<h3>GaussianStats<a class="headerlink" href="#gaussianstats" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.algorithms.algorithms.GaussianStats">
+<em class="property">class </em><tt class="descname">GaussianStats</tt><big>(</big><em>mean=None</em>, <em>cov=None</em>, <em>nsamples=None</em>, <em>inv_cov=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.GaussianStats" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for storing Gaussian statistics for a data set.</p>
+<p>Statistics stored include:</p>
+<blockquote>
+<div><p><cite>mean</cite>:</p>
+<blockquote>
+<div>Mean vector</div></blockquote>
+<p><cite>cov</cite>:</p>
+<blockquote>
+<div>Covariance matrix</div></blockquote>
+<p><cite>nsamples</cite>:</p>
+<blockquote>
+<div>Number of samples used in computing the statistics</div></blockquote>
+</div></blockquote>
+<p>Several derived statistics are computed on-demand (and cached) and are
+available as property attributes. These include:</p>
+<blockquote>
+<div><p><cite>inv_cov</cite>:</p>
+<blockquote>
+<div>Inverse of the covariance</div></blockquote>
+<p><cite>sqrt_cov</cite>:</p>
+<blockquote>
+<div>Matrix square root of covariance: sqrt_cov.dot(sqrt_cov) == cov</div></blockquote>
+<p><cite>sqrt_inv_cov</cite>:</p>
+<blockquote>
+<div>Matrix square root of the inverse of covariance</div></blockquote>
+<p><cite>log_det_cov</cite>:</p>
+<blockquote>
+<div>The log of the determinant of the covariance matrix</div></blockquote>
+<p><cite>principal_components</cite>:</p>
+<blockquote>
+<div>The principal components of the data, based on mean and cov.</div></blockquote>
+</div></blockquote>
 </dd></dl>
 
 </div>
@@ -2381,14 +2458,14 @@ __init__.</p>
 <dd><p>Chains together two linear transforms.
 If the transform <cite>f1</cite> is given by</p>
 <div class="math">
-<p><img src="_images/math/9e022355d98d559f059a9205a75605c6fb4f6ba6.png" alt="F_1(X) = A_1(X + b_1) + c_1"/></p>
+<p><img src="_images/math/4c2d4bbfe54740466bf7d6142fc9f41ca05f4f37.png" alt="F_1(X) = A_1(X + b_1) + c_1"/></p>
 </div><p>and <cite>f2</cite> by</p>
 <div class="math">
-<p><img src="_images/math/ab1099d098e203acb6fe639a8fa177e40bcf8f07.png" alt="F_2(X) = A_2(X + b_2) + c_2"/></p>
+<p><img src="_images/math/007406ee693cc3307718d6750309ff5fabd87cbb.png" alt="F_2(X) = A_2(X + b_2) + c_2"/></p>
 </div><p>then <cite>f1.chain(f2)</cite> returns a new LinearTransform, <cite>f3</cite>, whose output
 is given by</p>
 <div class="math">
-<p><img src="_images/math/1f049d98e76c7ec5f2403d016ddd3ad792169232.png" alt="F_3(X) = F_2(F_1(X))"/></p>
+<p><img src="_images/math/2556c80a60ac9278a78bf0f634d223cd2cfb6c75.png" alt="F_3(X) = F_2(F_1(X))"/></p>
 </div></dd></dl>
 
 </dd></dl>
@@ -2408,9 +2485,9 @@ is given by</p>
 <p>Given target/background means and a common covariance matrix, the matched
 filter response is given by:</p>
 <div class="math">
-<p><img src="_images/math/f962c5cb40b1672405835f5a5592c2410c5d5d19.png" alt="y=\frac{(\mu_t-\mu_b)^T\Sigma^{-1}(x-\mu_b)}{(\mu_t-\mu_b)^T\Sigma^{-1}(\mu_t-\mu_b)}"/></p>
-</div><p>where <img class="math" src="_images/math/2f9e4510130fedb42dca7d5e1bb137f0e39df777.png" alt="\mu_t"/> is the target mean, <img class="math" src="_images/math/310d542196cb8e2f484138a1458505769fe857ba.png" alt="\mu_b"/> is the background
-mean, and <img class="math" src="_images/math/c8f77e3035db5fe9a4975967750ac1a6454bda8c.png" alt="\Sigma"/> is the covariance.</p>
+<p><img src="_images/math/1de848277c35dd5c6eae9ebcf7f3301f5ffb0a52.png" alt="y=\frac{(\mu_t-\mu_b)^T\Sigma^{-1}(x-\mu_b)}{(\mu_t-\mu_b)^T\Sigma^{-1}(\mu_t-\mu_b)}"/></p>
+</div><p>where <img class="math" src="_images/math/a6c88c3fa7369c07dae3ceb8bbe58990f43038cf.png" alt="\mu_t"/> is the target mean, <img class="math" src="_images/math/fa81c642bd991cd9258ad5e6385fb2c06697ef2c.png" alt="\mu_b"/> is the background
+mean, and <img class="math" src="_images/math/19ac15bf260b22dcb61a1042c60259e4b0bfbd64.png" alt="\Sigma"/> is the covariance.</p>
 <p>Arguments:</p>
 <blockquote>
 <div><p><cite>X</cite> (numpy.ndarray):</p>
@@ -2441,7 +2518,7 @@ The background mean and covariance will be estimated from pixels
 in the outer window, excluding pixels within the inner window. For
 example, if (<cite>inner</cite>, <cite>outer</cite>) = (5, 21), then the number of
 pixels used to estimate background statistics will be
-<img class="math" src="_images/math/3990ab5951e6dfa17434842b8e194367af8e01e3.png" alt="21^2 - 5^2 = 416"/>. If this argument is given, <cite>background</cite>
+<img class="math" src="_images/math/2e5538d47f8ce1d701ba80f224fe3aa4bd14f220.png" alt="21^2 - 5^2 = 416"/>. If this argument is given, <cite>background</cite>
 is not required (and will be ignored, if given).</p>
 <p>The window is modified near image borders, where full, centered
 windows cannot be created. The outer window will be shifted, as
@@ -2482,9 +2559,9 @@ have shape (R, C).</div></blockquote>
 <p>Given target/background means and a common covariance matrix, the matched
 filter response is given by:</p>
 <div class="math">
-<p><img src="_images/math/f962c5cb40b1672405835f5a5592c2410c5d5d19.png" alt="y=\frac{(\mu_t-\mu_b)^T\Sigma^{-1}(x-\mu_b)}{(\mu_t-\mu_b)^T\Sigma^{-1}(\mu_t-\mu_b)}"/></p>
-</div><p>where <img class="math" src="_images/math/2f9e4510130fedb42dca7d5e1bb137f0e39df777.png" alt="\mu_t"/> is the target mean, <img class="math" src="_images/math/310d542196cb8e2f484138a1458505769fe857ba.png" alt="\mu_b"/> is the background
-mean, and <img class="math" src="_images/math/c8f77e3035db5fe9a4975967750ac1a6454bda8c.png" alt="\Sigma"/> is the covariance.</p>
+<p><img src="_images/math/1de848277c35dd5c6eae9ebcf7f3301f5ffb0a52.png" alt="y=\frac{(\mu_t-\mu_b)^T\Sigma^{-1}(x-\mu_b)}{(\mu_t-\mu_b)^T\Sigma^{-1}(\mu_t-\mu_b)}"/></p>
+</div><p>where <img class="math" src="_images/math/a6c88c3fa7369c07dae3ceb8bbe58990f43038cf.png" alt="\mu_t"/> is the target mean, <img class="math" src="_images/math/fa81c642bd991cd9258ad5e6385fb2c06697ef2c.png" alt="\mu_b"/> is the background
+mean, and <img class="math" src="_images/math/19ac15bf260b22dcb61a1042c60259e4b0bfbd64.png" alt="\Sigma"/> is the covariance.</p>
 <dl class="method">
 <dt id="spectral.algorithms.detectors.MatchedFilter.__init__">
 <tt class="descname">__init__</tt><big>(</big><em>background</em>, <em>target</em><big>)</big><a class="headerlink" href="#spectral.algorithms.detectors.MatchedFilter.__init__" title="Permalink to this definition">¶</a></dt>
@@ -2596,7 +2673,8 @@ to which <cite>x</cite> is classified.</div></blockquote>
 <tt class="descname">mean_cov</tt><big>(</big><em>image</em>, <em>mask=None</em>, <em>index=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.mean_cov" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the mean and covariance of the set of vectors.</p>
 <p>Usage:</p>
-<div class="highlight-python"><pre>(mean, cov, S) = mean_cov(vectors [, mask=None [, index=None]])</pre>
+<div class="highlight-python"><div class="highlight"><pre>(mean, cov, S) = mean_cov(vectors [, mask=None [, index=None]])
+</pre></div>
 </div>
 <p>Arguments:</p>
 <blockquote>
@@ -2633,6 +2711,166 @@ of the vectors.</div></blockquote>
 </div></blockquote>
 <p>Calculate the mean and covariance of of the given vectors. The argument
 can be an Iterator, a SpyFile object, or an <cite>MxNxB</cite> array.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="minimum-noise-fraction-mnf">
+<h3>Minimum Noise Fraction (MNF)<a class="headerlink" href="#minimum-noise-fraction-mnf" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.algorithms.mnf">
+<tt class="descname">mnf</tt><big>(</big><em>signal</em>, <em>noise</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.mnf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes Minimum Noise Fraction / Noise-Adjusted Principal Components.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>signal</cite> (<a class="reference internal" href="#spectral.algorithms.algorithms.GaussianStats" title="spectral.algorithms.algorithms.GaussianStats"><tt class="xref py py-class docutils literal"><span class="pre">GaussianStats</span></tt></a>):</p>
+<blockquote>
+<div>Estimated signal statistics</div></blockquote>
+<p><cite>noise</cite> (<a class="reference internal" href="#spectral.algorithms.algorithms.GaussianStats" title="spectral.algorithms.algorithms.GaussianStats"><tt class="xref py py-class docutils literal"><span class="pre">GaussianStats</span></tt></a>):</p>
+<blockquote>
+<div>Estimated noise statistics</div></blockquote>
+</div></blockquote>
+<p>Returns an <a class="reference internal" href="#spectral.algorithms.algorithms.MNFResult" title="spectral.algorithms.algorithms.MNFResult"><tt class="xref py py-class docutils literal"><span class="pre">MNFResult</span></tt></a> object,
+containing the Noise-Adjusted Principal Components (NAPC) and methods for
+denoising or reducing dimensionality of associated data.</p>
+<p>The Minimum Noise Fraction (MNF) is similar to the Principal Components
+transformation with the difference that the Principal Components associated
+with the MNF are ordered by descending signal-to-noise ratio (SNR) rather
+than overall image variance. Note that the eigenvalues of the NAPC are
+equal to one plus the SNR in the transformed space (since noise has
+whitened unit variance in the NAPC coordinate space).</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3C.lan&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span> <span class="o">=</span> <span class="n">calc_stats</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noise</span> <span class="o">=</span> <span class="n">noise_from_diffs</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">117</span><span class="p">:</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">85</span><span class="p">:</span> <span class="mi">122</span><span class="p">,</span> <span class="p">:])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mnfr</span> <span class="o">=</span> <span class="n">mnf</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">noise</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># De-noise the data by eliminating NAPC components where SNR &lt; 10.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># The de-noised data will be in the original coordinate space (at</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># full dimensionality).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">denoised</span> <span class="o">=</span> <span class="n">mnfr</span><span class="o">.</span><span class="n">denoise</span><span class="p">(</span><span class="n">snr</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Reduce dimensionality, retaining NAPC components where SNR &gt;= 10.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reduced</span> <span class="o">=</span> <span class="n">mnfr</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">snr</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Reduce dimensionality, retaining top 50 NAPC components.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reduced</span> <span class="o">=</span> <span class="n">mnfr</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>References:</p>
+<blockquote>
+<div>Lee, James B., A. Stephen Woodyatt, and Mark Berman. &#8220;Enhancement of
+high spectral resolution remote-sensing data by a noise-adjusted
+principal components transform.&#8221; Geoscience and Remote Sensing, IEEE
+Transactions on 28.3 (1990): 295-304.</div></blockquote>
+</dd></dl>
+
+<dl class="class">
+<dt id="spectral.algorithms.algorithms.MNFResult">
+<em class="property">class </em><tt class="descname">MNFResult</tt><big>(</big><em>signal</em>, <em>noise</em>, <em>napc</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.MNFResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result object returned by <a class="reference internal" href="#spectral.algorithms.algorithms.mnf" title="spectral.algorithms.algorithms.mnf"><tt class="xref py py-func docutils literal"><span class="pre">mnf</span></tt></a>.</p>
+<p>This object contains data associates with a Minimum Noise Fraction
+calculation, including signal and noise statistics, as well as the
+Noise-Adjusted Principal Components (NAPC). This object can be used to
+denoise image data or to reduce its dimensionality.</p>
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.MNFResult.denoise">
+<tt class="descname">denoise</tt><big>(</big><em>X</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.MNFResult.denoise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a de-noised version of <cite>X</cite>.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>X</cite> (np.ndarray):</p>
+<blockquote>
+<div>Data to be de-noised. Can be a single pixel or an image.</div></blockquote>
+</div></blockquote>
+<p>One (and only one) of the following keywords must be specified:</p>
+<blockquote>
+<div><p><cite>num</cite> (int):</p>
+<blockquote>
+<div>Number of Noise-Adjusted Principal Components to retain.</div></blockquote>
+<p><cite>snr</cite> (float):</p>
+<blockquote>
+<div>Threshold signal-to-noise ratio (SNR) to retain.</div></blockquote>
+</div></blockquote>
+<p>Returns denoised image data with same shape as <cite>X</cite>.</p>
+<p>Note that calling this method is equivalent to calling the
+<cite>get_denoising_transform</cite> method with same keyword and applying the
+returned transform to <cite>X</cite>. If you only intend to denoise data with the
+same parameters multiple times, then it is more efficient to get the
+denoising transform and reuse it, rather than calling this method
+multilple times.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.MNFResult.get_denoising_transform">
+<tt class="descname">get_denoising_transform</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.MNFResult.get_denoising_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a function for denoising image data.</p>
+<p>One (and only one) of the following keywords must be specified:</p>
+<blockquote>
+<div><p><cite>num</cite> (int):</p>
+<blockquote>
+<div>Number of Noise-Adjusted Principal Components to retain.</div></blockquote>
+<p><cite>snr</cite> (float):</p>
+<blockquote>
+<div>Threshold signal-to-noise ratio (SNR) to retain.</div></blockquote>
+</div></blockquote>
+<p>Returns a callable <a class="reference internal" href="#spectral.algorithms.transforms.LinearTransform" title="spectral.algorithms.transforms.LinearTransform"><tt class="xref py py-class docutils literal"><span class="pre">LinearTransform</span></tt></a>
+object for denoising image data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.MNFResult.get_reduction_transform">
+<tt class="descname">get_reduction_transform</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.MNFResult.get_reduction_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduces dimensionality of image data.</p>
+<p>One (and only one) of the following keywords must be specified:</p>
+<blockquote>
+<div><p><cite>num</cite> (int):</p>
+<blockquote>
+<div>Number of Noise-Adjusted Principal Components to retain.</div></blockquote>
+<p><cite>snr</cite> (float):</p>
+<blockquote>
+<div>Threshold signal-to-noise ratio (SNR) to retain.</div></blockquote>
+</div></blockquote>
+<p>Returns a callable <a class="reference internal" href="#spectral.algorithms.transforms.LinearTransform" title="spectral.algorithms.transforms.LinearTransform"><tt class="xref py py-class docutils literal"><span class="pre">LinearTransform</span></tt></a>
+object for reducing the dimensionality of image data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.MNFResult.num_with_snr">
+<tt class="descname">num_with_snr</tt><big>(</big><em>snr</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.MNFResult.num_with_snr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of components with SNR &gt;= <cite>snr</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.MNFResult.reduce">
+<tt class="descname">reduce</tt><big>(</big><em>X</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.MNFResult.reduce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduces dimensionality of image data.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>X</cite> (np.ndarray):</p>
+<blockquote>
+<div>Data to be reduced. Can be a single pixel or an image.</div></blockquote>
+</div></blockquote>
+<p>One (and only one) of the following keywords must be specified:</p>
+<blockquote>
+<div><p><cite>num</cite> (int):</p>
+<blockquote>
+<div>Number of Noise-Adjusted Principal Components to retain.</div></blockquote>
+<p><cite>snr</cite> (float):</p>
+<blockquote>
+<div>Threshold signal-to-noise ratio (SNR) to retain.</div></blockquote>
+</div></blockquote>
+<p>Returns a verions of <cite>X</cite> with reduced dimensionality.</p>
+<p>Note that calling this method is equivalent to calling the
+<cite>get_reduction_transform</cite> method with same keyword and applying the
+returned transform to <cite>X</cite>. If you intend to denoise data with the
+same parameters multiple times, then it is more efficient to get the
+reduction transform and reuse it, rather than calling this method
+multilple times.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -2693,6 +2931,40 @@ multiple bands.</div></blockquote>
 <blockquote>
 <div>An array containing NDVI values in the range [-1.0, 1.0] for each
 corresponding element of data.</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="noise-from-diffs">
+<h3>noise_from_diffs<a class="headerlink" href="#noise-from-diffs" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.algorithms.noise_from_diffs">
+<tt class="descname">noise_from_diffs</tt><big>(</big><em>X</em>, <em>direction='lowerright'</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.noise_from_diffs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimates noise statistcs by taking differences of adjacent pixels.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>X</cite> (np.ndarray):</p>
+<blockquote>
+<div>The data from which to estimage noise statistics. <cite>X</cite> should have
+shape <cite>(nrows, ncols, nbands</cite>).</div></blockquote>
+<p><cite>direction</cite> (str, default &#8220;lowerright&#8221;):</p>
+<blockquote>
+<div><p>The pixel direction along which to calculate pixel differences.
+Must be one of the following:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8216;lowerright&#8217;:</dt>
+<dd>Take difference with pixel diagonally to lower right</dd>
+<dt>&#8216;lowerleft&#8217;:</dt>
+<dd>Take difference with pixel diagonally to lower right</dd>
+<dt>&#8216;right&#8217;:</dt>
+<dd>Take difference with pixel to the right</dd>
+<dt>&#8216;lower&#8217;:</dt>
+<dd>Take differenece with pixel below</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p>Returns a <a class="reference internal" href="#spectral.algorithms.algorithms.GaussianStats" title="spectral.algorithms.algorithms.GaussianStats"><tt class="xref py py-class docutils literal"><span class="pre">GaussianStats</span></tt></a> object.</p>
 </dd></dl>
 
 </div>
@@ -2984,9 +3256,9 @@ will be retained (starting from greatest to smallest) until
 squared Mahalanobis distance of a spectrum from a background distribution
 according to</p>
 <div class="math">
-<p><img src="_images/math/9835fcee4ef7e2edb9323bce03ee2ff9777dd4c4.png" alt="y=(x-\mu_b)^T\Sigma^{-1}(x-\mu_b)"/></p>
-</div><p>where <cite>x</cite> is the pixel spectrum, <img class="math" src="_images/math/310d542196cb8e2f484138a1458505769fe857ba.png" alt="\mu_b"/> is the background
-mean, and <img class="math" src="_images/math/c8f77e3035db5fe9a4975967750ac1a6454bda8c.png" alt="\Sigma"/> is the background covariance.</p>
+<p><img src="_images/math/fd40f80967c3a7680713d1b2a5e2c3d03860571b.png" alt="y=(x-\mu_b)^T\Sigma^{-1}(x-\mu_b)"/></p>
+</div><p>where <cite>x</cite> is the pixel spectrum, <img class="math" src="_images/math/fa81c642bd991cd9258ad5e6385fb2c06697ef2c.png" alt="\mu_b"/> is the background
+mean, and <img class="math" src="_images/math/19ac15bf260b22dcb61a1042c60259e4b0bfbd64.png" alt="\Sigma"/> is the background covariance.</p>
 <p>Arguments:</p>
 <blockquote>
 <div><p><cite>X</cite> (numpy.ndarray):</p>
@@ -3015,7 +3287,7 @@ The background mean and covariance will be estimated from pixels
 in the outer window, excluding pixels within the inner window. For
 example, if (<cite>inner</cite>, <cite>outer</cite>) = (5, 21), then the number of
 pixels used to estimate background statistics will be
-<img class="math" src="_images/math/3990ab5951e6dfa17434842b8e194367af8e01e3.png" alt="21^2 - 5^2 = 416"/>.</p>
+<img class="math" src="_images/math/2e5538d47f8ce1d701ba80f224fe3aa4bd14f220.png" alt="21^2 - 5^2 = 416"/>.</p>
 <p>The window are modified near image borders, where full, centered
 windows cannot be created. The outer window will be shifted, as
 needed, to ensure that the outer window still has height and width
@@ -3296,6 +3568,7 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
 <li><a class="reference internal" href="#covariance">covariance</a></li>
 <li><a class="reference internal" href="#cov-avg">cov_avg</a></li>
 <li><a class="reference internal" href="#gaussianclassifier">GaussianClassifier</a></li>
+<li><a class="reference internal" href="#gaussianstats">GaussianStats</a></li>
 <li><a class="reference internal" href="#kmeans">kmeans</a></li>
 <li><a class="reference internal" href="#linear-discriminant">linear_discriminant</a></li>
 <li><a class="reference internal" href="#lineartransform">LinearTransform</a></li>
@@ -3303,8 +3576,10 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
 <li><a class="reference internal" href="#matchedfilter">MatchedFilter</a></li>
 <li><a class="reference internal" href="#mahalanobisdistanceclassifier">MahalanobisDistanceClassifier</a></li>
 <li><a class="reference internal" href="#mean-cov">mean_cov</a></li>
+<li><a class="reference internal" href="#minimum-noise-fraction-mnf">Minimum Noise Fraction (MNF)</a></li>
 <li><a class="reference internal" href="#msam">msam</a></li>
 <li><a class="reference internal" href="#ndvi">ndvi</a></li>
+<li><a class="reference internal" href="#noise-from-diffs">noise_from_diffs</a></li>
 <li><a class="reference internal" href="#orthogonalize">orthogonalize</a></li>
 <li><a class="reference internal" href="#perceptronclassifier">PerceptronClassifier</a></li>
 <li><a class="reference internal" href="#principal-components">principal_components</a></li>
@@ -3353,14 +3628,15 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
         <li class="right" style="margin-right: 10px">
           <a href="libraries.html" title="Spectral Libraries"
              >previous</a></li>
-        <li><a href="index.html">Spectral Python 0.14 documentation</a> &raquo;</li>
+        <li><a href="index.html">Spectral Python 0.15.0
+ documentation</a> &raquo;</li>
           <li><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>
     </div>
 
     <div class="footer">
-        &copy; Copyright 2010, Thomas Boggs.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+        &copy; Copyright 2014, Thomas Boggs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
 <!-- Google Analytics -->
 <script>

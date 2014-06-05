@@ -35,6 +35,25 @@ Documentation
 News
 ----
 
+2014-06-04 : SPy 0.15.0 is released.
+
+    This version adds the Minimum Noise Fraction algorithm
+    (:func:`~spectral.algorithms.algorithms.mnf`)
+    (a.k.a., Noise-Adjusted Principal Components). The related function
+    :func:`~spectral.algorithms.algorithms.noise_from_diffs` performs
+    estimation of image noise from a spectrally homogeneous region of the
+    image.
+
+    :class:`SpyFile` read methods now accept an optional `use_memmap` argument that
+    provides finer control over when to use (or not use) the memmap interface
+    to read image file data.
+
+    Many thanks to Don March (http://ohspite.net) for improving
+    ENVI header support (comment lines and blank parameters are now accepted)
+    and providing several performance improvements.
+
+    Additional details are `here <https://github.com/spectralpython/spectral/issues?milestone=1&page=1&state=closed>`_.
+
 2014-03-02 : SPy has moved!
 
     The Spectral Python web site is now located at `www.spectralpython.net <http://www.spectralpython.net>`_.

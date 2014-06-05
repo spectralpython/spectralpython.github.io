@@ -6,7 +6,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to Spectral Python (SPy) &mdash; Spectral Python 0.14 documentation</title>
+    <title>Welcome to Spectral Python (SPy) &mdash; Spectral Python 0.15.0
+ documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +15,8 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.14',
+        VERSION:     '0.15.0
+',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +25,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Spectral Python 0.14 documentation" href="#" />
+    <link rel="top" title="Spectral Python 0.15.0
+ documentation" href="#" />
     <link rel="next" title="Spectral Python (SPy) User Guide" href="user_guide.html" /> 
   </head>
   <body>
@@ -33,7 +36,8 @@
         <li class="right" style="margin-right: 10px">
           <a href="user_guide.html" title="Spectral Python (SPy) User Guide"
              accesskey="N">next</a></li>
-        <li><a href="#">Spectral Python 0.14 documentation</a> &raquo;</li> 
+        <li><a href="#">Spectral Python 0.15.0
+ documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -78,6 +82,22 @@ the <a class="reference external" href="https://pypi.python.org/pypi/spectral">P
 </div>
 <div class="section" id="news">
 <h1>News<a class="headerlink" href="#news" title="Permalink to this headline">¶</a></h1>
+<p>2014-06-04 : SPy 0.15.0 is released.</p>
+<blockquote>
+<div><p>This version adds the Minimum Noise Fraction algorithm
+(<a class="reference internal" href="class_func_ref.html#spectral.algorithms.algorithms.mnf" title="spectral.algorithms.algorithms.mnf"><tt class="xref py py-func docutils literal"><span class="pre">mnf</span></tt></a>)
+(a.k.a., Noise-Adjusted Principal Components). The related function
+<a class="reference internal" href="class_func_ref.html#spectral.algorithms.algorithms.noise_from_diffs" title="spectral.algorithms.algorithms.noise_from_diffs"><tt class="xref py py-func docutils literal"><span class="pre">noise_from_diffs</span></tt></a> performs
+estimation of image noise from a spectrally homogeneous region of the
+image.</p>
+<p><tt class="xref py py-class docutils literal"><span class="pre">SpyFile</span></tt> read methods now accept an optional <cite>use_memmap</cite> argument that
+provides finer control over when to use (or not use) the memmap interface
+to read image file data.</p>
+<p>Many thanks to Don March (<a class="reference external" href="http://ohspite.net">http://ohspite.net</a>) for improving
+ENVI header support (comment lines and blank parameters are now accepted)
+and providing several performance improvements.</p>
+<p>Additional details are <a class="reference external" href="https://github.com/spectralpython/spectral/issues?milestone=1&amp;page=1&amp;state=closed">here</a>.</p>
+</div></blockquote>
 <p>2014-03-02 : SPy has moved!</p>
 <blockquote>
 <div>The Spectral Python web site is now located at <a class="reference external" href="http://www.spectralpython.net">www.spectralpython.net</a>.
@@ -186,9 +206,7 @@ libraries, and installation via <tt class="xref py py-mod docutils literal"><spa
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Welcome to Spectral Python (SPy)</a></li>
-<li><a class="reference internal" href="#documentation">Documentation</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
 <li><a class="reference internal" href="#news">News</a></li>
 </ul>
 
@@ -218,13 +236,14 @@ libraries, and installation via <tt class="xref py py-mod docutils literal"><spa
         <li class="right" style="margin-right: 10px">
           <a href="user_guide.html" title="Spectral Python (SPy) User Guide"
              >next</a></li>
-        <li><a href="#">Spectral Python 0.14 documentation</a> &raquo;</li> 
+        <li><a href="#">Spectral Python 0.15.0
+ documentation</a> &raquo;</li> 
       </ul>
     </div>
 
     <div class="footer">
-        &copy; Copyright 2010, Thomas Boggs.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+        &copy; Copyright 2014, Thomas Boggs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
 <!-- Google Analytics -->
 <script>
