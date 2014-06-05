@@ -212,6 +212,11 @@ GaussianClassifier
    :special-members: __init__
    :inherited-members: classify_image
 
+GaussianStats
+-------------
+
+.. autoclass:: spectral.algorithms.algorithms.GaussianStats
+
 kmeans
 ------
 
@@ -253,6 +258,14 @@ mean_cov
 
 .. autofunction:: spectral.algorithms.algorithms.mean_cov
 
+Minimum Noise Fraction (MNF)
+----------------------------
+
+.. autofunction:: spectral.algorithms.algorithms.mnf
+
+.. autoclass:: spectral.algorithms.algorithms.MNFResult
+   :members: denoise, get_denoising_transform, reduce, get_reduction_transform, num_with_snr
+
 msam
 ----
 
@@ -262,6 +275,11 @@ ndvi
 ----
 
 .. autofunction:: spectral.algorithms.algorithms.ndvi
+
+noise_from_diffs
+----------------
+
+.. autofunction:: spectral.algorithms.algorithms.noise_from_diffs
 
 orthogonalize
 -------------
