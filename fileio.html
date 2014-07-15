@@ -75,7 +75,7 @@ interleave of the data within the image file.</p>
 <span class="gp">In [2]: </span><span class="n">img</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3C.lan&#39;</span><span class="p">)</span>
 
 <span class="gp">In [3]: </span><span class="n">img</span><span class="o">.</span><span class="n">__class__</span>
-<span class="go"> Out[3]: spectral.io.bilfile.BilFile</span>
+<span class="gh">Out[3]: </span><span class="go">spectral.io.bilfile.BilFile</span>
 
 <span class="gp">In [4]: </span><span class="k">print</span> <span class="n">img</span>
 <span class="go">	Data Source:   &#39;/home/thomas/spectral_data/92AV3C.lan&#39;</span>
@@ -100,17 +100,17 @@ operator. The <a class="reference internal" href="class_func_ref.html#spectral.S
 array where <em>M</em> is the number of rows in the image, <em>N</em> is the number of
 columns, and <em>B</em> is thenumber of bands.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [5]: </span><span class="n">img</span><span class="o">.</span><span class="n">shape</span>
-<span class="go"> Out[5]: (145, 145, 220)</span>
+<span class="gh">Out[5]: </span><span class="go">(145, 145, 220)</span>
 
 <span class="gp">In [6]: </span><span class="n">pixel</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">]</span>
 
 <span class="gp">In [7]: </span><span class="n">pixel</span><span class="o">.</span><span class="n">shape</span>
-<span class="go"> Out[7]: (220,)</span>
+<span class="gh">Out[7]: </span><span class="go">(220,)</span>
 
 <span class="gp">In [8]: </span><span class="n">band6</span> <span class="o">=</span> <span class="n">img</span><span class="p">[:,:,</span><span class="mi">5</span><span class="p">]</span>
 
 <span class="gp">In [9]: </span><span class="n">band6</span><span class="o">.</span><span class="n">shape</span>
-<span class="go"> Out[9]: (145, 145, 1)</span>
+<span class="gh">Out[9]: </span><span class="go">(145, 145, 1)</span>
 </pre></div>
 </div>
 <p>The image data values were not read from the file until the subscript operator
@@ -172,7 +172,7 @@ the full <tt class="xref py py-class docutils literal"><span class="pre">numpy.n
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="n">arr</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 
 <span class="gp">In [2]: </span><span class="n">arr</span><span class="o">.</span><span class="n">__class__</span>
-<span class="go"> Out[2]: spectral.spectral.ImageArray</span>
+<span class="gh">Out[2]: </span><span class="go">spectral.spectral.ImageArray</span>
 
 <span class="gp">In [3]: </span><span class="k">print</span> <span class="n">arr</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 <span class="go">	# Rows:            145</span>
@@ -181,7 +181,7 @@ the full <tt class="xref py py-class docutils literal"><span class="pre">numpy.n
 <span class="go">	Data format:   float32</span>
 
 <span class="gp">In [4]: </span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span>
-<span class="go"> Out[4]: (145, 145, 220)</span>
+<span class="gh">Out[4]: </span><span class="go">(145, 145, 220)</span>
 </pre></div>
 </div>
 <p>Because SPy is primarily designed for processing in the spectral domain,
@@ -225,7 +225,7 @@ has an unusual file extension that SPy can not identify.</p>
 <span class="gp">In [8]: </span><span class="n">lib</span> <span class="o">=</span> <span class="n">envi</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;spectra.hdr&#39;</span><span class="p">)</span>
 
 <span class="gp">In [9]: </span><span class="n">lib</span><span class="o">.</span><span class="n">names</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
-<span class="go"> Out[9]: </span>
+<span class="gh">Out[9]: </span><span class="go"></span>
 <span class="go">[&#39;construction asphalt&#39;,</span>
 <span class="go"> &#39;construction  concrete&#39;,</span>
 <span class="go"> &#39;red smooth-faced brick&#39;,</span>

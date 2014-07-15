@@ -99,11 +99,11 @@ SPy database contains two tables: <cite>Samples</cite> and <cite>Spectra</cite>.
 relationship between rows in the two tables but they have been separate to support
 potential future changes to the database.  The schemas for the tables are in the
 <tt class="xref py py-attr docutils literal"><span class="pre">schemas</span></tt> attribute of the database object:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [3]: </span><span class="n">db</span> <span class="o">=</span> <span class="n">AsterDatabase</span><span class="p">(</span><span class="s">&#39;aster_lib.db&#39;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [2]: </span><span class="n">db</span> <span class="o">=</span> <span class="n">AsterDatabase</span><span class="p">(</span><span class="s">&#39;aster_lib.db&#39;</span><span class="p">)</span>
 
-<span class="gp">In [4]: </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">schemas</span><span class="p">:</span>
-<span class="gp">   ...:</span>      <span class="k">print</span> <span class="n">s</span>
-<span class="gp">   ...:</span> 
+<span class="gp">In [3]: </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">schemas</span><span class="p">:</span>
+<span class="gp">   ...: </span>    <span class="k">print</span> <span class="n">s</span>
+<span class="gp">   ...: </span>
 <span class="go">CREATE TABLE Samples (SampleID INTEGER PRIMARY KEY, Name TEXT, Type TEXT, Class TEXT, SubClass TEXT, ParticleSize TEXT, SampleNum TEXT, Owner TEXT, Origin TEXT, Phase TEXT, Description TEXT)</span>
 <span class="go">CREATE TABLE Spectra (SpectrumID INTEGER PRIMARY KEY, SampleID INTEGER, SensorCalibrationID INTEGER, Instrument TEXT, Environment TEXT, Measurement TEXT, XUnit TEXT, YUnit TEXT, MinWavelength FLOAT, MaxWavelength FLOAT, NumValues INTEGER, XData BLOB, YData BLOB)</span>
 </pre></div>
@@ -122,10 +122,10 @@ method to print query results to the command line.  You can call its
 <a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase.query" title="spectral.database.AsterDatabase.query"><tt class="xref py py-meth docutils literal"><span class="pre">query</span></tt></a> method to return query results in
 tuples.  Lastly, you can use the <tt class="xref py py-attr docutils literal"><span class="pre">cursor</span></tt> attribute of the <a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase" title="spectral.database.AsterDatabase"><tt class="xref py py-class docutils literal"><span class="pre">AsterDatabase</span></tt></a>
 object to issue the query.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [5]: </span><span class="n">db</span><span class="o">.</span><span class="n">print_query</span><span class="p">(</span><span class="s">&#39;SELECT COUNT() FROM Samples WHERE Name LIKE &quot;</span><span class="si">%s</span><span class="s">tone%&quot;&#39;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [4]: </span><span class="n">db</span><span class="o">.</span><span class="n">print_query</span><span class="p">(</span><span class="s">&#39;SELECT COUNT() FROM Samples WHERE Name LIKE &quot;</span><span class="si">%s</span><span class="s">tone%&quot;&#39;</span><span class="p">)</span>
 <span class="go">78</span>
 
-<span class="gp">In [6]: </span><span class="n">db</span><span class="o">.</span><span class="n">print_query</span><span class="p">(</span><span class="s">&#39;SELECT SampleID, Name FROM Samples WHERE Name LIKE &quot;</span><span class="si">%s</span><span class="s">tone%&quot; limit 10&#39;</span><span class="p">)</span>
+<span class="gp">In [5]: </span><span class="n">db</span><span class="o">.</span><span class="n">print_query</span><span class="p">(</span><span class="s">&#39;SELECT SampleID, Name FROM Samples WHERE Name LIKE &quot;</span><span class="si">%s</span><span class="s">tone%&quot; limit 10&#39;</span><span class="p">)</span>
 <span class="go">43|slate stone shingle</span>
 <span class="go">250|fossiliferous limestone</span>
 <span class="go">251|dolomitic limestone</span>
@@ -139,21 +139,21 @@ object to issue the query.</p>
 </pre></div>
 </div>
 <p>Next, let&#8217;s retrieve and plot one of the results (we will take the last one).</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [7]: </span><span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [6]: </span><span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 
-<span class="gp">In [8]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_signature</span><span class="p">(</span><span class="mi">2436</span><span class="p">)</span>
+<span class="gp">In [7]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_signature</span><span class="p">(</span><span class="mi">2436</span><span class="p">)</span>
 
-<span class="gp">In [9]: </span><span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="gp">In [8]: </span><span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="gp">In [10]: </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
-<span class="gr">Out[10]: </span><span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="n">at</span> <span class="mh">0xf603850</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="gp">In [9]: </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+<span class="gh">Out[9]: </span><span class="go">[&lt;matplotlib.lines.Line2D at 0x10e9bb50&gt;]</span>
 
-<span class="gp">In [11]: </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">sample_name</span><span class="p">)</span>
-<span class="gr">Out[11]: </span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0xf5f8250</span><span class="o">&gt;</span>
+<span class="gp">In [10]: </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">sample_name</span><span class="p">)</span>
+<span class="gh">Out[10]: </span><span class="go">&lt;matplotlib.text.Text at 0x10ea5b10&gt;</span>
 
-<span class="gp">In [12]: </span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">In [11]: </span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [13]: </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="gp">In [12]: </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/limestone.png"><img alt="_images/limestone.png" class="align-center" src="_images/limestone.png" style="width: 640.0px; height: 480.0px;" /></a>
@@ -181,9 +181,9 @@ in the ASTER library have varying numbers of samples over varying spectral
 ranges.  To generate the library we want to save to ENVI format, we need to specify
 a band discretization to which we want all of the desired spectra resampled.
 Let&#8217;s pick the bands from our sample hyperspectral image.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [14]: </span><span class="n">bands</span> <span class="o">=</span> <span class="n">aviris</span><span class="o">.</span><span class="n">read_aviris_bands</span><span class="p">(</span><span class="s">&#39;92AV3C.spc&#39;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [13]: </span><span class="n">bands</span> <span class="o">=</span> <span class="n">aviris</span><span class="o">.</span><span class="n">read_aviris_bands</span><span class="p">(</span><span class="s">&#39;92AV3C.spc&#39;</span><span class="p">)</span>
 
-<span class="gp">In [15]: </span><span class="k">print</span> <span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">In [14]: </span><span class="k">print</span> <span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="go">400.019989 2498.959961</span>
 </pre></div>
 </div>
@@ -192,10 +192,10 @@ Let&#8217;s pick the bands from our sample hyperspectral image.</p>
 We would like to find library spectra that cover the entire spectral range for
 our image, so we&#8217;ll check the band limits for the library spectra.  But first,
 let&#8217;s check the units of the spectra in the library.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [16]: </span><span class="n">db</span><span class="o">.</span><span class="n">print_query</span><span class="p">(</span><span class="s">&#39;SELECT DISTINCT Measurement, XUnit, YUnit FROM Samples, Spectra &#39;</span> <span class="o">+</span>
-<span class="gp">   ....:</span>                       <span class="s">&#39;WHERE Samples.SampleID = Spectra.SampleID AND &#39;</span> <span class="o">+</span>
-<span class="gp">   ....:</span>                       <span class="s">&#39;Name LIKE &quot;</span><span class="si">%s</span><span class="s">tone%&quot;&#39;</span><span class="p">)</span>
-<span class="gp">   ....:</span> 
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [15]: </span><span class="n">db</span><span class="o">.</span><span class="n">print_query</span><span class="p">(</span><span class="s">&#39;SELECT DISTINCT Measurement, XUnit, YUnit FROM Samples, Spectra &#39;</span> <span class="o">+</span>
+<span class="gp">   ....: </span>                     <span class="s">&#39;WHERE Samples.SampleID = Spectra.SampleID AND &#39;</span> <span class="o">+</span>
+<span class="gp">   ....: </span>                     <span class="s">&#39;Name LIKE &quot;</span><span class="si">%s</span><span class="s">tone%&quot;&#39;</span><span class="p">)</span>
+<span class="gp">   ....: </span>
 <span class="go">directional (10 degree) hemispherical reflectance|wavelength (micrometers)|reflectance (percent)</span>
 <span class="go">directional hemispherical reflectance|wavelength (micrometers)|reflectance (percent)</span>
 <span class="go">hemispherical reflectance|wavelength (micrometers)|reflectance (percent)</span>
@@ -205,11 +205,11 @@ let&#8217;s check the units of the spectra in the library.</p>
 <p>We see that all spectra are measures of reflectance but wavelengths are in units
 of micrometers, whereas our sample image bands are in nanometers. To properly
 query the spectra, we will need to specify the band limits in micrometers.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [17]: </span><span class="n">db</span><span class="o">.</span><span class="n">print_query</span><span class="p">(</span><span class="s">&#39;SELECT COUNT() FROM Samples, Spectra &#39;</span> <span class="o">+</span>
-<span class="gp">   ....:</span>        <span class="s">&#39;WHERE Samples.SampleID = Spectra.SampleID AND &#39;</span> <span class="o">+</span>
-<span class="gp">   ....:</span>        <span class="s">&#39;Name LIKE &quot;</span><span class="si">%s</span><span class="s">tone%&quot; AND &#39;</span> <span class="o">+</span>
-<span class="gp">   ....:</span>        <span class="s">&#39;MinWavelength &lt;= 0.4 AND MaxWavelength &gt;= 2.5&#39;</span><span class="p">)</span>
-<span class="gp">   ....:</span> 
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [16]: </span><span class="n">db</span><span class="o">.</span><span class="n">print_query</span><span class="p">(</span><span class="s">&#39;SELECT COUNT() FROM Samples, Spectra &#39;</span> <span class="o">+</span>
+<span class="gp">   ....: </span>      <span class="s">&#39;WHERE Samples.SampleID = Spectra.SampleID AND &#39;</span> <span class="o">+</span>
+<span class="gp">   ....: </span>      <span class="s">&#39;Name LIKE &quot;</span><span class="si">%s</span><span class="s">tone%&quot; AND &#39;</span> <span class="o">+</span>
+<span class="gp">   ....: </span>      <span class="s">&#39;MinWavelength &lt;= 0.4 AND MaxWavelength &gt;= 2.5&#39;</span><span class="p">)</span>
+<span class="gp">   ....: </span>
 <span class="go">59</span>
 </pre></div>
 </div>
@@ -219,43 +219,43 @@ To create a new, resampled spectral library for these spectra, we call the
 method, passing it the list of spectrum IDs and our output band schema (in micrometers).
 Since our bands are defined in nanometers, we will convert them before calling
 the method.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [18]: </span><span class="n">rows</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&#39;SELECT SpectrumID FROM Samples, Spectra &#39;</span> <span class="o">+</span>
-<span class="gp">   ....:</span>          <span class="s">&#39;WHERE Samples.SampleID = Spectra.SampleID AND &#39;</span> <span class="o">+</span>
-<span class="gp">   ....:</span>          <span class="s">&#39;Name LIKE &quot;</span><span class="si">%s</span><span class="s">tone%&quot; AND &#39;</span> <span class="o">+</span>
-<span class="gp">   ....:</span>          <span class="s">&#39;MinWavelength &lt;= 0.4 AND MaxWavelength &gt;= 2.5&#39;</span><span class="p">)</span>
-<span class="gp">   ....:</span> 
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [17]: </span><span class="n">rows</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&#39;SELECT SpectrumID FROM Samples, Spectra &#39;</span> <span class="o">+</span>
+<span class="gp">   ....: </span>        <span class="s">&#39;WHERE Samples.SampleID = Spectra.SampleID AND &#39;</span> <span class="o">+</span>
+<span class="gp">   ....: </span>        <span class="s">&#39;Name LIKE &quot;</span><span class="si">%s</span><span class="s">tone%&quot; AND &#39;</span> <span class="o">+</span>
+<span class="gp">   ....: </span>        <span class="s">&#39;MinWavelength &lt;= 0.4 AND MaxWavelength &gt;= 2.5&#39;</span><span class="p">)</span>
+<span class="gp">   ....: </span>
 
-<span class="gp">In [19]: </span><span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
+<span class="gp">In [18]: </span><span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
 
-<span class="gp">In [20]: </span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mf">1000.</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">]</span>
+<span class="gp">In [19]: </span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mf">1000.</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">]</span>
 
-<span class="gp">In [21]: </span><span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mf">1000.</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span><span class="p">]</span>
+<span class="gp">In [20]: </span><span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mf">1000.</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span><span class="p">]</span>
 
-<span class="gp">In [22]: </span><span class="n">lib</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">create_envi_spectral_library</span><span class="p">(</span><span class="n">ids</span><span class="p">,</span> <span class="n">bands</span><span class="p">)</span>
+<span class="gp">In [21]: </span><span class="n">lib</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">create_envi_spectral_library</span><span class="p">(</span><span class="n">ids</span><span class="p">,</span> <span class="n">bands</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now that we&#8217;ve created a resampled library of spectra, let&#8217;s plot one.  We&#8217;ll
 plot the same limestone spectrum plotted above, which happens to be the last spectrum
 in the resampled library.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [23]: </span><span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [22]: </span><span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="gp">In [24]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_signature</span><span class="p">(</span><span class="mi">2436</span><span class="p">)</span>
+<span class="gp">In [23]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_signature</span><span class="p">(</span><span class="mi">2436</span><span class="p">)</span>
 
-<span class="gp">In [25]: </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;k-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;original&#39;</span><span class="p">);</span>
+<span class="gp">In [24]: </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;k-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;original&#39;</span><span class="p">);</span>
 
-<span class="gp">In [26]: </span><span class="n">plt</span><span class="o">.</span><span class="n">hold</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">In [25]: </span><span class="n">plt</span><span class="o">.</span><span class="n">hold</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [27]: </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">,</span> <span class="n">lib</span><span class="o">.</span><span class="n">spectra</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;resampled&#39;</span><span class="p">);</span>
+<span class="gp">In [26]: </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">,</span> <span class="n">lib</span><span class="o">.</span><span class="n">spectra</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;resampled&#39;</span><span class="p">);</span>
 
-<span class="gp">In [28]: </span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">In [27]: </span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [29]: </span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;upper left&#39;</span><span class="p">);</span>
+<span class="gp">In [28]: </span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;upper left&#39;</span><span class="p">);</span>
 
-<span class="gp">In [30]: </span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="gp">In [29]: </span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
 
-<span class="gp">In [31]: </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Resampled </span><span class="si">%s</span><span class="s"> spectrum&#39;</span> <span class="o">%</span> <span class="n">lib</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
+<span class="gp">In [30]: </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Resampled </span><span class="si">%s</span><span class="s"> spectrum&#39;</span> <span class="o">%</span> <span class="n">lib</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
 
-<span class="gp">In [32]: </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="gp">In [31]: </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/limestone_resampled.png"><img alt="_images/limestone_resampled.png" class="align-center" src="_images/limestone_resampled.png" style="width: 640.0px; height: 480.0px;" /></a>
@@ -263,22 +263,22 @@ in the resampled library.</p>
 band calibration to which we resampled the spectra.  We can also save the library
 for future use.  But before we save the library, we need to change the band units to the units
 used in the band calibration (we need to convert from micrometers to nanometers).</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [33]: </span><span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1000.</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [32]: </span><span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1000.</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">]</span>
 
-<span class="gp">In [34]: </span><span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1000.</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span><span class="p">]</span>
+<span class="gp">In [33]: </span><span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1000.</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span><span class="p">]</span>
 
-<span class="gp">In [35]: </span><span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">band_unit</span> <span class="o">=</span> <span class="s">&#39;nm&#39;</span>
+<span class="gp">In [34]: </span><span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">band_unit</span> <span class="o">=</span> <span class="s">&#39;nm&#39;</span>
 
-<span class="gp">In [36]: </span><span class="n">lib</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;stones&#39;</span><span class="p">,</span> <span class="s">&#39;Stone spectra from the ASTER library&#39;</span><span class="p">)</span>
+<span class="gp">In [35]: </span><span class="n">lib</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;stones&#39;</span><span class="p">,</span> <span class="s">&#39;Stone spectra from the ASTER library&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Saving the library with the name &#8220;stones&#8221; creates two files: &#8220;stones.sli&#8221; and
 &#8220;stones.hdr&#8221;.  The first file contains the resampled spectra and the second is the
 header file that we use to open the library.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [37]: </span><span class="n">mylib</span> <span class="o">=</span> <span class="n">envi</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;stones.hdr&#39;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [36]: </span><span class="n">mylib</span> <span class="o">=</span> <span class="n">envi</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;stones.hdr&#39;</span><span class="p">)</span>
 
-<span class="gp">In [38]: </span><span class="n">mylib</span>
-<span class="gr">Out[38]: </span><span class="o">&lt;</span><span class="n">spectral</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">envi</span><span class="o">.</span><span class="n">SpectralLibrary</span> <span class="n">instance</span> <span class="n">at</span> <span class="mh">0xdd69248</span><span class="o">&gt;</span>
+<span class="gp">In [37]: </span><span class="n">mylib</span>
+<span class="gh">Out[37]: </span><span class="go">&lt;spectral.io.envi.SpectralLibrary instance at 0xfe44830&gt;</span>
 </pre></div>
 </div>
 <p class="rubric">References</p>
