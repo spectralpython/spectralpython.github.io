@@ -42,5 +42,5 @@ The web site is hosted on GitHub and is deployed using the `upload` target:
 
     make upload
 
-Note you may be prompted to enter site credentials if you do note have your
+Note you may be prompted to enter site credentials if you do not have your
 ssh key cached.

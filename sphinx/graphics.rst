@@ -343,7 +343,7 @@ palette must be explicitly passed as a keyword argument:
     In [12]: save_rgb('gt.jpg', gt, colors=spy_colors)
     
     @suppress
-    In [13]: save_rgb('images/view_gt.jpg', gt, colors=spy.spy_colors)
+    In [13]: save_rgb('images/view_gt.jpg', gt, colors=spy_colors)
 
 Spectrum Plots
 ==============
