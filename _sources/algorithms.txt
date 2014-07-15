@@ -187,8 +187,6 @@ ground truth image.
 
     In [22]: gterrors = gtresults * (gtresults != gt)
     
-    In [23]: w = view_indexed(gterrors)
-
     @savefig gmlc_errors.png scale=33% align=center
     In [20]: v = imshow(classes=gterrors)
 
