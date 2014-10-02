@@ -61,8 +61,8 @@ interactivity.
 Image Data Display
 ~~~~~~~~~~~~~~~~~~
 
-To display the RGB bands as shown for the `view` function above, pass the same
-arguments to `imshow`:
+The `imshow` function produces a raster display of data associated with an
+np.ndarray or `SpyFile` object.
 
 .. ipython::
 
@@ -78,6 +78,22 @@ used to pan and zoom the displayed images. If you press the "z" keyboard key,
 a zoom window will be opened, which displays a magnified view of the image. By
 holding down the **CONTROL** key and left-clicking in the original window, the
 zoom window will pan to the pixel clicked in the original window.
+
+.. versionchanged:: 0.16.0
+   By default, `imshow` function applies a linear histogram stretch of the RGB
+   display data. The the color stretch can be controlled by the *stretch*,
+   *bounds*, and *stretch_all* keyword to the `imshow` function (see
+   :func:`~spectral.graphics.graphics.get_rgb` for the meaning of these
+   keywords). To adjust the color stretch of a displayed image, the
+   :meth:`~spectral.graphics.spypylab.ImageView.set_rgb_options` method of the
+   `ImageView` object can be called.
+
+RGB data limits for a displayed image can be printed from the `__str__` method
+of the `ImageView` object:
+
+.. ipython::
+
+    In [1]: print view
 
 Class Map Display
 ~~~~~~~~~~~~~~~~~
