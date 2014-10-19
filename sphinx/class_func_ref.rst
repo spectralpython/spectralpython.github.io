@@ -3,62 +3,9 @@
 .. toctree::
     :maxdepth: 2
 
-.. list-table:: File Input/Output
-   :header-rows: 1
-   :widths: 15, 30
-   :class: center
-
-   * - Class/Function
-     - Description
-   * - :func:`~spectral.database.AsterDatabase`
-     - Create/Query a spectral database generated from the ASTER Spectral Library
-   * - :func:`~spectral.spectral.open_image`
-     - Generic function for opening hyperspectral image file formats
-   * - :func:`~spectral.io.aviris.open`
-     - Open an AVIRIS image file
-   * - :func:`~spectral.io.aviris.read_aviris_bands`
-     - Read an AVIRIS band calibration file
-   * - :func:`~spectral.io.envi.open`
-     - Open a data file (image, classification, or spectral library) that has
-       an ENVI header
-   * - :func:`~spectral.io.envi.create_image`
-     - Open a new (empty) image file with an ENVI header
-   * - :func:`~spectral.io.envi.save_classification`
-     - Save classification labels to a file with a corresponding ENVI header
-   * - :func:`~spectral.io.envi.save_image`
-     - Save image data to a file with a corresponding ENVI header
-   * - :func:`~spectral.io.envi.SpectralLibrary`
-     - Class to create/save spectral libraries in ENVI format
-   * - :func:`~spectral.io.erdas.open`
-     - Open an Erdas LAN image file
-
-.. list-table:: Display Functions
-   :header-rows: 1
-   :widths: 15, 30
-   :class: center
-
-   * - Class/Function
-     - Description
-   * - :class:`~spectral.ColorScale`
-     - Create color scales for use with data display functions
-   * - :func:`~spectral.graphics.graphics.get_rgb`
-     - Produce RGB display data from image data
-   * - :func:`~spectral.graphics.spypylab.ImageView`
-     - Class for interacting with image displays
-   * - :func:`~spectral.graphics.spypylab.imshow`
-     - Primary function for displaying raster views of image data
-   * - :func:`~spectral.algorithms.algorithms.ppi`
-     - Display Pixel Purity Index values while `ppi` function executes.
-   * - :func:`~spectral.save_rgb`
-     - Saves image data in common RGB image formats (e.g., JPEG, PNG)
-   * - :func:`~spectral.view_cube`
-     - View an interactive 3D image cube
-   * - :func:`~spectral.view_nd`
-     - Display an interactive N-D visualization of image pixel data
-
-========================
-Class/Function Reference
-========================
+============================
+Class/Function Documentation
+============================
 
 File I/O
 ========
@@ -266,6 +213,11 @@ cov_avg
 -------
 
 .. autofunction:: spectral.algorithms.algorithms.cov_avg
+
+FisherLinearDiscriminant
+------------------------
+
+.. autoclass:: spectral.algorithms.algorithms.FisherLinearDiscriminant
 
 GaussianClassifier
 ------------------

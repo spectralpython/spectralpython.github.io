@@ -290,10 +290,10 @@ And the associated errors:
     In [73]: v = imshow(classes=training_errors)
 
 
-Fischer Linear Discriminant
+Fisher Linear Discriminant
 ---------------------------
 
-The Fischer Linear Discriminant (a.k.a., canonical discriminant) attempts to
+The Fisher Linear Discriminant (a.k.a., canonical discriminant) attempts to
 find a set of transformed axes that maximize the ratio of the average distance
 between classes to the average distance between samples within each class. [Richards1999]_
 This is written as

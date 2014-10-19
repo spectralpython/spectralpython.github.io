@@ -18,8 +18,10 @@ hyperspectral imagery. It can be used interactively from the Python command
 prompt or via Python scripts.  SPy is free, open source software distributed
 under the `GNU General Public License <http://www.gnu.org/copyleft/gpl.html>`_.
 To see some examples of how SPy can be used, you may want to jump straight to
-the documentation sections on :ref:`graphics` or :ref:`algorithms`.  You can
-download SPy from `GitHub <https://github.com/spectralpython/spectral/releases>`_,
+the documentation sections on :ref:`graphics` or :ref:`algorithms`.  A
+categorized listing of the main classes and functions are in the
+:ref:`class-func-glossary`. You can
+download SPy from `GitHub <https://github.com/spectralpython/spectral/releases/latest>`_,
 the `Python Package Index (PyPI) <https://pypi.python.org/pypi/spectral>`_, or
 `Sourceforge <https://sourceforge.net/projects/spectralpython>`_. See the
 :ref:`installation` section section of the documentation for details.
@@ -34,6 +36,23 @@ Documentation
 
 News
 ----
+
+2014-10-18 : SPy 0.16.0 provides initial support for Python 3.
+
+    This release supports Python 3 for all functions except :func:`~spectral.view_cube`
+    and :func:`~spectral.view_nd`. Note that for Python 3, you should use the
+    Qt4Agg matplotlib backend.
+
+    New features in this release include the Adaptive Coherence/Cosine Esimator (:func:`~spectral.algorithms.detectors.ace`)
+    target detector, Pixel Purity Index (:func:`~spectral.algorithms.algorithms.ppi`),
+    ability to save ENVI classification files (:func:`envi.save_classification <spectral.io.envi.save_classification>`),
+    and linear contrast enhancement (by data limits or cumulative histogram percentiles).
+    The SPy :func:`~spectral.graphics.spypylab.imshow` function now applies
+    a 2% histogram color stretch by default (this can be overridden in the
+    :obj:`spectral.settings <spectral.spectral.SpySettings>` object).
+
+    Additional info is in the `version 0.16.0 issues <https://github.com/spectralpython/spectral/issues?q=milestone%3Av0.16.0+is%3Aclosed>`_.
+
 
 2014-06-04 : SPy 0.15.0 is released.
 
