@@ -164,5 +164,5 @@ can be done as follows.
     In [23]: img = erdas.open('92AV3C.lan')
 
 
-.. [#envi-trademark] ENVI is a registered trademark of ITT Corporation.
+.. [#envi-trademark] ENVI is a registered trademark of Exelis Visual Information Solutions.
 .. [#aviris] `http://aviris.jpl.nasa.gov/ <http://aviris.jpl.nasa.gov/>`_

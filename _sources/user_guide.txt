@@ -16,5 +16,5 @@ Spectral Python (SPy) User Guide
     Displaying Data <graphics>
     Spectral Algorithms <algorithms>
     Spectral Libraries <libraries>
-    Class/Function Reference <class_func_ref>
-
+    Classes/Function Glossary <class_func_glossary>
+    Class/Function Documentation <class_func_ref>

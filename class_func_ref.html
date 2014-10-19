@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Class/Function Reference &mdash; Spectral Python 0.15.0
+    <title>Class/Function Documentation &mdash; Spectral Python 0.16.0
  documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.15.0
+        VERSION:     '0.16.0
 ',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,19 +25,19 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Spectral Python 0.15.0
+    <link rel="top" title="Spectral Python 0.16.0
  documentation" href="index.html" />
     <link rel="up" title="Spectral Python (SPy) User Guide" href="user_guide.html" />
-    <link rel="prev" title="Spectral Libraries" href="libraries.html" /> 
+    <link rel="prev" title="Class/Function Glossary" href="class_func_glossary.html" /> 
   </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="libraries.html" title="Spectral Libraries"
+          <a href="class_func_glossary.html" title="Class/Function Glossary"
              accesskey="P">previous</a></li>
-        <li><a href="index.html">Spectral Python 0.15.0
+        <li><a href="index.html">Spectral Python 0.16.0
  documentation</a> &raquo;</li>
           <li><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>
@@ -52,15 +52,15 @@
 <ul class="simple">
 </ul>
 </div>
-<div class="section" id="class-function-reference">
-<h1>Class/Function Reference<a class="headerlink" href="#class-function-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-function-documentation">
+<h1>Class/Function Documentation<a class="headerlink" href="#class-function-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="file-i-o">
 <h2>File I/O<a class="headerlink" href="#file-i-o" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="open-image">
 <h3>open_image<a class="headerlink" href="#open-image" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
-<dt id="spectral.open_image">
-<tt class="descname">open_image</tt><big>(</big><em>file</em><big>)</big><a class="headerlink" href="#spectral.open_image" title="Permalink to this definition">¶</a></dt>
+<dt id="spectral.spectral.open_image">
+<tt class="descname">open_image</tt><big>(</big><em>file</em><big>)</big><a class="headerlink" href="#spectral.spectral.open_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Locates &amp; opens the specified hyperspectral image.</p>
 <p>Arguments:</p>
 <blockquote>
@@ -535,7 +535,7 @@ the data file has an unusual file extension that SPy can not identify.</p>
 <table class="docutils footnote" frame="void" id="envi-trademark" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>ENVI is a registered trademark of ITT Corporation.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>ENVI is a registered trademark of Exelis, Inc.</td></tr>
 </tbody>
 </table>
 <dl class="function">
@@ -700,12 +700,12 @@ the <cite>open_memmap</cite> method of the returned object.</div></blockquote>
 </dd></dl>
 
 </div>
-<div class="section" id="envi-save-image">
-<h3>envi.save_image<a class="headerlink" href="#envi-save-image" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="envi-save-classification">
+<h3>envi.save_classification<a class="headerlink" href="#envi-save-classification" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
-<dt id="spectral.io.envi.save_image">
-<tt class="descname">save_image</tt><big>(</big><em>hdr_file</em>, <em>image</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.io.envi.save_image" title="Permalink to this definition">¶</a></dt>
-<dd><p>Saves an image to disk.</p>
+<dt id="spectral.io.envi.save_classification">
+<tt class="descname">save_classification</tt><big>(</big><em>hdr_file</em>, <em>image</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.io.envi.save_classification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves a classification image to disk.</p>
 <p>Arguments:</p>
 <blockquote>
 <div><p><cite>hdr_file</cite> (str):</p>
@@ -733,6 +733,74 @@ files exist, an exception will be raised.</div></blockquote>
 default extension &#8221;.img&#8221; will be used.  If <cite>ext</cite> is an empty
 string, the image file will have the same name as the header but
 without the &#8221;.hdr&#8221; extension.</div></blockquote>
+<p><cite>interleave</cite> (str):</p>
+<blockquote>
+<div>The band interleave format to use in the file.  This argument
+should be one of &#8220;bil&#8221;, &#8220;bip&#8221;, or &#8220;bsq&#8221;.  If not specified, the
+image will be written in BIP interleave.</div></blockquote>
+<p><cite>byteorder</cite> (int or string):</p>
+<blockquote>
+<div>Specifies the byte order (endian-ness) of the data as
+written to disk. For little endian, this value should be
+either 0 or &#8220;little&#8221;.  For big endian, it should be
+either 1 or &#8220;big&#8221;. If not specified, native byte order
+will be used.</div></blockquote>
+<p><cite>metadata</cite> (dict):</p>
+<blockquote>
+<div>A dict containing ENVI header parameters (e.g., parameters
+extracted from a source image).</div></blockquote>
+<p><cite>class_names</cite> (array of strings):</p>
+<blockquote>
+<div>For classification results, specifies the names to assign each
+integer in the class map being written.  If not given, default
+class names are created.</div></blockquote>
+<p><cite>class_colors</cite> (array of RGB-tuples):</p>
+<blockquote>
+<div>For classification results, specifies colors to assign each
+integer in the class map being written.  If not given, default
+colors are automatically generated.</div></blockquote>
+</div></blockquote>
+<p>If the source image being saved was already in ENVI format, then the
+SpyFile object for that image will contain a <cite>metadata</cite> dict that can be
+passed as the <cite>metadata</cite> keyword. However, care should be taken to ensure
+that all the metadata fields from the source image are still accurate
+(e.g., wavelengths do not apply to classification results).</p>
+</dd></dl>
+
+</div>
+<div class="section" id="envi-save-image">
+<h3>envi.save_image<a class="headerlink" href="#envi-save-image" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.io.envi.save_image">
+<tt class="descname">save_image</tt><big>(</big><em>hdr_file</em>, <em>image</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.io.envi.save_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves an image to disk.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>hdr_file</cite> (str):</p>
+<blockquote>
+<div>Header file (with &#8221;.hdr&#8221; extension) name with path.</div></blockquote>
+<p><cite>image</cite> (SpyFile object or numpy.ndarray):</p>
+<blockquote>
+<div>The image to save.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div><p><cite>dtype</cite> (numpy dtype or type string):</p>
+<blockquote>
+<div>The numpy data type with which to store the image.  For example,
+to store the image in 16-bit unsigned integer format, the argument
+could be any of <cite>numpy.uint16</cite>, &#8220;u2&#8221;, &#8220;uint16&#8221;, or &#8220;H&#8221;.</div></blockquote>
+<p><cite>force</cite> (bool):</p>
+<blockquote>
+<div>If the associated image file or header already exist and <cite>force</cite> is
+True, the files will be overwritten; otherwise, if either of the
+files exist, an exception will be raised.</div></blockquote>
+<p><cite>ext</cite> (str or None):</p>
+<blockquote>
+<div>The extension to use for the image file.  If not specified, the
+default extension &#8221;.img&#8221; will be used.  If <cite>ext</cite> is an empty
+string or is None, the image file will have the same name as the
+header but without the &#8221;.hdr&#8221; extension.</div></blockquote>
 <p><cite>interleave</cite> (str):</p>
 <blockquote>
 <div>The band interleave format to use in the file.  This argument
@@ -799,7 +867,7 @@ being saved are from a principal components transformation).</p>
 <h3>ColorScale<a class="headerlink" href="#colorscale" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="spectral.ColorScale">
-<em class="property">class </em><tt class="descname">ColorScale</tt><big>(</big><em>levels</em>, <em>colors</em>, <em>num_tics=256</em><big>)</big><a class="headerlink" href="#spectral.ColorScale" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descname">ColorScale</tt><big>(</big><em>levels</em>, <em>colors</em>, <em>num_tics=0</em><big>)</big><a class="headerlink" href="#spectral.ColorScale" title="Permalink to this definition">¶</a></dt>
 <dd><p>A color scale class to map scalar values to rgb colors.  The class allows
 associating colors with particular scalar values, setting a background
 color (for values below threshold), andadjusting the scale limits. The
@@ -813,7 +881,7 @@ corresponding color, interpolating between defined colors.</p>
 
 <dl class="method">
 <dt id="spectral.ColorScale.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>levels</em>, <em>colors</em>, <em>num_tics=256</em><big>)</big><a class="headerlink" href="#spectral.ColorScale.__init__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__init__</tt><big>(</big><em>levels</em>, <em>colors</em>, <em>num_tics=0</em><big>)</big><a class="headerlink" href="#spectral.ColorScale.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates the ColorScale.</p>
 <p>Arguments:</p>
 <blockquote>
@@ -827,7 +895,9 @@ corresponding color, interpolating between defined colors.</p>
 <blockquote>
 <div>The total number of colors in the scale, not including the
 background color.  This includes the colors given in the
-<cite>colors</cite> argument, as well as interpolated color values.</div></blockquote>
+<cite>colors</cite> argument, as well as interpolated color values. If
+not specified, only the colors in the <cite>colors</cite> argument will
+be used (i.e., num_tics = len(colors).</div></blockquote>
 </div></blockquote>
 </dd></dl>
 
@@ -858,8 +928,8 @@ accordingly.</p>
 <tt class="descname">get_rgb</tt><big>(</big><em>source</em>, <em>bands=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.graphics.graphics.get_rgb" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract RGB data for display from a SpyFile object or numpy array.</p>
 <dl class="docutils">
-<dt>USAGE: rgb = get_rgb(source [, bands] [stretch=True]</dt>
-<dd>[stretch_all=False] [bounds = (lower, upper)] )</dd>
+<dt>USAGE: rgb = get_rgb(source [, bands] [, stretch=&lt;arg&gt; | , bounds=&lt;arg&gt;]</dt>
+<dd>[, stretch_all=&lt;arg&gt;])</dd>
 </dl>
 <p>Arguments:</p>
 <blockquote>
@@ -876,20 +946,69 @@ not, then first, middle and last band will be returned.</div></blockquote>
 </div></blockquote>
 <p>Keyword Arguments:</p>
 <blockquote>
-<div><p><cite>stretch</cite> (bool, default True):</p>
+<div><p><cite>stretch</cite> (numeric or tuple):</p>
 <blockquote>
-<div>If the <cite>stretch</cite> keyword is True, the RGB values will be scaled
-so the maximum value in the returned array will be 1.</div></blockquote>
-<p><cite>stretch_all</cite> (bool, default False):</p>
+<div><p>This keyword specifies two points on the cumulative histogram of
+the input data for performing a linear stretch of RGB value for the
+data. Numeric values given for this parameter are expected to be
+between 0 and 1. This keyword can be expressed in three forms:</p>
+<ol class="arabic simple">
+<li>As a 2-tuple. In this case the two values specify the lower and
+upper points of the cumulative histogram respectively. The
+specified stretch will be performed independently on each of the
+three color channels unless the <cite>stretch_all</cite> keyword is set to
+True, in which case all three color channels will be stretched
+identically.</li>
+<li>As a 3-tuple of 2-tuples. In this case, Each channel will be
+stretched according to its respective 2-tuple in the keyword
+argument.</li>
+<li>As a single numeric value. In this case, the value indicates the
+size of the histogram tail to be applied at both ends of the
+histogram for each color channel. <cite>stretch=a</cite> is equivalent to
+<cite>stretch=(a, 1-a)</cite>.</li>
+</ol>
+<p>If neither <cite>stretch</cite> nor <cite>bounds</cite> are specified, then the default
+value of <cite>stretch</cite> defined by <cite>spectral.settings.imshow_stretch</cite>
+will be used.</p>
+</div></blockquote>
+<p><cite>bounds</cite> (tuple):</p>
+<blockquote>
+<div>This keyword functions similarly to the <cite>stretch</cite> keyword, except
+numeric values are in image data units instead of cumulative
+histogram values. The form of this keyword is the same as the first
+two forms for the <cite>stretch</cite> keyword (i.e., either a 2-tuple of
+numbers or a 3-tuple of 2-tuples of numbers).</div></blockquote>
+<p><cite>stretch_all</cite> (bool):</p>
 <blockquote>
 <div>If this keyword is True, each color channel will be scaled
-separately such that its maximum value is 1.</div></blockquote>
-<p><cite>bounds</cite> (2-tuple of scalars):</p>
+independently.</div></blockquote>
+<p><cite>color_scale</cite> (<tt class="xref py py-class docutils literal"><span class="pre">ColorScale</span></tt>):</p>
 <blockquote>
-<div>If <cite>bounds</cite> is specified, the data will be scaled so that <cite>lower</cite>
-and <cite>upper</cite> correspond to 0 and 1, respectively. Any values outside
-of the range (<cite>lower</cite>, <cite>upper</cite>) will be clipped.</div></blockquote>
+<div>A color scale to be applied to a single-band image.</div></blockquote>
+<p><cite>auto_scale</cite> (bool):</p>
+<blockquote>
+<div>If <cite>color_scale</cite> is provided and <cite>auto_scale</cite> is True, the min/max
+values of the color scale will be mapped to the min/max data
+values.</div></blockquote>
+<p><cite>colors</cite> (ndarray):</p>
+<blockquote>
+<div>If <cite>source</cite> is a single-band integer-valued np.ndarray and this
+keyword is provided, then elements of <cite>source</cite> are assumed to be
+color index values that specify RGB values in <cite>colors</cite>.</div></blockquote>
 </div></blockquote>
+<p>Examples:</p>
+<p>Select color limits corresponding to 2% tails in the data histogram:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">imshow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stretch</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Same as above but specify upper and lower limits explicitly:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">imshow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stretch</span><span class="o">=</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Same as above but specify limits for each RGB channel explicitly:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">imshow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stretch</span><span class="o">=</span><span class="p">((</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">)))</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -1059,6 +1178,13 @@ given.</div></blockquote>
 </dd></dl>
 
 <dl class="method">
+<dt id="spectral.graphics.spypylab.ImageView.set_rgb_options">
+<tt class="descname">set_rgb_options</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.set_rgb_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets parameters affecting RGB display of data.</p>
+<p>Accepts any keyword supported by <a class="reference internal" href="#spectral.graphics.graphics.get_rgb" title="spectral.graphics.graphics.get_rgb"><tt class="xref py py-func docutils literal"><span class="pre">get_rgb</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="spectral.graphics.spypylab.ImageView.set_source">
 <tt class="descname">set_source</tt><big>(</big><em>source</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.ImageView.set_source" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the image data source (used for accessing spectral data).</p>
@@ -1101,7 +1227,7 @@ the ImageView. If not provided, a new figure will be created.</div></blockquote>
 <h3>imshow<a class="headerlink" href="#imshow" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="spectral.graphics.spypylab.imshow">
-<tt class="descname">imshow</tt><big>(</big><em>data=None</em>, <em>bands=None</em>, <em>classes=None</em>, <em>source=None</em>, <em>colors=None</em>, <em>figsize=None</em>, <em>fignum=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.imshow" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">imshow</tt><big>(</big><em>data=None</em>, <em>bands=None</em>, <em>classes=None</em>, <em>source=None</em>, <em>colors=None</em>, <em>figsize=None</em>, <em>fignum=None</em>, <em>title=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.graphics.spypylab.imshow" title="Permalink to this definition">¶</a></dt>
 <dd><p>A wrapper around matplotlib&#8217;s imshow for multi-band images.</p>
 <p>Arguments:</p>
 <blockquote>
@@ -1142,13 +1268,15 @@ in <cite>spectral.settings.imshow_figure_size</cite> will be used.</div></blockq
 <blockquote>
 <div>Specifies the figure number of an existing matplotlib figure. If
 this argument is None, a new figure will be created.</div></blockquote>
+<p><cite>title</cite> (str):</p>
+<blockquote>
+<div>The title to be displayed above the image.</div></blockquote>
 </div></blockquote>
 <p>Keywords:</p>
 <blockquote>
-<div>If provided, the keywords, &#8220;stretch&#8221;, &#8220;stretch_all&#8221;, and &#8220;bounds&#8221;
-will be passed as keywords to <cite>get_rgb</cite> for extracting RGB values
-from <cite>data</cite>. All keyword arguments other than those described above
-will be passed on to <cite>matplotlib.imshow</cite>.</div></blockquote>
+<div>Keywords accepted by <a class="reference internal" href="#spectral.graphics.graphics.get_rgb" title="spectral.graphics.graphics.get_rgb"><tt class="xref py py-func docutils literal"><span class="pre">get_rgb</span></tt></a> or
+<tt class="xref py py-func docutils literal"><span class="pre">matplotlib.imshow</span></tt> will be passed on to the appropriate
+function.</div></blockquote>
 <p>This function defaults the color scale (imshow&#8217;s &#8220;cmap&#8221; keyword) to
 &#8220;gray&#8221;. To use imshow&#8217;s default color scale, call this function with
 keyword <cite>cmap=None</cite>.</p>
@@ -1227,24 +1355,8 @@ and blue channels, respectively.</div></blockquote>
 <div>The image file format to create.  Must be a format recognized by
 <tt class="xref py py-mod docutils literal"><span class="pre">PIL</span></tt> (e.g., &#8216;png&#8217;, &#8216;tiff&#8217;, &#8216;bmp&#8217;).  If <cite>format</cite> is not
 provided, &#8216;jpg&#8217; is assumed.</div></blockquote>
-<p><cite>colors</cite> (list of 3-tuples of ints):</p>
-<blockquote>
-<div>If this keyword is provided, <cite>data</cite> is interpeted to be a color map
-into the <cite>colors</cite> color palette. This is the same <cite>colors</cite> keyword
-used by the <a class="reference internal" href="#spectral.view_indexed" title="spectral.view_indexed"><tt class="xref py py-func docutils literal"><span class="pre">spectral.view_indexed</span></tt></a> function. The parameter
-is a list of 3-tuples defining RGB values, where R, G, and B are
-in the range [0-255].</div></blockquote>
-<p><cite>stretch</cite> (bool):</p>
-<blockquote>
-<div>If <cite>stretch</cite> evaluates True, the highest value in the data source
-will be scaled to maximum color channel intensity.</div></blockquote>
-<p><cite>stretch_all</cite> (bool):</p>
-<blockquote>
-<div>If <cite>stretch_all</cite> evaluates True, the highest value of the data
-source in each color channel will be set to maximum intensity.</div></blockquote>
-<p><cite>bounds</cite> (2-tuple of ints):</p>
-<blockquote>
-<div>Clips the input data at (lower, upper) values.</div></blockquote>
+<p>See <a class="reference internal" href="#spectral.graphics.graphics.get_rgb" title="spectral.graphics.graphics.get_rgb"><tt class="xref py py-func docutils literal"><span class="pre">get_rgb</span></tt></a> for descriptions of
+additional keyword arguments.</p>
 </div></blockquote>
 <p>Examples:</p>
 <blockquote>
@@ -1667,6 +1779,106 @@ recomputed.</div></blockquote>
 </div>
 <div class="section" id="spectral-classes-functions">
 <h2>Spectral Classes/Functions<a class="headerlink" href="#spectral-classes-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="adaptive-coherence-cosine-estimator-ace">
+<h3>Adaptive Coherence/Cosine Estimator (ACE)<a class="headerlink" href="#adaptive-coherence-cosine-estimator-ace" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.detectors.ace">
+<tt class="descname">ace</tt><big>(</big><em>X</em>, <em>target</em>, <em>background=None</em>, <em>window=None</em>, <em>cov=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.algorithms.detectors.ace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Adaptive Coherence/Cosine Estimator (ACE) detection scores.</p>
+<p>Usage:</p>
+<blockquote>
+<div><p>y = ace(X, target, background)</p>
+<p>y = ace(X, target, window=&lt;win&gt; [, cov=&lt;cov&gt;])</p>
+</div></blockquote>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>X</cite> (numpy.ndarray):</p>
+<blockquote>
+<div><p>For the first calling method shown, <cite>X</cite> can be an ndarray with
+shape (R, C, B) or an ndarray of shape (R * C, B). If the
+<cite>background</cite> keyword is given, it will be used for the image
+background statistics; otherwise, background statistics will be
+computed from <cite>X</cite>.</p>
+<p>If the <cite>window</cite> keyword is given, <cite>X</cite> must be a 3-dimensional
+array and background statistics will be computed for each point
+in the image using a local window defined by the keyword.</p>
+</div></blockquote>
+<p><cite>target</cite> (ndarray or sequence of ndarray):</p>
+<blockquote>
+<div><p>If <cite>X</cite> has shape (R, C, B), <cite>target</cite> can be any of the following:</p>
+<blockquote>
+<div><p>A length-B ndarray. In this case, <cite>target</cite> specifies a single
+target spectrum to be detected. The return value will be an
+ndarray with shape (R, C).</p>
+<p>An ndarray with shape (D, B). In this case, <cite>target</cite> contains
+<cite>D</cite> length-B targets that define a subspace for the detector.
+The return value will be an ndarray with shape (R, C).</p>
+<p>A length-D sequence (e.g., list or tuple) of length-B ndarrays.
+In this case, the detector will be applied seperately to each of
+the <cite>D</cite> targets. This is equivalent to calling the function
+sequentially for each target and stacking the results but is
+much faster. The return value will be an ndarray with shape
+(R, C, D).</p>
+</div></blockquote>
+</div></blockquote>
+<p><cite>background</cite> (<cite>GaussianStats</cite>):</p>
+<blockquote>
+<div>The Gaussian statistics for the background (e.g., the result
+of calling <tt class="xref py py-func docutils literal"><span class="pre">calc_stats</span></tt> for an image). This argument is not
+required if <cite>window</cite> is given.</div></blockquote>
+<p><cite>window</cite> (2-tuple of odd integers):</p>
+<blockquote>
+<div><p>Must have the form (<cite>inner</cite>, <cite>outer</cite>), where the two values
+specify the widths (in pixels) of inner and outer windows centered
+about the pixel being evaulated. Both values must be odd integers.
+The background mean and covariance will be estimated from pixels
+in the outer window, excluding pixels within the inner window. For
+example, if (<cite>inner</cite>, <cite>outer</cite>) = (5, 21), then the number of
+pixels used to estimate background statistics will be
+<img class="math" src="_images/math/2e5538d47f8ce1d701ba80f224fe3aa4bd14f220.png" alt="21^2 - 5^2 = 416"/>. If this argument is given, <cite>background</cite>
+is not required (and will be ignored, if given).</p>
+<p>The window is modified near image borders, where full, centered
+windows cannot be created. The outer window will be shifted, as
+needed, to ensure that the outer window still has height and width
+<cite>outer</cite> (in this situation, the pixel being evaluated will not be
+at the center of the outer window). The inner window will be
+clipped, as needed, near image borders. For example, assume an
+image with 145 rows and columns. If the window used is
+(5, 21), then for the image pixel at (0, 0) (upper left corner),
+the the inner window will cover <cite>image[:3, :3]</cite> and the outer
+window will cover <cite>image[:21, :21]</cite>. For the pixel at (50, 1), the
+inner window will cover <cite>image[48:53, :4]</cite> and the outer window
+will cover <cite>image[40:51, :21]</cite>.</p>
+</div></blockquote>
+<p><cite>cov</cite> (ndarray):</p>
+<blockquote>
+<div>An optional covariance to use. If this parameter is given, <cite>cov</cite>
+will be used for all matched filter calculations (background
+covariance will not be recomputed in each window). Only the
+background mean will be recomputed in each window). If the
+<cite>window</cite> argument is specified, providing <cite>cov</cite> will allow the
+result to be computed <em>much</em> faster.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div><p><cite>vectorize</cite> (bool, default True):</p>
+<blockquote>
+<div>Specifies whether the function should attempt to vectorize
+operations. This typicall results in faster computation but will
+consume more memory.</div></blockquote>
+</div></blockquote>
+<p>Returns numpy.ndarray:</p>
+<blockquote>
+<div>The return value will be the ACE scores for each input pixel. The shape
+of the returned array will be either (R, C) or (R, C, D), depending on
+the value of the <cite>target</cite> argument.</div></blockquote>
+<p>References:</p>
+<p>Kraut S. &amp; Scharf L.L., &#8220;The CFAR Adaptive Subspace Detector is a Scale-
+Invariant GLRT,&#8221; IEEE Trans. Signal Processing., vol. 47 no. 9, pp. 2538-41,
+Sep. 1999</p>
+</dd></dl>
+
+</div>
 <div class="section" id="asterdatabase">
 <h3>AsterDatabase<a class="headerlink" href="#asterdatabase" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
@@ -2183,6 +2395,37 @@ otherwise, a simple average of the class covariances is performed.</div></blockq
 </div></blockquote>
 <p>Returns a class-averaged covariance matrix. The number of covariances used
 in the average is equal to the number of non-zero elements of <cite>mask</cite>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="fisherlineardiscriminant">
+<h3>FisherLinearDiscriminant<a class="headerlink" href="#fisherlineardiscriminant" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.algorithms.algorithms.FisherLinearDiscriminant">
+<em class="property">class </em><tt class="descname">FisherLinearDiscriminant</tt><big>(</big><em>vals</em>, <em>vecs</em>, <em>mean</em>, <em>cov_b</em>, <em>cov_w</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.FisherLinearDiscriminant" title="Permalink to this definition">¶</a></dt>
+<dd><p>An object for storing a data set&#8217;s linear discriminant data.  For <cite>C</cite>
+classes with <cite>B</cite>-dimensional data, the object has the following members:</p>
+<blockquote>
+<div><p><cite>eigenvalues</cite>:</p>
+<blockquote>
+<div>A length <cite>C-1</cite> array of eigenvalues</div></blockquote>
+<p><cite>eigenvectors</cite>:</p>
+<blockquote>
+<div>A <cite>BxC</cite> array of normalized eigenvectors</div></blockquote>
+<p><cite>mean</cite>:</p>
+<blockquote>
+<div>The length <cite>B</cite> mean vector of the image pixels (from all classes)</div></blockquote>
+<p><cite>cov_b</cite>:</p>
+<blockquote>
+<div>The <cite>BxB</cite> matrix of covariance <em>between</em> classes</div></blockquote>
+<p><cite>cov_w</cite>:</p>
+<blockquote>
+<div>The <cite>BxB</cite> matrix of average covariance <em>within</em> each class</div></blockquote>
+<p><cite>transform</cite>:</p>
+<blockquote>
+<div>A callable function to transform data to the space of the
+linear discriminant.</div></blockquote>
+</div></blockquote>
 </dd></dl>
 
 </div>
@@ -2938,7 +3181,7 @@ corresponding element of data.</div></blockquote>
 <h3>noise_from_diffs<a class="headerlink" href="#noise-from-diffs" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="spectral.algorithms.algorithms.noise_from_diffs">
-<tt class="descname">noise_from_diffs</tt><big>(</big><em>X</em>, <em>direction='lowerright'</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.noise_from_diffs" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">noise_from_diffs</tt><big>(</big><em>X</em>, <em>direction=u'lowerright'</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.noise_from_diffs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimates noise statistcs by taking differences of adjacent pixels.</p>
 <p>Arguments:</p>
 <blockquote>
@@ -3148,6 +3391,72 @@ will preserve the network weights from the previous training iteration.
 rate.</p>
 </dd></dl>
 
+</dd></dl>
+
+</div>
+<div class="section" id="pixel-purity-index-ppi">
+<h3>Pixel Purity Index (PPI)<a class="headerlink" href="#pixel-purity-index-ppi" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.algorithms.ppi">
+<tt class="descname">ppi</tt><big>(</big><em>X</em>, <em>niters</em>, <em>threshold=0</em>, <em>centered=False</em>, <em>start=None</em>, <em>display=0</em>, <em>**imshow_kwargs</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.ppi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns pixel purity indices for an image.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>X</cite> (ndarray):</p>
+<blockquote>
+<div>Image data for which to calculate pixel purity indices</div></blockquote>
+<p><cite>niters</cite> (int):</p>
+<blockquote>
+<div>Number of iterations to perform. Each iteration corresponds to a
+projection of the image data onto a random unit vector.</div></blockquote>
+<p><cite>threshold</cite> (numeric):</p>
+<blockquote>
+<div>If this value is zero, only the two most extreme pixels will have
+their indices incremented for each random vector. If the value is
+greater than zero, then all pixels whose projections onto the
+random vector are with <cite>threshold</cite> data units of either of the two
+extreme pixels will also have their indices incremented.</div></blockquote>
+<p><cite>centered</cite> (bool):</p>
+<blockquote>
+<div>If True, then the pixels in X are assumed to have their mean
+already subtracted; otherwise, the mean of <cite>X</cite> will be computed
+and subtracted prior to computing the purity indices.</div></blockquote>
+<p><cite>start</cite> (ndarray):</p>
+<blockquote>
+<div>An optional array of initial purity indices. This can be used to
+continue computing PPI values after a previous call to <cite>ppi</cite> (i.e.,
+set <cite>start</cite> equal to the return value from a previou call to <cite>ppi</cite>.
+This should be an integer-valued array whose dimensions are equal
+to the first two dimensions of <cite>X</cite>.</div></blockquote>
+<p><cite>display</cite> (integer):</p>
+<blockquote>
+<div>If set to a postive integer, a <a class="reference internal" href="#spectral.graphics.spypylab.ImageView" title="spectral.graphics.spypylab.ImageView"><tt class="xref py py-class docutils literal"><span class="pre">ImageView</span></tt></a>
+window will be opened and dynamically display PPI values as the
+function iterates. The value specifies the number of PPI iterations
+between display updates. It is recommended to use a value around
+100 or higher. If the <cite>stretch</cite> keyword (see <a class="reference internal" href="#spectral.graphics.graphics.get_rgb" title="spectral.graphics.graphics.get_rgb"><tt class="xref py py-func docutils literal"><span class="pre">get_rgb</span></tt></a>
+for meaning) is not provided, a default stretch of (0.99, 0.999)
+is used.</div></blockquote>
+</div></blockquote>
+<p>Return value:</p>
+<blockquote>
+<div>An ndarray of integers that represent the pixel purity indices of the
+input image. The return array will have dimensions equal to the first
+two dimensions of the input image.</div></blockquote>
+<p>Keyword Arguments:</p>
+<blockquote>
+<div>Any keyword accepted by <a class="reference internal" href="#spectral.graphics.spypylab.imshow" title="spectral.graphics.spypylab.imshow"><tt class="xref py py-func docutils literal"><span class="pre">imshow</span></tt></a>.
+These keywords will be passed to the image display and only have an
+effect if the <cite>display</cite> argument is nonzero.</div></blockquote>
+<p>This function can be interruped with a KeyboardInterrupt (ctrl-C), in which
+case, the most recent value of the PPI array will be returned. This can be
+used in conjunction with the <cite>display</cite> argument to view the progression of
+the PPI values until they appear stable, then terminate iteration using
+ctrl-C.</p>
+<p>References:</p>
+<p>Boardman J.W., Kruse F.A, and Green R.O., &#8220;Mapping Target Signatures via
+Partial Unmixing of AVIRIS Data,&#8221; Pasadena, California, USA, 23 Jan 1995,
+URI: <a class="reference external" href="http://hdl.handle.net/2014/33635">http://hdl.handle.net/2014/33635</a></p>
 </dd></dl>
 
 </div>
@@ -3442,6 +3751,12 @@ this value is <cite>None</cite>, matplotlib&#8217;s default size is used.</div><
 <div>Pixel interpolation to be used in imshow windows. If this value
 is <cite>None</cite>, matplotlib&#8217;s default interpolation is used. Note that
 zoom windows always use &#8220;nearest&#8221; interpolation.</div></blockquote>
+<p><cite>imshow_stretch</cite>:</p>
+<blockquote>
+<div>Default RGB linear color stretch to perform.</div></blockquote>
+<p><cite>imshow_stretch_all</cite>:</p>
+<blockquote>
+<div>If True, each color channel limits are determined independently.</div></blockquote>
 <p><cite>imshow_zoom_figure_width</cite> (int, default <cite>None</cite>):</p>
 <blockquote>
 <div>Width of zoom windows opened from an imshow window. Since zoom
@@ -3518,7 +3833,7 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Class/Function Reference</a><ul>
+<li><a class="reference internal" href="#">Class/Function Documentation</a><ul>
 <li><a class="reference internal" href="#file-i-o">File I/O</a><ul>
 <li><a class="reference internal" href="#open-image">open_image</a></li>
 <li><a class="reference internal" href="#imagearray">ImageArray</a></li>
@@ -3533,6 +3848,7 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
 </ul>
 </li>
 <li><a class="reference internal" href="#envi-create-image">envi.create_image</a></li>
+<li><a class="reference internal" href="#envi-save-classification">envi.save_classification</a></li>
 <li><a class="reference internal" href="#envi-save-image">envi.save_image</a><ul>
 <li><a class="reference internal" href="#erdas-lan">ERDAS/Lan</a></li>
 </ul>
@@ -3559,6 +3875,7 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
 </ul>
 </li>
 <li><a class="reference internal" href="#spectral-classes-functions">Spectral Classes/Functions</a><ul>
+<li><a class="reference internal" href="#adaptive-coherence-cosine-estimator-ace">Adaptive Coherence/Cosine Estimator (ACE)</a></li>
 <li><a class="reference internal" href="#asterdatabase">AsterDatabase</a></li>
 <li><a class="reference internal" href="#bandinfo">BandInfo</a></li>
 <li><a class="reference internal" href="#bandresampler">BandResampler</a></li>
@@ -3567,6 +3884,7 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
 <li><a class="reference internal" href="#cluster">cluster</a></li>
 <li><a class="reference internal" href="#covariance">covariance</a></li>
 <li><a class="reference internal" href="#cov-avg">cov_avg</a></li>
+<li><a class="reference internal" href="#fisherlineardiscriminant">FisherLinearDiscriminant</a></li>
 <li><a class="reference internal" href="#gaussianclassifier">GaussianClassifier</a></li>
 <li><a class="reference internal" href="#gaussianstats">GaussianStats</a></li>
 <li><a class="reference internal" href="#kmeans">kmeans</a></li>
@@ -3582,6 +3900,7 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
 <li><a class="reference internal" href="#noise-from-diffs">noise_from_diffs</a></li>
 <li><a class="reference internal" href="#orthogonalize">orthogonalize</a></li>
 <li><a class="reference internal" href="#perceptronclassifier">PerceptronClassifier</a></li>
+<li><a class="reference internal" href="#pixel-purity-index-ppi">Pixel Purity Index (PPI)</a></li>
 <li><a class="reference internal" href="#principal-components">principal_components</a></li>
 <li><a class="reference internal" href="#principalcomponents">PrincipalComponents</a></li>
 <li><a class="reference internal" href="#rx-anomaly-detector">RX Anomaly Detector</a></li>
@@ -3603,8 +3922,8 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="libraries.html"
-                        title="previous chapter">Spectral Libraries</a></p>
+  <p class="topless"><a href="class_func_glossary.html"
+                        title="previous chapter">Class/Function Glossary</a></p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -3626,9 +3945,9 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="libraries.html" title="Spectral Libraries"
+          <a href="class_func_glossary.html" title="Class/Function Glossary"
              >previous</a></li>
-        <li><a href="index.html">Spectral Python 0.15.0
+        <li><a href="index.html">Spectral Python 0.16.0
  documentation</a> &raquo;</li>
           <li><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>

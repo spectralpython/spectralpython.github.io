@@ -290,10 +290,10 @@ And the associated errors:
     In [73]: v = imshow(classes=training_errors)
 
 
-Fischer Linear Discriminant
+Fisher Linear Discriminant
 ---------------------------
 
-The Fischer Linear Discriminant (a.k.a., canonical discriminant) attempts to
+The Fisher Linear Discriminant (a.k.a., canonical discriminant) attempts to
 find a set of transformed axes that maximize the ratio of the average distance
 between classes to the average distance between samples within each class. [Richards1999]_
 This is written as
@@ -413,16 +413,44 @@ view an image of raw RX scores, where brighter pixels are considered "more anoma
 
 For the sample image, only a few pixels are visible in the image of RX scores
 because a linear color scale is used and there is a very small number of pixels with RX
-scores much higher than other pixels. To view greater detail in the RX image,
-we can either use a nonlinear color scale or - as shown below - we can scale the
-data prior to displaying the image:
+scores much higher than other pixels. This is apparent from viewing the histogram
+of the RX scores.
 
 .. ipython::
 
-    In [1]: import numpy as np
+    In [1]: import matplotlib.pyplot as plt
 
-    @savefig rxvals_log.png scale=33% align=center
-    In [1]: v = imshow(np.log(rxvals))
+    In [1]: f = plt.figure()
+
+    @savefig rxhistogram.png scale=33% align=center
+    In [1]: h = plt.hist(rxvals.ravel(), 200, log=True)
+
+The outliers are not obvious in the histogram, so let's print their values:
+
+.. ipython::
+
+    In [1]: print np.sort(rxvals.ravel())[-10:]
+
+
+To view greater detail in the RX image, we can adjust the lower and upper limits
+of the image display. Since we are primarily interested in the most anomalous
+pixels, we will set the black level to the 99th percentile of the RX values'
+cumulative histogram and set the white point to the 99.99th percentile:
+
+.. ipython::
+
+    @savefig rxvals_stretched.png scale=33% align=center
+    In [1]: v = imshow(rxvals, stretch=(0.99, 0.9999))
+
+We can see the new RGB data limits by inspecting the returned
+:class:`~spectral.graphics.spypylab.ImageView` object:
+
+.. ipython::
+
+    In [1]: print v
+
+Note that we could also have set the contrast stretch to explicit RX values
+(vice percentile values) by specifying the *bounds* keyword instead of *stretch*.
 
 If an image contains regions with different background materials, then the
 assumption of a single mean/covariance for background pixels can reduce
@@ -508,6 +536,12 @@ scores are greater than 0.2.
 
 As with the :func:`rx` function, :func:`matched_filter` can be applied using
 windowed background statistics (optionally with a global covariance estimate).
+
+.. seealso::
+
+   :func:`~spectral.algorithms.detectors.ace`:
+   
+       Adaptive Coherence/Cosine Estimator (ACE)
 
 Miscellaneous Functions
 =======================
