@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to Spectral Python (SPy) &mdash; Spectral Python 0.15.0
+    <title>Welcome to Spectral Python (SPy) &mdash; Spectral Python 0.16.0
  documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.15.0
+        VERSION:     '0.16.0
 ',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Spectral Python 0.15.0
+    <link rel="top" title="Spectral Python 0.16.0
  documentation" href="#" />
     <link rel="next" title="Spectral Python (SPy) User Guide" href="user_guide.html" /> 
   </head>
@@ -36,7 +36,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="user_guide.html" title="Spectral Python (SPy) User Guide"
              accesskey="N">next</a></li>
-        <li><a href="#">Spectral Python 0.15.0
+        <li><a href="#">Spectral Python 0.16.0
  documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -57,8 +57,10 @@ hyperspectral imagery. It can be used interactively from the Python command
 prompt or via Python scripts.  SPy is free, open source software distributed
 under the <a class="reference external" href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a>.
 To see some examples of how SPy can be used, you may want to jump straight to
-the documentation sections on <a class="reference internal" href="graphics.html#graphics"><em>Displaying Data</em></a> or <a class="reference internal" href="algorithms.html#algorithms"><em>Spectral Algorithms</em></a>.  You can
-download SPy from <a class="reference external" href="https://github.com/spectralpython/spectral/releases">GitHub</a>,
+the documentation sections on <a class="reference internal" href="graphics.html#graphics"><em>Displaying Data</em></a> or <a class="reference internal" href="algorithms.html#algorithms"><em>Spectral Algorithms</em></a>.  A
+categorized listing of the main classes and functions are in the
+<a class="reference internal" href="class_func_glossary.html#class-func-glossary"><em>Class/Function Glossary</em></a>. You can
+download SPy from <a class="reference external" href="https://github.com/spectralpython/spectral/releases/latest">GitHub</a>,
 the <a class="reference external" href="https://pypi.python.org/pypi/spectral">Python Package Index (PyPI)</a>, or
 <a class="reference external" href="https://sourceforge.net/projects/spectralpython">Sourceforge</a>. See the
 <a class="reference internal" href="installation.html#installation"><em>Installing SPy</em></a> section section of the documentation for details.</p>
@@ -74,7 +76,8 @@ the <a class="reference external" href="https://pypi.python.org/pypi/spectral">P
 <li class="toctree-l2"><a class="reference internal" href="graphics.html">Displaying Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms.html">Spectral Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="libraries.html">Spectral Libraries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="class_func_ref.html">Class/Function Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="class_func_glossary.html">Class/Function Glossary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="class_func_ref.html">Class/Function Documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -82,6 +85,20 @@ the <a class="reference external" href="https://pypi.python.org/pypi/spectral">P
 </div>
 <div class="section" id="news">
 <h1>News<a class="headerlink" href="#news" title="Permalink to this headline">¶</a></h1>
+<p>2014-10-18 : SPy 0.16.0 provides initial support for Python 3.</p>
+<blockquote>
+<div><p>This release supports Python 3 for all functions except <a class="reference internal" href="class_func_ref.html#spectral.view_cube" title="spectral.view_cube"><tt class="xref py py-func docutils literal"><span class="pre">view_cube</span></tt></a>
+and <a class="reference internal" href="class_func_ref.html#spectral.view_nd" title="spectral.view_nd"><tt class="xref py py-func docutils literal"><span class="pre">view_nd</span></tt></a>. Note that for Python 3, you should use the
+Qt4Agg matplotlib backend.</p>
+<p>New features in this release include the Adaptive Coherence/Cosine Esimator (<a class="reference internal" href="class_func_ref.html#spectral.algorithms.detectors.ace" title="spectral.algorithms.detectors.ace"><tt class="xref py py-func docutils literal"><span class="pre">ace</span></tt></a>)
+target detector, Pixel Purity Index (<a class="reference internal" href="class_func_ref.html#spectral.algorithms.algorithms.ppi" title="spectral.algorithms.algorithms.ppi"><tt class="xref py py-func docutils literal"><span class="pre">ppi</span></tt></a>),
+ability to save ENVI classification files (<a class="reference internal" href="class_func_ref.html#spectral.io.envi.save_classification" title="spectral.io.envi.save_classification"><tt class="xref py py-func docutils literal"><span class="pre">envi.save_classification</span></tt></a>),
+and linear contrast enhancement (by data limits or cumulative histogram percentiles).
+The SPy <a class="reference internal" href="class_func_ref.html#spectral.graphics.spypylab.imshow" title="spectral.graphics.spypylab.imshow"><tt class="xref py py-func docutils literal"><span class="pre">imshow</span></tt></a> function now applies
+a 2% histogram color stretch by default (this can be overridden in the
+<a class="reference internal" href="class_func_ref.html#spectral.spectral.SpySettings" title="spectral.spectral.SpySettings"><tt class="xref py py-obj docutils literal"><span class="pre">spectral.settings</span></tt></a> object).</p>
+<p>Additional info is in the <a class="reference external" href="https://github.com/spectralpython/spectral/issues?q=milestone%3Av0.16.0+is%3Aclosed">version 0.16.0 issues</a>.</p>
+</div></blockquote>
 <p>2014-06-04 : SPy 0.15.0 is released.</p>
 <blockquote>
 <div><p>This version adds the Minimum Noise Fraction algorithm
@@ -153,7 +170,7 @@ simplify integration of SPy code with <a class="reference external" href="http:/
 ability to save and create images in ENVI format (see <a class="reference internal" href="class_func_ref.html#spectral.io.envi.save_image" title="spectral.io.envi.save_image"><tt class="xref py py-func docutils literal"><span class="pre">save_image</span></tt></a>
 and <a class="reference internal" href="class_func_ref.html#spectral.io.envi.create_image" title="spectral.io.envi.create_image"><tt class="xref py py-func docutils literal"><span class="pre">create_image</span></tt></a>), and a unit-testing sub-package.
 The top-level namespace has been simplified and several functions have been
-renamed for consistency (<tt class="xref py py-func docutils literal"><span class="pre">image</span></tt> is now <a class="reference internal" href="class_func_ref.html#spectral.open_image" title="spectral.open_image"><tt class="xref py py-func docutils literal"><span class="pre">open_image</span></tt></a>
+renamed for consistency (<tt class="xref py py-func docutils literal"><span class="pre">image</span></tt> is now <tt class="xref py py-func docutils literal"><span class="pre">open_image</span></tt>
 and <tt class="xref py py-func docutils literal"><span class="pre">save_image</span></tt> is now <a class="reference internal" href="class_func_ref.html#spectral.save_rgb" title="spectral.save_rgb"><tt class="xref py py-func docutils literal"><span class="pre">save_rgb</span></tt></a>).</div></blockquote>
 <p>2013-02-23 : SPy 0.10.1 bug-fix release is now available.</p>
 <blockquote>
@@ -236,7 +253,7 @@ libraries, and installation via <tt class="xref py py-mod docutils literal"><spa
         <li class="right" style="margin-right: 10px">
           <a href="user_guide.html" title="Spectral Python (SPy) User Guide"
              >next</a></li>
-        <li><a href="#">Spectral Python 0.15.0
+        <li><a href="#">Spectral Python 0.16.0
  documentation</a> &raquo;</li> 
       </ul>
     </div>

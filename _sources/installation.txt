@@ -23,24 +23,26 @@ graphical capabilities.
 
    * - Dependency
      - Notes
-   * - `Python  <http://www.python.org>`_ 2.6 or 2.7
-     - SPy does not work with Python 3 (yet)
+   * - `Python  <http://www.python.org>`_ 2.6+ or 3.3+
+     - `(1)`
    * - `NumPy <http://numpy.scipy.org/>`_
      - Required
    * - `Pillow <https://pypi.python.org/pypi/Pillow/>`_ or `Python Imaging Library (PIL) <http://www.pythonware.com/products/pil/>`_
      - Required if displaying or saving images
    * - `wxPython <http://www.wxpython.org/>`_
-     - `(1)`
+     - `(2)`
    * - `matplotlib <http://matplotlib.org/>`_
      - Required if rendering raster displays or spectral plots
    * - `IPython <http://ipython.org/>`_
      - Required for interactive, non-blocking GUI windows
    * - `PyOpenGL <http://pyopengl.sourceforge.net/>`_
-     - `(1)`
+     - `(2)`
 
 Notes:
 
-(1): Required if calling :func:`~spectral.view_cube` or :func:`~spectral.view_nd`.
+(1): All SPy functions work with Python 3.3+ except :func:`~spectral.view_cube` and :func:`~spectral.view_nd`.
+
+(2): Required if calling :func:`~spectral.view_cube` or :func:`~spectral.view_nd`.
 
 As of SPy version 0.10, IPython is used to provide interactive GUI windows.
 To use SPy with IPython, you will need to start IPython in "pylab" mode

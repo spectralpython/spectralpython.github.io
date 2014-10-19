@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Displaying Data &mdash; Spectral Python 0.15.0
+    <title>Displaying Data &mdash; Spectral Python 0.16.0
  documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.15.0
+        VERSION:     '0.16.0
 ',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Spectral Python 0.15.0
+    <link rel="top" title="Spectral Python 0.16.0
  documentation" href="index.html" />
     <link rel="up" title="Spectral Python (SPy) User Guide" href="user_guide.html" />
     <link rel="next" title="Spectral Algorithms" href="algorithms.html" />
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="fileio.html" title="Reading HSI Data Files"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Spectral Python 0.15.0
+        <li><a href="index.html">Spectral Python 0.16.0
  documentation</a> &raquo;</li>
           <li><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>
@@ -63,8 +63,8 @@
 <p>SPy uses IPython to provide GUI windows without blocking the interactive python
 interpreter.  To enable this, you must start IPython in &#8220;pylab&#8221; mode.  If you
 have already set your <a class="reference external" href="http://matplotlib.org/faq/usage_faq.html#what-is-a-backend">matplotlib backend</a>
-to either &#8220;WX&#8221; or &#8220;WXAgg&#8221; in your matplotlibrc file, you should be able to
-start IPython for SPy like this:</p>
+to either &#8220;WX&#8221; or &#8220;WXAgg&#8221; (see note below) in your matplotlibrc file, you
+should be able to start IPython for SPy like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">ipython</span> <span class="o">--</span><span class="n">pylab</span>
 </pre></div>
 </div>
@@ -88,17 +88,15 @@ to call the <a class="reference internal" href="class_func_ref.html#spectral.vie
 </div>
 <div class="section" id="raster-displays">
 <h2>Raster Displays<a class="headerlink" href="#raster-displays" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="displaying-images-with-imshow">
-<h3>Displaying images with <cite>imshow</cite><a class="headerlink" href="#displaying-images-with-imshow" title="Permalink to this headline">¶</a></h3>
 <p>The SPy <a class="reference internal" href="class_func_ref.html#spectral.graphics.spypylab.imshow" title="spectral.graphics.spypylab.imshow"><tt class="xref py py-func docutils literal"><span class="pre">imshow</span></tt></a> function is a wrapper around
 the matplotlib function of the same name. The main differences are that the SPy
 version makes it easy to display bands from multispectral/hyperspectral images,
 it renders classification images, and supports several additional types of
 interactivity.</p>
 <div class="section" id="image-data-display">
-<h4>Image Data Display<a class="headerlink" href="#image-data-display" title="Permalink to this headline">¶</a></h4>
-<p>To display the RGB bands as shown for the <cite>view</cite> function above, pass the same
-arguments to <cite>imshow</cite>:</p>
+<h3>Image Data Display<a class="headerlink" href="#image-data-display" title="Permalink to this headline">¶</a></h3>
+<p>The <cite>imshow</cite> function produces a raster display of data associated with an
+np.ndarray or <cite>SpyFile</cite> object.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">spectral</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="gp">In [2]: </span><span class="n">img</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3C.lan&#39;</span><span class="p">)</span>
@@ -112,21 +110,42 @@ used to pan and zoom the displayed images. If you press the &#8220;z&#8221; keyb
 a zoom window will be opened, which displays a magnified view of the image. By
 holding down the <strong>CONTROL</strong> key and left-clicking in the original window, the
 zoom window will pan to the pixel clicked in the original window.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.16.0: </span>By default, <cite>imshow</cite> function applies a linear histogram stretch of the RGB
+display data. The the color stretch can be controlled by the <em>stretch</em>,
+<em>bounds</em>, and <em>stretch_all</em> keyword to the <cite>imshow</cite> function (see
+<a class="reference internal" href="class_func_ref.html#spectral.graphics.graphics.get_rgb" title="spectral.graphics.graphics.get_rgb"><tt class="xref py py-func docutils literal"><span class="pre">get_rgb</span></tt></a> for the meaning of these
+keywords). To adjust the color stretch of a displayed image, the
+<a class="reference internal" href="class_func_ref.html#spectral.graphics.spypylab.ImageView.set_rgb_options" title="spectral.graphics.spypylab.ImageView.set_rgb_options"><tt class="xref py py-meth docutils literal"><span class="pre">set_rgb_options</span></tt></a> method of the
+<cite>ImageView</cite> object can be called.</p>
+</div>
+<p>RGB data limits for a displayed image can be printed from the <cite>__str__</cite> method
+of the <cite>ImageView</cite> object:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [4]: </span><span class="k">print</span> <span class="n">view</span>
+<span class="go">ImageView object:</span>
+<span class="go">  Display bands       :  (29, 19, 9)</span>
+<span class="go">  Interpolation       :  &lt;default&gt;</span>
+<span class="go">  RGB data limits     :</span>
+<span class="go">    R: [2054.0, 6317.0]</span>
+<span class="go">    G: [2775.0, 7307.0]</span>
+<span class="go">    B: [3560.0, 7928.0]</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="class-map-display">
-<h4>Class Map Display<a class="headerlink" href="#class-map-display" title="Permalink to this headline">¶</a></h4>
+<h3>Class Map Display<a class="headerlink" href="#class-map-display" title="Permalink to this headline">¶</a></h3>
 <p>To display the ground truth image using <tt class="xref py py-func docutils literal"><span class="pre">imshow</span></tt>, set the <em>classes</em>
 argument in the <cite>imshow</cite> function:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [4]: </span><span class="n">gt</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3GT.GIS&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [5]: </span><span class="n">gt</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3GT.GIS&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="gp">In [5]: </span><span class="n">view</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">gt</span><span class="p">)</span>
+<span class="gp">In [6]: </span><span class="n">view</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">gt</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/imshow_92AV3C_gt.png"><img alt="_images/imshow_92AV3C_gt.png" class="align-center" src="_images/imshow_92AV3C_gt.png" style="width: 264.0px; height: 198.0px;" /></a>
 <p>It is also possible to switch between displaying image bands and class colors,
 as well as displaying class color masks overlayed on the image data display. To
 do this, specify both the data and class values when calling <tt class="xref py py-func docutils literal"><span class="pre">imshow</span></tt>:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [6]: </span><span class="n">view</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">classes</span><span class="o">=</span><span class="n">gt</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [7]: </span><span class="n">view</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">classes</span><span class="o">=</span><span class="n">gt</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The default display mode is to show the image bands. Press &#8220;d&#8221;, &#8220;c&#8221;,
@@ -135,11 +154,11 @@ or &#8220;C&#8221; (while focus is on the image window) to switch the display to
 be done programatically. For example, to display the image with overlayed class
 masks, using an alpha transparency of 0.5, type the following commands after
 calling <tt class="xref py py-func docutils literal"><span class="pre">imshow</span></tt>:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [7]: </span><span class="n">view</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">classes</span><span class="o">=</span><span class="n">gt</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [8]: </span><span class="n">view</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">classes</span><span class="o">=</span><span class="n">gt</span><span class="p">)</span>
 
-<span class="gp">In [8]: </span><span class="n">view</span><span class="o">.</span><span class="n">set_display_mode</span><span class="p">(</span><span class="s">&#39;overlay&#39;</span><span class="p">)</span>
+<span class="gp">In [9]: </span><span class="n">view</span><span class="o">.</span><span class="n">set_display_mode</span><span class="p">(</span><span class="s">&#39;overlay&#39;</span><span class="p">)</span>
 
-<span class="gp">In [9]: </span><span class="n">view</span><span class="o">.</span><span class="n">class_alpha</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="gp">In [10]: </span><span class="n">view</span><span class="o">.</span><span class="n">class_alpha</span> <span class="o">=</span> <span class="mf">0.5</span>
 </pre></div>
 </div>
 <div class="figure align-center">
@@ -147,7 +166,7 @@ calling <tt class="xref py py-func docutils literal"><span class="pre">imshow</s
 </div>
 </div>
 <div class="section" id="interactive-class-labeling">
-<h4>Interactive Class Labeling<a class="headerlink" href="#interactive-class-labeling" title="Permalink to this headline">¶</a></h4>
+<h3>Interactive Class Labeling<a class="headerlink" href="#interactive-class-labeling" title="Permalink to this headline">¶</a></h3>
 <p>The <tt class="xref py py-class docutils literal"><span class="pre">ImageView</span></tt> window provides the ability to modify pixel class IDs interactively
 by selecting rectangular regions in the image and assigning a new class ID.
 Applying a class ID to a rectangular region is done using the following steps:</p>
@@ -177,7 +196,7 @@ the class ID to a super-rectangle covering all the pixels of interest, then
 reassigning sub-rectangles back to class 0 (or whatever was the original class ID).</p>
 </div>
 <div class="section" id="additional-capabilities">
-<h4>Additional Capabilities<a class="headerlink" href="#additional-capabilities" title="Permalink to this headline">¶</a></h4>
+<h3>Additional Capabilities<a class="headerlink" href="#additional-capabilities" title="Permalink to this headline">¶</a></h3>
 <p>To get help on <tt class="xref py py-class docutils literal"><span class="pre">ImageView</span></tt> keyboard &amp; mouse functions, press &#8220;h&#8221; while focus is on
 the image window to display all keybinds and mouse functions:</p>
 <div class="highlight-python"><div class="highlight"><pre>Mouse Functions:
@@ -212,108 +231,20 @@ modifiying members of the module&#8217;s <a class="reference internal" href="cla
 object.</p>
 </div>
 </div>
-<div class="section" id="displaying-images-with-view-and-view-indexed">
-<h3>Displaying images with <cite>view</cite> and <cite>view_indexed</cite><a class="headerlink" href="#displaying-images-with-view-and-view-indexed" title="Permalink to this headline">¶</a></h3>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><a class="reference internal" href="class_func_ref.html#spectral.view" title="spectral.view"><tt class="xref py py-func docutils literal"><span class="pre">spectral.view</span></tt></a> and <a class="reference internal" href="class_func_ref.html#spectral.view_indexed" title="spectral.view_indexed"><tt class="xref py py-func docutils literal"><span class="pre">spectral.view_indexed</span></tt></a> functions are
-older raster display functions, which are superceded by the SPy
-<a class="reference internal" href="class_func_ref.html#spectral.graphics.spypylab.imshow" title="spectral.graphics.spypylab.imshow"><tt class="xref py py-func docutils literal"><span class="pre">imshow</span></tt></a> function (which is a wrapper
-around matplotlib&#8217;s <cite>imshow</cite> function). The <cite>view*</cite> functions always display
-images at full resolution (one image pixel corresponds to one screen pixel),
-which is convenient for small chips (such as those used in this documentation).
-However, for typical image dimensions, it is more convenient to use the
-<cite>imshow</cite> function, which provides capabilities such as panning, zooming,
-resizing, class map overlays, and pixel class labeling. The <cite>view*</cite>
-functions will likely be deprecated and subsequently removed in future
-versions of the software.</p>
-</div>
-<p>The <a class="reference internal" href="class_func_ref.html#spectral.view" title="spectral.view"><tt class="xref py py-func docutils literal"><span class="pre">view</span></tt></a> function opens a window that displays a raster view of
-an image.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [10]: </span><span class="n">w</span> <span class="o">=</span> <span class="n">view</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="figure align-center">
-<img alt="_images/view_image_default.jpg" src="_images/view_image_default.jpg" />
-<p class="caption">Displaying first, middle, and last bands as RGB</p>
-</div>
-<p>The image file did not contain metadata on which bands to display so <a class="reference internal" href="class_func_ref.html#spectral.view" title="spectral.view"><tt class="xref py py-func docutils literal"><span class="pre">view</span></tt></a>
-took the first, middle and last band from the image file and displayed those bands
-as the red, green, and blue channels, resulting in an unsatisfying view of the
-image.  To display an image closer to a natural color view of the image, we would like to
-display the bands closest to the red, green, and blue wavelengths.  For our example
-image, those correspond roughly to the 30th, 20th, and 10th bands of the image.
-We can display these bands through the <a class="reference internal" href="class_func_ref.html#spectral.view" title="spectral.view"><tt class="xref py py-func docutils literal"><span class="pre">view</span></tt></a> function in two ways.
-First, we can explicitly pass the band indices as arguments.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [11]: </span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">w</span> <span class="o">=</span> <span class="n">view</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">[</span><span class="mi">29</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>Alternately, we can specify the default bands to display for the image by setting
-the <tt class="docutils literal"><span class="pre">default</span> <span class="pre">bands</span></tt> metadata field in the image before calling the <a class="reference internal" href="class_func_ref.html#spectral.view" title="spectral.view"><tt class="xref py py-func docutils literal"><span class="pre">view</span></tt></a>.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [12]: </span><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">img</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s">&#39;default bands&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">29</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>For either method, the resulting image will appear as follows.</p>
-<div class="figure align-center">
-<img alt="_images/view_image_rgb.jpg" src="_images/view_image_rgb.jpg" />
-<p class="caption">Color view of the image</p>
-</div>
-<p>The <tt class="docutils literal"><span class="pre">bands</span></tt> argument of <a class="reference internal" href="class_func_ref.html#spectral.view" title="spectral.view"><tt class="xref py py-func docutils literal"><span class="pre">view</span></tt></a> expects a list of either one or
-three integers so we can display the green band from the image in greyscale like this:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [13]: </span><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">w</span> <span class="o">=</span> <span class="n">view</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">[</span><span class="mi">19</span><span class="p">])</span>
-</pre></div>
-</div>
-<div class="figure align-center">
-<img alt="_images/view_image_g.jpg" src="_images/view_image_g.jpg" />
-<p class="caption">Green band in greyscale</p>
-</div>
-<p>The <a class="reference internal" href="class_func_ref.html#spectral.view" title="spectral.view"><tt class="xref py py-func docutils literal"><span class="pre">view</span></tt></a> function also works with <tt class="docutils literal"><span class="pre">numpy</span></tt> arrays, so the
-previous two image displays can alternately be created as follows.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [14]: </span><span class="n">rgb</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">read_bands</span><span class="p">([</span><span class="mi">29</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
-
-<span class="gp">In [15]: </span><span class="n">w</span> <span class="o">=</span> <span class="n">view</span><span class="p">(</span><span class="n">rgb</span><span class="p">)</span>
-
-<span class="gp">In [16]: </span><span class="n">green</span> <span class="o">=</span> <span class="n">img</span><span class="p">[:,:,</span><span class="mi">19</span><span class="p">]</span>
-
-<span class="gp">In [17]: </span><span class="n">w</span> <span class="o">=</span> <span class="n">view</span><span class="p">(</span><span class="n">green</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>To save an image display to disk, use the <a class="reference internal" href="class_func_ref.html#spectral.save_rgb" title="spectral.save_rgb"><tt class="xref py py-func docutils literal"><span class="pre">save_rgb</span></tt></a> function,
-which uses the same arguments as <a class="reference internal" href="class_func_ref.html#spectral.view" title="spectral.view"><tt class="xref py py-func docutils literal"><span class="pre">view</span></tt></a> but with the saved image
+<div class="section" id="saving-rgb-image-files">
+<h2>Saving RGB Image Files<a class="headerlink" href="#saving-rgb-image-files" title="Permalink to this headline">¶</a></h2>
+<p>To save an image display to a file, use the <a class="reference internal" href="class_func_ref.html#spectral.save_rgb" title="spectral.save_rgb"><tt class="xref py py-func docutils literal"><span class="pre">save_rgb</span></tt></a> function,
+which uses the same arguments as <tt class="xref py py-func docutils literal"><span class="pre">imshow</span></tt> but with the saved image
 file name as the first argument.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [18]: </span><span class="n">save_rgb</span><span class="p">(</span><span class="s">&#39;rgb.jpg&#39;</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="p">[</span><span class="mi">29</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>While the <a class="reference internal" href="class_func_ref.html#spectral.view" title="spectral.view"><tt class="xref py py-func docutils literal"><span class="pre">view</span></tt></a> function displays color images by specifying
-RGB triplets for each pixel, the <a class="reference internal" href="class_func_ref.html#spectral.view_indexed" title="spectral.view_indexed"><tt class="xref py py-func docutils literal"><span class="pre">view_indexed</span></tt></a> function creates
-color images via integer-valued arrays that represent indices into a color palette.
-This type of display is useful for generating images for ground truth masks or
-classification results.  For example, we can display the ground truth file for
-our sample image like this:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [19]: </span><span class="n">gt</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3GT.GIS&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="gp">In [20]: </span><span class="n">w</span> <span class="o">=</span> <span class="n">view_indexed</span><span class="p">(</span><span class="n">gt</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="figure align-center">
-<img alt="_images/view_gt.jpg" src="_images/view_gt.jpg" />
-<p class="caption">Ground truth mask for the sample image</p>
-</div>
-<p>The colors used by default are those defined in <strong>spectral.spy_colors</strong>, which
-is a list of 3-tuples, where each 3-tuple is a triplet defining an RGB color (R,
-G, and B are each in the range [0-255]).  The colors used by <a class="reference internal" href="class_func_ref.html#spectral.view_indexed" title="spectral.view_indexed"><tt class="xref py py-func docutils literal"><span class="pre">view_indexed</span></tt></a>
-can be changed by passing an alternate set of colors in the <tt class="docutils literal"><span class="pre">colors</span></tt> keyword
-argument:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [21]: </span><span class="n">w</span> <span class="o">=</span> <span class="n">view_indexed</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">myColors</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [11]: </span><span class="n">save_rgb</span><span class="p">(</span><span class="s">&#39;rgb.jpg&#39;</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="p">[</span><span class="mi">29</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Saving an indexed color image is similar to saving an RGB image; however, <a class="reference internal" href="class_func_ref.html#spectral.save_rgb" title="spectral.save_rgb"><tt class="xref py py-func docutils literal"><span class="pre">save_rgb</span></tt></a>
 is unable to determine if the image being saved is a single-band (greyscale) image
 or an indexed color image.  Therefore, to save as an indexed color image, the color
 palette must be explicitly passed as a keyword argument:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [22]: </span><span class="n">save_rgb</span><span class="p">(</span><span class="s">&#39;gt.jpg&#39;</span><span class="p">,</span> <span class="n">gt</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">spy_colors</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [12]: </span><span class="n">save_rgb</span><span class="p">(</span><span class="s">&#39;gt.jpg&#39;</span><span class="p">,</span> <span class="n">gt</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">spy_colors</span><span class="p">)</span>
 </pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="spectrum-plots">
@@ -331,9 +262,9 @@ Since there is no spectral band metadata in our sample image file, the spectral
 plot&#8217;s axes are unlabeled and the pixel band values are plotted vs. band number,
 rather than wavelength.  To have the data plotted vs. wavelength, we must first
 associated spectral band information with the image.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [23]: </span><span class="kn">import</span> <span class="nn">spectral.io.aviris</span> <span class="kn">as</span> <span class="nn">aviris</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [13]: </span><span class="kn">import</span> <span class="nn">spectral.io.aviris</span> <span class="kn">as</span> <span class="nn">aviris</span>
 
-<span class="gp">In [24]: </span><span class="n">img</span><span class="o">.</span><span class="n">bands</span> <span class="o">=</span> <span class="n">aviris</span><span class="o">.</span><span class="n">read_aviris_bands</span><span class="p">(</span><span class="s">&#39;92AV3C.spc&#39;</span><span class="p">)</span>
+<span class="gp">In [14]: </span><span class="n">img</span><span class="o">.</span><span class="n">bands</span> <span class="o">=</span> <span class="n">aviris</span><span class="o">.</span><span class="n">read_aviris_bands</span><span class="p">(</span><span class="s">&#39;92AV3C.spc&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now, close the image and spectral plot windows, call <a class="reference internal" href="class_func_ref.html#spectral.view" title="spectral.view"><tt class="xref py py-func docutils literal"><span class="pre">view</span></tt></a>
@@ -361,7 +292,7 @@ command focus to the newly created window, you can use keyboard input to alter
 the view of the hypercube.  Using keyword arguments, you can change the image
 displayed on the top of the cube, as well as the color scale used on the sides of
 of the cube.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [25]: </span><span class="n">view_cube</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="mi">29</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [15]: </span><span class="n">view_cube</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="mi">29</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="code highlight-python"><div class="highlight"><pre>Mouse Functions:
@@ -388,9 +319,9 @@ q       -&gt; close window
 a 32-bit depth buffer.  You can reduce the size of the depth buffer used by
 <a class="reference internal" href="class_func_ref.html#spectral.view_cube" title="spectral.view_cube"><tt class="xref py py-func docutils literal"><span class="pre">view_cube</span></tt></a> and <a class="reference internal" href="class_func_ref.html#spectral.view_nd" title="spectral.view_nd"><tt class="xref py py-func docutils literal"><span class="pre">view_nd</span></tt></a> to a smaller value
 (e.g., 16) by issuing the following commands:</p>
-<div class="last highlight-ipython"><div class="highlight"><pre><span class="gp">In [26]: </span><span class="kn">import</span> <span class="nn">spectral</span>
+<div class="last highlight-ipython"><div class="highlight"><pre><span class="gp">In [16]: </span><span class="kn">import</span> <span class="nn">spectral</span>
 
-<span class="gp">In [27]: </span><span class="n">spectral</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">WX_GL_DEPTH_SIZE</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="gp">In [17]: </span><span class="n">spectral</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">WX_GL_DEPTH_SIZE</span> <span class="o">=</span> <span class="mi">16</span>
 </pre></div>
 </div>
 </div>
@@ -410,16 +341,16 @@ combinations of features in a short time span.</p>
 <p>In most cases, the display will be more useful by first performing
 dimensionality reduction prior to viewint the data (e.g., by selecting some
 number of principal components).</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [28]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3C.lan&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [18]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3C.lan&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 
-<span class="gp">In [29]: </span><span class="n">gt</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3GT.GIS&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">In [19]: </span><span class="n">gt</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3GT.GIS&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="gp">In [30]: </span><span class="n">pc</span> <span class="o">=</span> <span class="n">principal_components</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">In [20]: </span><span class="n">pc</span> <span class="o">=</span> <span class="n">principal_components</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="go">Covariance.....done</span>
 
-<span class="gp">In [31]: </span><span class="n">xdata</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">In [21]: </span><span class="n">xdata</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-<span class="gp">In [32]: </span><span class="n">w</span> <span class="o">=</span> <span class="n">view_nd</span><span class="p">(</span><span class="n">xdata</span><span class="p">[:,:,:</span><span class="mi">15</span><span class="p">],</span> <span class="n">classes</span><span class="o">=</span><span class="n">gt</span><span class="p">)</span>
+<span class="gp">In [22]: </span><span class="n">w</span> <span class="o">=</span> <span class="n">view_nd</span><span class="p">(</span><span class="n">xdata</span><span class="p">[:,:,:</span><span class="mi">15</span><span class="p">],</span> <span class="n">classes</span><span class="o">=</span><span class="n">gt</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>A new window should open and appear as follows:</p>
@@ -558,16 +489,13 @@ image were modified.</p>
 <li><a class="reference internal" href="#">Displaying Data</a><ul>
 <li><a class="reference internal" href="#starting-ipython">Starting IPython</a></li>
 <li><a class="reference internal" href="#raster-displays">Raster Displays</a><ul>
-<li><a class="reference internal" href="#displaying-images-with-imshow">Displaying images with <cite>imshow</cite></a><ul>
 <li><a class="reference internal" href="#image-data-display">Image Data Display</a></li>
 <li><a class="reference internal" href="#class-map-display">Class Map Display</a></li>
 <li><a class="reference internal" href="#interactive-class-labeling">Interactive Class Labeling</a></li>
 <li><a class="reference internal" href="#additional-capabilities">Additional Capabilities</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#displaying-images-with-view-and-view-indexed">Displaying images with <cite>view</cite> and <cite>view_indexed</cite></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#saving-rgb-image-files">Saving RGB Image Files</a></li>
 <li><a class="reference internal" href="#spectrum-plots">Spectrum Plots</a></li>
 <li><a class="reference internal" href="#hypercube-display">Hypercube Display</a></li>
 <li><a class="reference internal" href="#n-dimensional-feature-display">N-Dimensional Feature Display</a><ul>
@@ -612,7 +540,7 @@ image were modified.</p>
         <li class="right" >
           <a href="fileio.html" title="Reading HSI Data Files"
              >previous</a> |</li>
-        <li><a href="index.html">Spectral Python 0.15.0
+        <li><a href="index.html">Spectral Python 0.16.0
  documentation</a> &raquo;</li>
           <li><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>

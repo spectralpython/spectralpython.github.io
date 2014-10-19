@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Spectral Algorithms &mdash; Spectral Python 0.15.0
+    <title>Spectral Algorithms &mdash; Spectral Python 0.16.0
  documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.15.0
+        VERSION:     '0.16.0
 ',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Spectral Python 0.15.0
+    <link rel="top" title="Spectral Python 0.16.0
  documentation" href="index.html" />
     <link rel="up" title="Spectral Python (SPy) User Guide" href="user_guide.html" />
     <link rel="next" title="Spectral Libraries" href="libraries.html" />
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="graphics.html" title="Displaying Data"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Spectral Python 0.15.0
+        <li><a href="index.html">Spectral Python 0.16.0
  documentation</a> &raquo;</li>
           <li><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>
@@ -315,9 +315,9 @@ principal components to train and classify against the training data.</p>
 </div>
 <a class="reference internal image-reference" href="_images/gmlc2_errors.png"><img alt="_images/gmlc2_errors.png" class="align-center" src="_images/gmlc2_errors.png" style="width: 264.0px; height: 198.0px;" /></a>
 </div>
-<div class="section" id="fischer-linear-discriminant">
-<h3>Fischer Linear Discriminant<a class="headerlink" href="#fischer-linear-discriminant" title="Permalink to this headline">¶</a></h3>
-<p>The Fischer Linear Discriminant (a.k.a., canonical discriminant) attempts to
+<div class="section" id="fisher-linear-discriminant">
+<h3>Fisher Linear Discriminant<a class="headerlink" href="#fisher-linear-discriminant" title="Permalink to this headline">¶</a></h3>
+<p>The Fisher Linear Discriminant (a.k.a., canonical discriminant) attempts to
 find a set of transformed axes that maximize the ratio of the average distance
 between classes to the average distance between samples within each class. <a class="reference internal" href="#richards1999" id="id1">[Richards1999]</a>
 This is written as</p>
@@ -415,15 +415,44 @@ view an image of raw RX scores, where brighter pixels are considered &#8220;more
 <a class="reference internal image-reference" href="_images/rxvals.png"><img alt="_images/rxvals.png" class="align-center" src="_images/rxvals.png" style="width: 264.0px; height: 198.0px;" /></a>
 <p>For the sample image, only a few pixels are visible in the image of RX scores
 because a linear color scale is used and there is a very small number of pixels with RX
-scores much higher than other pixels. To view greater detail in the RX image,
-we can either use a nonlinear color scale or - as shown below - we can scale the
-data prior to displaying the image:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [52]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+scores much higher than other pixels. This is apparent from viewing the histogram
+of the RX scores.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [52]: </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
-<span class="gp">In [53]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">rxvals</span><span class="p">))</span>
+<span class="gp">In [53]: </span><span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="gp">In [54]: </span><span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">rxvals</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="mi">200</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/rxvals_log.png"><img alt="_images/rxvals_log.png" class="align-center" src="_images/rxvals_log.png" style="width: 264.0px; height: 198.0px;" /></a>
+<a class="reference internal image-reference" href="_images/rxhistogram.png"><img alt="_images/rxhistogram.png" class="align-center" src="_images/rxhistogram.png" style="width: 264.0px; height: 198.0px;" /></a>
+<p>The outliers are not obvious in the histogram, so let&#8217;s print their values:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [55]: </span><span class="k">print</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">rxvals</span><span class="o">.</span><span class="n">ravel</span><span class="p">())[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span>
+<span class="go">[  665.17211462   675.85801536   683.58190673   731.4872873    739.95211335</span>
+<span class="go">   906.98669373   956.49972325  1703.20957949  2336.11246149  9018.65517253]</span>
+</pre></div>
+</div>
+<p>To view greater detail in the RX image, we can adjust the lower and upper limits
+of the image display. Since we are primarily interested in the most anomalous
+pixels, we will set the black level to the 99th percentile of the RX values&#8217;
+cumulative histogram and set the white point to the 99.99th percentile:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [56]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">rxvals</span><span class="p">,</span> <span class="n">stretch</span><span class="o">=</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.9999</span><span class="p">))</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/rxvals_stretched.png"><img alt="_images/rxvals_stretched.png" class="align-center" src="_images/rxvals_stretched.png" style="width: 264.0px; height: 198.0px;" /></a>
+<p>We can see the new RGB data limits by inspecting the returned
+<a class="reference internal" href="class_func_ref.html#spectral.graphics.spypylab.ImageView" title="spectral.graphics.spypylab.ImageView"><tt class="xref py py-class docutils literal"><span class="pre">ImageView</span></tt></a> object:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [57]: </span><span class="k">print</span> <span class="n">v</span>
+<span class="go">ImageView object:</span>
+<span class="go">  Display bands       :  [0]</span>
+<span class="go">  Interpolation       :  &lt;default&gt;</span>
+<span class="go">  RGB data limits     :</span>
+<span class="go">    R: [291.69380671768249, 956.49972325427484]</span>
+<span class="go">    G: [291.69380671768249, 956.49972325427484]</span>
+<span class="go">    B: [291.69380671768249, 956.49972325427484]</span>
+</pre></div>
+</div>
+<p>Note that we could also have set the contrast stretch to explicit RX values
+(vice percentile values) by specifying the <em>bounds</em> keyword instead of <em>stretch</em>.</p>
 <p>If an image contains regions with different background materials, then the
 assumption of a single mean/covariance for background pixels can reduce
 performance of the RX anomaly detector. In such situations, better results
@@ -440,7 +469,7 @@ pixels from &#8220;polluting&#8221; background statistics.</p>
 <p>For example, to compute RX scores with background statistics computed from a
 21 <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/> 21 pixel window about the pixel being evaluated, with an exclusion window of
 5 <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/> 5 pixels, the function would be called as follows:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [54]: </span><span class="n">rxvals</span> <span class="o">=</span> <span class="n">rx</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">21</span><span class="p">))</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [58]: </span><span class="n">rxvals</span> <span class="o">=</span> <span class="n">rx</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">21</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>While the use of a windowed background will often improve results for images containing
@@ -460,9 +489,9 @@ for the windowed algorithm and removes the size limitation on the window (except
 that the outer window must be larger than the inner). For example, since our sample image has ground
 cover classes labeled, we can compute the average covariance over those ground
 cover classes and use the result as an estimate of the global covariance.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [55]: </span><span class="n">C</span> <span class="o">=</span> <span class="n">cov_avg</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gt</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [59]: </span><span class="n">C</span> <span class="o">=</span> <span class="n">cov_avg</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gt</span><span class="p">)</span>
 
-<span class="gp">In [56]: </span><span class="n">rxvals</span> <span class="o">=</span> <span class="n">rx</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">21</span><span class="p">),</span> <span class="n">cov</span><span class="o">=</span><span class="n">C</span><span class="p">)</span>
+<span class="gp">In [60]: </span><span class="n">rxvals</span> <span class="o">=</span> <span class="n">rx</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">21</span><span class="p">),</span> <span class="n">cov</span><span class="o">=</span><span class="n">C</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -482,16 +511,22 @@ specified.</p>
 <p>Let&#8217;s select the image pixel at (row, col) = (8, 88) as our target, use a
 global background statistics estimate, and plot all pixels whose matched filter
 scores are greater than 0.2.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [57]: </span><span class="n">t</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">88</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [61]: </span><span class="n">t</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">88</span><span class="p">]</span>
 
-<span class="gp">In [58]: </span><span class="n">mfscores</span> <span class="o">=</span> <span class="n">matched_filter</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="gp">In [62]: </span><span class="n">mfscores</span> <span class="o">=</span> <span class="n">matched_filter</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
-<span class="gp">In [59]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">mfscores</span> <span class="o">&gt;</span> <span class="mf">0.2</span><span class="p">))</span>
+<span class="gp">In [63]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">mfscores</span> <span class="o">&gt;</span> <span class="mf">0.2</span><span class="p">))</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/mf_gt_02.png"><img alt="_images/mf_gt_02.png" class="align-center" src="_images/mf_gt_02.png" style="width: 264.0px; height: 198.0px;" /></a>
 <p>As with the <tt class="xref py py-func docutils literal"><span class="pre">rx</span></tt> function, <tt class="xref py py-func docutils literal"><span class="pre">matched_filter</span></tt> can be applied using
 windowed background statistics (optionally with a global covariance estimate).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p><a class="reference internal" href="class_func_ref.html#spectral.algorithms.detectors.ace" title="spectral.algorithms.detectors.ace"><tt class="xref py py-func docutils literal"><span class="pre">ace</span></tt></a>:</p>
+<blockquote class="last">
+<div>Adaptive Coherence/Cosine Estimator (ACE)</div></blockquote>
+</div>
 </div>
 </div>
 <div class="section" id="miscellaneous-functions">
@@ -519,17 +554,17 @@ resolution than the destination bands.</p>
 a list of band centers and, optionally, a list of FWHM values.  Once the
 BandResampler is created, we can call it with a source sensor spectrum and it will
 return the resampled spectrum.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [60]: </span><span class="kn">import</span> <span class="nn">spectral.io.aviris</span> <span class="kn">as</span> <span class="nn">aviris</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [64]: </span><span class="kn">import</span> <span class="nn">spectral.io.aviris</span> <span class="kn">as</span> <span class="nn">aviris</span>
 
-<span class="gp">In [61]: </span><span class="n">img1</span> <span class="o">=</span> <span class="n">aviris</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;f970619t01p02_r02_sc04.a.rfl&#39;</span><span class="p">,</span> <span class="s">&#39;f970619t01p02_r02.a.spc&#39;</span><span class="p">)</span>
+<span class="gp">In [65]: </span><span class="n">img1</span> <span class="o">=</span> <span class="n">aviris</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;f970619t01p02_r02_sc04.a.rfl&#39;</span><span class="p">,</span> <span class="s">&#39;f970619t01p02_r02.a.spc&#39;</span><span class="p">)</span>
 
-<span class="gp">In [62]: </span><span class="n">bands2</span> <span class="o">=</span> <span class="n">aviris</span><span class="o">.</span><span class="n">read_aviris_bands</span><span class="p">(</span><span class="s">&#39;92AV3C.spc&#39;</span><span class="p">)</span>
+<span class="gp">In [66]: </span><span class="n">bands2</span> <span class="o">=</span> <span class="n">aviris</span><span class="o">.</span><span class="n">read_aviris_bands</span><span class="p">(</span><span class="s">&#39;92AV3C.spc&#39;</span><span class="p">)</span>
 
-<span class="gp">In [63]: </span><span class="n">resample</span> <span class="o">=</span> <span class="n">BandResampler</span><span class="p">(</span><span class="n">img1</span><span class="o">.</span><span class="n">bands</span><span class="p">,</span> <span class="n">bands2</span><span class="p">)</span>
+<span class="gp">In [67]: </span><span class="n">resample</span> <span class="o">=</span> <span class="n">BandResampler</span><span class="p">(</span><span class="n">img1</span><span class="o">.</span><span class="n">bands</span><span class="p">,</span> <span class="n">bands2</span><span class="p">)</span>
 
-<span class="gp">In [64]: </span><span class="n">x1</span> <span class="o">=</span> <span class="n">img1</span><span class="p">[</span><span class="mi">96</span><span class="p">,</span> <span class="mi">304</span><span class="p">]</span>
+<span class="gp">In [68]: </span><span class="n">x1</span> <span class="o">=</span> <span class="n">img1</span><span class="p">[</span><span class="mi">96</span><span class="p">,</span> <span class="mi">304</span><span class="p">]</span>
 
-<span class="gp">In [65]: </span><span class="n">x2</span> <span class="o">=</span> <span class="n">resample</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+<span class="gp">In [69]: </span><span class="n">x2</span> <span class="o">=</span> <span class="n">resample</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -543,19 +578,19 @@ of vegetation.  The index is commonly defined as</p>
 <cite>RED</cite> is the reflectance of the red band.  For our sample image, if we take
 band 21 (607.0 nm) for our red band and band 43 (802.5 nm) for near infrared,
 we get the following NDVI image.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [66]: </span><span class="n">vi</span> <span class="o">=</span> <span class="n">ndvi</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">43</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [70]: </span><span class="n">vi</span> <span class="o">=</span> <span class="n">ndvi</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">43</span><span class="p">)</span>
 
-<span class="gp">In [67]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">vi</span><span class="p">)</span>
+<span class="gp">In [71]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">vi</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/ndvi.png"><img alt="_images/ndvi.png" class="align-center" src="_images/ndvi.png" style="width: 264.0px; height: 198.0px;" /></a>
 <p><a class="reference internal" href="class_func_ref.html#spectral.algorithms.algorithms.ndvi" title="spectral.algorithms.algorithms.ndvi"><tt class="xref py py-func docutils literal"><span class="pre">ndvi</span></tt></a> is a simple convenience function.
 You could just as easily calculate the vegetation index yourself like this:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [68]: </span><span class="n">red</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [72]: </span><span class="n">red</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
 
-<span class="gp">In [69]: </span><span class="n">nir</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">43</span><span class="p">)</span>
+<span class="gp">In [73]: </span><span class="n">nir</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">43</span><span class="p">)</span>
 
-<span class="gp">In [70]: </span><span class="n">vi</span> <span class="o">=</span> <span class="p">(</span><span class="n">nir</span> <span class="o">-</span> <span class="n">red</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">nir</span> <span class="o">+</span> <span class="n">red</span><span class="p">)</span>
+<span class="gp">In [74]: </span><span class="n">vi</span> <span class="o">=</span> <span class="p">(</span><span class="n">nir</span> <span class="o">-</span> <span class="n">red</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">nir</span> <span class="o">+</span> <span class="n">red</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -571,13 +606,13 @@ This is done by the <a class="reference internal" href="class_func_ref.html#spec
 Before calling the function, we must first create a <cite>CxB</cite> array of training class
 mean spectra, where <cite>C</cite> is the number of training classes and <cite>B</cite> is the number
 of spectral bands.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [71]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [75]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="gp">In [72]: </span><span class="n">classes</span> <span class="o">=</span> <span class="n">create_training_classes</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gt</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [76]: </span><span class="n">classes</span> <span class="o">=</span> <span class="n">create_training_classes</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gt</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
 
-<span class="gp">In [73]: </span><span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">),</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">float</span><span class="p">)</span>
+<span class="gp">In [77]: </span><span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">),</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">float</span><span class="p">)</span>
 
-<span class="gp">In [74]: </span><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">classes</span><span class="p">):</span>
+<span class="gp">In [78]: </span><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">classes</span><span class="p">):</span>
 <span class="gp">   ....: </span>    <span class="n">means</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">mean</span>
 <span class="gp">   ....: </span>
 </pre></div>
@@ -590,11 +625,11 @@ columns in the image and there are <cite>C</cite> spectral angle for each pixel.
 the class with the smallest angle, we call the <tt class="xref py py-mod docutils literal"><span class="pre">numpy</span></tt> <tt class="xref py py-func docutils literal"><span class="pre">argmin</span></tt>
 function to select the index for the smallest angle corresponding to each pixel.
 The <tt class="docutils literal"><span class="pre">clmap</span> <span class="pre">+</span> <span class="pre">1</span></tt> is used in the display command because our class IDs start at 1 (not 0).</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [75]: </span><span class="n">angles</span> <span class="o">=</span> <span class="n">spectral_angles</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">means</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [79]: </span><span class="n">angles</span> <span class="o">=</span> <span class="n">spectral_angles</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">means</span><span class="p">)</span>
 
-<span class="gp">In [76]: </span><span class="n">clmap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">In [80]: </span><span class="n">clmap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
-<span class="gp">In [77]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="p">((</span><span class="n">clmap</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">gt</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)))</span>
+<span class="gp">In [81]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="p">((</span><span class="n">clmap</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">gt</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)))</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/sam.png"><img alt="_images/sam.png" class="align-center" src="_images/sam.png" style="width: 264.0px; height: 198.0px;" /></a>
@@ -639,7 +674,7 @@ The <tt class="docutils literal"><span class="pre">clmap</span> <span class="pre
 </li>
 <li><a class="reference internal" href="#dimensionality-reduction">Dimensionality Reduction</a><ul>
 <li><a class="reference internal" href="#principal-components">Principal Components</a></li>
-<li><a class="reference internal" href="#fischer-linear-discriminant">Fischer Linear Discriminant</a></li>
+<li><a class="reference internal" href="#fisher-linear-discriminant">Fisher Linear Discriminant</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#target-detectors">Target Detectors</a><ul>
@@ -689,7 +724,7 @@ The <tt class="docutils literal"><span class="pre">clmap</span> <span class="pre
         <li class="right" >
           <a href="graphics.html" title="Displaying Data"
              >previous</a> |</li>
-        <li><a href="index.html">Spectral Python 0.15.0
+        <li><a href="index.html">Spectral Python 0.16.0
  documentation</a> &raquo;</li>
           <li><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>

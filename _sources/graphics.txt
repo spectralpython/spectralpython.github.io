@@ -24,8 +24,8 @@ Starting IPython
 SPy uses IPython to provide GUI windows without blocking the interactive python
 interpreter.  To enable this, you must start IPython in "pylab" mode.  If you
 have already set your `matplotlib backend <http://matplotlib.org/faq/usage_faq.html#what-is-a-backend>`_
-to either "WX" or "WXAgg" in your matplotlibrc file, you should be able to
-start IPython for SPy like this::
+to either "WX" or "WXAgg" (see note below) in your matplotlibrc file, you
+should be able to start IPython for SPy like this::
 
     ipython --pylab
     
@@ -49,9 +49,6 @@ You can also set the backend explicitly when starting IPython this way::
 Raster Displays
 ===============
 
-Displaying images with `imshow`
-*******************************
-
 The SPy :func:`~spectral.graphics.spypylab.imshow` function is a wrapper around
 the matplotlib function of the same name. The main differences are that the SPy
 version makes it easy to display bands from multispectral/hyperspectral images,
@@ -59,10 +56,10 @@ it renders classification images, and supports several additional types of
 interactivity.
 
 Image Data Display
-~~~~~~~~~~~~~~~~~~
+******************
 
-To display the RGB bands as shown for the `view` function above, pass the same
-arguments to `imshow`:
+The `imshow` function produces a raster display of data associated with an
+np.ndarray or `SpyFile` object.
 
 .. ipython::
 
@@ -79,8 +76,24 @@ a zoom window will be opened, which displays a magnified view of the image. By
 holding down the **CONTROL** key and left-clicking in the original window, the
 zoom window will pan to the pixel clicked in the original window.
 
+.. versionchanged:: 0.16.0
+   By default, `imshow` function applies a linear histogram stretch of the RGB
+   display data. The the color stretch can be controlled by the *stretch*,
+   *bounds*, and *stretch_all* keyword to the `imshow` function (see
+   :func:`~spectral.graphics.graphics.get_rgb` for the meaning of these
+   keywords). To adjust the color stretch of a displayed image, the
+   :meth:`~spectral.graphics.spypylab.ImageView.set_rgb_options` method of the
+   `ImageView` object can be called.
+
+RGB data limits for a displayed image can be printed from the `__str__` method
+of the `ImageView` object:
+
+.. ipython::
+
+    In [1]: print view
+
 Class Map Display
-~~~~~~~~~~~~~~~~~
+*****************
 
 To display the ground truth image using :func:`imshow`, set the *classes*
 argument in the `imshow` function:
@@ -123,7 +136,7 @@ calling :func:`imshow`:
    :scale:  30 %
 
 Interactive Class Labeling
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+**************************
 
 The :class:`ImageView` window provides the ability to modify pixel class IDs interactively
 by selecting rectangular regions in the image and assigning a new class ID.
@@ -154,7 +167,7 @@ the class ID to a super-rectangle covering all the pixels of interest, then
 reassigning sub-rectangles back to class 0 (or whatever was the original class ID).
 
 Additional Capabilities
-~~~~~~~~~~~~~~~~~~~~~~~
+***********************
 
 To get help on :class:`ImageView` keyboard & mouse functions, press "h" while focus is on
 the image window to display all keybinds and mouse functions::
@@ -189,148 +202,17 @@ you can customize some of the default behaviours of the image display by
 modifiying members of the module's :class:`~spectral.spectral.SpySettings`
 object.
 
-Displaying images with `view` and `view_indexed`
-************************************************
+Saving RGB Image Files
+======================
 
-.. note::
-
-    :func:`spectral.view` and :func:`spectral.view_indexed` functions are
-    older raster display functions, which are superceded by the SPy
-    :func:`~spectral.graphics.spypylab.imshow` function (which is a wrapper
-    around matplotlib's `imshow` function). The `view*` functions always display
-    images at full resolution (one image pixel corresponds to one screen pixel),
-    which is convenient for small chips (such as those used in this documentation).
-    However, for typical image dimensions, it is more convenient to use the
-    `imshow` function, which provides capabilities such as panning, zooming,
-    resizing, class map overlays, and pixel class labeling. The `view*`
-    functions will likely be deprecated and subsequently removed in future
-    versions of the software.
-
-The :func:`~spectral.view` function opens a window that displays a raster view of
-an image.
-
-.. ipython::
-
-    @suppress
-    In [1]: import wx
-    
-    @suppress
-    In [2]: app = wx.App()
-
-    @verbatim    
-    In [5]: w = view(img)
-    
-    @suppress
-    In [6]: save_rgb('images/view_image_default.jpg', img)
-
-.. figure::	images/view_image_default.jpg
-   :align:	center
-   
-   Displaying first, middle, and last bands as RGB
-
-The image file did not contain metadata on which bands to display so :func:`~spectral.view`
-took the first, middle and last band from the image file and displayed those bands
-as the red, green, and blue channels, resulting in an unsatisfying view of the
-image.  To display an image closer to a natural color view of the image, we would like to
-display the bands closest to the red, green, and blue wavelengths.  For our example
-image, those correspond roughly to the 30th, 20th, and 10th bands of the image.
-We can display these bands through the :func:`~spectral.view` function in two ways.
-First, we can explicitly pass the band indices as arguments.
-
-.. ipython:: python
-
-    @verbatim
-    In [1]: w = view(img, [29, 19, 9])
-    
-    @suppress
-    In [2]: save_rgb('images/view_image_rgb.jpg', img, [29, 19, 9])
-
-Alternately, we can specify the default bands to display for the image by setting
-the ``default bands`` metadata field in the image before calling the :func:`~spectral.view`.
-
-.. ipython:: python
-
-    In [3]: img.metadata['default bands'] = [29, 19, 9]
-    
-    @verbatim
-    In [4]: w = view(img)
-
-For either method, the resulting image will appear as follows.
-
-.. figure::	images/view_image_rgb.jpg
-   :align:	center
-   
-   Color view of the image
-
-The ``bands`` argument of :func:`~spectral.view` expects a list of either one or
-three integers so we can display the green band from the image in greyscale like this:
-
-.. ipython:: python
-
-    @verbatim
-    In [5]: w = view(img, [19])
-
-.. figure::	images/view_image_g.jpg
-   :align:	center
-   
-   Green band in greyscale
-
-The :func:`~spectral.view` function also works with ``numpy`` arrays, so the
-previous two image displays can alternately be created as follows.
-
-.. ipython::
-
-    In [6]: rgb = img.read_bands([29, 19, 9])
-    
-    @verbatim
-    In [7]: w = view(rgb)
-    
-    In [8]: green = img[:,:,19]
-    
-    @verbatim
-    In [9]: w = view(green)
-    
-    @suppress
-    In [10]: save_rgb('images/view_image_g.jpg', img, [19])
-
-To save an image display to disk, use the :func:`~spectral.save_rgb` function,
-which uses the same arguments as :func:`~spectral.view` but with the saved image
+To save an image display to a file, use the :func:`~spectral.save_rgb` function,
+which uses the same arguments as :func:`~spectral.imshow` but with the saved image
 file name as the first argument.
 
 .. ipython::
 
     @verbatim
     In [11]: save_rgb('rgb.jpg', img, [29, 19, 9])
-
-While the :func:`~spectral.view` function displays color images by specifying
-RGB triplets for each pixel, the :func:`~spectral.view_indexed` function creates
-color images via integer-valued arrays that represent indices into a color palette.
-This type of display is useful for generating images for ground truth masks or
-classification results.  For example, we can display the ground truth file for
-our sample image like this:
-
-.. ipython::
-
-    In [12]: gt = open_image('92AV3GT.GIS').read_band(0)
-    
-    @verbatim
-    In [13]: w = view_indexed(gt)
-
-.. figure::	images/view_gt.jpg
-   :align:	center
-   
-   Ground truth mask for the sample image
-
-The colors used by default are those defined in **spectral.spy_colors**, which
-is a list of 3-tuples, where each 3-tuple is a triplet defining an RGB color (R,
-G, and B are each in the range [0-255]).  The colors used by :func:`~spectral.view_indexed`
-can be changed by passing an alternate set of colors in the ``colors`` keyword
-argument:
-
-.. ipython::
-
-    @verbatim
-    In [11]: w = view_indexed(gt, colors=myColors)
 
 Saving an indexed color image is similar to saving an RGB image; however, :func:`~spectral.save_rgb`
 is unable to determine if the image being saved is a single-band (greyscale) image
