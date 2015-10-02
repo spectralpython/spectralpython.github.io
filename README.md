@@ -2,7 +2,7 @@ spectralpython.github.io
 ========================
 
 This repository contains source code for the Spectral Python (SPy)
-[web site](http://www.spectralpython..net).
+[web site](http://www.spectralpython.net).
 
 ## Build dependencies
 
