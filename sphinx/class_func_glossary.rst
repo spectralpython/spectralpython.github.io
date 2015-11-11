@@ -132,6 +132,10 @@ Classification
      - Unsupervised image classification via k-means clustering
    * - :class:`~spectral.algorithms.classifiers.MahalanobisDistanceClassifier`
      - A classifier using Mahalanobis distance
+   * - :func:`~spectral.algorithms.spatial.map_class_ids`
+     - Create a mapping between class labels in two classification images
+   * - :func:`~spectral.algorithms.spatial.map_classes`
+     - Modifies class indices according to a class index mapping
    * - :func:`~spectral.algorithms.algorithms.msam`
      - Modified Spectral Angle Mapper (MSAM)
    * - :func:`~spectral.algorithms.classifiers.PerceptronClassifier`
