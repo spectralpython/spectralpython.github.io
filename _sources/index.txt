@@ -20,11 +20,10 @@ under the `GNU General Public License <http://www.gnu.org/copyleft/gpl.html>`_.
 To see some examples of how SPy can be used, you may want to jump straight to
 the documentation sections on :ref:`graphics` or :ref:`algorithms`.  A
 categorized listing of the main classes and functions are in the
-:ref:`class-func-glossary`. You can
-download SPy from `GitHub <https://github.com/spectralpython/spectral/releases/latest>`_,
-the `Python Package Index (PyPI) <https://pypi.python.org/pypi/spectral>`_, or
-`Sourceforge <https://sourceforge.net/projects/spectralpython>`_. See the
-:ref:`installation` section section of the documentation for details.
+:ref:`class-func-glossary`. You can download SPy from
+`GitHub <https://github.com/spectralpython/spectral/releases/latest>`_
+or the `Python Package Index (PyPI) <https://pypi.python.org/pypi/spectral>`_.
+See the :ref:`installation` section section of the documentation for details.
 
 Documentation
 -------------
@@ -36,6 +35,17 @@ Documentation
 
 News
 ----
+
+2015-11-11 : SPy 0.17 enables mapping class labels between images.
+
+    Class labels can be mapped between images (e.g., from an unsupervised
+    classification result to a ground truth image) using :func:`~spectral.algorithms.spatial.map_class_ids`
+    and :func:`~spectral.algorithms.spatial.map_classes`. ENVI file handling
+    is improved, :func:`~spectral.view_nd` image windows support arbitrary
+    axis labels, and :class:`SpyFile` objects have improved numpy `ndarray`
+    interfaces. See the `SPy 0.17 release notes <https://github.com/spectralpython/spectral/releases/tag/v0.17>`_
+    for details. And thanks to `Don March <https://github.com/ohspite>`_ for
+    many contributions to this release.
 
 2014-10-18 : SPy 0.16.0 provides initial support for Python 3.
 
