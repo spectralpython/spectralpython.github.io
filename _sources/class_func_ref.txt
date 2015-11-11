@@ -199,11 +199,6 @@ calc_stats
 
 .. autofunction:: spectral.calc_stats
 
-cluster
--------
-
-.. autofunction:: spectral.cluster
-
 covariance
 ----------
 
@@ -244,9 +239,28 @@ linear_discriminant
 
 LinearTransform
 ---------------
+
 .. autoclass:: spectral.algorithms.transforms.LinearTransform
    :members: __init__, __call__, chain
    :special-members: __init__, __call__
+
+MahalanobisDistanceClassifier
+-----------------------------
+
+.. autoclass:: spectral.algorithms.classifiers.MahalanobisDistanceClassifier
+   :members: __init__, train, classify_spectrum
+   :special-members: __init__
+   :inherited-members: classify_image
+
+map_class_ids
+-------------
+
+.. autofunction:: spectral.algorithms.spatial.map_class_ids
+
+map_classes
+-----------
+
+.. autofunction:: spectral.algorithms.spatial.map_classes
 
 matched_filter
 --------------
@@ -259,15 +273,6 @@ MatchedFilter
    :members: __init__, whiten
    :special-members: __init__, __call__
    
-   
-MahalanobisDistanceClassifier
------------------------------
-
-.. autoclass:: spectral.algorithms.classifiers.MahalanobisDistanceClassifier
-   :members: __init__, train, classify_spectrum
-   :special-members: __init__
-   :inherited-members: classify_image
-
 mean_cov
 --------
 

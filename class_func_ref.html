@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Class/Function Documentation &mdash; Spectral Python 0.16.0
+    <title>Class/Function Documentation &mdash; Spectral Python 0.17
  documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.16.0
+        VERSION:     '0.17
 ',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Spectral Python 0.16.0
+    <link rel="top" title="Spectral Python 0.17
  documentation" href="index.html" />
     <link rel="up" title="Spectral Python (SPy) User Guide" href="user_guide.html" />
     <link rel="prev" title="Class/Function Glossary" href="class_func_glossary.html" /> 
@@ -37,7 +37,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="class_func_glossary.html" title="Class/Function Glossary"
              accesskey="P">previous</a></li>
-        <li><a href="index.html">Spectral Python 0.16.0
+        <li><a href="index.html">Spectral Python 0.17
  documentation</a> &raquo;</li>
           <li><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>
@@ -1554,6 +1554,13 @@ be specified as None instead of a list, in which case nothing
 will be rendered in that octant.</li>
 </ol>
 </div></blockquote>
+<p><cite>labels</cite> (list):</p>
+<blockquote>
+<div><p>List of labels to be displayed next to the axis assigned to a
+feature.  If not specified, the feature index is shown by default.</p>
+<p>The <cite>str()</cite> function will be called on each item of the list so,
+for example, a list of wavelengths can be passed as the labels.</p>
+</div></blockquote>
 <p><cite>size</cite> (2-tuple of ints)</p>
 <blockquote>
 <div>Specifies the initial size (pixel rows/cols) of the window.</div></blockquote>
@@ -2290,43 +2297,6 @@ will be used.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="cluster">
-<h3>cluster<a class="headerlink" href="#cluster" title="Permalink to this headline">¶</a></h3>
-<dl class="function">
-<dt id="spectral.cluster">
-<tt class="descname">cluster</tt><big>(</big><em>data</em>, <em>nclusters=10</em><big>)</big><a class="headerlink" href="#spectral.cluster" title="Permalink to this definition">¶</a></dt>
-<dd><p>An single-pass clustering algorithm with replacement.</p>
-<p>Arguments:</p>
-<blockquote>
-<div><p><cite>data</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>):</p>
-<blockquote>
-<div>The <cite>MxNxB</cite> image on which to perform clustering.</div></blockquote>
-<p><cite>nclusters</cite> (int) [default 10]:</p>
-<blockquote>
-<div>Number of clusters to create.</div></blockquote>
-</div></blockquote>
-<p>Returns a 2-tuple containing:</p>
-<blockquote>
-<div><p><cite>class_map</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
-<blockquote>
-<div>An <cite>MxN</cite> array of cluster indices.</div></blockquote>
-<p><cite>centers</cite> (<tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt>):</p>
-<blockquote>
-<div>A <cite>nclusters x B</cite> array of cluster centers corresponding to the
-indices in clMap</div></blockquote>
-</div></blockquote>
-<p>This algorithm initializes the clusters with the first <cite>nclusters</cite>
-pixels from data.  Successive pixels are then assigned to the nearest
-cluster in <cite>N</cite>-space.  If the distance from a pixel to the nearest cluster
-is greater than the greatest inter-cluster distance, the pixel is added
-as a new cluster and the two clusters nearest to eachother are combined
-into a single cluster.</p>
-<p>The advantages of this algorithm are that threshold distances need
-not be specified and the number of clusters remains fixed; however, results
-typically are not as accurate as iterative algorithms.</p>
-</dd></dl>
-
-</div>
 <div class="section" id="covariance">
 <h3>covariance<a class="headerlink" href="#covariance" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
@@ -2714,6 +2684,155 @@ is given by</p>
 </dd></dl>
 
 </div>
+<div class="section" id="mahalanobisdistanceclassifier">
+<h3>MahalanobisDistanceClassifier<a class="headerlink" href="#mahalanobisdistanceclassifier" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier">
+<em class="property">class </em><tt class="descname">MahalanobisDistanceClassifier</tt><big>(</big><em>training_data=None</em>, <em>min_samples=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Classifier using Mahalanobis distance for class discrimination</p>
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>training_data=None</em>, <em>min_samples=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the classifier and optionally trains it with training data.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>training_data</cite> (<tt class="xref py py-class docutils literal"><span class="pre">TrainingClassSet</span></tt>):</p>
+<blockquote>
+<div>The training classes on which to train the classifier.</div></blockquote>
+<p><cite>min_samples</cite> (int) [default None]:</p>
+<blockquote>
+<div>Minimum number of samples required from a training class to
+include it in the classifier.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier.classify_image">
+<tt class="descname">classify_image</tt><big>(</big><em>image</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier.classify_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Classifies an entire image, returning a classification map.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>image</cite> (ndarray or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>)</p>
+<blockquote>
+<div>The <cite>MxNxB</cite> image to classify.</div></blockquote>
+</div></blockquote>
+<p>Returns (ndarray):</p>
+<blockquote>
+<div>An <cite>MxN</cite> ndarray of integers specifying the class for each pixel.</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier.classify_spectrum">
+<tt class="descname">classify_spectrum</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier.classify_spectrum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Classifies a pixel into one of the trained classes.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>x</cite> (list or rank-1 ndarray):</p>
+<blockquote>
+<div>The unclassified spectrum.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p><cite>classIndex</cite> (int):</p>
+<blockquote>
+<div>The index for the <tt class="xref py py-class docutils literal"><span class="pre">TrainingClass</span></tt>
+to which <cite>x</cite> is classified.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier.train">
+<tt class="descname">train</tt><big>(</big><em>trainingData</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains the classifier on the given training data.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>trainingData</cite> (<tt class="xref py py-class docutils literal"><span class="pre">TrainingClassSet</span></tt>):</p>
+<blockquote>
+<div>Data for the training classes.</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="map-class-ids">
+<h3>map_class_ids<a class="headerlink" href="#map-class-ids" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.spatial.map_class_ids">
+<tt class="descname">map_class_ids</tt><big>(</big><em>src_class_image</em>, <em>dest_class_image</em>, <em>unlabeled=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.spatial.map_class_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a mapping between class labels in two classification images.</p>
+<p>Running a classification algorithm (particularly an unsupervised one)
+multiple times on the same image can yield similar results but with
+different class labels (indices) for the same classes. This function
+produces a mapping of class indices from one classification image to
+another by finding class indices that share the most pixels between the
+two classification images.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>src_class_image</cite> (ndarray):</p>
+<blockquote>
+<div>An MxN integer array of class indices. The indices in this array
+will be mapped to indices in <cite>dest_class_image</cite>.</div></blockquote>
+<p><cite>dest_class_image</cite> (ndarray):</p>
+<blockquote>
+<div>An MxN integer array of class indices.</div></blockquote>
+<p><cite>unlabeled</cite> (int or array of ints):</p>
+<blockquote>
+<div>If this argument is provided, all pixels (in both images) will be
+ignored when counting coincident pixels to determine the mapping.
+If mapping a classification image to a ground truth image that has
+a labeled background value, set <cite>unlabeled</cite> to that value.</div></blockquote>
+</div></blockquote>
+<p>Return Value:</p>
+<blockquote>
+<div>A dictionary whose keys are class indices from <cite>src_class_image</cite> and
+whose values are class indices from <cite>dest_class_image</cite>.</div></blockquote>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">map_classes</span></tt></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="map-classes">
+<h3>map_classes<a class="headerlink" href="#map-classes" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="spectral.algorithms.spatial.map_classes">
+<tt class="descname">map_classes</tt><big>(</big><em>class_image</em>, <em>class_id_map</em>, <em>allow_unmapped=False</em><big>)</big><a class="headerlink" href="#spectral.algorithms.spatial.map_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modifies class indices according to a class index mapping.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>class_image</cite>: (ndarray):</p>
+<blockquote>
+<div>An MxN array of integer class indices.</div></blockquote>
+<p><cite>class_id_map</cite>: (dict):</p>
+<blockquote>
+<div>A dict whose keys are indices from <cite>class_image</cite> and whose values
+are new values for the corresponding indices. This value is
+usually the output of <tt class="xref py py-func docutils literal"><span class="pre">map_class_ids</span></tt>.</div></blockquote>
+<p><cite>allow_unmapped</cite> (bool, default False):</p>
+<blockquote>
+<div>A flag indicating whether class indices can appear in <cite>class_image</cite>
+without a corresponding key in <cite>class_id_map</cite>. If this value is
+False and an index in the image is found without a mapping key,
+a <tt class="xref py py-class docutils literal"><span class="pre">ValueError</span></tt> is raised. If True, the unmapped index will
+appear unmodified in the output image.</div></blockquote>
+</div></blockquote>
+<p>Return Value:</p>
+<blockquote>
+<div>An integer-valued ndarray with same shape as <cite>class_image</cite></div></blockquote>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">spy</span><span class="o">.</span><span class="n">map_class_ids</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">gt</span><span class="p">,</span> <span class="n">unlabeled</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result_mapped</span> <span class="o">=</span> <span class="n">spy</span><span class="o">.</span><span class="n">map_classes</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">map_class_ids</span></tt></p>
+</div>
+</dd></dl>
+
+</div>
 <div class="section" id="matched-filter">
 <h3>matched_filter<a class="headerlink" href="#matched-filter" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
@@ -2833,77 +2952,6 @@ of calling <tt class="xref py py-func docutils literal"><span class="pre">calc_s
 </div></blockquote>
 <p>Returns an array of same size as <cite>X</cite> but linearly transformed to the
 whitened space of the filter.</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="mahalanobisdistanceclassifier">
-<h3>MahalanobisDistanceClassifier<a class="headerlink" href="#mahalanobisdistanceclassifier" title="Permalink to this headline">¶</a></h3>
-<dl class="class">
-<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier">
-<em class="property">class </em><tt class="descname">MahalanobisDistanceClassifier</tt><big>(</big><em>training_data=None</em>, <em>min_samples=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier" title="Permalink to this definition">¶</a></dt>
-<dd><p>A Classifier using Mahalanobis distance for class discrimination</p>
-<dl class="method">
-<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>training_data=None</em>, <em>min_samples=None</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates the classifier and optionally trains it with training data.</p>
-<p>Arguments:</p>
-<blockquote>
-<div><p><cite>training_data</cite> (<tt class="xref py py-class docutils literal"><span class="pre">TrainingClassSet</span></tt>):</p>
-<blockquote>
-<div>The training classes on which to train the classifier.</div></blockquote>
-<p><cite>min_samples</cite> (int) [default None]:</p>
-<blockquote>
-<div>Minimum number of samples required from a training class to
-include it in the classifier.</div></blockquote>
-</div></blockquote>
-</dd></dl>
-
-<dl class="method">
-<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier.classify_image">
-<tt class="descname">classify_image</tt><big>(</big><em>image</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier.classify_image" title="Permalink to this definition">¶</a></dt>
-<dd><p>Classifies an entire image, returning a classification map.</p>
-<p>Arguments:</p>
-<blockquote>
-<div><p><cite>image</cite> (ndarray or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>)</p>
-<blockquote>
-<div>The <cite>MxNxB</cite> image to classify.</div></blockquote>
-</div></blockquote>
-<p>Returns (ndarray):</p>
-<blockquote>
-<div>An <cite>MxN</cite> ndarray of integers specifying the class for each pixel.</div></blockquote>
-</dd></dl>
-
-<dl class="method">
-<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier.classify_spectrum">
-<tt class="descname">classify_spectrum</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier.classify_spectrum" title="Permalink to this definition">¶</a></dt>
-<dd><p>Classifies a pixel into one of the trained classes.</p>
-<p>Arguments:</p>
-<blockquote>
-<div><p><cite>x</cite> (list or rank-1 ndarray):</p>
-<blockquote>
-<div>The unclassified spectrum.</div></blockquote>
-</div></blockquote>
-<p>Returns:</p>
-<blockquote>
-<div><p><cite>classIndex</cite> (int):</p>
-<blockquote>
-<div>The index for the <tt class="xref py py-class docutils literal"><span class="pre">TrainingClass</span></tt>
-to which <cite>x</cite> is classified.</div></blockquote>
-</div></blockquote>
-</dd></dl>
-
-<dl class="method">
-<dt id="spectral.algorithms.classifiers.MahalanobisDistanceClassifier.train">
-<tt class="descname">train</tt><big>(</big><em>trainingData</em><big>)</big><a class="headerlink" href="#spectral.algorithms.classifiers.MahalanobisDistanceClassifier.train" title="Permalink to this definition">¶</a></dt>
-<dd><p>Trains the classifier on the given training data.</p>
-<p>Arguments:</p>
-<blockquote>
-<div><p><cite>trainingData</cite> (<tt class="xref py py-class docutils literal"><span class="pre">TrainingClassSet</span></tt>):</p>
-<blockquote>
-<div>Data for the training classes.</div></blockquote>
-</div></blockquote>
 </dd></dl>
 
 </dd></dl>
@@ -3881,7 +3929,6 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
 <li><a class="reference internal" href="#bandresampler">BandResampler</a></li>
 <li><a class="reference internal" href="#bhattacharyya-distance">Bhattacharyya Distance</a></li>
 <li><a class="reference internal" href="#calc-stats">calc_stats</a></li>
-<li><a class="reference internal" href="#cluster">cluster</a></li>
 <li><a class="reference internal" href="#covariance">covariance</a></li>
 <li><a class="reference internal" href="#cov-avg">cov_avg</a></li>
 <li><a class="reference internal" href="#fisherlineardiscriminant">FisherLinearDiscriminant</a></li>
@@ -3890,9 +3937,11 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
 <li><a class="reference internal" href="#kmeans">kmeans</a></li>
 <li><a class="reference internal" href="#linear-discriminant">linear_discriminant</a></li>
 <li><a class="reference internal" href="#lineartransform">LinearTransform</a></li>
+<li><a class="reference internal" href="#mahalanobisdistanceclassifier">MahalanobisDistanceClassifier</a></li>
+<li><a class="reference internal" href="#map-class-ids">map_class_ids</a></li>
+<li><a class="reference internal" href="#map-classes">map_classes</a></li>
 <li><a class="reference internal" href="#matched-filter">matched_filter</a></li>
 <li><a class="reference internal" href="#matchedfilter">MatchedFilter</a></li>
-<li><a class="reference internal" href="#mahalanobisdistanceclassifier">MahalanobisDistanceClassifier</a></li>
 <li><a class="reference internal" href="#mean-cov">mean_cov</a></li>
 <li><a class="reference internal" href="#minimum-noise-fraction-mnf">Minimum Noise Fraction (MNF)</a></li>
 <li><a class="reference internal" href="#msam">msam</a></li>
@@ -3947,7 +3996,7 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
         <li class="right" style="margin-right: 10px">
           <a href="class_func_glossary.html" title="Class/Function Glossary"
              >previous</a></li>
-        <li><a href="index.html">Spectral Python 0.16.0
+        <li><a href="index.html">Spectral Python 0.17
  documentation</a> &raquo;</li>
           <li><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>
