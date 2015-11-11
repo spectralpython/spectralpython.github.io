@@ -199,11 +199,6 @@ calc_stats
 
 .. autofunction:: spectral.calc_stats
 
-cluster
--------
-
-.. autofunction:: spectral.cluster
-
 covariance
 ----------
 

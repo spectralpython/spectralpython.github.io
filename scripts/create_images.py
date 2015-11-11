@@ -15,8 +15,6 @@ def view_image(outdir='.'):
 def create_clusters(outdir='.'):
     import matplotlib.pyplot as plt
     plt.ioff()
-    (m, c) = spy.cluster(image, 20)
-    spy.save_rgb(os.path.join(outdir, 'cluster20.jpg'), m, colors=spy.spy_colors)
     
     (m, c) = spy.kmeans(image, 20, 30)
     spy.save_rgb(os.path.join(outdir, 'kmeans_20_30.jpg'), m, colors=spy.spy_colors)
