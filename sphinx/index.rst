@@ -36,6 +36,8 @@ Documentation
 News
 ----
 
+2016-06-18 : SPy 0.18 fixes several bugs and has improved ENVI header support.
+
 2015-11-11 : SPy 0.17 enables mapping class labels between images.
 
     Class labels can be mapped between images (e.g., from an unsupervised
