@@ -209,6 +209,12 @@ cov_avg
 
 .. autofunction:: spectral.algorithms.algorithms.cov_avg
 
+EcostressDatabase
+-----------------
+
+.. autoclass:: spectral.database.EcostressDatabase
+   :members:
+
 FisherLinearDiscriminant
 ------------------------
 

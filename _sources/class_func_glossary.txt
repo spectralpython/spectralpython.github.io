@@ -17,8 +17,8 @@ File Input/Output
 
    * - Class/Function
      - Description
-   * - :func:`~spectral.database.AsterDatabase`
-     - Create/Query a spectral database generated from the ASTER Spectral Library
+   * - :func:`~spectral.database.EcostressDatabase`
+     - Create/Query a spectral database generated from the ECOSTRESS Spectral Library
    * - :func:`aviris.open <spectral.io.aviris.open>`
      - Open an AVIRIS image file
    * - :func:`aviris.read_aviris_bands <spectral.io.aviris.read_aviris_bands>`
