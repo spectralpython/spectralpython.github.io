@@ -36,6 +36,10 @@ Documentation
 News
 ----
 
+2019-10-06 : SPy 0.20 adds support for the ECOSTRESS spectral library.
+
+2017-06-04 : SPy 0.19 provides plotting support for bad band lists and adds a few utility methods.
+
 2016-06-18 : SPy 0.18 fixes several bugs and has improved ENVI header support.
 
 2015-11-11 : SPy 0.17 enables mapping class labels between images.
