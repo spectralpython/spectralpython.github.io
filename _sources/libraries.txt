@@ -7,50 +7,47 @@ Spectral Libraries
 .. toctree::
     :maxdepth: 2
 
+.. |EcostressDatabase| replace:: :class:`~spectral.database.EcostressDatabase`
 .. |AsterDatabase| replace:: :class:`~spectral.database.AsterDatabase`
 
-ASTER Spectral Library
-========================
+ECOSTRESS Spectral Library
+==========================
 
-The ASTER Spectral Library provides over 2,000 high-resolution spectra for
-numerous classes of materials. [Baldridge2009]_ The spectra and associated metadata
+The ECOSTRESS spectral library provides over 3,000 high-resolution spectra for
+numerous classes of materials [Meerdink2019]_. The spectra and associated metadata
 are provided as a large set of ASCII text files.  SPy provides the ability to
-import the ASTER library spectra and a subset of the associated metadata into
+import the ECOSTRESS library spectra and a subset of the associated metadata into
 a relational databased that can be easily accessed from Python.
 
-You will first need to get a copy of the ASTER Spectral Library, which is distributed
-on CD-ROM and can be ordered by filling out a simple `online order form <http://speclib.jpl.nasa.gov/order>`_.
-Once you have the library, you can import the data in to an :py:mod:`sqlite` database as
-follows:
+You will first need to get a copy of the ECOSTRESS spectral library data files,
+which can be requested `here <http://speclib.jpl.nasa.gov>`_. Once you have
+acquired the library data, you can import the data in to an :py:mod:`sqlite`
+database as follows:
 
 .. ipython::
     :verbatim:
 
-    In [1]: db = AsterDatabase.create("aster_lib.db", "/CDROM/ASTER2.0/data")
-    Importing /CDROM/ASTER2.0/data/jhu.becknic.manmade.asphalt.paving.solid.0095uuu.spectrum.txt.
-    Importing /CDROM/ASTER2.0/data/jhu.becknic.manmade.asphalt.paving.solid.0096uuu.spectrum.txt.
-    Importing /CDROM/ASTER2.0/data/jhu.becknic.manmade.asphalt.paving.solid.0674uuu.spectrum.txt.
-    Importing /CDROM/ASTER2.0/data/jhu.becknic.manmade.asphalt.tar.solid.0099uuu.spectrum.txt.
+    In [2]: db = spy.EcostressDatabase.create('ecostress.db', './eco_data_ver1')
+    Importing ./eco_data_ver1/vegetation.tree.betula.lenta.tir.bele-1-55.ucsb.nicolet.spectrum.txt.
+    Importing ./eco_data_ver1/vegetation.tree.quercus.lobata.tir.vh282.ucsb.nicolet.spectrum.txt.
+    Importing ./eco_data_ver1/nonphotosyntheticvegetation.branches.adenostoma.fasciculatum.vswir.vh334.ucsb.asd.spectrum.txt.
+    Importing ./eco_data_ver1/mineral.silicate.cyclosilicate.fine.tir.cs-2a.jpl.nicolet.spectrum.txt.
+    Importing ./eco_data_ver1/mineral.hydroxide.none.fine.tir.goethite_1.jhu.nicolet.spectrum.txt.
     ---// snip //---
-    Importing /CDROM/ASTER2.0/data/usgs.perknic.rock.sedimentary.shale.solid.phop011.spectrum.txt.
-    Importing /CDROM/ASTER2.0/data/usgs.perknic.rock.sedimentary.shale.solid.phop02a.spectrum.txt.
-    Processed 2443 files.
-    Ignored the following 2 bad files:
-	    /CDROM/ASTER2.0/data/jhu.nicolet.mineral.silicate.tectosilicate.fine.albite1.spectrum.txt
-	    /CDROM/ASTER2.0/data/usgs.perknic.rock.igneous.mafic.colid.me3.spectrum.txt
-
-Several files with malformed spectral were are skipped during the import process.
-If those spectra are important to you, you can always repair or adjust the data in the files
-as you see fit and repeat the import process.
+    Importing ./eco_data_ver1/mineral.silicate.inosilicate.coarse.vswir.in-8a.jpl.perkin.spectrum.txt.
+    Importing ./eco_data_ver1/vegetation.shrub.aloe.arborescens.tir.jpl077.jpl.nicolet.spectrum.txt.
+    Importing ./eco_data_ver1/mineral.silicate.phyllosilicate.coarse.tir.ps-12f.jpl.nicolet.spectrum.txt.
+    Processed 3403 files.
 
 .. note::
 
-    The |AsterDatabase| *create* method was written specifically
-    for version 2.0 of the ASTER Spectral Library and will not work for previous
-    versions of the library.
+    The ECOSTRESS library supercedes the older ASTER spectral library
+    [Baldridge2009]_.  To import data from version 2.0 of the ASTER library,
+    follow the precedure above but with |AsterDatabase| instead of
+    |EcostressDatabase|.
 
 Once the database has been created, it can be accessed by instantiating an
-|AsterDatabase| object for the database file (it can also be
+|EcostressDatabase| object for the database file (it can also be
 accessed by using sqlite external to Python).  The current implementation of the
 SPy database contains two tables: `Samples` and `Spectra`.  There is a one-to-one
 relationship between rows in the two tables but they have been separate to support
@@ -62,7 +59,7 @@ potential future changes to the database.  The schemas for the tables are in the
     @suppress
     In [104]: from spectral import *
 
-    In [105]: db = AsterDatabase('aster_lib.db')
+    In [105]: db = EcostressDatabase('ecostress.db')
     
     In [106]: for s in db.schemas:
        .....:     print s
@@ -70,20 +67,20 @@ potential future changes to the database.  The schemas for the tables are in the
     CREATE TABLE Samples (SampleID INTEGER PRIMARY KEY, Name TEXT, Type TEXT, Class TEXT, SubClass TEXT, ParticleSize TEXT, SampleNum TEXT, Owner TEXT, Origin TEXT, Phase TEXT, Description TEXT)
     CREATE TABLE Spectra (SpectrumID INTEGER PRIMARY KEY, SampleID INTEGER, SensorCalibrationID INTEGER, Instrument TEXT, Environment TEXT, Measurement TEXT, XUnit TEXT, YUnit TEXT, MinWavelength FLOAT, MaxWavelength FLOAT, NumValues INTEGER, XData BLOB, YData BLOB)
 
-Descriptions of most of the `Sample` table columns can be found in the ASTER
+Descriptions of most of the `Sample` table columns can be found in the ECOSTRESS
 Spectral Library documentation.  The sample spectra and bands are stored in
 `BLOB` objects in the database, so you probably don't want to access them directly.
-The recommended method is to use either the :meth:`~spectral.database.AsterDatabase.get_spectrum`
-or :meth:`~spectral.database.AsterDatabase.get_signature` method of |AsterDatabase|,
+The recommended method is to use either the :meth:`~spectral.database.EcostressDatabase.get_spectrum`
+or :meth:`~spectral.database.EcostressDatabase.get_signature` method of |EcostressDatabase|,
 both of which take a `SpectrumID` as their argument.
 
 As a simple example, suppose you want to find all samples that have "stone" in
 their name (this isn't the best way to find stones in the library but it makes
 for an easy example). There are three ways you can issue queries through the
-|AsterDatabase| object.  You can call its :meth:`~spectral.database.AsterDatabase.print_query`
+|EcostressDatabase| object.  You can call its :meth:`~spectral.database.EcostressDatabase.print_query`
 method to print query results to the command line.  You can call its
-:meth:`~spectral.database.AsterDatabase.query` method to return query results in
-tuples.  Lastly, you can use the :attr:`cursor` attribute of the |AsterDatabase|
+:meth:`~spectral.database.EcostressDatabase.query` method to return query results in
+tuples.  Lastly, you can use the :attr:`cursor` attribute of the |EcostressDatabase|
 object to issue the query.
 
 .. ipython::
@@ -106,7 +103,7 @@ Next, let's retrieve and plot one of the results (we will take the last one).
     @supress
     In [117]: f = plt.figure()
     
-    In [117]: s = db.get_signature(2436)
+    In [117]: s = db.get_signature(384)
     
     In [118]: import pylab as plt
     
@@ -132,17 +129,17 @@ Next, let's retrieve and plot one of the results (we will take the last one).
 ENVI Spectral Libraries
 ========================
 
-While the |AsterDatabase| provides a Python interface to the
-ASTER Spectral Library, there may be times where you want to repeatedly access
+While the |EcostressDatabase| provides a Python interface to the
+ECOSTRESS Spectral Library, there may be times where you want to repeatedly access
 a small, fixed subset of the spectra in the library and do not want to repeatedly
 query the database.  The ENVI file format enables storage of spectral libraries
 (see :ref:`envi-format`). SPy can read these files into a SPy
 :class:`~spectral.io.envi.SpectralLibrary` object.
 
-To enable easy creation of custom spectral libraries, the |AsterDatabase|
-has a :meth:`~spectral.database.AsterDatabase.create_envi_spectral_library` method that
+To enable easy creation of custom spectral libraries, the |EcostressDatabase|
+has a :meth:`~spectral.database.EcostressDatabase.create_envi_spectral_library` method that
 generates a spectral library that can easily be saved to ENVI format.  Spectra
-in the ASTER library have varying numbers of samples over varying spectral
+in the ECOSTRESS library have varying numbers of samples over varying spectral
 ranges.  To generate the library we want to save to ENVI format, we need to specify
 a band discretization to which we want all of the desired spectra resampled.
 Let's pick the bands from our sample hyperspectral image.
@@ -184,7 +181,7 @@ query the spectra, we will need to specify the band limits in micrometers.
 
 So it appears that 59 of the 78 "stone" spectra cover the desired band limits.
 To create a new, resampled spectral library for these spectra, we call the
-|AsterDatabase| :meth:`~spectral.database.AsterDatabase.create_envi_spectral_library`
+|EcostressDatabase| :meth:`~spectral.database.EcostressDatabase.create_envi_spectral_library`
 method, passing it the list of spectrum IDs and our output band schema (in micrometers).
 Since our bands are defined in nanometers, we will convert them before calling
 the method.
@@ -198,21 +195,23 @@ the method.
     
     In [128]: ids = [r[0] for r in rows]
     
+    In [128]: print(ids)
+    
     In [129]: bands.centers = [x / 1000. for x in bands.centers]
     
     In [130]: bands.bandwidths = [x / 1000. for x in bands.bandwidths]
     
     In [131]: lib = db.create_envi_spectral_library(ids, bands)
 
-Now that we've created a resampled library of spectra, let's plot one.  We'll
-plot the same limestone spectrum plotted above, which happens to be the last spectrum
-in the resampled library.
+Now that we've created a resampled library of spectra, let's plot the last
+spectrum in the resampled library.
 
 .. ipython::
 
-    In [132]: import pylab as plt
+    @supress
+    In [132]: f = plt.figure()
     
-    In [133]: s = db.get_signature(2436)
+    In [133]: s = db.get_signature(ids[-1])
     
     In [134]: plt.plot(s.x, s.y, 'k-', label='original');
     
@@ -228,7 +227,7 @@ in the resampled library.
     
     In [139]: plt.title('Resampled %s spectrum' % lib.names[-1]);
     
-    @savefig limestone_resampled.png scale=80% align=center
+    @savefig spectrum_resampled.png scale=80% align=center
     In [140]: plt.show()
 
 The resampled spectral library can be used with any image that uses the same
@@ -244,7 +243,7 @@ used in the band calibration (we need to convert from micrometers to nanometers)
     
     In [143]: lib.bands.band_unit = 'nm'
     
-    In [144]: lib.save('stones', 'Stone spectra from the ASTER library')
+    In [144]: lib.save('stones', 'Stone spectra from the ECOSTRESS library')
 
 Saving the library with the name "stones" creates two files: "stones.sli" and
 "stones.hdr".  The first file contains the resampled spectra and the second is the
@@ -261,3 +260,6 @@ header file that we use to open the library.
 
 .. [Baldridge2009] Baldridge, A. M., Hook, S. J., Grove, C. I. and G. Rivera, 2008(9).
    The ASTER Spectral Library Version 2.0. In press Remote Sensing of Environment
+
+.. [Meerdink2019] Meerdink, S. K., Hook, S. J., Roberts, D. A., & Abbott, E. A. (2019).
+   The ECOSTRESS spectral library version 1.0. Remote Sensing of Environment, 230(111196), 1–8.
