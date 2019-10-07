@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Spectral Libraries &mdash; Spectral Python 0.18
+    <title>Spectral Libraries &mdash; Spectral Python 0.20
  documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.18
+        VERSION:     '0.20
 ',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Spectral Python 0.18
+    <link rel="top" title="Spectral Python 0.20
  documentation" href="index.html" />
     <link rel="up" title="Spectral Python (SPy) User Guide" href="user_guide.html" />
     <link rel="next" title="Class/Function Glossary" href="class_func_glossary.html" />
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="algorithms.html" title="Spectral Algorithms"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Spectral Python 0.18
+        <li><a href="index.html">Spectral Python 0.20
  documentation</a> &raquo;</li>
           <li><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>
@@ -58,48 +58,45 @@
 <ul class="simple">
 </ul>
 </div>
-<div class="section" id="aster-spectral-library">
-<h2>ASTER Spectral Library<a class="headerlink" href="#aster-spectral-library" title="Permalink to this headline">¶</a></h2>
-<p>The ASTER Spectral Library provides over 2,000 high-resolution spectra for
-numerous classes of materials. <a class="reference internal" href="#baldridge2009" id="id1">[Baldridge2009]</a> The spectra and associated metadata
+<div class="section" id="ecostress-spectral-library">
+<h2>ECOSTRESS Spectral Library<a class="headerlink" href="#ecostress-spectral-library" title="Permalink to this headline">¶</a></h2>
+<p>The ECOSTRESS spectral library provides over 3,000 high-resolution spectra for
+numerous classes of materials <a class="reference internal" href="#meerdink2019" id="id1">[Meerdink2019]</a>. The spectra and associated metadata
 are provided as a large set of ASCII text files.  SPy provides the ability to
-import the ASTER library spectra and a subset of the associated metadata into
+import the ECOSTRESS library spectra and a subset of the associated metadata into
 a relational databased that can be easily accessed from Python.</p>
-<p>You will first need to get a copy of the ASTER Spectral Library, which is distributed
-on CD-ROM and can be ordered by filling out a simple <a class="reference external" href="http://speclib.jpl.nasa.gov/order">online order form</a>.
-Once you have the library, you can import the data in to an <tt class="xref py py-mod docutils literal"><span class="pre">sqlite</span></tt> database as
-follows:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="n">db</span> <span class="o">=</span> <span class="n">AsterDatabase</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;aster_lib.db&quot;</span><span class="p">,</span> <span class="s">&quot;/CDROM/ASTER2.0/data&quot;</span><span class="p">)</span>
-<span class="go">Importing /CDROM/ASTER2.0/data/jhu.becknic.manmade.asphalt.paving.solid.0095uuu.spectrum.txt.</span>
-<span class="go">Importing /CDROM/ASTER2.0/data/jhu.becknic.manmade.asphalt.paving.solid.0096uuu.spectrum.txt.</span>
-<span class="go">Importing /CDROM/ASTER2.0/data/jhu.becknic.manmade.asphalt.paving.solid.0674uuu.spectrum.txt.</span>
-<span class="go">Importing /CDROM/ASTER2.0/data/jhu.becknic.manmade.asphalt.tar.solid.0099uuu.spectrum.txt.</span>
+<p>You will first need to get a copy of the ECOSTRESS spectral library data files,
+which can be requested <a class="reference external" href="http://speclib.jpl.nasa.gov">here</a>. Once you have
+acquired the library data, you can import the data in to an <tt class="xref py py-mod docutils literal"><span class="pre">sqlite</span></tt>
+database as follows:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="n">db</span> <span class="o">=</span> <span class="n">spy</span><span class="o">.</span><span class="n">EcostressDatabase</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;ecostress.db&#39;</span><span class="p">,</span> <span class="s">&#39;./eco_data_ver1&#39;</span><span class="p">)</span>
+<span class="go">Importing ./eco_data_ver1/vegetation.tree.betula.lenta.tir.bele-1-55.ucsb.nicolet.spectrum.txt.</span>
+<span class="go">Importing ./eco_data_ver1/vegetation.tree.quercus.lobata.tir.vh282.ucsb.nicolet.spectrum.txt.</span>
+<span class="go">Importing ./eco_data_ver1/nonphotosyntheticvegetation.branches.adenostoma.fasciculatum.vswir.vh334.ucsb.asd.spectrum.txt.</span>
+<span class="go">Importing ./eco_data_ver1/mineral.silicate.cyclosilicate.fine.tir.cs-2a.jpl.nicolet.spectrum.txt.</span>
+<span class="go">Importing ./eco_data_ver1/mineral.hydroxide.none.fine.tir.goethite_1.jhu.nicolet.spectrum.txt.</span>
 <span class="go">---// snip //---</span>
-<span class="go">Importing /CDROM/ASTER2.0/data/usgs.perknic.rock.sedimentary.shale.solid.phop011.spectrum.txt.</span>
-<span class="go">Importing /CDROM/ASTER2.0/data/usgs.perknic.rock.sedimentary.shale.solid.phop02a.spectrum.txt.</span>
-<span class="go">Processed 2443 files.</span>
-<span class="go">Ignored the following 2 bad files:</span>
-<span class="go">        /CDROM/ASTER2.0/data/jhu.nicolet.mineral.silicate.tectosilicate.fine.albite1.spectrum.txt</span>
-<span class="go">        /CDROM/ASTER2.0/data/usgs.perknic.rock.igneous.mafic.colid.me3.spectrum.txt</span>
+<span class="go">Importing ./eco_data_ver1/mineral.silicate.inosilicate.coarse.vswir.in-8a.jpl.perkin.spectrum.txt.</span>
+<span class="go">Importing ./eco_data_ver1/vegetation.shrub.aloe.arborescens.tir.jpl077.jpl.nicolet.spectrum.txt.</span>
+<span class="go">Importing ./eco_data_ver1/mineral.silicate.phyllosilicate.coarse.tir.ps-12f.jpl.nicolet.spectrum.txt.</span>
+<span class="go">Processed 3403 files.</span>
 </pre></div>
 </div>
-<p>Several files with malformed spectral were are skipped during the import process.
-If those spectra are important to you, you can always repair or adjust the data in the files
-as you see fit and repeat the import process.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase" title="spectral.database.AsterDatabase"><tt class="xref py py-class docutils literal"><span class="pre">AsterDatabase</span></tt></a> <em>create</em> method was written specifically
-for version 2.0 of the ASTER Spectral Library and will not work for previous
-versions of the library.</p>
+<p class="last">The ECOSTRESS library supercedes the older ASTER spectral library
+<a class="reference internal" href="#baldridge2009" id="id2">[Baldridge2009]</a>.  To import data from version 2.0 of the ASTER library,
+follow the precedure above but with <a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase" title="spectral.database.AsterDatabase"><tt class="xref py py-class docutils literal"><span class="pre">AsterDatabase</span></tt></a> instead of
+<a class="reference internal" href="class_func_ref.html#spectral.database.EcostressDatabase" title="spectral.database.EcostressDatabase"><tt class="xref py py-class docutils literal"><span class="pre">EcostressDatabase</span></tt></a>.</p>
 </div>
 <p>Once the database has been created, it can be accessed by instantiating an
-<a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase" title="spectral.database.AsterDatabase"><tt class="xref py py-class docutils literal"><span class="pre">AsterDatabase</span></tt></a> object for the database file (it can also be
+<a class="reference internal" href="class_func_ref.html#spectral.database.EcostressDatabase" title="spectral.database.EcostressDatabase"><tt class="xref py py-class docutils literal"><span class="pre">EcostressDatabase</span></tt></a> object for the database file (it can also be
 accessed by using sqlite external to Python).  The current implementation of the
 SPy database contains two tables: <cite>Samples</cite> and <cite>Spectra</cite>.  There is a one-to-one
 relationship between rows in the two tables but they have been separate to support
 potential future changes to the database.  The schemas for the tables are in the
 <tt class="xref py py-attr docutils literal"><span class="pre">schemas</span></tt> attribute of the database object:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [2]: </span><span class="n">db</span> <span class="o">=</span> <span class="n">AsterDatabase</span><span class="p">(</span><span class="s">&#39;aster_lib.db&#39;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [2]: </span><span class="n">db</span> <span class="o">=</span> <span class="n">EcostressDatabase</span><span class="p">(</span><span class="s">&#39;ecostress.db&#39;</span><span class="p">)</span>
 
 <span class="gp">In [3]: </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">schemas</span><span class="p">:</span>
 <span class="gp">   ...: </span>    <span class="k">print</span> <span class="n">s</span>
@@ -108,48 +105,48 @@ potential future changes to the database.  The schemas for the tables are in the
 <span class="go">CREATE TABLE Spectra (SpectrumID INTEGER PRIMARY KEY, SampleID INTEGER, SensorCalibrationID INTEGER, Instrument TEXT, Environment TEXT, Measurement TEXT, XUnit TEXT, YUnit TEXT, MinWavelength FLOAT, MaxWavelength FLOAT, NumValues INTEGER, XData BLOB, YData BLOB)</span>
 </pre></div>
 </div>
-<p>Descriptions of most of the <cite>Sample</cite> table columns can be found in the ASTER
+<p>Descriptions of most of the <cite>Sample</cite> table columns can be found in the ECOSTRESS
 Spectral Library documentation.  The sample spectra and bands are stored in
 <cite>BLOB</cite> objects in the database, so you probably don&#8217;t want to access them directly.
-The recommended method is to use either the <a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase.get_spectrum" title="spectral.database.AsterDatabase.get_spectrum"><tt class="xref py py-meth docutils literal"><span class="pre">get_spectrum</span></tt></a>
-or <a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase.get_signature" title="spectral.database.AsterDatabase.get_signature"><tt class="xref py py-meth docutils literal"><span class="pre">get_signature</span></tt></a> method of <a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase" title="spectral.database.AsterDatabase"><tt class="xref py py-class docutils literal"><span class="pre">AsterDatabase</span></tt></a>,
+The recommended method is to use either the <tt class="xref py py-meth docutils literal"><span class="pre">get_spectrum</span></tt>
+or <tt class="xref py py-meth docutils literal"><span class="pre">get_signature</span></tt> method of <a class="reference internal" href="class_func_ref.html#spectral.database.EcostressDatabase" title="spectral.database.EcostressDatabase"><tt class="xref py py-class docutils literal"><span class="pre">EcostressDatabase</span></tt></a>,
 both of which take a <cite>SpectrumID</cite> as their argument.</p>
 <p>As a simple example, suppose you want to find all samples that have &#8220;stone&#8221; in
 their name (this isn&#8217;t the best way to find stones in the library but it makes
 for an easy example). There are three ways you can issue queries through the
-<a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase" title="spectral.database.AsterDatabase"><tt class="xref py py-class docutils literal"><span class="pre">AsterDatabase</span></tt></a> object.  You can call its <a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase.print_query" title="spectral.database.AsterDatabase.print_query"><tt class="xref py py-meth docutils literal"><span class="pre">print_query</span></tt></a>
+<a class="reference internal" href="class_func_ref.html#spectral.database.EcostressDatabase" title="spectral.database.EcostressDatabase"><tt class="xref py py-class docutils literal"><span class="pre">EcostressDatabase</span></tt></a> object.  You can call its <tt class="xref py py-meth docutils literal"><span class="pre">print_query</span></tt>
 method to print query results to the command line.  You can call its
-<a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase.query" title="spectral.database.AsterDatabase.query"><tt class="xref py py-meth docutils literal"><span class="pre">query</span></tt></a> method to return query results in
-tuples.  Lastly, you can use the <tt class="xref py py-attr docutils literal"><span class="pre">cursor</span></tt> attribute of the <a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase" title="spectral.database.AsterDatabase"><tt class="xref py py-class docutils literal"><span class="pre">AsterDatabase</span></tt></a>
+<tt class="xref py py-meth docutils literal"><span class="pre">query</span></tt> method to return query results in
+tuples.  Lastly, you can use the <tt class="xref py py-attr docutils literal"><span class="pre">cursor</span></tt> attribute of the <a class="reference internal" href="class_func_ref.html#spectral.database.EcostressDatabase" title="spectral.database.EcostressDatabase"><tt class="xref py py-class docutils literal"><span class="pre">EcostressDatabase</span></tt></a>
 object to issue the query.</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [4]: </span><span class="n">db</span><span class="o">.</span><span class="n">print_query</span><span class="p">(</span><span class="s">&#39;SELECT COUNT() FROM Samples WHERE Name LIKE &quot;</span><span class="si">%s</span><span class="s">tone%&quot;&#39;</span><span class="p">)</span>
 <span class="go">78</span>
 
 <span class="gp">In [5]: </span><span class="n">db</span><span class="o">.</span><span class="n">print_query</span><span class="p">(</span><span class="s">&#39;SELECT SampleID, Name FROM Samples WHERE Name LIKE &quot;</span><span class="si">%s</span><span class="s">tone%&quot; limit 10&#39;</span><span class="p">)</span>
-<span class="go">43|slate stone shingle</span>
-<span class="go">250|fossiliferous limestone</span>
-<span class="go">251|dolomitic limestone</span>
-<span class="go">252|limestone</span>
-<span class="go">253|oolitic limestone</span>
-<span class="go">254|lithographic limestone</span>
-<span class="go">255|argillaceous limestone</span>
-<span class="go">256|oolitic limestone</span>
-<span class="go">257|fossiliferous limestone</span>
-<span class="go">258|dolomitic limestone</span>
+<span class="go">14|Limestone Breccia</span>
+<span class="go">73|Argillaceous Limestone</span>
+<span class="go">167|Arkosic Sandstone</span>
+<span class="go">171|Limestone CaCO3</span>
+<span class="go">203|Limestone CaCO3</span>
+<span class="go">237|Greywacke Sandstone</span>
+<span class="go">275|Gray/dark brown extremely stoney coarse sandy</span>
+<span class="go">279|Sandstone (Red)</span>
+<span class="go">280|Gray Sandstone</span>
+<span class="go">384|Dolomitic Limestone</span>
 </pre></div>
 </div>
 <p>Next, let&#8217;s retrieve and plot one of the results (we will take the last one).</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [6]: </span><span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 
-<span class="gp">In [7]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_signature</span><span class="p">(</span><span class="mi">2436</span><span class="p">)</span>
+<span class="gp">In [7]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_signature</span><span class="p">(</span><span class="mi">384</span><span class="p">)</span>
 
 <span class="gp">In [8]: </span><span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="gp">In [9]: </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
-<span class="gh">Out[9]: </span><span class="go">[&lt;matplotlib.lines.Line2D at 0x10d3e310&gt;]</span>
+<span class="gh">Out[9]: </span><span class="go">[&lt;matplotlib.lines.Line2D at 0xe2cef90&gt;]</span>
 
 <span class="gp">In [10]: </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">sample_name</span><span class="p">)</span>
-<span class="gh">Out[10]: </span><span class="go">&lt;matplotlib.text.Text at 0x10d222d0&gt;</span>
+<span class="gh">Out[10]: </span><span class="go">&lt;matplotlib.text.Text at 0xd568c90&gt;</span>
 
 <span class="gp">In [11]: </span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
@@ -168,16 +165,16 @@ object to issue the query.</p>
 </div>
 <div class="section" id="envi-spectral-libraries">
 <h2>ENVI Spectral Libraries<a class="headerlink" href="#envi-spectral-libraries" title="Permalink to this headline">¶</a></h2>
-<p>While the <a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase" title="spectral.database.AsterDatabase"><tt class="xref py py-class docutils literal"><span class="pre">AsterDatabase</span></tt></a> provides a Python interface to the
-ASTER Spectral Library, there may be times where you want to repeatedly access
+<p>While the <a class="reference internal" href="class_func_ref.html#spectral.database.EcostressDatabase" title="spectral.database.EcostressDatabase"><tt class="xref py py-class docutils literal"><span class="pre">EcostressDatabase</span></tt></a> provides a Python interface to the
+ECOSTRESS Spectral Library, there may be times where you want to repeatedly access
 a small, fixed subset of the spectra in the library and do not want to repeatedly
 query the database.  The ENVI file format enables storage of spectral libraries
 (see <a class="reference internal" href="fileio.html#envi-format"><em>ENVI Headers</em></a>). SPy can read these files into a SPy
 <a class="reference internal" href="class_func_ref.html#spectral.io.envi.SpectralLibrary" title="spectral.io.envi.SpectralLibrary"><tt class="xref py py-class docutils literal"><span class="pre">SpectralLibrary</span></tt></a> object.</p>
-<p>To enable easy creation of custom spectral libraries, the <a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase" title="spectral.database.AsterDatabase"><tt class="xref py py-class docutils literal"><span class="pre">AsterDatabase</span></tt></a>
-has a <a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase.create_envi_spectral_library" title="spectral.database.AsterDatabase.create_envi_spectral_library"><tt class="xref py py-meth docutils literal"><span class="pre">create_envi_spectral_library</span></tt></a> method that
+<p>To enable easy creation of custom spectral libraries, the <a class="reference internal" href="class_func_ref.html#spectral.database.EcostressDatabase" title="spectral.database.EcostressDatabase"><tt class="xref py py-class docutils literal"><span class="pre">EcostressDatabase</span></tt></a>
+has a <tt class="xref py py-meth docutils literal"><span class="pre">create_envi_spectral_library</span></tt> method that
 generates a spectral library that can easily be saved to ENVI format.  Spectra
-in the ASTER library have varying numbers of samples over varying spectral
+in the ECOSTRESS library have varying numbers of samples over varying spectral
 ranges.  To generate the library we want to save to ENVI format, we need to specify
 a band discretization to which we want all of the desired spectra resampled.
 Let&#8217;s pick the bands from our sample hyperspectral image.</p>
@@ -196,10 +193,12 @@ let&#8217;s check the units of the spectra in the library.</p>
 <span class="gp">   ....: </span>                     <span class="s">&#39;WHERE Samples.SampleID = Spectra.SampleID AND &#39;</span> <span class="o">+</span>
 <span class="gp">   ....: </span>                     <span class="s">&#39;Name LIKE &quot;</span><span class="si">%s</span><span class="s">tone%&quot;&#39;</span><span class="p">)</span>
 <span class="gp">   ....: </span>
-<span class="go">directional (10 degree) hemispherical reflectance|wavelength (micrometers)|reflectance (percent)</span>
-<span class="go">directional hemispherical reflectance|wavelength (micrometers)|reflectance (percent)</span>
-<span class="go">hemispherical reflectance|wavelength (micrometers)|reflectance (percent)</span>
-<span class="go">reflectance|wavelength (micrometers)|reflectance (percent)</span>
+<span class="go">Hemispherical reflectance|Wavelength (micrometers)|Reflectance (percent)</span>
+<span class="go">Directional (10 Degree) Hemispherical Reflectance|Wavelength (micrometers)|Reflectance (percent)</span>
+<span class="go">Reflectance|Wavelength (micrometers)|Reflectance (percent)</span>
+<span class="go">Directional (10 degree) Hemispherical Reflectance|Wavelength (micrometers)|Reflectance (percent)</span>
+<span class="go">Directional (10 degree) hemispherical reflectance|Wavelength (micrometers)|Reflectance (percent)</span>
+<span class="go">Directional hemispherical reflectance|Wavelength (micrometers)|Reflectance (percent)</span>
 </pre></div>
 </div>
 <p>We see that all spectra are measures of reflectance but wavelengths are in units
@@ -215,7 +214,7 @@ query the spectra, we will need to specify the band limits in micrometers.</p>
 </div>
 <p>So it appears that 59 of the 78 &#8220;stone&#8221; spectra cover the desired band limits.
 To create a new, resampled spectral library for these spectra, we call the
-<a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase" title="spectral.database.AsterDatabase"><tt class="xref py py-class docutils literal"><span class="pre">AsterDatabase</span></tt></a> <a class="reference internal" href="class_func_ref.html#spectral.database.AsterDatabase.create_envi_spectral_library" title="spectral.database.AsterDatabase.create_envi_spectral_library"><tt class="xref py py-meth docutils literal"><span class="pre">create_envi_spectral_library</span></tt></a>
+<a class="reference internal" href="class_func_ref.html#spectral.database.EcostressDatabase" title="spectral.database.EcostressDatabase"><tt class="xref py py-class docutils literal"><span class="pre">EcostressDatabase</span></tt></a> <tt class="xref py py-meth docutils literal"><span class="pre">create_envi_spectral_library</span></tt>
 method, passing it the list of spectrum IDs and our output band schema (in micrometers).
 Since our bands are defined in nanometers, we will convert them before calling
 the method.</p>
@@ -227,66 +226,75 @@ the method.</p>
 
 <span class="gp">In [18]: </span><span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
 
-<span class="gp">In [19]: </span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mf">1000.</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">]</span>
+<span class="gp">In [19]: </span><span class="k">print</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+<span class="go">[14, 73, 167, 171, 203, 237, 275, 279, 384, 502, 532, 582, 601, 682, 744, 766, 788, 789, 1064, 1114, 1121, 1218, 1404, 1429, 1433, 1459, 1551, 1563, 1615, 1624, 1631, 1652, 1669, 1745, 1903, 1929, 2153, 2155, 2200, 2254, 2271, 2308, 2375, 2472, 2602, 2626, 2653, 2717, 2740, 2811, 2880, 3002, 3033, 3059, 3069, 3189, 3234, 3314, 3339]</span>
 
-<span class="gp">In [20]: </span><span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mf">1000.</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span><span class="p">]</span>
+<span class="gp">In [20]: </span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mf">1000.</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">]</span>
 
-<span class="gp">In [21]: </span><span class="n">lib</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">create_envi_spectral_library</span><span class="p">(</span><span class="n">ids</span><span class="p">,</span> <span class="n">bands</span><span class="p">)</span>
+<span class="gp">In [21]: </span><span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="mf">1000.</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span><span class="p">]</span>
+
+<span class="gp">In [22]: </span><span class="n">lib</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">create_envi_spectral_library</span><span class="p">(</span><span class="n">ids</span><span class="p">,</span> <span class="n">bands</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Now that we&#8217;ve created a resampled library of spectra, let&#8217;s plot one.  We&#8217;ll
-plot the same limestone spectrum plotted above, which happens to be the last spectrum
-in the resampled library.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [22]: </span><span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
+<p>Now that we&#8217;ve created a resampled library of spectra, let&#8217;s plot the last
+spectrum in the resampled library.</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [23]: </span><span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 
-<span class="gp">In [23]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_signature</span><span class="p">(</span><span class="mi">2436</span><span class="p">)</span>
+<span class="gp">In [24]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_signature</span><span class="p">(</span><span class="n">ids</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
-<span class="gp">In [24]: </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;k-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;original&#39;</span><span class="p">);</span>
+<span class="gp">In [25]: </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s">&#39;k-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;original&#39;</span><span class="p">);</span>
 
-<span class="gp">In [25]: </span><span class="n">plt</span><span class="o">.</span><span class="n">hold</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">In [26]: </span><span class="n">plt</span><span class="o">.</span><span class="n">hold</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [26]: </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">,</span> <span class="n">lib</span><span class="o">.</span><span class="n">spectra</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;resampled&#39;</span><span class="p">);</span>
+<span class="gp">In [27]: </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">,</span> <span class="n">lib</span><span class="o">.</span><span class="n">spectra</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;resampled&#39;</span><span class="p">);</span>
 
-<span class="gp">In [27]: </span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">In [28]: </span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="gp">In [28]: </span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;upper left&#39;</span><span class="p">);</span>
+<span class="gp">In [29]: </span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;upper left&#39;</span><span class="p">);</span>
 
-<span class="gp">In [29]: </span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="gp">In [30]: </span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
 
-<span class="gp">In [30]: </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Resampled </span><span class="si">%s</span><span class="s"> spectrum&#39;</span> <span class="o">%</span> <span class="n">lib</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
+<span class="gp">In [31]: </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Resampled </span><span class="si">%s</span><span class="s"> spectrum&#39;</span> <span class="o">%</span> <span class="n">lib</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
 
-<span class="gp">In [31]: </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="gp">In [32]: </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/limestone_resampled.png"><img alt="_images/limestone_resampled.png" class="align-center" src="_images/limestone_resampled.png" style="width: 640.0px; height: 480.0px;" /></a>
+<a class="reference internal image-reference" href="_images/spectrum_resampled.png"><img alt="_images/spectrum_resampled.png" class="align-center" src="_images/spectrum_resampled.png" style="width: 640.0px; height: 480.0px;" /></a>
 <p>The resampled spectral library can be used with any image that uses the same
 band calibration to which we resampled the spectra.  We can also save the library
 for future use.  But before we save the library, we need to change the band units to the units
 used in the band calibration (we need to convert from micrometers to nanometers).</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [32]: </span><span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1000.</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">]</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [33]: </span><span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1000.</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">centers</span><span class="p">]</span>
 
-<span class="gp">In [33]: </span><span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1000.</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span><span class="p">]</span>
+<span class="gp">In [34]: </span><span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1000.</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">bandwidths</span><span class="p">]</span>
 
-<span class="gp">In [34]: </span><span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">band_unit</span> <span class="o">=</span> <span class="s">&#39;nm&#39;</span>
+<span class="gp">In [35]: </span><span class="n">lib</span><span class="o">.</span><span class="n">bands</span><span class="o">.</span><span class="n">band_unit</span> <span class="o">=</span> <span class="s">&#39;nm&#39;</span>
 
-<span class="gp">In [35]: </span><span class="n">lib</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;stones&#39;</span><span class="p">,</span> <span class="s">&#39;Stone spectra from the ASTER library&#39;</span><span class="p">)</span>
+<span class="gp">In [36]: </span><span class="n">lib</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;stones&#39;</span><span class="p">,</span> <span class="s">&#39;Stone spectra from the ECOSTRESS library&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Saving the library with the name &#8220;stones&#8221; creates two files: &#8220;stones.sli&#8221; and
 &#8220;stones.hdr&#8221;.  The first file contains the resampled spectra and the second is the
 header file that we use to open the library.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [36]: </span><span class="n">mylib</span> <span class="o">=</span> <span class="n">envi</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;stones.hdr&#39;</span><span class="p">)</span>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [37]: </span><span class="n">mylib</span> <span class="o">=</span> <span class="n">envi</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;stones.hdr&#39;</span><span class="p">)</span>
 
-<span class="gp">In [37]: </span><span class="n">mylib</span>
-<span class="gh">Out[37]: </span><span class="go">&lt;spectral.io.envi.SpectralLibrary instance at 0xfd5c638&gt;</span>
+<span class="gp">In [38]: </span><span class="n">mylib</span>
+<span class="gh">Out[38]: </span><span class="go">&lt;spectral.io.envi.SpectralLibrary instance at 0xdf828c0&gt;</span>
 </pre></div>
 </div>
 <p class="rubric">References</p>
 <table class="docutils citation" frame="void" id="baldridge2009" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[Baldridge2009]</a></td><td>Baldridge, A. M., Hook, S. J., Grove, C. I. and G. Rivera, 2008(9).
+<tr><td class="label"><a class="fn-backref" href="#id2">[Baldridge2009]</a></td><td>Baldridge, A. M., Hook, S. J., Grove, C. I. and G. Rivera, 2008(9).
 The ASTER Spectral Library Version 2.0. In press Remote Sensing of Environment</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="meerdink2019" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[Meerdink2019]</a></td><td>Meerdink, S. K., Hook, S. J., Roberts, D. A., &amp; Abbott, E. A. (2019).
+The ECOSTRESS spectral library version 1.0. Remote Sensing of Environment, 230(111196), 1–8.</td></tr>
 </tbody>
 </table>
 </div>
@@ -301,7 +309,7 @@ The ASTER Spectral Library Version 2.0. In press Remote Sensing of Environment</
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Spectral Libraries</a><ul>
-<li><a class="reference internal" href="#aster-spectral-library">ASTER Spectral Library</a></li>
+<li><a class="reference internal" href="#ecostress-spectral-library">ECOSTRESS Spectral Library</a></li>
 <li><a class="reference internal" href="#envi-spectral-libraries">ENVI Spectral Libraries</a></li>
 </ul>
 </li>
@@ -339,7 +347,7 @@ The ASTER Spectral Library Version 2.0. In press Remote Sensing of Environment</
         <li class="right" >
           <a href="algorithms.html" title="Spectral Algorithms"
              >previous</a> |</li>
-        <li><a href="index.html">Spectral Python 0.18
+        <li><a href="index.html">Spectral Python 0.20
  documentation</a> &raquo;</li>
           <li><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>

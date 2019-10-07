@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Class/Function Documentation &mdash; Spectral Python 0.18
+    <title>Class/Function Documentation &mdash; Spectral Python 0.20
  documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.18
+        VERSION:     '0.20
 ',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Spectral Python 0.18
+    <link rel="top" title="Spectral Python 0.20
  documentation" href="index.html" />
     <link rel="up" title="Spectral Python (SPy) User Guide" href="user_guide.html" />
     <link rel="prev" title="Class/Function Glossary" href="class_func_glossary.html" /> 
@@ -37,7 +37,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="class_func_glossary.html" title="Class/Function Glossary"
              accesskey="P">previous</a></li>
-        <li><a href="index.html">Spectral Python 0.18
+        <li><a href="index.html">Spectral Python 0.20
  documentation</a> &raquo;</li>
           <li><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>
@@ -90,7 +90,7 @@ file, the <cite>file</cite> argument should be the name of the header file.</p>
 <em class="property">class </em><tt class="descname">ImageArray</tt><big>(</big><em>data</em>, <em>spyfile</em><big>)</big><a class="headerlink" href="#spectral.spectral.ImageArray" title="Permalink to this definition">¶</a></dt>
 <dd><p>ImageArray is an interface to an image loaded entirely into memory.
 ImageArray objects are returned by <a class="reference internal" href="#spectral.SpyFile.load" title="spectral.SpyFile.load"><tt class="xref py py-meth docutils literal"><span class="pre">spectral.SpyFile.load</span></tt></a>.
-This class inherits from both numpy.ndarray and SpyFile, providing the
+This class inherits from both numpy.ndarray and Image, providing the
 interfaces of both classes.</p>
 </dd></dl>
 
@@ -500,7 +500,7 @@ are read.</div></blockquote>
 <div>A SpyFile object for the image file.</div></blockquote>
 <p>Raises:</p>
 <blockquote>
-<div>IOError</div></blockquote>
+<div>spectral.io.spyfile.InvalidFileError</div></blockquote>
 </dd></dl>
 
 <dl class="function">
@@ -557,7 +557,7 @@ the data file has an unusual file extension that SPy can not identify.</p>
 object.</div></blockquote>
 <p>Raises:</p>
 <blockquote>
-<div>TypeError, IOError.</div></blockquote>
+<div>TypeError, EnviDataFileNotFoundError</div></blockquote>
 <p>If the specified file is not found in the current directory, all
 directories listed in the SPECTRAL_DATA environment variable will be
 searched until the file is found.  Based on the name of the header file,
@@ -856,7 +856,7 @@ being saved are from a principal components transformation).</p>
 <div>A SpyFile object for the image file.</div></blockquote>
 <p>Raises:</p>
 <blockquote>
-<div>IOError</div></blockquote>
+<div>spectral.io.spyfile.InvalidFileError</div></blockquote>
 </dd></dl>
 
 </div>
@@ -1891,7 +1891,8 @@ Sep. 1999</p>
 <dl class="class">
 <dt id="spectral.database.AsterDatabase">
 <em class="property">class </em><tt class="descname">AsterDatabase</tt><big>(</big><em>sqlite_filename=None</em><big>)</big><a class="headerlink" href="#spectral.database.AsterDatabase" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="classmethod">
+<dd><p>A relational database to manage ASTER spectral library data.</p>
+<dl class="classmethod">
 <dt id="spectral.database.AsterDatabase.create">
 <em class="property">classmethod </em><tt class="descname">create</tt><big>(</big><em>filename</em>, <em>aster_data_dir=None</em><big>)</big><a class="headerlink" href="#spectral.database.AsterDatabase.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates an ASTER relational database by parsing ASTER data files.</p>
@@ -2365,6 +2366,48 @@ otherwise, a simple average of the class covariances is performed.</div></blockq
 </div></blockquote>
 <p>Returns a class-averaged covariance matrix. The number of covariances used
 in the average is equal to the number of non-zero elements of <cite>mask</cite>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="ecostressdatabase">
+<h3>EcostressDatabase<a class="headerlink" href="#ecostressdatabase" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="spectral.database.EcostressDatabase">
+<em class="property">class </em><tt class="descname">EcostressDatabase</tt><big>(</big><em>sqlite_filename=None</em><big>)</big><a class="headerlink" href="#spectral.database.EcostressDatabase" title="Permalink to this definition">¶</a></dt>
+<dd><p>A relational database to manage ECOSTRESS spectral library data.</p>
+<dl class="classmethod">
+<dt id="spectral.database.EcostressDatabase.create">
+<em class="property">classmethod </em><tt class="descname">create</tt><big>(</big><em>filename</em>, <em>data_dir=None</em><big>)</big><a class="headerlink" href="#spectral.database.EcostressDatabase.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an ECOSTRESS relational database by parsing ECOSTRESS data files.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>filename</cite> (str):</p>
+<blockquote>
+<div>Name of the new sqlite database file to create.</div></blockquote>
+<p><cite>data_dir</cite> (str):</p>
+<blockquote>
+<div>Path to the directory containing ECOSTRESS library data files. If
+this argument is not provided, no data will be imported.</div></blockquote>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>An <a class="reference internal" href="#spectral.database.EcostressDatabase" title="spectral.database.EcostressDatabase"><tt class="xref py py-class docutils literal"><span class="pre">EcostressDatabase</span></tt></a> object.</div></blockquote>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">EcostressDatabase</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;ecostress.db&quot;</span><span class="p">,</span> <span class="s">&quot;./eco_data_ver1/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is a class method (it does not require instantiating an
+EcostressDatabase object) that creates a new database by parsing all of the
+files in the ECOSTRESS library data directory.  Normally, this should only
+need to be called once.  Subsequently, a corresponding database object
+can be created by instantiating a new EcostressDatabase object with the
+path the database file as its argument.  For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">spectral.database.ecostress</span> <span class="kn">import</span> <span class="n">EcostressDatabase</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">EcostressDatabase</span><span class="p">(</span><span class="s">&quot;~/ecostress.db&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -3039,15 +3082,15 @@ whitened unit variance in the NAPC coordinate space).</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># De-noise the data by eliminating NAPC components where SNR &lt; 10.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c"># The de-noised data will be in the original coordinate space (at</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c"># full dimensionality).</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">denoised</span> <span class="o">=</span> <span class="n">mnfr</span><span class="o">.</span><span class="n">denoise</span><span class="p">(</span><span class="n">snr</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">denoised</span> <span class="o">=</span> <span class="n">mnfr</span><span class="o">.</span><span class="n">denoise</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">snr</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Reduce dimensionality, retaining NAPC components where SNR &gt;= 10.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">reduced</span> <span class="o">=</span> <span class="n">mnfr</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">snr</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reduced</span> <span class="o">=</span> <span class="n">mnfr</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">snr</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Reduce dimensionality, retaining top 50 NAPC components.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">reduced</span> <span class="o">=</span> <span class="n">mnfr</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reduced</span> <span class="o">=</span> <span class="n">mnfr</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>References:</p>
@@ -3520,7 +3563,7 @@ URI: <a class="reference external" href="http://hdl.handle.net/2014/33635">http:
 </div>
 <p>Arguments:</p>
 <blockquote>
-<div><p><cite>image</cite> (ndarray or <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>):</p>
+<div><p><cite>image</cite> (ndarray, <tt class="xref py py-class docutils literal"><span class="pre">spectral.Image</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">GaussianStats</span></tt>):</p>
 <blockquote>
 <div>An <cite>MxNxB</cite> image</div></blockquote>
 </div></blockquote>
@@ -3543,6 +3586,13 @@ principal components.</div></blockquote>
 <p><cite>reduce</cite>:</p>
 <blockquote>
 <div>A method to reduce the number of eigenvalues.</div></blockquote>
+<p><cite>denoise</cite>:</p>
+<blockquote>
+<div>A callable function to denoise data using a reduced set of
+principal components.</div></blockquote>
+<p><cite>get_denoising_transform</cite>:</p>
+<blockquote>
+<div>A callable function that returns a function for denoising data.</div></blockquote>
 </div></blockquote>
 </dd></dl>
 
@@ -3573,7 +3623,71 @@ principal components.</div></blockquote>
 <div>A method to return a reduced set of principal components based
 on either a fixed number of components or a fraction of total
 variance.</div></blockquote>
+<p><cite>denoise</cite>:</p>
+<blockquote>
+<div>A callable function to denoise data using a reduced set of
+principal components.</div></blockquote>
+<p><cite>get_denoising_transform</cite>:</p>
+<blockquote>
+<div>A callable function that returns a function for denoising data.</div></blockquote>
 </div></blockquote>
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.PrincipalComponents.denoise">
+<tt class="descname">denoise</tt><big>(</big><em>X</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.PrincipalComponents.denoise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a de-noised version of <cite>X</cite>.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p><cite>X</cite> (np.ndarray):</p>
+<blockquote>
+<div>Data to be de-noised. Can be a single pixel or an image.</div></blockquote>
+</div></blockquote>
+<p>Keyword Arguments (one of the following must be specified):</p>
+<blockquote>
+<div><p><cite>num</cite> (integer):</p>
+<blockquote>
+<div>Number of eigenvalues/eigenvectors to use.  The top <cite>num</cite>
+eigenvalues will be used.</div></blockquote>
+<p><cite>eigs</cite> (list):</p>
+<blockquote>
+<div>A list of indices of eigenvalues/eigenvectors to be used.</div></blockquote>
+<p><cite>fraction</cite> (float):</p>
+<blockquote>
+<div>The fraction of total image variance to retain.  Eigenvalues
+will be included (starting from greatest to smallest) until
+<cite>fraction</cite> of total image variance is retained.</div></blockquote>
+</div></blockquote>
+<p>Returns denoised image data with same shape as <cite>X</cite>.</p>
+<p>Note that calling this method is equivalent to calling the
+<cite>get_denoising_transform</cite> method with same keyword and applying the
+returned transform to <cite>X</cite>. If you only intend to denoise data with the
+same parameters multiple times, then it is more efficient to get the
+denoising transform and reuse it, rather than calling this method
+multilple times.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="spectral.algorithms.algorithms.PrincipalComponents.get_denoising_transform">
+<tt class="descname">get_denoising_transform</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.PrincipalComponents.get_denoising_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a function for denoising image data.</p>
+<p>Keyword Arguments (one of the following must be specified):</p>
+<blockquote>
+<div><p><cite>num</cite> (integer):</p>
+<blockquote>
+<div>Number of eigenvalues/eigenvectors to use.  The top <cite>num</cite>
+eigenvalues will be used.</div></blockquote>
+<p><cite>eigs</cite> (list):</p>
+<blockquote>
+<div>A list of indices of eigenvalues/eigenvectors to be used.</div></blockquote>
+<p><cite>fraction</cite> (float):</p>
+<blockquote>
+<div>The fraction of total image variance to retain.  Eigenvalues
+will be included (starting from greatest to smallest) until
+<cite>fraction</cite> of total image variance is retained.</div></blockquote>
+</div></blockquote>
+<p>Returns a callable <a class="reference internal" href="#spectral.algorithms.transforms.LinearTransform" title="spectral.algorithms.transforms.LinearTransform"><tt class="xref py py-class docutils literal"><span class="pre">LinearTransform</span></tt></a>
+object for denoising image data.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="spectral.algorithms.algorithms.PrincipalComponents.reduce">
 <tt class="descname">reduce</tt><big>(</big><em>N=0</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#spectral.algorithms.algorithms.PrincipalComponents.reduce" title="Permalink to this definition">¶</a></dt>
@@ -3785,6 +3899,11 @@ a <a class="reference internal" href="#spectral.SpyFile" title="spectral.SpyFile
 <div>Sets the depth (in number of bits) for the OpenGL depth buffer.
 If calls to <cite>view_cube</cite> or <cite>view_nd</cite> result in windows with blank
 canvases, try reducing this value.</div></blockquote>
+<p><cite>envi_support_nonlowercase_params</cite> (bool, default False)</p>
+<blockquote>
+<div>By default, ENVI headers are read with parameter names converted
+to lower case. If this attribute is set to True, parameters will
+be read with original capitalization retained.</div></blockquote>
 <p><cite>show_progress</cite> (bool, default True):</p>
 <blockquote>
 <div>Indicates whether long-running algorithms should display progress
@@ -3794,6 +3913,9 @@ SPy is embedded in another application (e.g., IPython Notebook).</div></blockquo
 <blockquote>
 <div>Width and height (in inches) of windows opened with <cite>imshow</cite>. If
 this value is <cite>None</cite>, matplotlib&#8217;s default size is used.</div></blockquote>
+<p><cite>imshow_background_color</cite> (3-tuple of integers, default (0,0,0)):</p>
+<blockquote>
+<div>Default color to use for masked pixels in <cite>imshow</cite> displays.</div></blockquote>
 <p><cite>imshow_interpolation</cite> (str, default <cite>None</cite>):</p>
 <blockquote>
 <div>Pixel interpolation to be used in imshow windows. If this value
@@ -3931,6 +4053,7 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
 <li><a class="reference internal" href="#calc-stats">calc_stats</a></li>
 <li><a class="reference internal" href="#covariance">covariance</a></li>
 <li><a class="reference internal" href="#cov-avg">cov_avg</a></li>
+<li><a class="reference internal" href="#ecostressdatabase">EcostressDatabase</a></li>
 <li><a class="reference internal" href="#fisherlineardiscriminant">FisherLinearDiscriminant</a></li>
 <li><a class="reference internal" href="#gaussianclassifier">GaussianClassifier</a></li>
 <li><a class="reference internal" href="#gaussianstats">GaussianStats</a></li>
@@ -3996,7 +4119,7 @@ are defined, iteration is performed over all pixels <cite>image[i,j]</cite> for 
         <li class="right" style="margin-right: 10px">
           <a href="class_func_glossary.html" title="Class/Function Glossary"
              >previous</a></li>
-        <li><a href="index.html">Spectral Python 0.18
+        <li><a href="index.html">Spectral Python 0.20
  documentation</a> &raquo;</li>
           <li><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &raquo;</li> 
       </ul>
