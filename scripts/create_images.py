@@ -18,10 +18,9 @@ def create_clusters(outdir='.'):
     
     (m, c) = spy.kmeans(image, 20, 30)
     spy.save_rgb(os.path.join(outdir, 'kmeans_20_30.jpg'), m, colors=spy.spy_colors)
-    plt.figure()
-    plt.hold(1)
     for i in range(c.shape[0]):
         plt.plot(c[i])
+    plt.grid()
     plt.savefig(os.path.join(outdir, 'kmeans_20_30_centers.png'))
     
 def create_all(outdir='.'):

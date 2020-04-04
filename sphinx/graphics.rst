@@ -67,7 +67,7 @@ np.ndarray or `SpyFile` object.
     
     In [1]: img = open_image('92AV3C.lan')
     
-    @savefig imshow_92AV3C_rgb.png scale=33% align=center
+    @savefig imshow_92AV3C_rgb.png scale=75% align=center
     In [1]: view = imshow(img, (29, 19, 9))
 
 When displaying the image interactively, the matplotlib button controls can be
@@ -90,7 +90,7 @@ of the `ImageView` object:
 
 .. ipython::
 
-    In [1]: print view
+    In [1]: print(view)
 
 Class Map Display
 *****************
@@ -102,8 +102,14 @@ argument in the `imshow` function:
 
     In [1]: gt = open_image('92AV3GT.GIS').read_band(0)
     
-    @savefig imshow_92AV3C_gt.png scale=33% align=center
+    @savefig imshow_92AV3C_gt.png scale=75% align=center
     In [9]: view = imshow(classes=gt)
+
+.. ipython::
+    :suppress:
+
+    In [9]: plt.close('all')
+   
 It is also possible to switch between displaying image bands and class colors,
 as well as displaying class color masks overlayed on the image data display. To
 do this, specify both the data and class values when calling :func:`imshow`:
@@ -133,7 +139,7 @@ calling :func:`imshow`:
 
 .. figure:: images/imshow_92AV3C_overlay.png
    :align:  center
-   :scale:  30 %
+   :scale: 75 %
 
 Interactive Class Labeling
 **************************
@@ -315,12 +321,12 @@ of the cube.
     :func:`~spectral.view_cube` and :func:`~spectral.view_nd` to a smaller value
     (e.g., 16) by issuing the following commands:
 
-    .. ipython::
-	:verbatim:
-	
-	In [16]: import spectral
-	
-	In [16]: spectral.settings.WX_GL_DEPTH_SIZE = 16
+.. ipython::
+    :verbatim:
+
+    In [16]: import spectral
+
+    In [16]: spectral.settings.WX_GL_DEPTH_SIZE = 16
     
 .. _nd_displays:
 

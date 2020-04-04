@@ -1,3 +1,4 @@
+
 .. toctree::
     :maxdepth: 2
 
@@ -79,6 +80,7 @@ as the optional :class:`start_clusters` argument to the function.
 
 .. figure::	images/kmeans_20_30.jpg
    :align:	center
+   :scale:	120 %
    
    k-means clustering results
 
@@ -90,16 +92,16 @@ algorithm:
 .. ipython:: python
     :verbatim:
 
-    import pylab
-    pylab.figure()
-    pylab.hold(1)
+    import matplotlib.pyplot as plt
+    plt.figure()
+    
     for i in range(c.shape[0]):
-	pylab.plot(c[i])
-    pylab.show()
+	plt.plot(c[i])
+    plt.grid()
 
 .. figure::	images/kmeans_20_30_centers.png
    :align:	center
-   :scale:	50 %
+   :scale:	100 %
 
    k-means cluster centers
 
@@ -124,7 +126,7 @@ image:
 
     In [14]: gt = open_image('92AV3GT.GIS').read_band(0)
     
-    @savefig view_gt.png scale=33% align=center
+    @savefig view_gt.png scale=75% align=center
     In [15]: v = imshow(classes=gt)
 
 We can now create a :class:`~spectral.TrainingClassSet` object by calling
@@ -164,7 +166,7 @@ and display the resulting classification map.
     In [17]: clmap = gmlc.classify_image(img)
     Classifying image...done  
     
-    @savefig gmlc_map.png scale=33% align=center
+    @savefig gmlc_map.png scale=75% align=center
     In [18]: v = imshow(classes=clmap)
 
 The classification map above shows classification results for the entire image.  To view
@@ -175,7 +177,7 @@ associated with a training class.
 
     In [19]: gtresults = clmap * (gt != 0)
     
-    @savefig gmlc_map_training.png scale=33% align=center
+    @savefig gmlc_map_training.png scale=75% align=center
     In [20]: v = imshow(classes=gtresults)
 
 If the classification results are good, we expect the classification map
@@ -187,7 +189,7 @@ ground truth image.
 
     In [22]: gterrors = gtresults * (gtresults != gt)
     
-    @savefig gmlc_errors.png scale=33% align=center
+    @savefig gmlc_errors.png scale=75% align=center
     In [20]: v = imshow(classes=gterrors)
 
 The five contiguous regions in the error image above correspond to the ground
@@ -238,7 +240,7 @@ principal compenents, as well as a method to reduce the number of eigenvectors.
     In [60]: pc = principal_components(img)
     Covariance.....done  
     
-    @savefig covariance.png scale=33% align=center
+    @savefig covariance.png scale=75% align=center
     In [61]: v = imshow(pc.cov)
 
 In the covariance matrix display, whiter values indicate strong positive covariance,
@@ -261,7 +263,7 @@ We will choose to retain a minimum of 99.9% of the total image variance.
     
     In [64]: img_pc = pc_0999.transform(img)
     
-    @savefig pc3.png scale=33% align=center
+    @savefig pc3.png scale=75% align=center
     In [65]: v = imshow(img_pc[:,:,:3], stretch_all=True)
 
 Now we'll use a Gaussian maximum likelihood classifier (GMLC) for the reduced
@@ -277,7 +279,7 @@ principal components to train and classify against the training data.
     
     In [70]: clmap_training = clmap * (gt != 0)
     
-    @savefig gmlc2_training.png scale=33% align=center
+    @savefig gmlc2_training.png scale=75% align=center
     In [71]: v = imshow(classes=clmap_training)
 
 And the associated errors:
@@ -286,7 +288,7 @@ And the associated errors:
 
     In [72]: training_errors = clmap_training * (clmap_training != gt)
     
-    @savefig gmlc2_errors.png scale=33% align=center
+    @savefig gmlc2_errors.png scale=75% align=center
     In [73]: v = imshow(classes=training_errors)
 
 
@@ -325,11 +327,9 @@ Let's view the image projected onto the top 3 components of the transform:
 
 .. ipython::
 
-    In [77]: print '2 + 2 =', 4
-
     In [77]: img_fld = fld.transform(img)
     
-    @savefig fld3.png scale=33% align=center
+    @savefig fld3.png scale=75% align=center
     In [79]: v = imshow(img_fld[:, :, :3])
 
 Next, we'll classify the data using this discriminant.
@@ -344,14 +344,14 @@ Next, we'll classify the data using this discriminant.
     
     In [83]: clmap_training = clmap * (gt != 0)
     
-    @savefig fld_training.png scale=33% align=center
+    @savefig fld_training.png scale=75% align=center
     In [84]: v = imshow(classes=clmap_training)
     
 .. ipython::
 
     In [85]: fld_errors = clmap_training * (clmap_training != gt)
     
-    @savefig fld_training_errors.png scale=33% align=center
+    @savefig fld_training_errors.png scale=75% align=center
     In [87]: v = imshow(classes=fld_errors)
 
 .. seealso::
@@ -399,7 +399,7 @@ less than 0.001 with respect to the background:
 
     In [1]: P = chi2.ppf(0.999, nbands)
 
-    @savefig rxvals_threshold.png scale=33% align=center
+    @savefig rxvals_threshold.png scale=75% align=center
     In [1]: v = imshow(1 * (rxvals > P))
 
 
@@ -408,7 +408,7 @@ view an image of raw RX scores, where brighter pixels are considered "more anoma
 
 .. ipython::
 
-    @savefig rxvals.png scale=33% align=center
+    @savefig rxvals.png scale=75% align=center
     In [1]: v = imshow(rxvals)
 
 For the sample image, only a few pixels are visible in the image of RX scores
@@ -422,14 +422,16 @@ of the RX scores.
 
     In [1]: f = plt.figure()
 
-    @savefig rxhistogram.png scale=33% align=center
     In [1]: h = plt.hist(rxvals.ravel(), 200, log=True)
+
+    @savefig rxhistogram.png scale=75% align=center
+    In [1]: h = plt.grid()
 
 The outliers are not obvious in the histogram, so let's print their values:
 
 .. ipython::
 
-    In [1]: print np.sort(rxvals.ravel())[-10:]
+    In [1]: print(np.sort(rxvals.ravel())[-10:])
 
 
 To view greater detail in the RX image, we can adjust the lower and upper limits
@@ -439,7 +441,7 @@ cumulative histogram and set the white point to the 99.99th percentile:
 
 .. ipython::
 
-    @savefig rxvals_stretched.png scale=33% align=center
+    @savefig rxvals_stretched.png scale=75% align=center
     In [1]: v = imshow(rxvals, stretch=(0.99, 0.9999))
 
 We can see the new RGB data limits by inspecting the returned
@@ -447,7 +449,7 @@ We can see the new RGB data limits by inspecting the returned
 
 .. ipython::
 
-    In [1]: print v
+    In [1]: print(v)
 
 Note that we could also have set the contrast stretch to explicit RX values
 (vice percentile values) by specifying the *bounds* keyword instead of *stretch*.
@@ -531,7 +533,7 @@ scores are greater than 0.2.
 
     In [1]: mfscores = matched_filter(img, t)
 
-    @savefig mf_gt_02.png scale=33% align=center
+    @savefig mf_gt_02.png scale=75% align=center
     In [1]: v = imshow(1 * (mfscores > 0.2))
 
 As with the :func:`rx` function, :func:`matched_filter` can be applied using
@@ -602,7 +604,7 @@ we get the following NDVI image.
 
     In [103]: vi = ndvi(img, 21, 43)
     
-    @savefig ndvi.png scale=33% align=center
+    @savefig ndvi.png scale=75% align=center
     In [104]: v = imshow(vi)
 
 :func:`~spectral.algorithms.algorithms.ndvi` is a simple convenience function.
@@ -662,7 +664,7 @@ The ``clmap + 1`` is used in the display command because our class IDs start at 
     
     In [101]: clmap = np.argmin(angles, 2)
     
-    @savefig sam.png scale=33% align=center
+    @savefig sam.png scale=75% align=center
     In [102]: v = imshow(classes=((clmap + 1) * (gt != 0)))
 
 .. seealso::

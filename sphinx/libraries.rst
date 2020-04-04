@@ -62,7 +62,7 @@ potential future changes to the database.  The schemas for the tables are in the
     In [105]: db = EcostressDatabase('ecostress.db')
     
     In [106]: for s in db.schemas:
-       .....:     print s
+       .....:     print(s)
        .....:     
     CREATE TABLE Samples (SampleID INTEGER PRIMARY KEY, Name TEXT, Type TEXT, Class TEXT, SubClass TEXT, ParticleSize TEXT, SampleNum TEXT, Owner TEXT, Origin TEXT, Phase TEXT, Description TEXT)
     CREATE TABLE Spectra (SpectrumID INTEGER PRIMARY KEY, SampleID INTEGER, SensorCalibrationID INTEGER, Instrument TEXT, Environment TEXT, Measurement TEXT, XUnit TEXT, YUnit TEXT, MinWavelength FLOAT, MaxWavelength FLOAT, NumValues INTEGER, XData BLOB, YData BLOB)
@@ -113,10 +113,8 @@ Next, let's retrieve and plot one of the results (we will take the last one).
     In [120]: plt.title(s.sample_name)
     Out[120]: <matplotlib.text.Text at 0x100743a10>
     
-    In [121]: plt.grid(1)
-    
     @savefig limestone.png scale=80% align=center
-    In [122]: plt.show()
+    In [121]: plt.grid(1)
 
 .. seealso::
 
@@ -148,7 +146,7 @@ Let's pick the bands from our sample hyperspectral image.
 
     In [123]: bands = aviris.read_aviris_bands('92AV3C.spc')
     
-    In [124]: print bands.centers[0], bands.centers[-1]
+    In [124]: print(bands.centers[0], bands.centers[-1])
     400.019989 2498.959961
 
 We see from the output above that the bands range from about 400 - 2,500 `nm`
@@ -215,8 +213,6 @@ spectrum in the resampled library.
     
     In [134]: plt.plot(s.x, s.y, 'k-', label='original');
     
-    In [135]: plt.hold(1)
-    
     In [136]: plt.plot(bands.centers, lib.spectra[-1], 'r-', label='resampled');
     
     In [137]: plt.grid(1)
@@ -225,10 +221,8 @@ spectrum in the resampled library.
 
     In [138]: plt.xlim(0, 3);
     
-    In [139]: plt.title('Resampled %s spectrum' % lib.names[-1]);
-    
     @savefig spectrum_resampled.png scale=80% align=center
-    In [140]: plt.show()
+    In [139]: plt.title('Resampled %s spectrum' % lib.names[-1]);
 
 The resampled spectral library can be used with any image that uses the same
 band calibration to which we resampled the spectra.  We can also save the library

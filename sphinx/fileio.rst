@@ -51,7 +51,7 @@ the full :class:`numpy.ndarray` interface, as well as the |SpyFile| interface.
     In [11]: arr.__class__
     Out[11]: spectral.spectral.ImageArray
     
-    In [12]: print arr.info()
+    In [12]: print(arr.info())
 	    # Rows:            145
 	    # Samples:         145
 	    # Bands:           220

@@ -17,16 +17,16 @@ import sys, os
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.append(os.path.abspath('.'))
-sys.path.append('/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/matplotlib/sphinxext/')
+#sys.path.append('/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/matplotlib/sphinxext/')
 # -- General configuration -----------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-#extensions = ['sphinx.ext.autodoc', 'sphinx.ext.todo', 'sphinx.ext.pngmath',
+#extensions = ['sphinx.ext.autodoc', 'sphinx.ext.todo', 'sphinx.ext.imgmath',
 #	      'ipython_directive', 'ipython_console_highlighting']
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.todo', 'sphinx.ext.pngmath',
-	      'IPython.sphinxext.ipython_directive',
-          'IPython.sphinxext.ipython_console_highlighting']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.todo', 'sphinx.ext.imgmath',
+              'IPython.sphinxext.ipython_directive',
+              'IPython.sphinxext.ipython_console_highlighting']
 #          'sphinxcontrib.fulltoc']
 
 # Add any paths that contain templates here, relative to this directory.
@@ -51,10 +51,10 @@ copyright = u'2014, Thomas Boggs'
 #
 
 import subprocess
-cmd = 'python -c "import spectral; print spectral.__version__"'
+cmd = 'python -c "import spectral; print(spectral.__version__)"'
 proc = subprocess.Popen(cmd, stdout=subprocess.PIPE,
                         env=os.environ.copy(), shell=True)
-version = proc.stdout.read()
+version = proc.stdout.read().decode('utf-8').strip()
 release = version
 
 # The short X.Y version.
