@@ -18,7 +18,7 @@ open_image
 ImageArray
 ----------
 
-.. autoclass:: spectral.spectral.ImageArray
+.. autoclass:: spectral.image.ImageArray
 
 SpyFile
 -------
@@ -363,7 +363,7 @@ Configuration
 SpySettings
 -----------
 
-.. autoclass:: spectral.spectral.SpySettings
+.. autoclass:: spectral.config.SpySettings
 
 Utilities
 =========
