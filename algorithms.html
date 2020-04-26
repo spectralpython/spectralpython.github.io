@@ -1,60 +1,46 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Spectral Algorithms &mdash; Spectral Python 0.20
- documentation</title>
-    
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <meta charset="utf-8" />
+    <title>Spectral Algorithms &#8212; Spectral Python 0.21 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.20
-',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Spectral Python 0.20
- documentation" href="index.html" />
-    <link rel="up" title="Spectral Python (SPy) User Guide" href="user_guide.html" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Spectral Libraries" href="libraries.html" />
     <link rel="prev" title="Displaying Data" href="graphics.html" /> 
-  </head>
-  <body>
-    <div class="related">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a></li>
+        <li class="right" >
           <a href="libraries.html" title="Spectral Libraries"
-             accesskey="N">next</a></li>
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="graphics.html" title="Displaying Data"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Spectral Python 0.20
- documentation</a> &raquo;</li>
-          <li><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Spectral Python 0.21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="toctree-wrapper compound">
-<ul class="simple">
-</ul>
 </div>
 <div class="section" id="spectral-algorithms">
 <span id="algorithms"></span><h1>Spectral Algorithms<a class="headerlink" href="#spectral-algorithms" title="Permalink to this headline">¶</a></h1>
@@ -64,9 +50,9 @@ burdensome and require iterative access to image data.  These algorithms will
 almost always execute significantly faster if the image data is loaded into
 memory.  Therefore, if you use these algorithms and have sufficient computer
 memory, you should load your image into memory.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">spectral</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">spectral</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="gp">In [2]: </span><span class="n">img</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3C.lan&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="gp">In [2]: </span><span class="n">img</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s1">&#39;92AV3C.lan&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="section" id="unsupervised-classification">
@@ -78,14 +64,14 @@ spectral classes.</p>
 <h3>k-means Clustering<a class="headerlink" href="#k-means-clustering" title="Permalink to this headline">¶</a></h3>
 <p>The <em>k-means</em> algorithm takes an iterative approach to generating clusters.
 The parameter <em>k</em> specifies the desired number of clusters to generate.  The algorithm
-begins with an initial set of cluster centers (e.g., results from <tt class="xref py py-func docutils literal"><span class="pre">cluster</span></tt>).
+begins with an initial set of cluster centers (e.g., results from <code class="xref py py-func docutils literal notranslate"><span class="pre">cluster</span></code>).
 Each pixel in the image is then assigned to the nearest cluster center (using
 distance in <em>N</em>-space as the distance metric) and each cluster center is then recomputed
 as the centroid of all pixels assigned to the cluster.  This process repeats until
 a desired stopping criterion is reached (e.g., max number of iterations).  To run
 the <em>k-means</em> algorithm on the image and create 20 clusters, using a maximum of
-50 iterations, call <a class="reference internal" href="class_func_ref.html#spectral.kmeans" title="spectral.kmeans"><tt class="xref py py-func docutils literal"><span class="pre">kmeans</span></tt></a> as follows.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [3]: </span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">=</span> <span class="n">kmeans</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+50 iterations, call <a class="reference internal" href="class_func_ref.html#spectral.kmeans" title="spectral.kmeans"><code class="xref py py-func docutils literal notranslate"><span class="pre">kmeans</span></code></a> as follows.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">=</span> <span class="n">kmeans</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 <span class="go">Initializing clusters along diagonal of N-dimensional bounding box.</span>
 <span class="go">Starting iterations.</span>
 <span class="go">Iteration 1...done</span>
@@ -106,39 +92,37 @@ the <em>k-means</em> algorithm on the image and create 20 clusters, using a maxi
 </div>
 <p>Note that I interrupted the algorithm with a keyboard interrupt (CTRL-C) after
 the 30th iteration since there were only about a hundred pixels migrating between
-clusters at that point. <a class="reference internal" href="class_func_ref.html#spectral.kmeans" title="spectral.kmeans"><tt class="xref py py-func docutils literal"><span class="pre">kmeans</span></tt></a> catches the <tt class="xref py py-exc docutils literal"><span class="pre">KeyboardInterrupt</span></tt>
+clusters at that point. <a class="reference internal" href="class_func_ref.html#spectral.kmeans" title="spectral.kmeans"><code class="xref py py-func docutils literal notranslate"><span class="pre">kmeans</span></code></a> catches the <code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyboardInterrupt</span></code>
 exception and returns the clusters generated at the end of the previous
 iteration.  If you are running the algorithm interactively, this feature allows
 you to set the max number of iterations to an arbitrarily high number and then
 stop the algorithm when the clusters have converged to an acceptable level. If you
 happen to set the max number of iterations too small (many pixels are still migrating
-at the end of the final iteration), you can simply call <a class="reference internal" href="class_func_ref.html#spectral.kmeans" title="spectral.kmeans"><tt class="xref py py-func docutils literal"><span class="pre">kmeans</span></tt></a> again
+at the end of the final iteration), you can simply call <a class="reference internal" href="class_func_ref.html#spectral.kmeans" title="spectral.kmeans"><code class="xref py py-func docutils literal notranslate"><span class="pre">kmeans</span></code></a> again
 to resume processing by passing the cluster centers generated by the previous call
-as the optional <tt class="xref py py-class docutils literal"><span class="pre">start_clusters</span></tt> argument to the function.</p>
-<div class="figure align-center">
-<img alt="_images/kmeans_20_30.jpg" src="_images/kmeans_20_30.jpg" />
-<p class="caption">k-means clustering results</p>
+as the optional <code class="xref py py-class docutils literal notranslate"><span class="pre">start_clusters</span></code> argument to the function.</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="_images/kmeans_20_30.jpg"><img alt="_images/kmeans_20_30.jpg" src="_images/kmeans_20_30.jpg" style="width: 174.0px; height: 174.0px;" /></a>
+<p class="caption"><span class="caption-text">k-means clustering results</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
-<p>Notice that <a class="reference internal" href="class_func_ref.html#spectral.kmeans" title="spectral.kmeans"><tt class="xref py py-func docutils literal"><span class="pre">kmeans</span></tt></a> appears to have captured much more of the
-spectral variation in the image than the single-pass <tt class="xref py py-func docutils literal"><span class="pre">cluster</span></tt>
-function.  Let&#8217;s also take a look at the the cluster centers produced by the
+<p>Notice that <a class="reference internal" href="class_func_ref.html#spectral.kmeans" title="spectral.kmeans"><code class="xref py py-func docutils literal notranslate"><span class="pre">kmeans</span></code></a> appears to have captured much more of the
+spectral variation in the image than the single-pass <code class="xref py py-func docutils literal notranslate"><span class="pre">cluster</span></code>
+function.  Let’s also take a look at the the cluster centers produced by the
 algorithm:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [4]: </span><span class="kn">import</span> <span class="nn">pylab</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="gp">In [5]: </span><span class="n">pylab</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">In [5]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 
-<span class="gp">In [6]: </span><span class="n">pylab</span><span class="o">.</span><span class="n">hold</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="gp">In [7]: </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-<span class="gp">   ...: </span>    <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="gp">In [6]: </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="gp">   ...: </span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 <span class="gp">   ...: </span>
 
-<span class="gp">In [8]: </span><span class="n">pylab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="gp">In [7]: </span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="figure align-center">
-<a class="reference internal image-reference" href="_images/kmeans_20_30_centers.png"><img alt="_images/kmeans_20_30_centers.png" src="_images/kmeans_20_30_centers.png" style="width: 400.0px; height: 300.0px;" /></a>
-<p class="caption">k-means cluster centers</p>
+<div class="figure align-center" id="id4">
+<a class="reference internal image-reference" href="_images/kmeans_20_30_centers.png"><img alt="_images/kmeans_20_30_centers.png" src="_images/kmeans_20_30_centers.png" style="width: 640.0px; height: 480.0px;" /></a>
+<p class="caption"><span class="caption-text">k-means cluster centers</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>
@@ -154,15 +138,15 @@ training classes.  A value of 0 in the ground truth array indicate an unlabeled 
 (the pixel is not associated with a training class).</p>
 <p>The following commands will load and display the ground truth map for our sample
 image:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [9]: </span><span class="n">gt</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s">&#39;92AV3GT.GIS&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">gt</span> <span class="o">=</span> <span class="n">open_image</span><span class="p">(</span><span class="s1">&#39;92AV3GT.GIS&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="gp">In [10]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">gt</span><span class="p">)</span>
+<span class="gp">In [9]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">gt</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/view_gt.png"><img alt="_images/view_gt.png" class="align-center" src="_images/view_gt.png" style="width: 264.0px; height: 198.0px;" /></a>
-<p>We can now create a <tt class="xref py py-class docutils literal"><span class="pre">TrainingClassSet</span></tt> object by calling
-<a class="reference internal" href="class_func_ref.html#spectral.create_training_classes" title="spectral.create_training_classes"><tt class="xref py py-func docutils literal"><span class="pre">create_training_classes</span></tt></a>:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [11]: </span><span class="n">classes</span> <span class="o">=</span> <span class="n">create_training_classes</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gt</span><span class="p">)</span>
+<a class="reference internal image-reference" href="_images/view_gt.png"><img alt="_images/view_gt.png" class="align-center" src="_images/view_gt.png" style="width: 480.0px; height: 360.0px;" /></a>
+<p>We can now create a <code class="xref py py-class docutils literal notranslate"><span class="pre">TrainingClassSet</span></code> object by calling
+<a class="reference internal" href="class_func_ref.html#spectral.create_training_classes" title="spectral.create_training_classes"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_training_classes</span></code></a>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">classes</span> <span class="o">=</span> <span class="n">create_training_classes</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gt</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>With the training classes defined, we can then create a supervised classifier,
@@ -170,74 +154,68 @@ train it with the training classes, and then classify an image.</p>
 </div>
 <div class="section" id="gaussian-maximum-likelihood-classification">
 <h3>Gaussian Maximum Likelihood Classification<a class="headerlink" href="#gaussian-maximum-likelihood-classification" title="Permalink to this headline">¶</a></h3>
-<p>In this case, we&#8217;ll perform Gaussian Maximum Likelihood Classification (GMLC),
-so let&#8217;s create the appropriate classifier.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [12]: </span><span class="n">gmlc</span> <span class="o">=</span> <span class="n">GaussianClassifier</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
-<span class="go">Setting min samples to 220</span>
-<span class="go">  Omitting class   1 : only 54 samples present</span>
-<span class="go">  Omitting class   7 : only 26 samples present</span>
-<span class="go">  Omitting class   9 : only 20 samples present</span>
-<span class="go">  Omitting class  13 : only 212 samples present</span>
-<span class="go">  Omitting class  16 : only 95 samples present</span>
+<p>In this case, we’ll perform Gaussian Maximum Likelihood Classification (GMLC),
+so let’s create the appropriate classifier.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">gmlc</span> <span class="o">=</span> <span class="n">GaussianClassifier</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>When we created the classifier, it was automatically trained on the training sets
 we provided.  Notice that the classifier ignored five of the training classes.
 GMLC requires computing the inverse of the covariance matrix for each training
 class.  Since our sample image contains 220 spectral bands, classes with fewer
-than 220 samples will have singular covariance matrices, for which we can&#8217;t compute
+than 220 samples will have singular covariance matrices, for which we can’t compute
 the inverse.</p>
 <p>Once the classifier is trained, we can use it to classify an image having
-the same spectral bands as the training set.  Let&#8217;s classify our training image
+the same spectral bands as the training set.  Let’s classify our training image
 and display the resulting classification map.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [13]: </span><span class="n">clmap</span> <span class="o">=</span> <span class="n">gmlc</span><span class="o">.</span><span class="n">classify_image</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-<span class="go"></span>
-<span class="gp">In [14]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">clmap</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">clmap</span> <span class="o">=</span> <span class="n">gmlc</span><span class="o">.</span><span class="n">classify_image</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="gp">In [13]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">clmap</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/gmlc_map.png"><img alt="_images/gmlc_map.png" class="align-center" src="_images/gmlc_map.png" style="width: 264.0px; height: 198.0px;" /></a>
+<a class="reference internal image-reference" href="_images/gmlc_map.png"><img alt="_images/gmlc_map.png" class="align-center" src="_images/gmlc_map.png" style="width: 480.0px; height: 360.0px;" /></a>
 <p>The classification map above shows classification results for the entire image.  To view
 results for only the ground truth pixels we must mask out all the pixels not
 associated with a training class.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [15]: </span><span class="n">gtresults</span> <span class="o">=</span> <span class="n">clmap</span> <span class="o">*</span> <span class="p">(</span><span class="n">gt</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">gtresults</span> <span class="o">=</span> <span class="n">clmap</span> <span class="o">*</span> <span class="p">(</span><span class="n">gt</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
 
-<span class="gp">In [16]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">gtresults</span><span class="p">)</span>
+<span class="gp">In [15]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">gtresults</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/gmlc_map_training.png"><img alt="_images/gmlc_map_training.png" class="align-center" src="_images/gmlc_map_training.png" style="width: 264.0px; height: 198.0px;" /></a>
+<a class="reference internal image-reference" href="_images/gmlc_map_training.png"><img alt="_images/gmlc_map_training.png" class="align-center" src="_images/gmlc_map_training.png" style="width: 480.0px; height: 360.0px;" /></a>
 <p>If the classification results are good, we expect the classification map
 above to look very similar to the original ground truth map.  To view only the
-errors, we must mask out all elements in <tt class="xref py py-obj docutils literal"><span class="pre">gtResults</span></tt> that do not match the
+errors, we must mask out all elements in <code class="xref py py-obj docutils literal notranslate"><span class="pre">gtResults</span></code> that do not match the
 ground truth image.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [17]: </span><span class="n">gterrors</span> <span class="o">=</span> <span class="n">gtresults</span> <span class="o">*</span> <span class="p">(</span><span class="n">gtresults</span> <span class="o">!=</span> <span class="n">gt</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">gterrors</span> <span class="o">=</span> <span class="n">gtresults</span> <span class="o">*</span> <span class="p">(</span><span class="n">gtresults</span> <span class="o">!=</span> <span class="n">gt</span><span class="p">)</span>
 
-<span class="gp">In [18]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">gterrors</span><span class="p">)</span>
+<span class="gp">In [17]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">gterrors</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/gmlc_errors.png"><img alt="_images/gmlc_errors.png" class="align-center" src="_images/gmlc_errors.png" style="width: 264.0px; height: 198.0px;" /></a>
+<a class="reference internal image-reference" href="_images/gmlc_errors.png"><img alt="_images/gmlc_errors.png" class="align-center" src="_images/gmlc_errors.png" style="width: 480.0px; height: 360.0px;" /></a>
 <p>The five contiguous regions in the error image above correspond to the ground
-truth classes that the <tt class="xref py py-class docutils literal"><span class="pre">GaussianClassifier</span></tt> ignored because they
+truth classes that the <code class="xref py py-class docutils literal notranslate"><span class="pre">GaussianClassifier</span></code> ignored because they
 had too few samples.</p>
 <p>The following table lists the supervised classifiers SPy currently provides.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="55%" />
-<col width="45%" />
+<col style="width: 55%" />
+<col style="width: 45%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Classifier</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Classifier</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference internal" href="class_func_ref.html#spectral.algorithms.classifiers.GaussianClassifier" title="spectral.algorithms.classifiers.GaussianClassifier"><tt class="xref py py-class docutils literal"><span class="pre">GaussianClassifier</span></tt></a></td>
-<td>Gaussian Maximum Likelihood</td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="class_func_ref.html#spectral.algorithms.classifiers.GaussianClassifier" title="spectral.algorithms.classifiers.GaussianClassifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">GaussianClassifier</span></code></a></p></td>
+<td><p>Gaussian Maximum Likelihood</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="class_func_ref.html#spectral.algorithms.classifiers.MahalanobisDistanceClassifier" title="spectral.algorithms.classifiers.MahalanobisDistanceClassifier"><tt class="xref py py-class docutils literal"><span class="pre">MahalanobisDistanceClassifier</span></tt></a></td>
-<td>Mahalanobis Distance</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="class_func_ref.html#spectral.algorithms.classifiers.MahalanobisDistanceClassifier" title="spectral.algorithms.classifiers.MahalanobisDistanceClassifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">MahalanobisDistanceClassifier</span></code></a></p></td>
+<td><p>Mahalanobis Distance</p></td>
 </tr>
-<tr class="row-even"><td><tt class="xref py py-class docutils literal"><span class="pre">PerceptronClassifier</span></tt></td>
-<td>Multi-Layer Perceptron</td>
+<tr class="row-even"><td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">PerceptronClassifier</span></code></p></td>
+<td><p>Multi-Layer Perceptron</p></td>
 </tr>
 </tbody>
 </table>
@@ -246,8 +224,8 @@ had too few samples.</p>
 <div class="section" id="dimensionality-reduction">
 <h2>Dimensionality Reduction<a class="headerlink" href="#dimensionality-reduction" title="Permalink to this headline">¶</a></h2>
 <p>Processing hyperspectral images with hundreds of bands can be computationally
-burdensome and classification accuracy may suffer due to the so-called &#8220;curse
-of dimensionality&#8221;.  To mitigate these problems, it is often desirable to reduce
+burdensome and classification accuracy may suffer due to the so-called “curse
+of dimensionality”.  To mitigate these problems, it is often desirable to reduce
 the dimensionality of the data.</p>
 <div class="section" id="principal-components">
 <h3>Principal Components<a class="headerlink" href="#principal-components" title="Permalink to this headline">¶</a></h3>
@@ -258,17 +236,17 @@ correspond to the eigenvectors of the image covariance matrix, where the associa
 eigenvalue represents the variance in the direction of the eigenvector. A very
 large percentage of the image variance can be captured in a relatively small
 number of principal components (compared to the original number of bands) .</p>
-<p>The SPy function <a class="reference internal" href="class_func_ref.html#spectral.principal_components" title="spectral.principal_components"><tt class="xref py py-func docutils literal"><span class="pre">principal_components</span></tt></a> computes the principal
+<p>The SPy function <a class="reference internal" href="class_func_ref.html#spectral.principal_components" title="spectral.principal_components"><code class="xref py py-func docutils literal notranslate"><span class="pre">principal_components</span></code></a> computes the principal
 components of the image data and returns the mean, covariance, eigenvalues, and
-eigenvectors in a <tt class="xref py py-class docutils literal"><span class="pre">PrincipalComponents</span></tt>.
+eigenvectors in a <code class="xref py py-class docutils literal notranslate"><span class="pre">PrincipalComponents</span></code>.
 This object also contains a transform to rotate data in to the space of the
 principal compenents, as well as a method to reduce the number of eigenvectors.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [19]: </span><span class="n">pc</span> <span class="o">=</span> <span class="n">principal_components</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">pc</span> <span class="o">=</span> <span class="n">principal_components</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 
-<span class="gp">In [20]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">cov</span><span class="p">)</span>
+<span class="gp">In [19]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">pc</span><span class="o">.</span><span class="n">cov</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/covariance.png"><img alt="_images/covariance.png" class="align-center" src="_images/covariance.png" style="width: 264.0px; height: 198.0px;" /></a>
+<a class="reference internal image-reference" href="_images/covariance.png"><img alt="_images/covariance.png" class="align-center" src="_images/covariance.png" style="width: 480.0px; height: 360.0px;" /></a>
 <p>In the covariance matrix display, whiter values indicate strong positive covariance,
 darker values indicate strong negative covariance, and grey values indicate
 covariance near zero.</p>
@@ -277,102 +255,96 @@ in descending order and then retain enough eigenvalues (an corresponding eigenve
 to capture a desired fraction of the total image variance.  We then reduce the
 dimensionality of the image pixels by projecting them onto the remaining eigenvectors.
 We will choose to retain a minimum of 99.9% of the total image variance.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [21]: </span><span class="n">pc_0999</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">fraction</span><span class="o">=</span><span class="mf">0.999</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">pc_0999</span> <span class="o">=</span> <span class="n">pc</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">fraction</span><span class="o">=</span><span class="mf">0.999</span><span class="p">)</span>
 
-<span class="gp">In [22]: </span><span class="c"># How many eigenvalues are left?</span>
+<span class="gp">In [21]: </span><span class="c1"># How many eigenvalues are left?</span>
 
-<span class="gp">In [23]: </span><span class="nb">len</span><span class="p">(</span><span class="n">pc_0999</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">)</span>
-<span class="gh">Out[23]: </span><span class="go">32</span>
+<span class="gp">In [22]: </span><span class="nb">len</span><span class="p">(</span><span class="n">pc_0999</span><span class="o">.</span><span class="n">eigenvalues</span><span class="p">)</span>
+<span class="gh">Out[22]: </span><span class="go">32</span>
 
-<span class="gp">In [24]: </span><span class="n">img_pc</span> <span class="o">=</span> <span class="n">pc_0999</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="gp">In [23]: </span><span class="n">img_pc</span> <span class="o">=</span> <span class="n">pc_0999</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 
-<span class="gp">In [25]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">img_pc</span><span class="p">[:,:,:</span><span class="mi">3</span><span class="p">],</span> <span class="n">stretch_all</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [24]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">img_pc</span><span class="p">[:,:,:</span><span class="mi">3</span><span class="p">],</span> <span class="n">stretch_all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/pc3.png"><img alt="_images/pc3.png" class="align-center" src="_images/pc3.png" style="width: 264.0px; height: 198.0px;" /></a>
-<p>Now we&#8217;ll use a Gaussian maximum likelihood classifier (GMLC) for the reduced
+<a class="reference internal image-reference" href="_images/pc3.png"><img alt="_images/pc3.png" class="align-center" src="_images/pc3.png" style="width: 480.0px; height: 360.0px;" /></a>
+<p>Now we’ll use a Gaussian maximum likelihood classifier (GMLC) for the reduced
 principal components to train and classify against the training data.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [26]: </span><span class="n">classes</span> <span class="o">=</span> <span class="n">create_training_classes</span><span class="p">(</span><span class="n">img_pc</span><span class="p">,</span> <span class="n">gt</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">classes</span> <span class="o">=</span> <span class="n">create_training_classes</span><span class="p">(</span><span class="n">img_pc</span><span class="p">,</span> <span class="n">gt</span><span class="p">)</span>
 
-<span class="gp">In [27]: </span><span class="n">gmlc</span> <span class="o">=</span> <span class="n">GaussianClassifier</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
-<span class="go">Setting min samples to 32</span>
-<span class="go">  Omitting class   7 : only 26 samples present</span>
-<span class="go">  Omitting class   9 : only 20 samples present</span>
+<span class="gp">In [26]: </span><span class="n">gmlc</span> <span class="o">=</span> <span class="n">GaussianClassifier</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
 
-<span class="gp">In [28]: </span><span class="n">clmap</span> <span class="o">=</span> <span class="n">gmlc</span><span class="o">.</span><span class="n">classify_image</span><span class="p">(</span><span class="n">img_pc</span><span class="p">)</span>
-<span class="go"></span>
-<span class="gp">In [29]: </span><span class="n">clmap_training</span> <span class="o">=</span> <span class="n">clmap</span> <span class="o">*</span> <span class="p">(</span><span class="n">gt</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">In [27]: </span><span class="n">clmap</span> <span class="o">=</span> <span class="n">gmlc</span><span class="o">.</span><span class="n">classify_image</span><span class="p">(</span><span class="n">img_pc</span><span class="p">)</span>
 
-<span class="gp">In [30]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">clmap_training</span><span class="p">)</span>
+<span class="gp">In [28]: </span><span class="n">clmap_training</span> <span class="o">=</span> <span class="n">clmap</span> <span class="o">*</span> <span class="p">(</span><span class="n">gt</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="gp">In [29]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">clmap_training</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/gmlc2_training.png"><img alt="_images/gmlc2_training.png" class="align-center" src="_images/gmlc2_training.png" style="width: 264.0px; height: 198.0px;" /></a>
+<a class="reference internal image-reference" href="_images/gmlc2_training.png"><img alt="_images/gmlc2_training.png" class="align-center" src="_images/gmlc2_training.png" style="width: 480.0px; height: 360.0px;" /></a>
 <p>And the associated errors:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [31]: </span><span class="n">training_errors</span> <span class="o">=</span> <span class="n">clmap_training</span> <span class="o">*</span> <span class="p">(</span><span class="n">clmap_training</span> <span class="o">!=</span> <span class="n">gt</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">training_errors</span> <span class="o">=</span> <span class="n">clmap_training</span> <span class="o">*</span> <span class="p">(</span><span class="n">clmap_training</span> <span class="o">!=</span> <span class="n">gt</span><span class="p">)</span>
 
-<span class="gp">In [32]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">training_errors</span><span class="p">)</span>
+<span class="gp">In [31]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">training_errors</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/gmlc2_errors.png"><img alt="_images/gmlc2_errors.png" class="align-center" src="_images/gmlc2_errors.png" style="width: 264.0px; height: 198.0px;" /></a>
+<a class="reference internal image-reference" href="_images/gmlc2_errors.png"><img alt="_images/gmlc2_errors.png" class="align-center" src="_images/gmlc2_errors.png" style="width: 480.0px; height: 360.0px;" /></a>
 </div>
 <div class="section" id="fisher-linear-discriminant">
 <h3>Fisher Linear Discriminant<a class="headerlink" href="#fisher-linear-discriminant" title="Permalink to this headline">¶</a></h3>
 <p>The Fisher Linear Discriminant (a.k.a., canonical discriminant) attempts to
 find a set of transformed axes that maximize the ratio of the average distance
-between classes to the average distance between samples within each class. <a class="reference internal" href="#richards1999" id="id1">[Richards1999]</a>
+between classes to the average distance between samples within each class. <a class="reference internal" href="#richards1999" id="id1"><span>[Richards1999]</span></a>
 This is written as</p>
 <div class="math">
-<p><img src="_images/math/be6c111d8fc46009c7770cfad66ecc8d5a423898.png" alt="C_b x = \lambda C_w x"/></p>
-</div><p>where <img class="math" src="_images/math/31a3141fcb755a2f6eb521c53b534b2da3d00b99.png" alt="C_b"/> is the covariance of the class centers and <img class="math" src="_images/math/80704b5bea6a7ec033d45c015a4ed3b50336e1b5.png" alt="C_w"/> is the
-weighted average of the covariances of each class.  If <img class="math" src="_images/math/80704b5bea6a7ec033d45c015a4ed3b50336e1b5.png" alt="C_w"/> is invertible,
+<p><img src="_images/math/85ea06190cc6e4a593bdc4c087ae7990ab30000e.png" alt="C_b x = \lambda C_w x"/></p>
+</div><p>where <img class="math" src="_images/math/cef212a0d6d030d89e5a153f271db0d6bb0a3c6f.png" alt="C_b"/> is the covariance of the class centers and <img class="math" src="_images/math/6afb20d86b0ace64a91f3099474b5ec02aacefc1.png" alt="C_w"/> is the
+weighted average of the covariances of each class.  If <img class="math" src="_images/math/6afb20d86b0ace64a91f3099474b5ec02aacefc1.png" alt="C_w"/> is invertible,
 this becomes</p>
 <div class="math">
-<p><img src="_images/math/6f572cf049c804a4108b5f8fa062a565ac1bff34.png" alt="\left(C_{w}^{-1} C_b\right)x=\lambda x"/></p>
-</div><p>This eigenvalue problem is solved by the <a class="reference internal" href="class_func_ref.html#spectral.linear_discriminant" title="spectral.linear_discriminant"><tt class="xref py py-func docutils literal"><span class="pre">linear_discriminant</span></tt></a>
+<p><img src="_images/math/638083c0831486fca4c054b988560722cbe53754.png" alt="\left(C_{w}^{-1} C_b\right)x=\lambda x"/></p>
+</div><p>This eigenvalue problem is solved by the <a class="reference internal" href="class_func_ref.html#spectral.linear_discriminant" title="spectral.linear_discriminant"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_discriminant</span></code></a>
 function, yielding <cite>C-1</cite> eigenvalues, where <cite>C</cite> is the number of classes.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [33]: </span><span class="n">classes</span> <span class="o">=</span> <span class="n">create_training_classes</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gt</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">classes</span> <span class="o">=</span> <span class="n">create_training_classes</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gt</span><span class="p">)</span>
 
-<span class="gp">In [34]: </span><span class="n">fld</span> <span class="o">=</span> <span class="n">linear_discriminant</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+<span class="gp">In [33]: </span><span class="n">fld</span> <span class="o">=</span> <span class="n">linear_discriminant</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
 
-<span class="gp">In [35]: </span><span class="nb">len</span><span class="p">(</span><span class="n">fld</span><span class="o">.</span><span class="n">eigenvectors</span><span class="p">)</span>
-<span class="gh">Out[35]: </span><span class="go">220</span>
+<span class="gp">In [34]: </span><span class="nb">len</span><span class="p">(</span><span class="n">fld</span><span class="o">.</span><span class="n">eigenvectors</span><span class="p">)</span>
+<span class="gh">Out[34]: </span><span class="go">220</span>
 </pre></div>
 </div>
-<p>Let&#8217;s view the image projected onto the top 3 components of the transform:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [36]: </span><span class="k">print</span> <span class="s">&#39;2 + 2 =&#39;</span><span class="p">,</span> <span class="mi">4</span>
-<span class="go">2 + 2 = 4</span>
+<p>Let’s view the image projected onto the top 3 components of the transform:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">img_fld</span> <span class="o">=</span> <span class="n">fld</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 
-<span class="gp">In [37]: </span><span class="n">img_fld</span> <span class="o">=</span> <span class="n">fld</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-
-<span class="gp">In [38]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">img_fld</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">In [36]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">img_fld</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">])</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/fld3.png"><img alt="_images/fld3.png" class="align-center" src="_images/fld3.png" style="width: 264.0px; height: 198.0px;" /></a>
-<p>Next, we&#8217;ll classify the data using this discriminant.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [39]: </span><span class="n">classes</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">fld</span><span class="o">.</span><span class="n">transform</span><span class="p">)</span>
+<a class="reference internal image-reference" href="_images/fld3.png"><img alt="_images/fld3.png" class="align-center" src="_images/fld3.png" style="width: 480.0px; height: 360.0px;" /></a>
+<p>Next, we’ll classify the data using this discriminant.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">classes</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">fld</span><span class="o">.</span><span class="n">transform</span><span class="p">)</span>
 
-<span class="gp">In [40]: </span><span class="n">gmlc</span> <span class="o">=</span> <span class="n">GaussianClassifier</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
-<span class="go">Setting min samples to 15</span>
+<span class="gp">In [38]: </span><span class="n">gmlc</span> <span class="o">=</span> <span class="n">GaussianClassifier</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
 
-<span class="gp">In [41]: </span><span class="n">clmap</span> <span class="o">=</span> <span class="n">gmlc</span><span class="o">.</span><span class="n">classify_image</span><span class="p">(</span><span class="n">img_fld</span><span class="p">)</span>
-<span class="go"></span>
-<span class="gp">In [42]: </span><span class="n">clmap_training</span> <span class="o">=</span> <span class="n">clmap</span> <span class="o">*</span> <span class="p">(</span><span class="n">gt</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">In [39]: </span><span class="n">clmap</span> <span class="o">=</span> <span class="n">gmlc</span><span class="o">.</span><span class="n">classify_image</span><span class="p">(</span><span class="n">img_fld</span><span class="p">)</span>
 
-<span class="gp">In [43]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">clmap_training</span><span class="p">)</span>
+<span class="gp">In [40]: </span><span class="n">clmap_training</span> <span class="o">=</span> <span class="n">clmap</span> <span class="o">*</span> <span class="p">(</span><span class="n">gt</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="gp">In [41]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">clmap_training</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/fld_training.png"><img alt="_images/fld_training.png" class="align-center" src="_images/fld_training.png" style="width: 264.0px; height: 198.0px;" /></a>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [44]: </span><span class="n">fld_errors</span> <span class="o">=</span> <span class="n">clmap_training</span> <span class="o">*</span> <span class="p">(</span><span class="n">clmap_training</span> <span class="o">!=</span> <span class="n">gt</span><span class="p">)</span>
+<a class="reference internal image-reference" href="_images/fld_training.png"><img alt="_images/fld_training.png" class="align-center" src="_images/fld_training.png" style="width: 480.0px; height: 360.0px;" /></a>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="n">fld_errors</span> <span class="o">=</span> <span class="n">clmap_training</span> <span class="o">*</span> <span class="p">(</span><span class="n">clmap_training</span> <span class="o">!=</span> <span class="n">gt</span><span class="p">)</span>
 
-<span class="gp">In [45]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">fld_errors</span><span class="p">)</span>
+<span class="gp">In [43]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">fld_errors</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/fld_training_errors.png"><img alt="_images/fld_training_errors.png" class="align-center" src="_images/fld_training_errors.png" style="width: 264.0px; height: 198.0px;" /></a>
+<a class="reference internal image-reference" href="_images/fld_training_errors.png"><img alt="_images/fld_training_errors.png" class="align-center" src="_images/fld_training_errors.png" style="width: 480.0px; height: 360.0px;" /></a>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p><a class="reference internal" href="class_func_ref.html#spectral.algorithms.algorithms.orthogonalize" title="spectral.algorithms.algorithms.orthogonalize"><tt class="xref py py-func docutils literal"><span class="pre">orthogonalize</span></tt></a>:</p>
-<blockquote class="last">
-<div>Gram-Schmidt Orthogonalization</div></blockquote>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="class_func_ref.html#spectral.algorithms.algorithms.orthogonalize" title="spectral.algorithms.algorithms.orthogonalize"><code class="xref py py-func docutils literal notranslate"><span class="pre">orthogonalize</span></code></a>:</p>
+<blockquote>
+<div><p>Gram-Schmidt Orthogonalization</p>
+</div></blockquote>
 </div>
 </div>
 </div>
@@ -382,73 +354,75 @@ function, yielding <cite>C-1</cite> eigenvalues, where <cite>C</cite> is the num
 <h3>RX Anomaly Detector<a class="headerlink" href="#rx-anomaly-detector" title="Permalink to this headline">¶</a></h3>
 <p>The RX anomaly detector uses the squared Mahalanobis distance as a measure of
 how anomalous a pixel is with respect to an assumed background. The SPy
-<a class="reference internal" href="class_func_ref.html#spectral.algorithms.detectors.rx" title="spectral.algorithms.detectors.rx"><tt class="xref py py-func docutils literal"><span class="pre">rx</span></tt></a> function computes RX scores for an
+<a class="reference internal" href="class_func_ref.html#spectral.algorithms.detectors.rx" title="spectral.algorithms.detectors.rx"><code class="xref py py-func docutils literal notranslate"><span class="pre">rx</span></code></a> function computes RX scores for an
 array of image pixels. The squared Mahalanobis distance is given by</p>
 <div class="math">
-<p><img src="_images/math/83712571e86c95907c4d84ae50505e664e81b488.png" alt="y=(x-\mu_b)^T\Sigma_b^{-1}(x-\mu_b)"/></p>
-</div><p>where <img class="math" src="_images/math/188c175aac0a8a9c22499336711b5d7256407254.png" alt="x"/> is the pixel spectrum, <img class="math" src="_images/math/fa81c642bd991cd9258ad5e6385fb2c06697ef2c.png" alt="\mu_b"/> is the background
-mean, and <img class="math" src="_images/math/9afecf0d1e6130848c8836235bc7cfc5b0dd1ef8.png" alt="\Sigma_b"/> is the background covariance <a class="reference internal" href="#reed-yu-1990" id="id2">[Reed_Yu_1990]</a>.</p>
-<p>If no background statistics are passed to the <tt class="xref py py-func docutils literal"><span class="pre">rx</span></tt> function,
+<p><img src="_images/math/2337d04a5b957d3fdc3ad00fa0fac26f38e8602c.png" alt="y=(x-\mu_b)^T\Sigma_b^{-1}(x-\mu_b)"/></p>
+</div><p>where <img class="math" src="_images/math/888f7c323ac0341871e867220ae2d76467d74d6e.png" alt="x"/> is the pixel spectrum, <img class="math" src="_images/math/a3565136d9107b3df64b08768fe13a9bd5a8d79f.png" alt="\mu_b"/> is the background
+mean, and <img class="math" src="_images/math/51c142e155733b3efe0c5fe4628975cda12a22df.png" alt="\Sigma_b"/> is the background covariance <a class="reference internal" href="#reed-yu-1990" id="id2"><span>[Reed_Yu_1990]</span></a>.</p>
+<p>If no background statistics are passed to the <code class="xref py py-func docutils literal notranslate"><span class="pre">rx</span></code> function,
 background statistics will be estimated from the array of pixels for which the
 RX scores are to be calculated.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [46]: </span><span class="n">rxvals</span> <span class="o">=</span> <span class="n">rx</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="n">rxvals</span> <span class="o">=</span> <span class="n">rx</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>To declare pixels as anomalous, we need to specify a threshold RX score. For
 example, we could choose all image pixels whose RX score has a probability of
 less than 0.001 with respect to the background:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [47]: </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span>
 
-<span class="gp">In [48]: </span><span class="n">nbands</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">In [46]: </span><span class="n">nbands</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="gp">In [49]: </span><span class="n">P</span> <span class="o">=</span> <span class="n">chi2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.999</span><span class="p">,</span> <span class="n">nbands</span><span class="p">)</span>
+<span class="gp">In [47]: </span><span class="n">P</span> <span class="o">=</span> <span class="n">chi2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.999</span><span class="p">,</span> <span class="n">nbands</span><span class="p">)</span>
 
-<span class="gp">In [50]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">rxvals</span> <span class="o">&gt;</span> <span class="n">P</span><span class="p">))</span>
+<span class="gp">In [48]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">rxvals</span> <span class="o">&gt;</span> <span class="n">P</span><span class="p">))</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/rxvals_threshold.png"><img alt="_images/rxvals_threshold.png" class="align-center" src="_images/rxvals_threshold.png" style="width: 264.0px; height: 198.0px;" /></a>
+<a class="reference internal image-reference" href="_images/rxvals_threshold.png"><img alt="_images/rxvals_threshold.png" class="align-center" src="_images/rxvals_threshold.png" style="width: 480.0px; height: 360.0px;" /></a>
 <p>Rather than specifying a threshold for anomalous pixels, one can also simply
-view an image of raw RX scores, where brighter pixels are considered &#8220;more anomalous&#8221;:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [51]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">rxvals</span><span class="p">)</span>
+view an image of raw RX scores, where brighter pixels are considered “more anomalous”:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">rxvals</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/rxvals.png"><img alt="_images/rxvals.png" class="align-center" src="_images/rxvals.png" style="width: 264.0px; height: 198.0px;" /></a>
+<a class="reference internal image-reference" href="_images/rxvals.png"><img alt="_images/rxvals.png" class="align-center" src="_images/rxvals.png" style="width: 480.0px; height: 360.0px;" /></a>
 <p>For the sample image, only a few pixels are visible in the image of RX scores
 because a linear color scale is used and there is a very small number of pixels with RX
 scores much higher than other pixels. This is apparent from viewing the histogram
 of the RX scores.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [52]: </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [50]: </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="gp">In [53]: </span><span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">In [51]: </span><span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 
-<span class="gp">In [54]: </span><span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">rxvals</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="mi">200</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [52]: </span><span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">rxvals</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="mi">200</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [53]: </span><span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/rxhistogram.png"><img alt="_images/rxhistogram.png" class="align-center" src="_images/rxhistogram.png" style="width: 264.0px; height: 198.0px;" /></a>
-<p>The outliers are not obvious in the histogram, so let&#8217;s print their values:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [55]: </span><span class="k">print</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">rxvals</span><span class="o">.</span><span class="n">ravel</span><span class="p">())[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span>
-<span class="go">[  665.17211462   675.85801536   683.58190673   731.4872873    739.95211335</span>
-<span class="go">   906.98669373   956.49972325  1703.20957949  2336.11246149  9018.65517253]</span>
+<a class="reference internal image-reference" href="_images/rxhistogram.png"><img alt="_images/rxhistogram.png" class="align-center" src="_images/rxhistogram.png" style="width: 480.0px; height: 360.0px;" /></a>
+<p>The outliers are not obvious in the histogram, so let’s print their values:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [54]: </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">rxvals</span><span class="o">.</span><span class="n">ravel</span><span class="p">())[</span><span class="o">-</span><span class="mi">10</span><span class="p">:])</span>
+<span class="go">[ 665.17211462  675.85801536  683.58190673  731.4872873   739.95211335</span>
+<span class="go">  906.98669373  956.49972325 1703.20957949 2336.11246149 9018.65517253]</span>
 </pre></div>
 </div>
 <p>To view greater detail in the RX image, we can adjust the lower and upper limits
 of the image display. Since we are primarily interested in the most anomalous
-pixels, we will set the black level to the 99th percentile of the RX values&#8217;
+pixels, we will set the black level to the 99th percentile of the RX values’
 cumulative histogram and set the white point to the 99.99th percentile:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [56]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">rxvals</span><span class="p">,</span> <span class="n">stretch</span><span class="o">=</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.9999</span><span class="p">))</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [55]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">rxvals</span><span class="p">,</span> <span class="n">stretch</span><span class="o">=</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.9999</span><span class="p">))</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/rxvals_stretched.png"><img alt="_images/rxvals_stretched.png" class="align-center" src="_images/rxvals_stretched.png" style="width: 264.0px; height: 198.0px;" /></a>
+<a class="reference internal image-reference" href="_images/rxvals_stretched.png"><img alt="_images/rxvals_stretched.png" class="align-center" src="_images/rxvals_stretched.png" style="width: 480.0px; height: 360.0px;" /></a>
 <p>We can see the new RGB data limits by inspecting the returned
-<a class="reference internal" href="class_func_ref.html#spectral.graphics.spypylab.ImageView" title="spectral.graphics.spypylab.ImageView"><tt class="xref py py-class docutils literal"><span class="pre">ImageView</span></tt></a> object:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [57]: </span><span class="k">print</span> <span class="n">v</span>
+<a class="reference internal" href="class_func_ref.html#spectral.graphics.spypylab.ImageView" title="spectral.graphics.spypylab.ImageView"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageView</span></code></a> object:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [56]: </span><span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 <span class="go">ImageView object:</span>
 <span class="go">  Display bands       :  [0]</span>
 <span class="go">  Interpolation       :  &lt;default&gt;</span>
 <span class="go">  RGB data limits     :</span>
-<span class="go">    R: [291.69380671768249, 956.49972325427484]</span>
-<span class="go">    G: [291.69380671768249, 956.49972325427484]</span>
-<span class="go">    B: [291.69380671768249, 956.49972325427484]</span>
+<span class="go">    R: [291.6938067178437, 956.4997232540622]</span>
+<span class="go">    G: [291.6938067178437, 956.4997232540622]</span>
+<span class="go">    B: [291.6938067178437, 956.4997232540622]</span>
 </pre></div>
 </div>
 <p>Note that we could also have set the contrast stretch to explicit RX values
@@ -459,39 +433,39 @@ performance of the RX anomaly detector. In such situations, better results
 can be obtained by dynamically computing background statistics in a neighborhood
 around each pixel being evaluated.</p>
 <p>To compute local background statistics for
-each pixel, the <tt class="xref py py-func docutils literal"><span class="pre">rx</span></tt> function accepts an optional <cite>window</cite> argument, which
+each pixel, the <code class="xref py py-func docutils literal notranslate"><span class="pre">rx</span></code> function accepts an optional <cite>window</cite> argument, which
 specifies an inner/outer window within which to calculate background statistics
 for each pixel being evaluated. The outer window is the window within which
 background statistics will be calculated. The inner window is a smaller window
 (within the outer window) indicating an exclusion zone within which pixels are
 to be ignored. The purpose of the inner window is to prevent potential anomaly/target
-pixels from &#8220;polluting&#8221; background statistics.</p>
+pixels from “polluting” background statistics.</p>
 <p>For example, to compute RX scores with background statistics computed from a
-21 <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/> 21 pixel window about the pixel being evaluated, with an exclusion window of
-5 <img class="math" src="_images/math/c69691d64985442217922c8d34e835a9dea60178.png" alt="\times"/> 5 pixels, the function would be called as follows:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [58]: </span><span class="n">rxvals</span> <span class="o">=</span> <span class="n">rx</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">21</span><span class="p">))</span>
+21 <img class="math" src="_images/math/8ef1f282527041d7d5c4a46dd2c60a02a7a7c00b.png" alt="\times"/> 21 pixel window about the pixel being evaluated, with an exclusion window of
+5 <img class="math" src="_images/math/8ef1f282527041d7d5c4a46dd2c60a02a7a7c00b.png" alt="\times"/> 5 pixels, the function would be called as follows:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="n">rxvals</span> <span class="o">=</span> <span class="n">rx</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">21</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>While the use of a windowed background will often improve results for images containing
 multiple background materials, it does so at the expense of introducing two
 issues. First, the sizes of the inner and outer windows must be specified such
-that the resulting covariance has full rank. That is, if <img class="math" src="_images/math/cba1b6f77b2d051ecd50f37f3f9df900f58df942.png" alt="w_{in}"/> and
-<img class="math" src="_images/math/ee0f01780f99567711c06ab95aba466a924948ed.png" alt="w_{out}"/> represent the pixel widths of the inner and outer windows, respectively,
-then <img class="math" src="_images/math/bd82df9f51132ee550017c6c77cb8dacea868fc3.png" alt="w_{out}^2 - w_{in}^2"/> must be at least as large as the number of
+that the resulting covariance has full rank. That is, if <img class="math" src="_images/math/50b6f08425d9c4974e96bcde8c07b8dfbf271cb8.png" alt="w_{in}"/> and
+<img class="math" src="_images/math/08d5b0516b4375a7755ccd45c82be74cbf9a46e7.png" alt="w_{out}"/> represent the pixel widths of the inner and outer windows, respectively,
+then <img class="math" src="_images/math/f245781aa993881751610a53d8b3be5c0671325d.png" alt="w_{out}^2 - w_{in}^2"/> must be at least as large as the number of
 image bands. Second, recomputing the estimated background covariance for each
 pixel in the image makes the computational complexity of of the RX score
 computation orders of magnitue greater.</p>
 <p>As a compromise between a fixed background and recomputation of mean &amp; covariance
-for each pixel, <tt class="xref py py-func docutils literal"><span class="pre">rx</span></tt> can be passed a global covariance estimate in addition
+for each pixel, <code class="xref py py-func docutils literal notranslate"><span class="pre">rx</span></code> can be passed a global covariance estimate in addition
 to the <em>window</em> argument. In this case, only the background mean within the window will
 be recomputed for each pixel. This significanly reduces computation time
 for the windowed algorithm and removes the size limitation on the window (except
 that the outer window must be larger than the inner). For example, since our sample image has ground
 cover classes labeled, we can compute the average covariance over those ground
 cover classes and use the result as an estimate of the global covariance.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [59]: </span><span class="n">C</span> <span class="o">=</span> <span class="n">cov_avg</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gt</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [58]: </span><span class="n">C</span> <span class="o">=</span> <span class="n">cov_avg</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gt</span><span class="p">)</span>
 
-<span class="gp">In [60]: </span><span class="n">rxvals</span> <span class="o">=</span> <span class="n">rx</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">21</span><span class="p">),</span> <span class="n">cov</span><span class="o">=</span><span class="n">C</span><span class="p">)</span>
+<span class="gp">In [59]: </span><span class="n">rxvals</span> <span class="o">=</span> <span class="n">rx</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">21</span><span class="p">),</span> <span class="n">cov</span><span class="o">=</span><span class="n">C</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -499,33 +473,34 @@ cover classes and use the result as an estimate of the global covariance.</p>
 <h3>Matched Filter<a class="headerlink" href="#matched-filter" title="Permalink to this headline">¶</a></h3>
 <p>The matched filter is a linear detector given by the formula</p>
 <div class="math">
-<p><img src="_images/math/609e01578d999a49c4228603107bfb95de882e5e.png" alt="y=\frac{(\mu_t-\mu_b)^T\Sigma_b^{-1}(x-\mu_b)}{(\mu_t-\mu_b)^T\Sigma^{-1}(\mu_t-\mu_b)}"/></p>
-</div><p>where <img class="math" src="_images/math/a6c88c3fa7369c07dae3ceb8bbe58990f43038cf.png" alt="\mu_t"/> is the target mean, <img class="math" src="_images/math/fa81c642bd991cd9258ad5e6385fb2c06697ef2c.png" alt="\mu_b"/> is the background
-mean, and <img class="math" src="_images/math/9afecf0d1e6130848c8836235bc7cfc5b0dd1ef8.png" alt="\Sigma_b"/> is the covariance. The matched filter response is
+<p><img src="_images/math/59c6879cd38c227825731a682a925c733deb5ba4.png" alt="y=\frac{(\mu_t-\mu_b)^T\Sigma_b^{-1}(x-\mu_b)}{(\mu_t-\mu_b)^T\Sigma^{-1}(\mu_t-\mu_b)}"/></p>
+</div><p>where <img class="math" src="_images/math/bba4dc6f1475c69c3aee7dfaf608317264ba6d48.png" alt="\mu_t"/> is the target mean, <img class="math" src="_images/math/a3565136d9107b3df64b08768fe13a9bd5a8d79f.png" alt="\mu_b"/> is the background
+mean, and <img class="math" src="_images/math/51c142e155733b3efe0c5fe4628975cda12a22df.png" alt="\Sigma_b"/> is the covariance. The matched filter response is
 scaled such that the response is zero when the input is equal to the background
 mean and equal to one when the pixel is equal to the target mean. Like the
-<a class="reference internal" href="class_func_ref.html#spectral.algorithms.detectors.rx" title="spectral.algorithms.detectors.rx"><tt class="xref py py-func docutils literal"><span class="pre">rx</span></tt></a> function the SPy
-<a class="reference internal" href="class_func_ref.html#spectral.algorithms.detectors.matched_filter" title="spectral.algorithms.detectors.matched_filter"><tt class="xref py py-func docutils literal"><span class="pre">matched_filter</span></tt></a> function will estimate
+<a class="reference internal" href="class_func_ref.html#spectral.algorithms.detectors.rx" title="spectral.algorithms.detectors.rx"><code class="xref py py-func docutils literal notranslate"><span class="pre">rx</span></code></a> function the SPy
+<a class="reference internal" href="class_func_ref.html#spectral.algorithms.detectors.matched_filter" title="spectral.algorithms.detectors.matched_filter"><code class="xref py py-func docutils literal notranslate"><span class="pre">matched_filter</span></code></a> function will estimate
 background statistics from the input image if no background statistics are
 specified.</p>
-<p>Let&#8217;s select the image pixel at (row, col) = (8, 88) as our target, use a
+<p>Let’s select the image pixel at (row, col) = (8, 88) as our target, use a
 global background statistics estimate, and plot all pixels whose matched filter
 scores are greater than 0.2.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [61]: </span><span class="n">t</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">88</span><span class="p">]</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [60]: </span><span class="n">t</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">88</span><span class="p">]</span>
 
-<span class="gp">In [62]: </span><span class="n">mfscores</span> <span class="o">=</span> <span class="n">matched_filter</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="gp">In [61]: </span><span class="n">mfscores</span> <span class="o">=</span> <span class="n">matched_filter</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
-<span class="gp">In [63]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">mfscores</span> <span class="o">&gt;</span> <span class="mf">0.2</span><span class="p">))</span>
+<span class="gp">In [62]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">mfscores</span> <span class="o">&gt;</span> <span class="mf">0.2</span><span class="p">))</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/mf_gt_02.png"><img alt="_images/mf_gt_02.png" class="align-center" src="_images/mf_gt_02.png" style="width: 264.0px; height: 198.0px;" /></a>
-<p>As with the <tt class="xref py py-func docutils literal"><span class="pre">rx</span></tt> function, <tt class="xref py py-func docutils literal"><span class="pre">matched_filter</span></tt> can be applied using
+<a class="reference internal image-reference" href="_images/mf_gt_02.png"><img alt="_images/mf_gt_02.png" class="align-center" src="_images/mf_gt_02.png" style="width: 480.0px; height: 360.0px;" /></a>
+<p>As with the <code class="xref py py-func docutils literal notranslate"><span class="pre">rx</span></code> function, <code class="xref py py-func docutils literal notranslate"><span class="pre">matched_filter</span></code> can be applied using
 windowed background statistics (optionally with a global covariance estimate).</p>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p><a class="reference internal" href="class_func_ref.html#spectral.algorithms.detectors.ace" title="spectral.algorithms.detectors.ace"><tt class="xref py py-func docutils literal"><span class="pre">ace</span></tt></a>:</p>
-<blockquote class="last">
-<div>Adaptive Coherence/Cosine Estimator (ACE)</div></blockquote>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="class_func_ref.html#spectral.algorithms.detectors.ace" title="spectral.algorithms.detectors.ace"><code class="xref py py-func docutils literal notranslate"><span class="pre">ace</span></code></a>:</p>
+<blockquote>
+<div><p>Adaptive Coherence/Cosine Estimator (ACE)</p>
+</div></blockquote>
 </div>
 </div>
 </div>
@@ -544,27 +519,27 @@ functions of the two bands.  If there is an overlap, an integral is
 performed over the region of overlap assuming the source band data value is
 constant over its FWHM (since we do not know the true spectral load over the
 source band) and the destination band has a Gaussian response function. Any
-target bands that do not have an overlapping source band will produce <tt class="xref py py-const docutils literal"><span class="pre">NaN</span></tt>
-as the resampled band value.  If FWHM information is not available for a sensor&#8217;s
-bands, each band&#8217;s FWHM is assumed to reach half the distance the its adjacent
+target bands that do not have an overlapping source band will produce <code class="xref py py-const docutils literal notranslate"><span class="pre">NaN</span></code>
+as the resampled band value.  If FWHM information is not available for a sensor’s
+bands, each band’s FWHM is assumed to reach half the distance the its adjacent
 bands.  Resampling results are better when source bands are at a higher spectral
 resolution than the destination bands.</p>
 <p>To create BandResampler object, we can either pass it a
-<a class="reference internal" href="class_func_ref.html#spectral.algorithms.resampling.BandResampler" title="spectral.algorithms.resampling.BandResampler"><tt class="xref py py-class docutils literal"><span class="pre">BandResampler</span></tt></a> object for each sensor or
+<a class="reference internal" href="class_func_ref.html#spectral.algorithms.resampling.BandResampler" title="spectral.algorithms.resampling.BandResampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">BandResampler</span></code></a> object for each sensor or
 a list of band centers and, optionally, a list of FWHM values.  Once the
 BandResampler is created, we can call it with a source sensor spectrum and it will
 return the resampled spectrum.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [64]: </span><span class="kn">import</span> <span class="nn">spectral.io.aviris</span> <span class="kn">as</span> <span class="nn">aviris</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [63]: </span><span class="kn">import</span> <span class="nn">spectral.io.aviris</span> <span class="k">as</span> <span class="nn">aviris</span>
 
-<span class="gp">In [65]: </span><span class="n">img1</span> <span class="o">=</span> <span class="n">aviris</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;f970619t01p02_r02_sc04.a.rfl&#39;</span><span class="p">,</span> <span class="s">&#39;f970619t01p02_r02.a.spc&#39;</span><span class="p">)</span>
+<span class="gp">In [64]: </span><span class="n">img1</span> <span class="o">=</span> <span class="n">aviris</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;f970619t01p02_r02_sc04.a.rfl&#39;</span><span class="p">,</span> <span class="s1">&#39;f970619t01p02_r02.a.spc&#39;</span><span class="p">)</span>
 
-<span class="gp">In [66]: </span><span class="n">bands2</span> <span class="o">=</span> <span class="n">aviris</span><span class="o">.</span><span class="n">read_aviris_bands</span><span class="p">(</span><span class="s">&#39;92AV3C.spc&#39;</span><span class="p">)</span>
+<span class="gp">In [65]: </span><span class="n">bands2</span> <span class="o">=</span> <span class="n">aviris</span><span class="o">.</span><span class="n">read_aviris_bands</span><span class="p">(</span><span class="s1">&#39;92AV3C.spc&#39;</span><span class="p">)</span>
 
-<span class="gp">In [67]: </span><span class="n">resample</span> <span class="o">=</span> <span class="n">BandResampler</span><span class="p">(</span><span class="n">img1</span><span class="o">.</span><span class="n">bands</span><span class="p">,</span> <span class="n">bands2</span><span class="p">)</span>
+<span class="gp">In [66]: </span><span class="n">resample</span> <span class="o">=</span> <span class="n">BandResampler</span><span class="p">(</span><span class="n">img1</span><span class="o">.</span><span class="n">bands</span><span class="p">,</span> <span class="n">bands2</span><span class="p">)</span>
 
-<span class="gp">In [68]: </span><span class="n">x1</span> <span class="o">=</span> <span class="n">img1</span><span class="p">[</span><span class="mi">96</span><span class="p">,</span> <span class="mi">304</span><span class="p">]</span>
+<span class="gp">In [67]: </span><span class="n">x1</span> <span class="o">=</span> <span class="n">img1</span><span class="p">[</span><span class="mi">96</span><span class="p">,</span> <span class="mi">304</span><span class="p">]</span>
 
-<span class="gp">In [69]: </span><span class="n">x2</span> <span class="o">=</span> <span class="n">resample</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+<span class="gp">In [68]: </span><span class="n">x2</span> <span class="o">=</span> <span class="n">resample</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -573,24 +548,24 @@ return the resampled spectrum.</p>
 <p>The Normalized Difference Vegetation Index (NDVI) is an indicator of the presence
 of vegetation.  The index is commonly defined as</p>
 <div class="math">
-<p><img src="_images/math/0f6618d738748df0872f5094271ed3fd9ea5e165.png" alt="NDVI = \frac{NIR-RED}{NIR+RED}"/></p>
+<p><img src="_images/math/8af4d257dda3c8c78d5150150a5b87711974d8db.png" alt="NDVI = \frac{NIR-RED}{NIR+RED}"/></p>
 </div><p>where <cite>NIR</cite> is the reflectance in the near infrared (NIR) part of the spectrum and
 <cite>RED</cite> is the reflectance of the red band.  For our sample image, if we take
 band 21 (607.0 nm) for our red band and band 43 (802.5 nm) for near infrared,
 we get the following NDVI image.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [70]: </span><span class="n">vi</span> <span class="o">=</span> <span class="n">ndvi</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">43</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [69]: </span><span class="n">vi</span> <span class="o">=</span> <span class="n">ndvi</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">43</span><span class="p">)</span>
 
-<span class="gp">In [71]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">vi</span><span class="p">)</span>
+<span class="gp">In [70]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">vi</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/ndvi.png"><img alt="_images/ndvi.png" class="align-center" src="_images/ndvi.png" style="width: 264.0px; height: 198.0px;" /></a>
-<p><a class="reference internal" href="class_func_ref.html#spectral.algorithms.algorithms.ndvi" title="spectral.algorithms.algorithms.ndvi"><tt class="xref py py-func docutils literal"><span class="pre">ndvi</span></tt></a> is a simple convenience function.
+<a class="reference internal image-reference" href="_images/ndvi.png"><img alt="_images/ndvi.png" class="align-center" src="_images/ndvi.png" style="width: 480.0px; height: 360.0px;" /></a>
+<p><a class="reference internal" href="class_func_ref.html#spectral.algorithms.algorithms.ndvi" title="spectral.algorithms.algorithms.ndvi"><code class="xref py py-func docutils literal notranslate"><span class="pre">ndvi</span></code></a> is a simple convenience function.
 You could just as easily calculate the vegetation index yourself like this:</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [72]: </span><span class="n">red</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [71]: </span><span class="n">red</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
 
-<span class="gp">In [73]: </span><span class="n">nir</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">43</span><span class="p">)</span>
+<span class="gp">In [72]: </span><span class="n">nir</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">43</span><span class="p">)</span>
 
-<span class="gp">In [74]: </span><span class="n">vi</span> <span class="o">=</span> <span class="p">(</span><span class="n">nir</span> <span class="o">-</span> <span class="n">red</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">nir</span> <span class="o">+</span> <span class="n">red</span><span class="p">)</span>
+<span class="gp">In [73]: </span><span class="n">vi</span> <span class="o">=</span> <span class="p">(</span><span class="n">nir</span> <span class="o">-</span> <span class="n">red</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">nir</span> <span class="o">+</span> <span class="n">red</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -602,54 +577,50 @@ against a set of reference spectra by selecting the reference spectrum with
 which the unknown spectrum has the smallest angle.</p>
 <p>To classify our sample image to the ground truth classes using spectral angles,
 we must compute the spectral angles for each pixel with each training class mean.
-This is done by the <a class="reference internal" href="class_func_ref.html#spectral.algorithms.algorithms.spectral_angles" title="spectral.algorithms.algorithms.spectral_angles"><tt class="xref py py-func docutils literal"><span class="pre">spectral_angles</span></tt></a> function.
+This is done by the <a class="reference internal" href="class_func_ref.html#spectral.algorithms.algorithms.spectral_angles" title="spectral.algorithms.algorithms.spectral_angles"><code class="xref py py-func docutils literal notranslate"><span class="pre">spectral_angles</span></code></a> function.
 Before calling the function, we must first create a <cite>CxB</cite> array of training class
 mean spectra, where <cite>C</cite> is the number of training classes and <cite>B</cite> is the number
 of spectral bands.</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [75]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [74]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="gp">In [76]: </span><span class="n">classes</span> <span class="o">=</span> <span class="n">create_training_classes</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gt</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [75]: </span><span class="n">classes</span> <span class="o">=</span> <span class="n">create_training_classes</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">gt</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
-<span class="gp">In [77]: </span><span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">),</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">float</span><span class="p">)</span>
+<span class="gp">In [76]: </span><span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">),</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">float</span><span class="p">)</span>
 
-<span class="gp">In [78]: </span><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">classes</span><span class="p">):</span>
+<span class="gp">In [77]: </span><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">classes</span><span class="p">):</span>
 <span class="gp">   ....: </span>    <span class="n">means</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">mean</span>
 <span class="gp">   ....: </span>
 </pre></div>
 </div>
-<p>In the code above, the <tt class="xref py py-const docutils literal"><span class="pre">True</span></tt> parameter to
-<a class="reference internal" href="class_func_ref.html#spectral.create_training_classes" title="spectral.create_training_classes"><tt class="xref py py-func docutils literal"><span class="pre">create_training_classes</span></tt></a> forces calculation
-of statistics for each class.  Next, we call <a class="reference internal" href="class_func_ref.html#spectral.algorithms.algorithms.spectral_angles" title="spectral.algorithms.algorithms.spectral_angles"><tt class="xref py py-func docutils literal"><span class="pre">spectral_angles</span></tt></a>,
+<p>In the code above, the <code class="xref py py-const docutils literal notranslate"><span class="pre">True</span></code> parameter to
+<a class="reference internal" href="class_func_ref.html#spectral.create_training_classes" title="spectral.create_training_classes"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_training_classes</span></code></a> forces calculation
+of statistics for each class.  Next, we call <a class="reference internal" href="class_func_ref.html#spectral.algorithms.algorithms.spectral_angles" title="spectral.algorithms.algorithms.spectral_angles"><code class="xref py py-func docutils literal notranslate"><span class="pre">spectral_angles</span></code></a>,
 which returns an <cite>MxNxC</cite> array, where <cite>M</cite> and <cite>N</cite> are the number of rows and
 columns in the image and there are <cite>C</cite> spectral angle for each pixel.  To select
-the class with the smallest angle, we call the <tt class="xref py py-mod docutils literal"><span class="pre">numpy</span></tt> <tt class="xref py py-func docutils literal"><span class="pre">argmin</span></tt>
+the class with the smallest angle, we call the <code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code> <code class="xref py py-func docutils literal notranslate"><span class="pre">argmin</span></code>
 function to select the index for the smallest angle corresponding to each pixel.
-The <tt class="docutils literal"><span class="pre">clmap</span> <span class="pre">+</span> <span class="pre">1</span></tt> is used in the display command because our class IDs start at 1 (not 0).</p>
-<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [79]: </span><span class="n">angles</span> <span class="o">=</span> <span class="n">spectral_angles</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">means</span><span class="p">)</span>
+The <code class="docutils literal notranslate"><span class="pre">clmap</span> <span class="pre">+</span> <span class="pre">1</span></code> is used in the display command because our class IDs start at 1 (not 0).</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [78]: </span><span class="n">angles</span> <span class="o">=</span> <span class="n">spectral_angles</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">means</span><span class="p">)</span>
 
-<span class="gp">In [80]: </span><span class="n">clmap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">In [79]: </span><span class="n">clmap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
-<span class="gp">In [81]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="p">((</span><span class="n">clmap</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">gt</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)))</span>
+<span class="gp">In [80]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">imshow</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="p">((</span><span class="n">clmap</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">gt</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)))</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/sam.png"><img alt="_images/sam.png" class="align-center" src="_images/sam.png" style="width: 264.0px; height: 198.0px;" /></a>
+<a class="reference internal image-reference" href="_images/sam.png"><img alt="_images/sam.png" class="align-center" src="_images/sam.png" style="width: 480.0px; height: 360.0px;" /></a>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="class_func_ref.html#spectral.algorithms.algorithms.msam" title="spectral.algorithms.algorithms.msam"><tt class="xref py py-func docutils literal"><span class="pre">msam</span></tt></a>: Modified Spectral Angle Mapper</p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="class_func_ref.html#spectral.algorithms.algorithms.msam" title="spectral.algorithms.algorithms.msam"><code class="xref py py-func docutils literal notranslate"><span class="pre">msam</span></code></a>: Modified Spectral Angle Mapper</p>
 </div>
 <p class="rubric">References</p>
-<table class="docutils citation" frame="void" id="richards1999" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[Richards1999]</a></td><td>Richards, J.A. &amp; Jia, X. Remote Sensing Digital Image Analysis: An Introduction.  (Springer: Berlin, 1999).</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="reed-yu-1990" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[Reed_Yu_1990]</a></td><td>Reed, I.S. and Yu, X., &#8220;Adaptive multiple-band CFAR detection of an optical pattern with unknown spectral distribution,&#8221; IEEE Trans. Acoust., Speech, Signal Processing, vol. 38, pp. 1760-1770, Oct. 1990.</td></tr>
-</tbody>
-</table>
+<dl class="citation">
+<dt class="label" id="richards1999"><span class="brackets"><a class="fn-backref" href="#id1">Richards1999</a></span></dt>
+<dd><p>Richards, J.A. &amp; Jia, X. Remote Sensing Digital Image Analysis: An Introduction.  (Springer: Berlin, 1999).</p>
+</dd>
+<dt class="label" id="reed-yu-1990"><span class="brackets"><a class="fn-backref" href="#id2">Reed_Yu_1990</a></span></dt>
+<dd><p>Reed, I.S. and Yu, X., “Adaptive multiple-band CFAR detection of an optical pattern with unknown spectral distribution,” IEEE Trans. Acoust., Speech, Signal Processing, vol. 38, pp. 1760-1770, Oct. 1990.</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -658,9 +629,9 @@ The <tt class="docutils literal"><span class="pre">clmap</span> <span class="pre
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
+  <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Spectral Algorithms</a><ul>
 <li><a class="reference internal" href="#unsupervised-classification">Unsupervised Classification</a><ul>
@@ -698,41 +669,40 @@ The <tt class="docutils literal"><span class="pre">clmap</span> <span class="pre
   <h4>Next topic</h4>
   <p class="topless"><a href="libraries.html"
                         title="next chapter">Spectral Libraries</a></p>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
+    </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a></li>
+        <li class="right" >
           <a href="libraries.html" title="Spectral Libraries"
-             >next</a></li>
+             >next</a> |</li>
         <li class="right" >
           <a href="graphics.html" title="Displaying Data"
              >previous</a> |</li>
-        <li><a href="index.html">Spectral Python 0.20
- documentation</a> &raquo;</li>
-          <li><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Spectral Python 0.21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &#187;</li> 
       </ul>
     </div>
 
-    <div class="footer">
-        &copy; Copyright 2014, Thomas Boggs.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Thomas Boggs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
     </div>
 <!-- Google Analytics -->
 <script>
