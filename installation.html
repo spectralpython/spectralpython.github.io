@@ -1,111 +1,97 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Installing SPy &mdash; Spectral Python 0.20
- documentation</title>
-    
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <meta charset="utf-8" />
+    <title>Installing SPy &#8212; Spectral Python 0.21 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.20
-',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Spectral Python 0.20
- documentation" href="index.html" />
-    <link rel="up" title="Spectral Python (SPy) User Guide" href="user_guide.html" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Reading HSI Data Files" href="fileio.html" />
     <link rel="prev" title="Introduction" href="user_guide_intro.html" /> 
-  </head>
-  <body>
-    <div class="related">
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a></li>
+        <li class="right" >
           <a href="fileio.html" title="Reading HSI Data Files"
-             accesskey="N">next</a></li>
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="user_guide_intro.html" title="Introduction"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Spectral Python 0.20
- documentation</a> &raquo;</li>
-          <li><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Spectral Python 0.21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="user_guide.html" accesskey="U">Spectral Python (SPy) User Guide</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="installing-spy">
 <span id="installation"></span><h1>Installing SPy<a class="headerlink" href="#installing-spy" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
-<ul class="simple">
-</ul>
 </div>
 <div class="section" id="spy-dependencies">
 <h2>SPy Dependencies<a class="headerlink" href="#spy-dependencies" title="Permalink to this headline">¶</a></h2>
 <p>SPy requires Python and depends on several other freely available Python
 modules. Prior to installing SPy, you should make sure its dependencies are met.
 While you can use SPy to process hyperspectral data with just Python and NumPy,
-there are several other modules you will need if you want to use any of SPy&#8217;s
+there are several other modules you will need if you want to use any of SPy’s
 graphical capabilities.</p>
-<table border="1" class="center docutils">
-<caption>SPy Dependencies</caption>
+<table class="colwidths-given center docutils align-default" id="id1">
+<caption><span class="caption-text">SPy Dependencies</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
 <colgroup>
-<col width="44%" />
-<col width="56%" />
+<col style="width: 44%" />
+<col style="width: 56%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Dependency</th>
-<th class="head">Notes</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Dependency</p></th>
+<th class="head"><p>Notes</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://www.python.org">Python</a> 2.6+ or 3.3+</td>
-<td><cite>(1)</cite></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.python.org">Python</a> 2.6+ or 3.3+</p></td>
+<td><p><cite>(1)</cite></p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="http://numpy.scipy.org/">NumPy</a></td>
-<td>Required</td>
+<tr class="row-odd"><td><p><a class="reference external" href="http://numpy.scipy.org/">NumPy</a></p></td>
+<td><p>Required</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="https://pypi.python.org/pypi/Pillow/">Pillow</a> or <a class="reference external" href="http://www.pythonware.com/products/pil/">Python Imaging Library (PIL)</a></td>
-<td>Required if displaying or saving images</td>
+<tr class="row-even"><td><p><a class="reference external" href="https://pypi.python.org/pypi/Pillow/">Pillow</a> or <a class="reference external" href="http://www.pythonware.com/products/pil/">Python Imaging Library (PIL)</a></p></td>
+<td><p>Required if displaying or saving images</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="http://www.wxpython.org/">wxPython</a></td>
-<td><cite>(2)</cite></td>
+<tr class="row-odd"><td><p><a class="reference external" href="http://www.wxpython.org/">wxPython</a></p></td>
+<td><p><cite>(2)</cite></p></td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="http://matplotlib.org/">matplotlib</a></td>
-<td>Required if rendering raster displays or spectral plots</td>
+<tr class="row-even"><td><p><a class="reference external" href="http://matplotlib.org/">matplotlib</a></p></td>
+<td><p>Required if rendering raster displays or spectral plots</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference external" href="http://ipython.org/">IPython</a></td>
-<td>Required for interactive, non-blocking GUI windows</td>
+<tr class="row-odd"><td><p><a class="reference external" href="http://ipython.org/">IPython</a></p></td>
+<td><p>Required for interactive, non-blocking GUI windows</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference external" href="http://pyopengl.sourceforge.net/">PyOpenGL</a></td>
-<td><cite>(2)</cite></td>
+<tr class="row-even"><td><p><a class="reference external" href="http://pyopengl.sourceforge.net/">PyOpenGL</a></p></td>
+<td><p><cite>(2)</cite></p></td>
 </tr>
 </tbody>
 </table>
 <p>Notes:</p>
-<p>(1): All SPy functions work with Python 3.3+ except <a class="reference internal" href="class_func_ref.html#spectral.view_cube" title="spectral.view_cube"><tt class="xref py py-func docutils literal"><span class="pre">view_cube</span></tt></a> and <a class="reference internal" href="class_func_ref.html#spectral.view_nd" title="spectral.view_nd"><tt class="xref py py-func docutils literal"><span class="pre">view_nd</span></tt></a>.</p>
-<p>(2): Required if calling <a class="reference internal" href="class_func_ref.html#spectral.view_cube" title="spectral.view_cube"><tt class="xref py py-func docutils literal"><span class="pre">view_cube</span></tt></a> or <a class="reference internal" href="class_func_ref.html#spectral.view_nd" title="spectral.view_nd"><tt class="xref py py-func docutils literal"><span class="pre">view_nd</span></tt></a>.</p>
+<p>(1): All SPy functions work with Python 3.3+ except <a class="reference internal" href="class_func_ref.html#spectral.view_cube" title="spectral.view_cube"><code class="xref py py-func docutils literal notranslate"><span class="pre">view_cube</span></code></a> and <a class="reference internal" href="class_func_ref.html#spectral.view_nd" title="spectral.view_nd"><code class="xref py py-func docutils literal notranslate"><span class="pre">view_nd</span></code></a>.</p>
+<p>(2): Required if calling <a class="reference internal" href="class_func_ref.html#spectral.view_cube" title="spectral.view_cube"><code class="xref py py-func docutils literal notranslate"><span class="pre">view_cube</span></code></a> or <a class="reference internal" href="class_func_ref.html#spectral.view_nd" title="spectral.view_nd"><code class="xref py py-func docutils literal notranslate"><span class="pre">view_nd</span></code></a>.</p>
 <p>As of SPy version 0.10, IPython is used to provide interactive GUI windows.
-To use SPy with IPython, you will need to start IPython in &#8220;pylab&#8221; mode
-(see <a class="reference internal" href="graphics.html#starting-ipython"><em>Starting IPython</em></a>).</p>
+To use SPy with IPython, you will need to start IPython in “pylab” mode
+(see <a class="reference internal" href="graphics.html#starting-ipython"><span class="std std-ref">Starting IPython</span></a>).</p>
 </div>
 <div class="section" id="installing-from-a-distribution-package">
 <h2>Installing from a distribution package<a class="headerlink" href="#installing-from-a-distribution-package" title="Permalink to this headline">¶</a></h2>
@@ -113,13 +99,13 @@ To use SPy with IPython, you will need to start IPython in &#8220;pylab&#8221; m
 the <a class="reference external" href="https://pypi.python.org/pypi/spectral">Python Package Index (PyPI)</a> or
 from the <a class="reference external" href="https://github.com/spectralpython/spectral">SPy Project Page</a> on
 GitHub. The source distribution will unpack to a directory with
-a name like <tt class="docutils literal"><span class="pre">spectral-x.y</span></tt>, where <tt class="docutils literal"><span class="pre">x.y</span></tt> is the SPy version number.  To
+a name like <code class="docutils literal notranslate"><span class="pre">spectral-x.y</span></code>, where <code class="docutils literal notranslate"><span class="pre">x.y</span></code> is the SPy version number.  To
 install SPy, open a console in the unpacked directory and type the following:</p>
-<div class="code highlight-python"><div class="highlight"><pre>python setup.py install
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
 </pre></div>
 </div>
 <p>Note that if you are on a unix-based system, you will either need to be logged
-in as root or preface the above command with &#8220;sudo&#8221; (unless you use the -d
+in as root or preface the above command with “sudo” (unless you use the -d
 option to install it to a local directory).</p>
 </div>
 <div class="section" id="installing-with-pip-or-distribute">
@@ -128,15 +114,15 @@ option to install it to a local directory).</p>
 deprecated Setuptools) or <a class="reference external" href="http://pypi.python.org/pypi/pip">pip</a> installed on
 your system, there is no need to download the latest SPy version explicitly.
 If you have Distribute installed, simply type</p>
-<div class="code highlight-python"><div class="highlight"><pre>easy_install spectral
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">easy_install</span> <span class="n">spectral</span>
 </pre></div>
 </div>
 <p>or using pip, type</p>
-<div class="code highlight-python"><div class="highlight"><pre>pip install spectral
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">spectral</span>
 </pre></div>
 </div>
-<p>Note that your pip binary may be named differently (e.g., &#8220;pip-python&#8221;). And
-again, you may need to be logged in as root or use &#8220;sudo&#8221; if you are on a
+<p>Note that your pip binary may be named differently (e.g., “pip-python”). And
+again, you may need to be logged in as root or use “sudo” if you are on a
 unix-based system.</p>
 </div>
 <div class="section" id="installing-from-the-git-source-code-repository">
@@ -144,9 +130,9 @@ unix-based system.</p>
 <p>The latest version of the SPy source code resides in the GitHub source code
 repository.  While the latest source code may be less stable than the most
 recent release, it often has newer features and bug fixes.  To download the
-latest version of SPy from the Git repository, <tt class="docutils literal"><span class="pre">cd</span></tt> to the directory
+latest version of SPy from the Git repository, <code class="docutils literal notranslate"><span class="pre">cd</span></code> to the directory
 where you would like to check out the source code and type the following:</p>
-<div class="highlight-python"><div class="highlight"><pre>git clone https://github.com/spectralpython/spectral.git
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">spectralpython</span><span class="o">/</span><span class="n">spectral</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 </div>
@@ -155,12 +141,12 @@ where you would like to check out the source code and type the following:</p>
 <p>Because hyperspectral data files can be quite large, you might store all your
 HSI data in one or several specific directories.  To avoid having to type
 absolute path names whenever you attempt to open an HSI file in SPy, you can
-define a <tt class="docutils literal"><span class="pre">SPECTRAL_DATA</span></tt> environment variable, which SPy will use to find
-image files (if they are not found in the current directory).  <tt class="docutils literal"><span class="pre">SPECTRAL_DATA</span></tt>
+define a <code class="docutils literal notranslate"><span class="pre">SPECTRAL_DATA</span></code> environment variable, which SPy will use to find
+image files (if they are not found in the current directory).  <code class="docutils literal notranslate"><span class="pre">SPECTRAL_DATA</span></code>
 should be a colon-delimited list of directory paths.</p>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="class_func_ref.html#spectral.spectral.SpySettings" title="spectral.spectral.SpySettings"><tt class="xref py py-class docutils literal"><span class="pre">SpySettings</span></tt></a></p>
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">SpySettings</span></code></p>
 </div>
 </div>
 </div>
@@ -169,9 +155,9 @@ should be a colon-delimited list of directory paths.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
+  <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Installing SPy</a><ul>
 <li><a class="reference internal" href="#spy-dependencies">SPy Dependencies</a></li>
@@ -189,41 +175,40 @@ should be a colon-delimited list of directory paths.</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="fileio.html"
                         title="next chapter">Reading HSI Data Files</a></p>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
+    </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a></li>
+        <li class="right" >
           <a href="fileio.html" title="Reading HSI Data Files"
-             >next</a></li>
+             >next</a> |</li>
         <li class="right" >
           <a href="user_guide_intro.html" title="Introduction"
              >previous</a> |</li>
-        <li><a href="index.html">Spectral Python 0.20
- documentation</a> &raquo;</li>
-          <li><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Spectral Python 0.21 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="user_guide.html" >Spectral Python (SPy) User Guide</a> &#187;</li> 
       </ul>
     </div>
 
-    <div class="footer">
-        &copy; Copyright 2014, Thomas Boggs.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Thomas Boggs.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
     </div>
 <!-- Google Analytics -->
 <script>
